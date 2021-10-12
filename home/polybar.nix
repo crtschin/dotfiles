@@ -42,7 +42,7 @@ enable-ipc = true
 background = ''${colors.background}
 foreground = ''${colors.foreground}
 
-bottom = true
+bottom = false
 
 line-size = 3
 line-color = #f00

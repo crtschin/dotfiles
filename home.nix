@@ -35,14 +35,19 @@ in {
       firefox
       fortune
       gimp
+      imagemagick
+      simplescreenrecorder
       spotify
       spotifyd
+      texlive.combined.scheme-basic
       vlc
       vscode
 
       gcc
       python
-      rustup
+      rustc
+      rustfmt
+      cargo
 
       dejavu_fonts
       fira-code
@@ -130,6 +135,7 @@ in {
 
   home.sessionVariables = {
     EDITOR = "vim";
-    TERMINAL = "alacritty";
+    TERMINAL = "kitty";
+    RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
   };
 }

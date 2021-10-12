@@ -6,8 +6,8 @@ in {
   programs = {
     rofi = {
       enable = true;
-      font = "Fira Code 12, DejaVu Sans Mono 12";
-      terminal = "${pkgs.alacritty}/bin/alacritty";
+      font = "FontAwesome, Fira Code 12, DejaVu Sans Mono 12";
+      terminal = "${pkgs.kitty}/bin/kitty";
       theme = "gruvbox-dark-hard";
       extraConfig = {
         modi = "run,combi";
@@ -18,11 +18,20 @@ in {
     };
   };
   xsession.windowManager.i3 = {
+    package = pkgs.i3-gaps;
     enable = true;
     config = {
       modifier = mod;
+      gaps = {
+        inner = 10;
+        outer = 0;
+      };
 
-      fonts = ["Fira Code 12, DejaVu Sans Mono 12, Monospace 12"];
+      fonts = {
+        names = ["FontAwesome5Free, Fira Code, DejaVu Sans Mono, Monospace"];
+        style = "Bold Semi-Condensed";
+        size = 11.0;
+      };
 
       keybindings = lib.mkOptionDefault {
         "${mod}+p" = "exec ${pkgs.rofi}/bin/rofi -show";
@@ -37,7 +46,14 @@ in {
     };
     extraConfig =
       ''
-for_window [class=".*"] title_format "<span font='Fira Code 12'>%title</span>"
+# Theme
+client.focused #000000 #000000 #FFFFFF #000000
+client.focused_inactive #333333 #333333 #FFFFFF #000000
+client.unfocused #333333 #333333 #FFFFFF #333333
+client.urgent #cc241d #cc241d #ebdbb2 #282828
+
+for_window [class=".*"] border pixel 0
+# for_window [class=".*"] title_format "<span font='Fira Code 12'>%title</span>"
 exec_always --no-startup-id polybar-msg cmd restart
 exec --no-startup-id polybar --reload main
 exec --no-startup-id polybar --reload secondary
