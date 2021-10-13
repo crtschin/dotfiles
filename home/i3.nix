@@ -52,8 +52,7 @@ blur:
     config = {
       modifier = mod;
       gaps = {
-        inner = 15;
-        outer = 0;
+        inner = 10;
       };
 
       fonts = {
