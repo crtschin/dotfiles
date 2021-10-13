@@ -14,9 +14,38 @@ in {
         combi-modi = "run";
         icon-theme = "Papirus";
         show-icons = true;
+        fuzzy = true;
+        normal-window = true;
       };
     };
   };
+
+  services.picom = {
+    enable = true;
+    blur = true;
+    fade = true;
+    fadeDelta = 2;
+    inactiveOpacity = "0.8";
+    inactiveDim = "0.3";
+    vSync = true;
+    experimentalBackends = true;
+    extraOptions =
+      ''
+mark-overdir-focused = true;
+mark-wmwin-focused = true;
+focus-exclude = [
+	# "class_g ?= 'rofi'"
+];
+blur:
+{
+  method = "gaussian";
+  size = 10;
+  deviation = 5.0;
+};
+      ''
+    ;
+  };
+
   xsession.windowManager.i3 = {
     package = pkgs.i3-gaps;
     enable = true;
@@ -39,7 +68,7 @@ in {
         "${mod}+Return" = "exec $TERMINAL";
         "${mod}+Tab" = "workspace back_and_forth";
         "${mod}+Shift+r" = "restart";
-        "${mod}+l" = "${pkgs.i3lock-fancy}/bin/i3lock-fancy -p -t ''";
+        "${mod}+l" = "exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy -p -t ''";
         "${mod}+m" = "move workspace to output left";
       };
       bars = [];
@@ -57,6 +86,7 @@ for_window [class=".*"] border pixel 0
 exec_always --no-startup-id polybar-msg cmd restart
 exec --no-startup-id polybar --reload main
 exec --no-startup-id polybar --reload secondary
+exec_always --no-startup-id picom
       ''
     ;
   };

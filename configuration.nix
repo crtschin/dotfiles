@@ -48,7 +48,7 @@
       xfce = {
         enable = true;
         noDesktop = true;
-        enableXfwm = true;
+        enableXfwm = false;
       };
     };
     windowManager.i3 = {

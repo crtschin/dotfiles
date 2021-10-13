@@ -26,9 +26,11 @@ in {
       playerctl
       ripgrep
       s-tui
-      tmux
+      tig
       vim
       wget
+
+      nix-tree
 
       alacritty
       ffmpeg
@@ -114,12 +116,16 @@ in {
   };
 
   services = {
+    playerctld = {
+      enable = true;
+    };
+    random-background = {
+      enable = true;
+      imageDirectory = "%h/backgrounds";
+    };
     screen-locker = {
       enable = true;
       lockCmd = "${lockCmd}";
-    };
-    playerctld = {
-      enable = true;
     };
   };
 

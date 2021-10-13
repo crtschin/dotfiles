@@ -17,6 +17,38 @@ let
     fzf-fish
     pisces
   ];
+
+  tmuxConfig = {
+    enable = true;
+    clock24 = true;
+    historyLimit = 5000;
+    prefix = "C-Space";
+    extraConfig =
+      "
+bind-key -n C-t new-window
+bind-key -n C-w kill-window
+bind-key -n C-Up previous-window
+bind-key -n C-Down next-window
+bind-key -n M-Up select-pane -U
+bind-key -n M-Down select-pane -D
+bind-key -n M-Left select-pane -L
+bind-key -n M-Right select-pane -R
+
+bind -n M-s setw synchronize-panes
+
+# Prevent vim from swallowing ctrl arrows
+set-window-option -g xterm-keys on
+
+# Use the xterm-256color terminal
+set -g default-terminal \"screen-256color\"
+
+# Apply Tc
+set-option -ga terminal-overrides \",screen-256color:Tc\"
+set -g mouse on
+set -g focus-events on
+      "
+    ;
+  };
 in
 {
   home.packages = with pkgs; [
@@ -110,9 +142,10 @@ fi # added by Nix installer
         scrollback_lines = 10000;
         copy_on_select = true;
         strip_trailing_spaces = "always";
+        cursor_shape = "block";
         enable_audio_bell = true;
         visual_bell_duration = "0.5";
-        shell = "${pkgs.fish}/bin/fish --command=tmux";
+        shell = "${pkgs.fish}/bin/fish";
         # https://gist.github.com/lunks/0d5731693084b2831c88ca23936d20e8
         foreground = "#ebdbb2";
         background = "#272727";
@@ -135,6 +168,31 @@ fi # added by Nix installer
         color14 = "#8ec07b";
         color7 = "#a89983";
         color15 = "#ebdbb2";
+        clear_all_shortcuts = true;
+      };
+      keybindings = {
+        "ctrl+c" = "copy_or_interrupt";
+        "ctrl+shift+c" = "copy_to_clipboard";
+        "ctrl+shift+v" = "paste_from_clipboard";
+        "shift+insert" = "paste_from_clipboard";
+        "ctrl+s" = "paste_from_selection";
+
+        "alt+up" = "scroll_line_up";
+        "alt+down" = "scroll_line_down";
+        "alt+page_up" = "scroll_page_up";
+        "alt+page_down" = "scroll_page_down";
+        "alt+home" = "scroll_home";
+        "alt+end" = "scroll_end";
+        "alt+h" = "show_scrollback";
+
+        "ctrl+up" = "next_tab";
+        "ctrl+down" = "previous_tab";
+        "ctrl+t" = "new_tab";
+        "ctrl+w" = "close_tab";
+        "ctrl+n" = "new_window";
+        "ctrl+x" = "close_window";
+        "ctrl+right" = "next_window";
+        "ctrl+left" = "previous_window";
       };
     };
 
@@ -191,7 +249,6 @@ fi # added by Nix installer
         };
         shell = {
           program = "${pkgs.fish}/bin/fish";
-          args = [ "--command=tmux" ];
         };
       };
     };
@@ -259,7 +316,7 @@ fi # added by Nix installer
           diverged = "😵 🏎️💨  *$ahead_count 🐢 *$behind_count";
           untracked = "🛤️ ";
           stashed = "📦 ";
-          modified = "📝 ";
+          modified = "📝";
           staged = "🗃️ ";
           renamed = "📛 ";
           deleted = "🗑️ ";
@@ -332,37 +389,6 @@ fi # added by Nix installer
         };
       };
     };
-
-    tmux = {
-      enable = true;
-      clock24 = true;
-      historyLimit = 5000;
-      prefix = "C-Space";
-      extraConfig =
-        "
-bind-key -n C-t new-window
-bind-key -n C-w kill-window
-bind-key -n C-Up previous-window
-bind-key -n C-Down next-window
-bind-key -n M-Up select-pane -U
-bind-key -n M-Down select-pane -D
-bind-key -n M-Left select-pane -L
-bind-key -n M-Right select-pane -R
-
-bind -n M-s setw synchronize-panes
-
-# Prevent vim from swallowing ctrl arrows
-set-window-option -g xterm-keys on
-
-# Use the xterm-256color terminal
-set -g default-terminal \"screen-256color\"
-
-# Apply Tc
-set-option -ga terminal-overrides \",screen-256color:Tc\"
-set -g mouse on
-set -g focus-events on
-        "
-      ;
-    };
+    # tmux = tmuxConfig;
   };
 }
