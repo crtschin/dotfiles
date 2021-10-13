@@ -146,28 +146,42 @@ fi # added by Nix installer
         enable_audio_bell = true;
         visual_bell_duration = "0.5";
         shell = "${pkgs.fish}/bin/fish";
-        # https://gist.github.com/lunks/0d5731693084b2831c88ca23936d20e8
-        foreground = "#ebdbb2";
-        background = "#272727";
-        selection_foreground = "#655b53";
-        selection_background = "#ebdbb2";
-        url_color = "#d65c0d";
-        color0 = "#272727";
-        color8 = "#928373";
-        color1 = "#cc231c";
-        color9 = "#fb4833";
-        color2 = "#989719";
-        color10 = "#b8ba25";
-        color3 = "#d79920";
-        color11 = "#fabc2e";
-        color4 = "#448488";
-        color12 = "#83a597";
-        color5 = "#b16185";
-        color13 = "#d3859a";
-        color6 = "#689d69";
-        color14 = "#8ec07b";
-        color7 = "#a89983";
-        color15 = "#ebdbb2";
+        # GruvboxMaterial theme by sainnhe
+        # License: [MIT License](https://opensource.org/licenses/MIT).
+        background = "#32302f";
+        foreground = "#dfbf8e";
+        selection_background = "#dfbf8e";
+        selection_foreground = "#32302f";
+        active_tab_background = "#32302f";
+        active_tab_foreground = "#dfbf8e";
+        active_tab_font_style = "bold-italic";
+        inactive_tab_background = "#32302f";
+        inactive_tab_foreground = "#a89984";
+        inactive_tab_font_style = "normal";
+        # Black
+        color0 = "#665c54";
+        color8 = "#928374";
+        # Red
+        color1 = "#ea6962";
+        color9 = "#ea6962";
+        # Green
+        color2 = "#a9b665";
+        color10 = "#a9b665";
+        # Yellow
+        color3 = "#e78a4e";
+        color11 = "#e3a84e";
+        # Blue
+        color4 = "#7daea3";
+        color12 = "#7daea3";
+        # Magenta
+        color5 = "#d3869b";
+        color13 = "#d3869b";
+        # Cyan
+        color6 = "#89b482";
+        color14 = "#89b482";
+        # White
+        color7  = "#dfbf8e";
+        color15 = "#dfbf8e";
         clear_all_shortcuts = true;
       };
       keybindings = {
