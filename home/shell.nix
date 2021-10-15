@@ -1,54 +1,11 @@
 { config, lib, pkgs, ... }:
 
 let
-  shellAliases = {
-    l = "exa";
-    ll = "exa -la";
-    ls = "exa";
-    less = "bat";
-    g = "git";
-    e = "eval $EDITOR";
-    ee = "e (fzf)";
-    lock = "${pkgs.i3lock-fancy}/bin/i3lock-fancy -p -t ''";
-  };
   devFishPlugins = with pkgs.fishPlugins; [
     done
     foreign-env
     fzf-fish
-    pisces
   ];
-
-  tmuxConfig = {
-    enable = true;
-    clock24 = true;
-    historyLimit = 5000;
-    prefix = "C-Space";
-    extraConfig =
-      "
-bind-key -n C-t new-window
-bind-key -n C-w kill-window
-bind-key -n C-Up previous-window
-bind-key -n C-Down next-window
-bind-key -n M-Up select-pane -U
-bind-key -n M-Down select-pane -D
-bind-key -n M-Left select-pane -L
-bind-key -n M-Right select-pane -R
-
-bind -n M-s setw synchronize-panes
-
-# Prevent vim from swallowing ctrl arrows
-set-window-option -g xterm-keys on
-
-# Use the xterm-256color terminal
-set -g default-terminal \"screen-256color\"
-
-# Apply Tc
-set-option -ga terminal-overrides \",screen-256color:Tc\"
-set -g mouse on
-set -g focus-events on
-      "
-    ;
-  };
 in
 {
   home.packages = with pkgs; [
@@ -66,7 +23,6 @@ in
 
     broot = {
       enable = true;
-      enableBashIntegration = true;
       enableFishIntegration = true;
     };
 
@@ -75,15 +31,28 @@ in
     };
 
     fish = {
-      inherit shellAliases;
       promptInit =
-        "
-        begin
-          set fish_greeting
-          set __done_notify_sound 1
-          set LESS ' -R '
-        end
-        "
+        ''
+begin
+  set fish_greeting
+  set __done_notify_sound 1
+  set LESS ' -R '
+
+  # Non-NixOS setting
+  set --export NIX_PATH $NIX_PATH:$HOME/.nix-defexpr/channels
+
+  # Channable specific
+  . ${../.config/channable.fish}
+end
+
+alias l "exa"
+alias ll "exa -la"
+alias ls "exa"
+alias less "bat"
+alias g "git"
+alias e "eval $EDITOR"
+alias ee "e (fzf)"
+        ''
       ;
       functions = {
         giffify = {
@@ -110,24 +79,8 @@ in
       enable = true;
     };
 
-    bash = {
-      enable = true;
-      historyIgnore = [ "l" "ls" "cd" "exit" ];
-      historyControl = [ "erasedups" ];
-      inherit shellAliases;
-      initExtra =
-        ''
-if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then
-  . ~/.nix-profile/etc/profile.d/nix.sh;
-  export NIX_PATH=$HOME/.nix-defexpr/channels''${NIX_PATH:+:}$NIX_PATH
-fi # added by Nix installer
-        ''
-      ;
-    };
-
     fzf = {
       enable = true;
-      enableBashIntegration = true;
       enableFishIntegration = true;
     };
 
@@ -207,6 +160,8 @@ fi # added by Nix installer
         "ctrl+x" = "close_window";
         "ctrl+right" = "next_window";
         "ctrl+left" = "previous_window";
+        "ctrl+equal" = "change_font_size all +2.0";
+        "ctrl+minus" = "change_font_size all -2.0";
       };
     };
 
@@ -216,36 +171,37 @@ fi # added by Nix installer
         colors = {
           primary = {
             background = "0x282828";
-            foreground = "0xebdbb2";
+            foreground = "0xdfbf8e";
           };
           normal = {
-            black   = "0x282828";
-            red     = "0xcc241d";
-            green   = "0x98971a";
-            yellow  = "0xd79921";
-            blue    = "0x458588";
-            magenta = "0xb16286";
-            cyan    = "0x689d6a";
-            white   = "0xa89984";
+            black   = "0x665c54";
+            red     = "0xea6962";
+            green   = "0xa9b665";
+            yellow  = "0xe78a4e";
+            blue    = "0x7daea3";
+            magenta = "0xd3869b";
+            cyan    = "0x89b482";
+            white   = "0xdfbf8e";
           };
           bright = {
             black   = "0x928374";
-            red     = "0xfb4934";
-            green   = "0xb8bb26";
-            yellow  = "0xfabd2f";
-            blue    = "0x83a598";
+            red     = "0xea6962";
+            green   = "0xa9b665";
+            yellow  = "0xe3a84e";
+            blue    = "0x7daea3";
             magenta = "0xd3869b";
-            cyan    = "0x8ec07c";
-            white   = "0xebdbb2";
+            cyan    = "0x89b482";
+            white   = "0xdfbf8e";
           };
         };
         font = {
           normal.family = "Fira Code";
-          normal.style = "Retina";
+          normal.style = "Regular";
           bold.family = "Fira Code";
-          bold.style = "Medium";
+          bold.style = "Bold";
           italic.family = "Fira Code";
           italic.style = "Light Italic";
+          size = 13;
         };
         mouse = {
           double_click = { threshold = 300; };
@@ -263,6 +219,7 @@ fi # added by Nix installer
         };
         shell = {
           program = "${pkgs.fish}/bin/fish";
+          args = [ "--command=${pkgs.tmux}/bin/tmux" ];
         };
       };
     };
@@ -325,15 +282,15 @@ fi # added by Nix installer
 
         git_status = {
           conflicted = "⚔️";
-          ahead = "🏎️💨 ";
+          ahead = "🏎️💨";
           behind = "🐢";
-          diverged = "😵 🏎️💨  *$ahead_count 🐢 *$behind_count";
-          untracked = "🛤️ ";
-          stashed = "📦 ";
+          diverged = "😵🏎️💨*$ahead_count🐢*$behind_count";
+          untracked = "🛤️";
+          stashed = "📦";
           modified = "📝";
-          staged = "🗃️ ";
-          renamed = "📛 ";
-          deleted = "🗑️ ";
+          staged = "🗃️";
+          renamed = "📛";
+          deleted = "🗑️";
           style = "bright-white";
           format = "(\\[$all_status$ahead_behind\\])($style)";
         };
@@ -399,10 +356,43 @@ fi # added by Nix installer
           disabled = false;
           symbol = "↕️ ";
           format = "\\[[$symbol$shlvl]($style)\\] ";
-          threshold = 2;
+          threshold = 3;
         };
       };
     };
-    # tmux = tmuxConfig;
+    tmux = {
+      enable = true;
+      clock24 = true;
+      historyLimit = 5000;
+      prefix = "C-Space";
+      extraConfig =
+        "
+bind-key -n C-t new-window
+bind-key -n C-w kill-window
+bind-key -n C-Up previous-window
+bind-key -n C-Down next-window
+bind-key -n C-x kill-pane
+bind-key -n C-n split-window -v
+bind-key -n C-M-n split-window -h
+bind-key -n M-Up select-pane -U
+bind-key -n M-Down select-pane -D
+bind-key -n M-Left select-pane -L
+bind-key -n M-Right select-pane -R
+
+bind -n M-s setw synchronize-panes
+
+# Prevent vim from swallowing ctrl arrows
+set-window-option -g xterm-keys on
+
+# Use the screen-256color terminal
+set -g default-terminal \"screen-256color\"
+
+# Apply Tc
+set-option -ga terminal-overrides \",screen-256color:Tc\"
+set -g mouse on
+set -g focus-events on
+        "
+      ;
+    };
   };
 }

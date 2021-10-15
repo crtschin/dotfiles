@@ -1,39 +1,58 @@
 { config, pkgs, ... }:
 
 let
-  lockCmd = "${pkgs.i3lock-fancy}/bin/i3lock-fancy -p -t ''";
+
 in {
+  nixpkgs.overlays = [ (self: super: {
+    nix_gl = (import (fetchGit {
+      ref = "main";
+      url = "https://github.com/guibou/nixGL.git";
+    }) {}).auto.nixGLDefault;
+    nix_gl_wrapper = program: pkgs.writeShellScriptBin program.pname ''
+      ${self.nix_gl}/bin/nixGL ${program}/bin/${program.pname} "$@"
+    '';
+    kitty = self.nix_gl_wrapper super.kitty;
+    alacritty = pkgs.nix_gl_wrapper super.alacritty;
+  }) ];
+
   imports = [
     ./home/i3.nix
-    ./home/polybar.nix
     ./home/python.nix
     ./home/shell.nix
   ];
 
+  systemd.user.startServices = "sd-switch";
+
+  xdg.systemDirs.data = [ "/usr/share" "/usr/local/share" ];
+  targets.genericLinux = {
+    enable = true;
+  };
   nixpkgs.config.allowUnfree = true;
-  home = {
-    username = "crtschin";
-    homeDirectory = "/home/crtschin";
+  home = rec {
+    username = "curtis";
+    homeDirectory = "/home/${username}";
 
     packages = with pkgs; [
+      arandr
       curl
       fd
+      feh
       file
       git
       gtop
       htop
+      nitrogen
       pavucontrol
       playerctl
       ripgrep
       s-tui
       tig
-      vim
       wget
 
       nix-tree
 
-      alacritty
       ffmpeg
+      flameshot
       firefox
       fortune
       gimp
@@ -69,16 +88,26 @@ in {
 
     firefox = {
       enable = true;
+      package = pkgs.firefox;
     };
 
     git = {
       enable = true;
       userName = "Curtis Chin Jen Sem";
-      userEmail = "csochinjensem@gmail.com";
-      delta.enable = true;
+      userEmail = "curtis.chinjensem@channable.com";
+      delta = {
+        enable = true;
+      };
       lfs.enable = true;
       extraConfig = {
+        pager = {
+          diff = "delta";
+          log = "delta";
+          reflog = "delta";
+          show = "delta";
+        };
         core = {
+          editor = "${pkgs.vim}/bin/vim";
           excludesfile = "${./.config/global.gitignore}";
         };
         merge = {
@@ -86,33 +115,20 @@ in {
           difftool = "${pkgs.meld}/bin/meld";
         };
         delta = {
-            features = "unobtrusive-line-numbers decorations";
-            plus-style = "syntax \"#012800\"";
-            minus-style = "syntax \"#340001\"";
-            syntax-theme = "Monokai Extended";
-        };
-        "delta \"decorations\"" = {
-            commit-decoration-style = "bold yellow box ul";
-            file-style = "bold yellow ul";
-            file-decoration-style = "none";
-            hunk-header-decoration-style = "cyan box ul";
-        };
-        "delta \"unobtrusive-line-numbers\"" = {
-            line-numbers = true;
-            line-numbers-minus-style = "\"#666666\"";
-            line-numbers-zero-style = "\"#444444\"";
-            line-numbers-plus-style = "\"#aaaaaa\"";
-            line-numbers-left-format = "\"{nm:>4}┊\"";
-            line-numbers-right-format = "\"{np:>4}│\"";
-            line-numbers-left-style = "blue";
-            line-numbers-right-style = "blue";
+            features = "interactive unobtrusive-line-numbers decorations";
+            syntax-theme = "gruvbox-dark";
         };
       };
     };
-  };
 
-  xsession = {
-    enable = true;
+    vim = {
+      enable = true;
+      extraConfig =
+        ''
+syntax on
+        ''
+      ;
+    };
   };
 
   services = {
@@ -120,12 +136,8 @@ in {
       enable = true;
     };
     random-background = {
-      enable = true;
+      enable = false;
       imageDirectory = "%h/backgrounds";
-    };
-    screen-locker = {
-      enable = true;
-      lockCmd = "${lockCmd}";
     };
   };
 

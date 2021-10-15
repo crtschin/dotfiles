@@ -4,13 +4,6 @@
   services = {
     polybar = {
       enable = true;
-      script =
-        ''
-for m in $(polybar --list-monitors | ${pkgs.coreutils}/bin/cut -d":" -f1); do
-  MONITOR=$m polybar --reload bottom &
-done
-        ''
-      ;
       package = pkgs.polybar.override {
         i3Support = true;
         alsaSupport = true;
@@ -20,17 +13,28 @@ done
       extraConfig =
         ''
 [colors]
-background = #222
-background-alt = #444
-foreground = #dfdfdf
-foreground-alt = #999
-primary = #ffb52a
-secondary = #ff5555
-alert = #ff5555
+background = #282828
+foreground = #ebdbb2
+red        = #fb4934
+green      = #b8bb26
+yellow     = #fabd2f
+blue       = #83a598
+purple     = #d3869b
+teal       = #8ec07c
+orange     = #fe8019
+gray       = #a89984
 
-good = #55aa55
-degraded = #f5a70a
-bad = #ff5555
+background-alt = #444
+foreground-alt = ''${colors.gray}
+primary = ''${colors.blue}
+secondary = ''${colors.teal}
+alert = ''${colors.purple}
+
+good = ''${colors.green}
+degraded = ''${colors.yellow}
+bad = ''${colors.red}
+
+
 
 [bar/common]
 width = 100%
@@ -69,7 +73,7 @@ scroll-down = "#i3.next"
 
 [bar/main]
 inherit=bar/common
-monitor = eDP-1
+monitor = ''${env:MONITOR:}
 
 modules-left = i3
 modules-center = media
@@ -215,10 +219,10 @@ bar-volume-empty-foreground = ''${colors.foreground-alt}
 [module/cpu_temperature]
 type = internal/temperature
 
-hwmon-path = /sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon2/temp2_input
+hwmon-path = /sys/devices/virtual/thermal/thermal_zone9/hwmon4/temp1_input
 
 base-temperature = 40
-warn-temperature = 80
+warn-temperature = 70
 
 format = <ramp> <label>
 format-warn = <ramp> <label-warn>
@@ -237,7 +241,7 @@ ramp-foreground = ''${colors.foreground-alt}
 [module/gpu_temperature]
 inherit = module/cpu_temperature
 
-hwmon-path = /sys/devices/pci0000:00/0000:00:03.1/0000:09:00.0/0000:0a:00.0/0000:0b:00.0/hwmon/hwmon1/temp2_input
+hwmon-path = /sys/devices/pci0000:00/0000:00:1d.0/0000:3d:00.0/hwmon/hwmon3/temp1_input
 
 [module/powermenu]
 type = custom/menu
@@ -262,16 +266,16 @@ menu-0-2-exec = gnome-session-quit --logout --no-prompt
 
 [module/media]
 type = custom/script
-exec = playerctl metadata --player playerctld --format "{{ title }} - {{ artist }}" || true
+exec = ${pkgs.playerctl}/bin/playerctl metadata --player playerctld --format "{{ title }} - {{ artist }}" || true
 interval = 1
 format = <label>
 format-prefix = " "
 format-prefix-foreground = ''${colors.foreground-alt}
 format-suffix = " "
 format-suffix-foreground = ''${colors.foreground-alt}
-click-left = playerctl play-pause --player playerctld
-double-click-left = playerctl next --player playerctld
-click-right = playerctl previous --player playerctld
+click-left = ${pkgs.playerctl}/bin/playerctl play-pause --player playerctld
+double-click-left = ${pkgs.playerctl}/bin/playerctl next --player playerctld
+click-right = ${pkgs.playerctl}/bin/playerctl previous --player playerctld
 
 [settings]
 screenchange-reload = true
