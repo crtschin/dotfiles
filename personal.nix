@@ -7,6 +7,7 @@
 
   home = rec {
     username = "crtschin";
+    homeDirectory = "/home/${username}";
   };
 
   programs = {

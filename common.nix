@@ -26,8 +26,6 @@ in {
   xdg.systemDirs.data = [ "/usr/share" "/usr/local/share" ];
   nixpkgs.config.allowUnfree = true;
   home = rec {
-    username = "curtis";
-    homeDirectory = "/home/${username}";
 
     packages = with pkgs; [
       arandr

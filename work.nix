@@ -5,12 +5,11 @@
     ./common.nix
   ];
 
-  targets.genericLinux = {
-    enable = true;
-  };
+  targets.genericLinux.enable = true;
 
   home = rec {
     username = "curtis";
+    homeDirectory = "/home/${username}";
   };
 
   programs = {
@@ -31,7 +30,7 @@ begin
   set --export NIX_PATH $NIX_PATH:$HOME/.nix-defexpr/channels
 
   # Channable specific
-  . ${../.config/channable.fish}
+  . ${.config/channable.fish}
 end
 
 alias l "exa"
