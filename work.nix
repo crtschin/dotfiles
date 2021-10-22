@@ -5,11 +5,16 @@
     ./common.nix
   ];
 
+
   targets.genericLinux.enable = true;
 
   home = rec {
     username = "curtis";
     homeDirectory = "/home/${username}";
+    packages = with pkgs; [
+      gruvbox-dark-gtk
+      gruvbox-dark-icons-gtk
+    ];
   };
 
   programs = {

@@ -28,6 +28,7 @@ in
 
     exa = {
       enable = true;
+      enableAliases = true;
     };
 
     fish = {
@@ -39,9 +40,6 @@ begin
   set LESS ' -R '
 end
 
-alias l "exa"
-alias ll "exa -la"
-alias ls "exa"
 alias less "bat"
 alias g "git"
 alias e "eval $EDITOR"

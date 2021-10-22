@@ -1,9 +1,6 @@
 { config, lib, pkgs, ... }:
 
 let
-  nativeI3lock = pkgs.writers.writeBashBin "i3lock" ''
-    PATH=/usr/bin:${pkgs.i3lock-color}/bin i3lock "$@"
-  '';
   mod = "Mod4";
   polybarStart =
     ''
@@ -37,11 +34,11 @@ in {
   services = {
     screen-locker = {
       enable = false;
-      lockCmd = "${nativeI3lock}/bin/i3lock";
+      lockCmd = "${pkgs.betterlockscreen}/bin/betterlockscreen -l dim";
     };
     polybar.script = polybarStart;
     picom = {
-      package = pkgs.nix_gl_wrapper pkgs.picom;
+      package = pkgs.picom;
       enable = true;
       blur = true;
       fade = true;
@@ -52,8 +49,12 @@ in {
       experimentalBackends = true;
       extraOptions =
         ''
-mark-overdir-focused = true;
+no-fading-openclose = true;
 mark-wmwin-focused = true;
+mark-ovredir-focused = true;
+use-ewmh-active-win = true;
+detect-client-opacity = true;
+
 focus-exclude = [
 	"class_g ?= 'rofi'"
 ];
@@ -70,47 +71,25 @@ blur:
   xdg.enable = true;
   xdg.mime.enable = true;
 
-  xresources = {
-    extraConfig =
-      ''
-! -----------------------------------------------------------------------------
-! File: gruvbox-dark.xresources
-! Description: Retro groove colorscheme generalized
-! Author: morhetz <morhetz@gmail.com>
-! Source: https://github.com/morhetz/gruvbox-generalized
-! Last Modified: 6 Sep 2014
-! -----------------------------------------------------------------------------
-
-! hard contrast: *background: #1d2021
-*background: #282828
-! soft contrast: *background: #32302f
-*foreground: #ebdbb2
-! Black + DarkGrey
-*color0:  #282828
-*color8:  #928374
-! DarkRed + Red
-*color1:  #cc241d
-*color9:  #fb4934
-! DarkGreen + Green
-*color2:  #98971a
-*color10: #b8bb26
-! DarkYellow + Yellow
-*color3:  #d79921
-*color11: #fabd2f
-! DarkBlue + Blue
-*color4:  #458588
-*color12: #83a598
-! DarkMagenta + Magenta
-*color5:  #b16286
-*color13: #d3869b
-! DarkCyan + Cyan
-*color6:  #689d6a
-*color14: #8ec07c
-! LightGrey + White
-*color7:  #a89984
-*color15: #ebdbb2
-      ''
-    ;
+  xresources.properties = {
+    "*background"= "#282828";
+    "*foreground"= "#ebdbb2";
+    "*color0"=  "#282828";
+    "*color8"=  "#928374";
+    "*color1"=  "#cc241d";
+    "*color9"=  "#fb4934";
+    "*color2"=  "#98971a";
+    "*color10"= "#b8bb26";
+    "*color3"=  "#d79921";
+    "*color11"= "#fabd2f";
+    "*color4"=  "#458588";
+    "*color12"= "#83a598";
+    "*color5"=  "#b16286";
+    "*color13"= "#d3869b";
+    "*color6"=  "#689d6a";
+    "*color14"= "#8ec07c";
+    "*color7"=  "#a89984";
+    "*color15"= "#ebdbb2";
   };
 
   xsession = {
@@ -136,7 +115,7 @@ blur:
           "${mod}+Return" = "exec $TERMINAL";
           "${mod}+Tab" = "workspace back_and_forth";
           "${mod}+Shift+r" = "restart";
-          "${mod}+l" = "exec ${nativeI3lock}/bin/i3lock";
+          "${mod}+l" = "exec ${pkgs.betterlockscreen}/bin/betterlockscreen -l dim";
           "${mod}+m" = "move workspace to output left";
           "${mod}+Shift+p" = "exec flameshot gui";
         };
@@ -169,7 +148,7 @@ client.urgent           $red $red $white $red $red
 # client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
 # client.urgent           $red $red $white $red $red
 
-for_window [class=".*"] border pixel 0
+for_window [class=".*"] border pixel 2
 # for_window [class=".*"] title_format "<span font='Fira Code 12'>%title</span>"
 exec_always --no-startup-id polybar-msg cmd restart
 exec --no-startup-id ${pkgs.nitrogen}/bin/nitrogen --restore
