@@ -24,9 +24,6 @@ in {
   systemd.user.startServices = "sd-switch";
 
   xdg.systemDirs.data = [ "/usr/share" "/usr/local/share" ];
-  targets.genericLinux = {
-    enable = true;
-  };
   nixpkgs.config.allowUnfree = true;
   home = rec {
     username = "curtis";

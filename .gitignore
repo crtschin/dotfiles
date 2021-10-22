@@ -1,2 +1,5 @@
 results
-.config/channable.fish
+home.nix
+
+!.config/global.gitignore
+.config/

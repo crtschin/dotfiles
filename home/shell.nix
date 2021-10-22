@@ -37,12 +37,6 @@ begin
   set fish_greeting
   set __done_notify_sound 1
   set LESS ' -R '
-
-  # Non-NixOS setting
-  set --export NIX_PATH $NIX_PATH:$HOME/.nix-defexpr/channels
-
-  # Channable specific
-  . ${../.config/channable.fish}
 end
 
 alias l "exa"
