@@ -3,30 +3,6 @@
 let
 
 in {
-  nixpkgs.overlays = [ (self: super: {
-    nix_gl = (import (fetchGit {
-      ref = "main";
-      url = "https://github.com/guibou/nixGL.git";
-    }) {}).auto.nixGLDefault;
-
-    nix_gl_wrapper = program: pkgs.writeShellScriptBin program.pname ''
-      ${self.nix_gl}/bin/nixGL ${program}/bin/${program.pname} "$@"
-    '';
-
-    native_wrapper = program: pkgs.writeShellScriptBin program.pname ''
-      PATH=/usr/bin:${program}/bin ${program.pname} "$@"
-    '';
-
-    # On Ubuntu:
-    #   install betterlockscreen in /usr/bin
-    #   install i3lock in /usr/bin
-    betterlockscreen = self.native_wrapper super.betterlockscreen;
-    i3lock = self.native_wrapper super.i3lock-color;
-    kitty = self.nix_gl_wrapper super.kitty;
-    alacritty = pkgs.nix_gl_wrapper super.alacritty;
-    picom = pkgs.nix_gl_wrapper super.picom;
-  }) ];
-
   imports = [
     ./home/i3.nix
     ./home/python.nix
@@ -38,7 +14,6 @@ in {
   xdg.systemDirs.data = [ "/usr/share" "/usr/local/share" ];
   nixpkgs.config.allowUnfree = true;
   home = rec {
-
     packages = with pkgs; [
       arandr
       curl
@@ -58,6 +33,7 @@ in {
 
       nix-tree
 
+      betterlockscreen
       ffmpeg
       flameshot
       firefox
@@ -100,8 +76,6 @@ in {
 
     git = {
       enable = true;
-      userName = "Curtis Chin Jen Sem";
-      userEmail = "curtis.chinjensem@channable.com";
       delta = {
         enable = true;
       };
@@ -143,7 +117,6 @@ syntax on
       enable = true;
     };
     random-background = {
-      enable = false;
       imageDirectory = "%h/backgrounds";
     };
   };

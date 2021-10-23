@@ -138,7 +138,7 @@ set $aqua #689d68
 set $gray #a89984
 set $darkgray #1d2021
 # green gruvbox
-client.focused          $green $green $darkgray $purple $darkgray
+client.focused          $green $green $darkgray $purple $green
 client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray
 client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
 client.urgent           $red $red $white $red $red
