@@ -59,6 +59,9 @@ in {
       font-awesome
       source-serif-pro
       papirus-icon-theme
+      gruvbox-dark-gtk
+      gruvbox-dark-icons-gtk
+
     ];
   };
 

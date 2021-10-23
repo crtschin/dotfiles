@@ -18,6 +18,9 @@
     # On Ubuntu:
     #   install betterlockscreen in /usr/bin
     #   install i3lock in /usr/bin
+    hello = pkgs.writeShellScriptBin "hello" ''
+      echo "Hello world"
+    '';
     betterlockscreen = self.native_wrapper super.betterlockscreen;
     i3lock = self.native_wrapper super.i3lock-color;
     kitty = self.nix_gl_wrapper super.kitty;
@@ -34,14 +37,13 @@
   home = rec {
     username = "curtis";
     homeDirectory = "/home/${username}";
-    packages = with pkgs; [
-      gruvbox-dark-gtk
-      gruvbox-dark-icons-gtk
-    ];
+    packages = with pkgs; [ ];
   };
 
   services = {
-    enable = false;
+    random-background = {
+      enable = false;
+    };
   };
 
   programs = {
