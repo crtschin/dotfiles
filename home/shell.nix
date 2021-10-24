@@ -1,10 +1,23 @@
 { config, lib, pkgs, ... }:
 
 let
+  pisces = pkgs.fishPlugins.buildFishPlugin rec {
+    pname = "pisces";
+    version = "0.7.0";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "laughedelic";
+      repo = pname;
+      rev = "v${version}";
+      sha256 = "sha256-Oou2IeNNAqR00ZT3bss/DbhrJjGeMsn9dBBYhgdafBw=";
+    };
+  };
+
   devFishPlugins = with pkgs.fishPlugins; [
     done
     foreign-env
     fzf-fish
+    pisces
   ];
 in
 {
