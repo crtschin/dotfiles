@@ -1,5 +1,6 @@
 results
 home.nix
+hardware-configuration.nix
 
 !.config/global.gitignore
 .config/
