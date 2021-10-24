@@ -11,18 +11,14 @@
       ${self.nix_gl}/bin/nixGL ${program}/bin/${program.pname} "$@"
     '';
 
+    # Usage notice, install wrapped packages in `/usr/bin`
     native_wrapper = program: pkgs.writeShellScriptBin program.pname ''
       PATH=/usr/bin:${program}/bin ${program.pname} "$@"
     '';
 
-    # On Ubuntu:
-    #   install betterlockscreen in /usr/bin
-    #   install i3lock in /usr/bin
-    hello = pkgs.writeShellScriptBin "hello" ''
-      echo "Hello world"
-    '';
     betterlockscreen = self.native_wrapper super.betterlockscreen;
     i3lock = self.native_wrapper super.i3lock-color;
+
     kitty = self.nix_gl_wrapper super.kitty;
     alacritty = pkgs.nix_gl_wrapper super.alacritty;
     picom = pkgs.nix_gl_wrapper super.picom;
