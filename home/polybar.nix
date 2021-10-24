@@ -60,8 +60,10 @@ padding-right = 1
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = DejaVu Sans Mono:pixelsize=13;1
-font-1 = FontAwesome:pixelsize=13;1
+font-0 = Font Awesome 5 Brands Regular:pixelsize=13;1
+font-1 = Font Awesome 5 Free Solid:pixelsize=13;1
+font-2 = Font Awesome 5 Free Regular:pixelsize=13;1
+font-3 = Fira Code:pixelsize=13;1
 
 tray-position = right
 tray-padding = 1
@@ -135,14 +137,14 @@ label-urgent-padding = 1
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " "
+format-prefix = " "
 format-prefix-foreground = ''${colors.foreground-alt}
 label = %percentage:2%%
 
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
+format-prefix = " "
 format-prefix-foreground = ''${colors.foreground-alt}
 label = %gb_free%
 

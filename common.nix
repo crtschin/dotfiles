@@ -55,13 +55,11 @@ in {
 
       dejavu_fonts
       fira-code
-      fira-code-symbols
       font-awesome
       source-serif-pro
       papirus-icon-theme
       gruvbox-dark-gtk
       gruvbox-dark-icons-gtk
-
     ];
   };
 

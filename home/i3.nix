@@ -104,7 +104,7 @@ blur:
         };
 
         fonts = {
-          names = ["FontAwesome5Free, Fira Code, DejaVu Sans Mono, Monospace"];
+          names = ["Font Awesome 5 Free, Fira Code, DejaVu Sans Mono, Monospace"];
           style = "Bold Semi-Condensed";
           size = 11.0;
         };
