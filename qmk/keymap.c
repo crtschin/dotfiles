@@ -82,7 +82,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* FN
  * ,-----------------------------------------------------------------------------------.
- * | ____ | XXXX | XXXX | XXXX | XXXX | XXXX | XXXX | XXXX | XXXX | INS  | DEL  | ____ |
+ * | ____ | XXXX | XXXX | XXXX | XXXX | XXXX | XXXX | XXXX | XXXX | XXXX | INS  | DEL  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | ____ | XXXX | XXXX | XXXX | XXXX | XXXX | XXXX |  [   |  ]   |  {   |  }   | ____ |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -110,7 +110,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_NUM] = LAYOUT_planck_grid(
-    KC_GRV  ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,KC_1    ,KC_2    ,KC_3    ,KC_0    ,XXXXXXX,
+    KC_GRV  ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,KC_1    ,KC_2    ,KC_3    ,KC_0    ,_______,
     _______ ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,KC_4    ,KC_5    ,KC_6    ,KC_MINS ,KC_EQL ,
     _______ ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,KC_7    ,KC_8    ,KC_9    ,XXXXXXX ,XXXXXXX,
     _______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,_______ ,XXXXXXX ,XXXXXXX ,XXXXXXX
