@@ -45,7 +45,7 @@ in
     };
 
     fish = {
-      promptInit =
+      interactiveShellInit =
         ''
 begin
   set fish_greeting

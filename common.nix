@@ -13,6 +13,9 @@ in {
 
   xdg.systemDirs.data = [ "/usr/share" "/usr/local/share" ];
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "openssl-1.0.2u"
+  ];
   home = rec {
     packages = with pkgs; [
       arandr
@@ -40,6 +43,7 @@ in {
       fortune
       gimp
       imagemagick
+      pgadmin
       simplescreenrecorder
       spotify
       spotifyd
