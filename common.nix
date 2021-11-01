@@ -43,7 +43,6 @@ in {
       fortune
       gimp
       imagemagick
-      pgadmin
       simplescreenrecorder
       spotify
       spotifyd
