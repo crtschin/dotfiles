@@ -24,6 +24,7 @@ in {
       feh
       file
       git
+      gitAndTools.git-absorb
       gtop
       htop
       nitrogen
