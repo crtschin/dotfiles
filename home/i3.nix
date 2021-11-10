@@ -153,6 +153,24 @@ for_window [class=".*"] border pixel 2
 exec_always --no-startup-id polybar-msg cmd restart
 exec --no-startup-id ${pkgs.nitrogen}/bin/nitrogen --restore
 exec --no-startup-id systemctl --user start playerctld polybar picom
+
+assign [class="Code"] 1
+assign [class="kitty"] 10
+assign [class="alacritty"] 10
+assign [class="Firefox"] 2
+assign [class="pgadmin4"] 3
+assign [class="Spotify"] 9
+
+workspace 1 output primary
+workspace 2 output secondary
+workspace 3 output secondary
+workspace 4 output secondary
+workspace 5 output secondary
+workspace 6 output secondary
+workspace 7 output secondary
+workspace 8 output secondary
+workspace 9 output secondary
+workspace 10 output secondary
         ''
       ;
     };
