@@ -109,9 +109,8 @@ in {
 
     vim = {
       enable = true;
-      extraConfig =
-        ''
-syntax on
+      extraConfig = ''
+        syntax on
         ''
       ;
     };

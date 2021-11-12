@@ -2,11 +2,10 @@
 
 let
   mod = "Mod4";
-  polybarStart =
-    ''
-for m in $(polybar --list-monitors | ${pkgs.coreutils}/bin/cut -d":" -f1); do
-  MONITOR=$m polybar --reload main &
-done
+  polybarStart = ''
+    for m in $(polybar --list-monitors | ${pkgs.coreutils}/bin/cut -d":" -f1); do
+      MONITOR=$m polybar --reload main &
+    done
     ''
   ;
 in {
@@ -47,23 +46,22 @@ in {
       inactiveDim = "0.3";
       vSync = true;
       experimentalBackends = true;
-      extraOptions =
-        ''
-no-fading-openclose = true;
-mark-wmwin-focused = true;
-mark-ovredir-focused = true;
-use-ewmh-active-win = true;
-detect-client-opacity = true;
+      extraOptions = ''
+        no-fading-openclose = true;
+        mark-wmwin-focused = true;
+        mark-ovredir-focused = true;
+        use-ewmh-active-win = true;
+        detect-client-opacity = true;
 
-focus-exclude = [
-	"class_g ?= 'rofi'"
-];
-blur:
-{
-  method = "gaussian";
-  size = 10;
-  deviation = 5.0;
-};
+        focus-exclude = [
+          "class_g ?= 'rofi'"
+        ];
+        blur:
+        {
+          method = "gaussian";
+          size = 10;
+          deviation = 5.0;
+        };
         ''
       ;
     };
@@ -121,56 +119,55 @@ blur:
         };
         bars = [];
       };
-      extraConfig =
-        ''
-#######
-#THEME#
-#######
+      extraConfig = ''
+        #######
+        #THEME#
+        #######
 
-# set primary gruvbox colorscheme colors
-set $bg #282828
-set $red #cc241d
-set $green #98971a
-set $yellow #d79921
-set $blue #458588
-set $purple #b16286
-set $aqua #689d68
-set $gray #a89984
-set $darkgray #1d2021
-# green gruvbox
-client.focused          $green $green $darkgray $purple $green
-client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray
-client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
-client.urgent           $red $red $white $red $red
-# blue gruvbox
-# client.focused          $blue $blue $darkgray $purple $darkgray
-# client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray
-# client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
-# client.urgent           $red $red $white $red $red
+        # set primary gruvbox colorscheme colors
+        set $bg #282828
+        set $red #cc241d
+        set $green #98971a
+        set $yellow #d79921
+        set $blue #458588
+        set $purple #b16286
+        set $aqua #689d68
+        set $gray #a89984
+        set $darkgray #1d2021
+        # green gruvbox
+        client.focused          $green $green $darkgray $purple $green
+        client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray
+        client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
+        client.urgent           $red $red $white $red $red
+        # blue gruvbox
+        # client.focused          $blue $blue $darkgray $purple $darkgray
+        # client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray
+        # client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
+        # client.urgent           $red $red $white $red $red
 
-for_window [class=".*"] border pixel 2
-# for_window [class=".*"] title_format "<span font='Fira Code 12'>%title</span>"
-exec_always --no-startup-id polybar-msg cmd restart
-exec --no-startup-id ${pkgs.nitrogen}/bin/nitrogen --restore
-exec --no-startup-id systemctl --user start playerctld polybar picom
+        for_window [class=".*"] border pixel 2
+        # for_window [class=".*"] title_format "<span font='Fira Code 12'>%title</span>"
+        exec_always --no-startup-id polybar-msg cmd restart
+        exec --no-startup-id ${pkgs.nitrogen}/bin/nitrogen --restore
+        exec --no-startup-id systemctl --user start playerctld polybar picom
 
-assign [class="Code"] 1
-assign [class="kitty"] 10
-assign [class="alacritty"] 10
-assign [class="Firefox"] 2
-assign [class="pgadmin4"] 3
-assign [class="Spotify"] 9
+        assign [class="Code"] 1
+        assign [class="kitty"] 10
+        assign [class="alacritty"] 10
+        assign [class="Firefox"] 2
+        assign [class="pgadmin4"] 3
+        assign [class="Spotify"] 9
 
-workspace 1 output primary
-workspace 2 output secondary
-workspace 3 output secondary
-workspace 4 output secondary
-workspace 5 output secondary
-workspace 6 output secondary
-workspace 7 output secondary
-workspace 8 output secondary
-workspace 9 output secondary
-workspace 10 output secondary
+        workspace 1 output primary
+        workspace 2 output secondary
+        workspace 3 output secondary
+        workspace 4 output secondary
+        workspace 5 output secondary
+        workspace 6 output secondary
+        workspace 7 output secondary
+        workspace 8 output secondary
+        workspace 9 output secondary
+        workspace 10 output secondary
         ''
       ;
     };
