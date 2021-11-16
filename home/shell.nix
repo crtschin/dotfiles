@@ -45,18 +45,17 @@ in
     };
 
     fish = {
-      interactiveShellInit =
-        ''
-begin
-  set fish_greeting
-  set __done_notify_sound 1
-  set LESS ' -R '
-end
+      interactiveShellInit = ''
+        begin
+          set fish_greeting
+          set __done_notify_sound 1
+          set LESS ' -R '
+        end
 
-alias less "bat"
-alias g "git"
-alias e "eval $EDITOR"
-alias ee "e (fzf)"
+        alias less "bat"
+        alias g "git"
+        alias e "eval $EDITOR"
+        alias ee "e (fzf)"
         ''
       ;
       functions = {
@@ -271,6 +270,14 @@ alias ee "e (fzf)"
           truncation_length = 5;
           truncation_symbol = "…/";
           format = "[$path]($style)[$lock_symbol]($lock_style) with ";
+        };
+
+        env_var = {
+          IN_NIX = {
+            default = "";
+            format = "[$env_value]($style)";
+            style = "bold blue";
+          };
         };
 
         git_branch = {

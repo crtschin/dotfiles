@@ -57,6 +57,7 @@
 
           # Non-NixOS setting
           set --export NIX_PATH $NIX_PATH:$HOME/.nix-defexpr/channels
+          set --export NIXPKGS_ALLOW_UNFREE 1
 
           # Channable specific
           . ${.config/channable.fish}
@@ -69,6 +70,7 @@
         alias g "git"
         alias e "eval $EDITOR"
         alias ee "e (fzf)"
+        alias hm "home-manager -I /nix/var/nix/profiles/per-user/curtis/channels/nixpkgs/"
         ''
       ;
     };

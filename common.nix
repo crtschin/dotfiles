@@ -18,23 +18,13 @@ in {
   ];
   home = rec {
     packages = with pkgs; [
-      arandr
-      curl
-      fd
-      feh
-      file
-      git
       gitAndTools.git-absorb
       gtop
-      htop
       nitrogen
       pavucontrol
       playerctl
       ripgrep
       s-tui
-      tig
-      wget
-
       nix-tree
 
       betterlockscreen
@@ -50,12 +40,6 @@ in {
       texlive.combined.scheme-basic
       vlc
       vscode
-
-      gcc
-      python
-      rustc
-      rustfmt
-      cargo
 
       dejavu_fonts
       fira-code

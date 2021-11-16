@@ -8,6 +8,22 @@
   home = rec {
     username = "crtschin";
     homeDirectory = "/home/${username}";
+    packages = with pkgs; [
+      git
+      htop
+      tig
+      arandr
+      curl
+      fd
+      feh
+      file
+      wget
+      gcc
+      python
+      rustc
+      rustfmt
+      cargo
+    ];
   };
 
   gtk = {
