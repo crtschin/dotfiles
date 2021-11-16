@@ -18,6 +18,7 @@ in {
   ];
   home = rec {
     packages = with pkgs; [
+      fd
       gitAndTools.git-absorb
       gtop
       nitrogen
@@ -25,6 +26,7 @@ in {
       playerctl
       ripgrep
       s-tui
+      tig
       nix-tree
 
       betterlockscreen

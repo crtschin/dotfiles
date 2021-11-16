@@ -11,10 +11,8 @@
     packages = with pkgs; [
       git
       htop
-      tig
       arandr
       curl
-      fd
       feh
       file
       wget
