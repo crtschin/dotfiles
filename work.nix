@@ -63,14 +63,7 @@
           . ${.config/channable.fish}
         end
 
-        alias l "exa"
-        alias ll "exa -la"
-        alias ls "exa"
-        alias less "bat"
-        alias g "git"
-        alias e "eval $EDITOR"
-        alias ee "e (fzf)"
-        alias hm "home-manager -I /nix/var/nix/profiles/per-user/curtis/channels/nixpkgs/"
+        fzf_configure_bindings --git_status=\a
         ''
       ;
     };

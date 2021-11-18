@@ -12,7 +12,6 @@ let
       sha256 = "sha256-Oou2IeNNAqR00ZT3bss/DbhrJjGeMsn9dBBYhgdafBw=";
     };
   };
-
   devFishPlugins = with pkgs.fishPlugins; [
     done
     foreign-env
@@ -32,6 +31,17 @@ in
 
     bat = {
       enable = true;
+      config = {
+        theme = "gruvbox-dark";
+      };
+      themes = {
+        gruvbox = builtins.readFile (pkgs.fetchFromGitHub {
+          owner = "subnut";
+          repo = "gruvbox-tmTheme"; # Bat uses sublime syntax for its themes
+          rev = "64c47250e54298b91e2cf8d401320009aba9f991";
+          sha256 = "1kh0230maqvzynxxzv813bdgpcs1sh13cw1jw6piq6kigwbaw3kb";
+        } + "/gruvbox-dark.tmTheme");
+      };
     };
 
     broot = {
@@ -115,13 +125,8 @@ in
         begin
           set fish_greeting
           set __done_notify_sound 1
-          set LESS ' -R '
         end
-
-        alias less "bat"
-        alias g "git"
-        alias e "eval $EDITOR"
-        alias ee "e (fzf)"
+        fzf_configure_bindings --git_status=\a --variables=\cV --history=\cR --directory=\cF --git_log=\e\f
         ''
       ;
       functions = {
@@ -142,6 +147,16 @@ in
             sha256 = "0dbnir6jbwjpjalz14snzd3cgdysgcs3raznsijd6savad3qhijc";
           };
         }
+        {
+          name = "bass";
+          src = pkgs.fetchFromGitHub {
+            owner = "edc";
+            repo = "bass";
+            rev = "2fd3d2157d5271ca3575b13daec975ca4c10577a";
+            sha256 = "0mb01y1d0g8ilsr5m8a71j6xmqlyhf8w4xjf00wkk8k41cz3ypky";
+          };
+
+        }
       ];
     };
 
@@ -151,7 +166,6 @@ in
 
     fzf = {
       enable = true;
-      enableFishIntegration = true;
     };
 
     kitty = {

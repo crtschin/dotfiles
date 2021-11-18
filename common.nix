@@ -122,7 +122,8 @@ in {
   home.stateVersion = "21.05";
 
   home.sessionVariables = {
-    EDITOR = "vscode";
+    EDITOR = "code";
+    SHELL = "${pkgs.fish}/bin/fish";
     TERMINAL = "kitty";
     RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
   };
