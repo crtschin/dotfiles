@@ -369,7 +369,9 @@ in
         git_commit = {
           commit_hash_length = 6;
           tag_disabled = false;
-          style = "bold white";
+          tag_symbol = "🔖";
+          style = "bright-white";
+          format = "[\\[$hash$tag\\]]($style)";
         };
 
         git_status = {
