@@ -8,6 +8,8 @@
     }) {}).auto.nixGLDefault;
 
     nix_gl_wrapper = program: pkgs.writeShellScriptBin program.pname ''
+      #!/bin/sh
+
       ${self.nix_gl}/bin/nixGL ${program}/bin/${program.pname} "$@"
     '';
 
@@ -20,8 +22,9 @@
     i3lock = self.native_wrapper super.i3lock-color;
 
     kitty = self.nix_gl_wrapper super.kitty;
-    alacritty = pkgs.nix_gl_wrapper super.alacritty;
-    picom = pkgs.nix_gl_wrapper super.picom;
+    alacritty = self.nix_gl_wrapper super.alacritty;
+    picom = self.nix_gl_wrapper super.picom;
+    # vscode =  nix_gl_wrapper super.vscode;
   }) ];
 
   imports = [
@@ -33,7 +36,9 @@
   home = rec {
     username = "curtis";
     homeDirectory = "/home/${username}";
-    packages = with pkgs; [ ];
+    packages = with pkgs; [
+      nix_gl
+    ];
   };
 
   services = {
