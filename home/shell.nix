@@ -126,7 +126,6 @@ in
           set fish_greeting
           set __done_notify_sound 1
         end
-        fzf_configure_bindings --git_status=\a --variables=\cV --history=\cR --directory=\cF --git_log=\e\f
         ''
       ;
       functions = {
@@ -331,10 +330,15 @@ in
           full_symbol = "🔋";
           charging_symbol = "🔌";
           discharging_symbol = "⚡";
-          display = {
+          display = [{
             threshold = 45;
+            style = "bold yellow";
+            discharging_symbol = "💦";
+          } {
+            threshold = 10;
             style = "bold red";
-          };
+            discharging_symbol = "💀";
+          }];
         };
 
         character = {
@@ -387,6 +391,11 @@ in
           deleted = "🗑️";
           style = "bright-white";
           format = "(\\[$all_status$ahead_behind\\])($style)";
+        };
+
+        haskell = {
+          symbol = "λ ";
+          format = "\\[[$symbol($version)]($style)\\]";
         };
 
         hostname = {

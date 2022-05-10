@@ -18,6 +18,20 @@
       PATH=/usr/bin:${program}/bin ${program.pname} "$@"
     '';
 
+    monitor-heap = pkgs.writeShellScriptBin "monitor-heap" ''
+    #!/bin/sh
+    head -`fgrep -n END_SAMPLE $1.hp | tail -1 | cut -d : -f 1` $1.hp \
+      | hp2ps > $1.ps
+    gv $1.ps &
+    gvpsnum=$!
+    while [ 1 ] ; do
+      sleep 10
+      head -`fgrep -n END_SAMPLE $1.hp | tail -1 | cut -d : -f 1` $1.hp \
+        | hp2ps > $1.ps
+      kill -HUP $gvpsnum
+    done
+    '';
+
     betterlockscreen = self.native_wrapper super.betterlockscreen;
     i3lock = self.native_wrapper super.i3lock-color;
 
@@ -38,12 +52,15 @@
     homeDirectory = "/home/${username}";
     packages = with pkgs; [
       nix_gl
+      gv
+      monitor-heap
     ];
   };
 
   services = {
     random-background = {
-      enable = false;
+      enable = true;
+      imageDirectory = "%h/Pictures/Wallpapers";
     };
   };
 

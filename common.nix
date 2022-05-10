@@ -19,8 +19,10 @@ in {
   home = rec {
     packages = with pkgs; [
       fd
+      jq
+      jd
       gitAndTools.git-absorb
-      gtop
+      btop
       nitrogen
       pavucontrol
       playerctl
@@ -105,9 +107,6 @@ in {
   services = {
     playerctld = {
       enable = true;
-    };
-    random-background = {
-      imageDirectory = "%h/backgrounds";
     };
   };
 
