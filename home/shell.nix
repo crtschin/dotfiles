@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+F{ config, lib, pkgs, ... }:
 
 let
   pisces = pkgs.fishPlugins.buildFishPlugin rec {
@@ -366,7 +366,9 @@ in
 
         git_branch = {
           format = "\\[[$symbol$branch]($style)\\]";
-          symbol = "🌱 ";
+          symbol = "🌱";
+          truncation_length = 13;
+          ignore_branches = ["master"];
           style = "bold yellow";
         };
 
@@ -394,8 +396,8 @@ in
         };
 
         haskell = {
-          symbol = "λ ";
-          format = "\\[[$symbol($version)]($style)\\]";
+          symbol = "λ";
+          format = "\\[[$symbol($ghc_version)]($style)\\]";
         };
 
         hostname = {
@@ -407,6 +409,7 @@ in
         };
 
         memory_usage = {
+          symbol = "🐏";
           format = "\\[$symbol[$ram(|$swap)]($style)\\]";
           threshold = 0;
           style = "bold dimmed white";
@@ -418,7 +421,7 @@ in
         };
 
         python = {
-          symbol = "🐍 ";
+          symbol = "🐍";
           format = "\\[[$symbol$pyenv_prefix($version)(\($virtualenv\))]($style)\\]";
           disabled = true;
         };
@@ -457,7 +460,7 @@ in
 
         shlvl = {
           disabled = false;
-          symbol = "↕️ ";
+          symbol = "↕️";
           format = "\\[[$symbol$shlvl]($style)\\] ";
           threshold = 3;
         };

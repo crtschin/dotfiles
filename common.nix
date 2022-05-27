@@ -5,7 +5,6 @@ let
 in {
   imports = [
     ./home/i3.nix
-    ./home/python.nix
     ./home/shell.nix
   ];
 
