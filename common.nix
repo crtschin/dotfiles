@@ -94,6 +94,10 @@ in {
       };
     };
 
+    gitui = {
+      enable = true;
+    };
+
     vim = {
       enable = true;
       extraConfig = ''

@@ -1,4 +1,4 @@
-F{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   pisces = pkgs.fishPlugins.buildFishPlugin rec {
@@ -128,6 +128,11 @@ in
         end
         ''
       ;
+      shellAliases = {
+        kdiff = "kitty +kitten diff -o pygments_style=gruvbox-dark";
+        kssh = "kitty +kitten ssh";
+        kicat = "kitty +kitten icat";
+      };
       functions = {
         giffify = {
           body = "ffmpeg -i $video_file -r 15 -vf \"scale=1024:-1,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse\" $giff_name.gif";
@@ -173,6 +178,7 @@ in
         name = "Fira Code";
         size = 14;
       };
+      theme = "Gruvbox Material Dark Soft";
       settings = {
         disable_ligatures = "cursor";
         scrollback_lines = 10000;
@@ -182,42 +188,6 @@ in
         enable_audio_bell = true;
         visual_bell_duration = "0.5";
         shell = "${pkgs.fish}/bin/fish";
-        # GruvboxMaterial theme by sainnhe
-        # License: [MIT License](https://opensource.org/licenses/MIT).
-        background = "#32302f";
-        foreground = "#dfbf8e";
-        selection_background = "#dfbf8e";
-        selection_foreground = "#32302f";
-        active_tab_background = "#32302f";
-        active_tab_foreground = "#dfbf8e";
-        active_tab_font_style = "bold-italic";
-        inactive_tab_background = "#32302f";
-        inactive_tab_foreground = "#a89984";
-        inactive_tab_font_style = "normal";
-        # Black
-        color0 = "#665c54";
-        color8 = "#928374";
-        # Red
-        color1 = "#ea6962";
-        color9 = "#ea6962";
-        # Green
-        color2 = "#a9b665";
-        color10 = "#a9b665";
-        # Yellow
-        color3 = "#e78a4e";
-        color11 = "#e3a84e";
-        # Blue
-        color4 = "#7daea3";
-        color12 = "#7daea3";
-        # Magenta
-        color5 = "#d3869b";
-        color13 = "#d3869b";
-        # Cyan
-        color6 = "#89b482";
-        color14 = "#89b482";
-        # White
-        color7  = "#dfbf8e";
-        color15 = "#dfbf8e";
         clear_all_shortcuts = true;
       };
       keybindings = {

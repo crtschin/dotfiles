@@ -33,8 +33,6 @@
         degraded = ''${colors.yellow}
         bad = ''${colors.red}
 
-
-
         [bar/common]
         width = 100%
         height = 27
@@ -59,10 +57,10 @@
         module-margin-left = 1
         module-margin-right = 1
 
-        font-0 = Font Awesome 5 Brands Regular:pixelsize=13;1
-        font-1 = Font Awesome 5 Free Solid:pixelsize=13;1
-        font-2 = Font Awesome 5 Free Regular:pixelsize=13;1
-        font-3 = Fira Code:pixelsize=13;1
+        font-0 = Fira Code:pixelsize=13;1
+        font-1 = Font Awesome 6 Brands Regular:pixelsize=13;1
+        font-2 = Font Awesome 6 Free Solid:pixelsize=13;1
+        font-3 = Font Awesome 6 Free Regular:pixelsize=13;1
 
         tray-position = right
         tray-padding = 1

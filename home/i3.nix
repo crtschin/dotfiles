@@ -41,7 +41,7 @@ in {
       enable = true;
       blur = true;
       fade = true;
-      fadeDelta = 2;
+      fadeDelta = 3;
       inactiveOpacity = "0.8";
       inactiveDim = "0.3";
       vSync = true;
