@@ -397,6 +397,8 @@ in
         };
 
         rust = {
+          symbol = "🦀";
+          version_format = "v$\{raw\}";
           format = "\\[[$symbol$version]($style)\\]";
           style = "bold green";
         };
@@ -407,8 +409,16 @@ in
         };
 
         nix_shell = {
-          impure_msg = "[impure](bold red)";
-          pure_msg = "[pure](bold green)";
+          format = "\\[[$symbol$state]($style)\\]";
+          symbol = "❄️";
+          impure_msg = "[$name](bold red)";
+          pure_msg = "[$name](bold green)";
+        };
+
+        package = {
+          symbol = "📦";
+          version_format = "$\{raw\}";
+          format = "\\[[$symbol$version]($style)\\]";
         };
 
         time = {
