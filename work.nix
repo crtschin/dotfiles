@@ -8,9 +8,7 @@
     }) {}).auto.nixGLDefault;
 
     nix_gl_wrapper = program: pkgs.writeShellScriptBin program.pname ''
-      #!/bin/sh
-
-      ${self.nix_gl}/bin/nixGL ${program}/bin/${program.pname} "$@"
+      exec ${self.nix_gl}/bin/nixGL ${program}/bin/${program.pname} "$@"
     '';
 
     # Usage notice, install wrapped packages in `/usr/bin`
@@ -44,7 +42,6 @@
     kitty = self.nix_gl_wrapper super.kitty;
     alacritty = self.nix_gl_wrapper super.alacritty;
     picom = self.nix_gl_wrapper super.picom;
-    # vscode =  nix_gl_wrapper super.vscode;
   }) ];
 
   imports = [
@@ -61,6 +58,7 @@
       gv
       monitor-heap
       mermaid-cli
+      nix_gl
     ];
   };
 

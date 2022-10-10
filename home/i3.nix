@@ -39,31 +39,28 @@ in {
     picom = {
       package = pkgs.picom;
       enable = true;
-      blur = true;
-      fade = true;
-      fadeDelta = 3;
-      inactiveOpacity = "0.8";
-      inactiveDim = "0.3";
-      vSync = true;
       experimentalBackends = true;
-      extraOptions = ''
+      fade = true;
+      fadeDelta = 2;
+      inactiveOpacity = 0.8;
+      settings = {
         no-fading-openclose = true;
         mark-wmwin-focused = true;
         mark-ovredir-focused = true;
         use-ewmh-active-win = true;
         detect-client-opacity = true;
-
         focus-exclude = [
           "class_g ?= 'rofi'"
         ];
-        blur:
+        blur =
         {
           method = "gaussian";
           size = 10;
           deviation = 5.0;
         };
-        ''
-      ;
+        inactive-dim = "0.3";
+        vsync = true;
+      };
     };
   };
   xdg.enable = true;
@@ -155,6 +152,7 @@ in {
         assign [class="kitty"] 10
         assign [class="alacritty"] 10
         assign [class="Firefox"] 2
+        assign [class="brave"] 2
         assign [class="pgadmin4"] 3
         assign [class="Spotify"] 9
 

@@ -19,9 +19,7 @@ in {
     packages = with pkgs; [
       fd
       jq
-      jd
       gitAndTools.git-absorb
-      btop
       nitrogen
       pavucontrol
       playerctl
@@ -29,8 +27,11 @@ in {
       s-tui
       tig
       nix-tree
+      hyperfine
+      du-dust
 
       betterlockscreen
+      brave
       ffmpeg
       flameshot
       firefox
@@ -59,6 +60,15 @@ in {
   programs = {
     home-manager = {
       enable = true;
+    };
+
+    btop = {
+      enable = true;
+      settings = {
+        color_theme = "gruvbox_dark";
+        theme_background = false;
+        truecolor = true;
+      };
     };
 
     firefox = {
@@ -128,5 +138,6 @@ in {
     SHELL = "${pkgs.fish}/bin/fish";
     TERMINAL = "kitty";
     RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
+    GIT_EDITOR = "${pkgs.vim}/bin/vim";
   };
 }
