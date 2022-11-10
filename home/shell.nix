@@ -122,13 +122,6 @@ in
       enableAliases = true;
     };
 
-    direnv = {
-      enable = true;
-      nix-direnv = {
-        enable = true;
-      };
-    };
-
     fish = {
       interactiveShellInit = ''
         begin
@@ -206,6 +199,8 @@ in
         visual_bell_duration = "0.5";
         shell = "${pkgs.fish}/bin/fish";
         clear_all_shortcuts = true;
+        tab_bar_style = "powerline";
+        tab_powerline_style = "slanted";
       };
       keybindings = {
         "ctrl+c" = "copy_or_interrupt";
@@ -368,6 +363,7 @@ in
         };
 
         git_status = {
+          disabled = true;
           conflicted = "⚔️";
           ahead = "🏎️💨";
           behind = "🐢";
@@ -409,10 +405,6 @@ in
           disabled = true;
         };
 
-        package = {
-          disabled = false;
-        };
-
         python = {
           symbol = "🐍";
           format = "\\[[$symbol$pyenv_prefix($version)(\($virtualenv\))]($style)\\]";
@@ -439,6 +431,7 @@ in
         };
 
         package = {
+          disabled = false;
           symbol = "📦";
           version_format = "$\{raw\}";
           format = "\\[[$symbol$version]($style)\\]";

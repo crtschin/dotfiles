@@ -6,6 +6,7 @@ in {
   imports = [
     ./home/i3.nix
     ./home/shell.nix
+    ./home/services.nix
   ];
 
   systemd.user.startServices = "sd-switch";
@@ -30,6 +31,9 @@ in {
       hyperfine
       du-dust
 
+      direnv
+      nix-direnv
+
       betterlockscreen
       brave
       ffmpeg
@@ -44,6 +48,7 @@ in {
       texlive.combined.scheme-basic
       vlc
       vscode
+      rnix-lsp
 
       dejavu_fonts
       fira-code
@@ -56,6 +61,10 @@ in {
   };
 
   fonts.fontconfig.enable = true;
+
+  xdg.configFile."direnv/direnvrc".text = ''
+    source ${pkgs.nix-direnv}/share/nix-direnv/direnvrc
+    '';
 
   programs = {
     home-manager = {
@@ -102,6 +111,10 @@ in {
             syntax-theme = "gruvbox-dark";
         };
       };
+    };
+
+    taskwarrior = {
+      enable = false;
     };
 
     gitui = {

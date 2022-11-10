@@ -3,8 +3,8 @@
 {
   nixpkgs.overlays = [ (self: super: {
     nix_gl = (import (fetchGit {
-      ref = "main";
-      url = "https://github.com/guibou/nixGL.git";
+      ref = "28432f4703506e0e019a60fdc2859717e2344eae";
+      url = "https://github.com/cathaysia/nixGL.git";
     }) {}).auto.nixGLDefault;
 
     nix_gl_wrapper = program: pkgs.writeShellScriptBin program.pname ''
@@ -39,6 +39,7 @@
     betterlockscreen = self.native_wrapper super.betterlockscreen;
     i3lock = self.native_wrapper super.i3lock-color;
 
+    brave = self.nix_gl_wrapper super.brave;
     kitty = self.nix_gl_wrapper super.kitty;
     alacritty = self.nix_gl_wrapper super.alacritty;
     picom = self.nix_gl_wrapper super.picom;
@@ -54,11 +55,10 @@
     username = "curtis";
     homeDirectory = "/home/${username}";
     packages = with pkgs; [
-      nix_gl
       gv
       monitor-heap
       mermaid-cli
-      nix_gl
+      pgadmin
     ];
   };
 
