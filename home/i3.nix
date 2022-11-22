@@ -39,11 +39,11 @@ in {
     picom = {
       package = pkgs.picom;
       enable = true;
-      experimentalBackends = true;
       fade = true;
       fadeDelta = 2;
       inactiveOpacity = 0.8;
       settings = {
+        experimental-backends = true;
         no-fading-openclose = true;
         mark-wmwin-focused = true;
         mark-ovredir-focused = true;
@@ -63,8 +63,6 @@ in {
       };
     };
   };
-  xdg.enable = true;
-  xdg.mime.enable = true;
 
   xresources.properties = {
     "*background"= "#282828";
@@ -97,7 +95,6 @@ in {
         gaps = {
           inner = 10;
         };
-
         fonts = {
           names = ["Font Awesome 5 Free, Fira Code, DejaVu Sans Mono, Monospace"];
           style = "Bold Semi-Condensed";

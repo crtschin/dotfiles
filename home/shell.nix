@@ -142,6 +142,7 @@ in
         kdiff = "kitty +kitten diff -o pygments_style=gruvbox-dark";
         kssh = "kitty +kitten ssh";
         kicat = "kitty +kitten icat";
+        copy = "xclip -sel clip";
       };
       functions = {
         giffify = {

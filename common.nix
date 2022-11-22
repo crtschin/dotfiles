@@ -11,7 +11,6 @@ in {
 
   systemd.user.startServices = "sd-switch";
 
-  xdg.systemDirs.data = [ "/usr/share" "/usr/local/share" ];
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.0.2u"
@@ -30,6 +29,7 @@ in {
       nix-tree
       hyperfine
       du-dust
+      xclip
 
       direnv
       nix-direnv
@@ -62,9 +62,14 @@ in {
 
   fonts.fontconfig.enable = true;
 
-  xdg.configFile."direnv/direnvrc".text = ''
-    source ${pkgs.nix-direnv}/share/nix-direnv/direnvrc
-    '';
+  xdg = {
+    enable = true;
+    mime.enable = true;
+    systemDirs.data = [ "/usr/share" "/usr/local/share" ];
+    configFile."direnv/direnvrc".text = ''
+      source ${pkgs.nix-direnv}/share/nix-direnv/direnvrc
+      '';
+  };
 
   programs = {
     home-manager = {

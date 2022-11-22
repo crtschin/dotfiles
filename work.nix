@@ -3,8 +3,9 @@
 {
   nixpkgs.overlays = [ (self: super: {
     nix_gl = (import (fetchGit {
-      ref = "28432f4703506e0e019a60fdc2859717e2344eae";
-      url = "https://github.com/cathaysia/nixGL.git";
+      ref = "flathub";
+      url = "https://github.com/KiruyaMomochi/nixGL.git";
+      rev = "5d59e457ddc019561a2de3d7fe46d3a7fe61a44c";
     }) {}).auto.nixGLDefault;
 
     nix_gl_wrapper = program: pkgs.writeShellScriptBin program.pname ''
