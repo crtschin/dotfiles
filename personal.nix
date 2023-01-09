@@ -53,5 +53,24 @@
       userName = "crtschin";
       userEmail = "csochinjensem@gmail.com";
     };
+
+    fish = {
+      shellInit = ''
+        begin
+          set fish_greeting
+          set __done_notify_sound 1
+        end
+
+        function __direnv_export_eval --on-event fish_prompt
+            begin
+                begin
+                    ${pkgs.direnv}/bin/direnv export fish
+                end 1>| source
+            end 2>| egrep -v -e "^direnv: export"
+        end
+
+        set (gnome-keyring-daemon --start | string split "=")
+      '';
+    };
   };
 }

@@ -60,7 +60,6 @@
 
   # Video settings
   services.xserver.videoDrivers = [ "modesetting" ];
-  services.xserver.useGlamor = true;
 
   # Configure keymap in X11
   services.xserver.layout = "us";
@@ -109,6 +108,9 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.lightdm.enableGnomeKeyring = true;
+  programs.ssh.startAgent = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
