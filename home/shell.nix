@@ -143,6 +143,7 @@ in
         kssh = "kitty +kitten ssh";
         kicat = "kitty +kitten icat";
         copy = "xclip -sel clip";
+        gu = "${pkgs.gitui}/bin/gitui";
       };
       functions = {
         giffify = {
@@ -186,7 +187,7 @@ in
     kitty = {
       enable = true;
       font = {
-        name = "Fira Code";
+        name = "Iosevka crtschin";
         size = 14;
       };
       theme = "Gruvbox Material Dark Soft";
@@ -261,11 +262,11 @@ in
           };
         };
         font = {
-          normal.family = "Fira Code";
+          normal.family = "Iosevka crtschin";
           normal.style = "Regular";
-          bold.family = "Fira Code";
+          bold.family = "Iosevka crtschin";
           bold.style = "Bold";
-          italic.family = "Fira Code";
+          italic.family = "Iosevka crtschin";
           italic.style = "Light Italic";
           size = 13;
         };
@@ -427,7 +428,7 @@ in
         nix_shell = {
           symbol = "🐚";
           format = "\\[[$symbol$state]($style)\\]";
-          impure_msg = "[$name](bold red)";
+          impure_msg = "[$name](bold blue)";
           pure_msg = "[$name](bold green)";
         };
 

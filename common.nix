@@ -1,7 +1,23 @@
 { config, pkgs, ... }:
 
 let
+  iosevka = pkgs.iosevka.override {
+    set = "crtschin";
+    privateBuildPlan = ''
+    [buildPlans.iosevka-crtschin]
+    family = "Iosevka crtschin"
+    spacing = "normal"
+    serifs = "sans"
+    no-cv-ss = false
+    export-glyph-names = true
 
+      [buildPlans.iosevka-crtschin.variants]
+      inherits = "ss05"
+
+      [buildPlans.iosevka-crtschin.ligations]
+      inherits = "dlig"
+    '';
+  };
 in {
   imports = [
     ./home/i3.nix
@@ -12,13 +28,11 @@ in {
   systemd.user.startServices = "sd-switch";
 
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.permittedInsecurePackages = [
-    "openssl-1.0.2u"
-  ];
   home = rec {
     packages = with pkgs; [
       fd
       jq
+      arandr
       gitAndTools.git-absorb
       nitrogen
       pavucontrol
@@ -26,13 +40,17 @@ in {
       ripgrep
       s-tui
       tig
-      nix-tree
       hyperfine
       du-dust
       xclip
-
+      gitui
+      ncdu
       direnv
+
       nix-direnv
+      nix-tree
+      nix-diff
+      nvd
 
       betterlockscreen
       brave
@@ -49,6 +67,8 @@ in {
       vlc
       vscode
       rnix-lsp
+      hivemind
+      pipe-rename
 
       dejavu_fonts
       fira-code
@@ -57,6 +77,7 @@ in {
       papirus-icon-theme
       gruvbox-dark-gtk
       gruvbox-dark-icons-gtk
+      iosevka
     ];
   };
 
@@ -92,10 +113,10 @@ in {
 
     git = {
       enable = true;
-      delta = {
-        enable = true;
-      };
       lfs.enable = true;
+      delta.enable = true;
+      # Prevent bad objects from spreading.
+      # transfer.fsckObjects = true;
       extraConfig = {
         pager = {
           diff = "delta";
@@ -115,6 +136,22 @@ in {
             features = "interactive unobtrusive-line-numbers decorations";
             syntax-theme = "gruvbox-dark";
         };
+        diff = {
+          algorithm = "histogram";
+          # Try to break up diffs at blank lines
+          compactionHeuristic = true;
+        };
+        # For interactive rebases, automatically reorder and set the
+        # right actions for !fixup and !squash commits.
+        rebase.autosquash = true;
+        # Include tags with commits that we push
+        push.followTags = true;
+        # Sort tags in version order, e.g. `v1 v2 .. v9 v10` instead
+        # of `v1 v10 .. v9`
+        tag.sort = "version:refname";
+        # Remeber conflict resolutions. If the same conflict appears
+        # again, use the previous resolution.
+        rerere.enabled = true;
       };
     };
 
@@ -123,7 +160,7 @@ in {
     };
 
     gitui = {
-      enable = true;
+      enable = false;
     };
 
     vim = {

@@ -16,7 +16,7 @@ in {
   programs = {
     rofi = {
       enable = true;
-      font = "FontAwesome, Fira Code 12, DejaVu Sans Mono 12";
+      font = "FontAwesome, Iosevka crtschin, Fira Code 12, DejaVu Sans Mono 12";
       terminal = "${pkgs.kitty}/bin/kitty";
       theme = "gruvbox-dark-soft";
       extraConfig = {
@@ -28,6 +28,15 @@ in {
         normal-window = true;
       };
     };
+  };
+
+  xresources.properties = {
+    "Xft.antialias" = "1";
+    "Xft.autohint" = "0";
+    "Xft.hinting" = "1";
+    "Xft.hintstyle" = "hintnone";
+    "Xft.lcdfilter" = "lcddefault";
+    "Xft.rgba" = "rgb";
   };
 
   services = {
@@ -96,7 +105,7 @@ in {
           inner = 10;
         };
         fonts = {
-          names = ["Font Awesome 5 Free, Fira Code, DejaVu Sans Mono, Monospace"];
+          names = ["Font Awesome 5 Free, Iosevka crtschin, Fira Code, DejaVu Sans Mono, Monospace"];
           style = "Bold Semi-Condensed";
           size = 11.0;
         };

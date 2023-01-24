@@ -60,6 +60,9 @@
       monitor-heap
       mermaid-cli
       pgadmin
+      solaar
+      nix_gl
+      _1password
     ];
   };
 

@@ -8,6 +8,7 @@
         i3Support = true;
         alsaSupport = true;
         iwSupport = true;
+        pulseSupport = true;
         githubSupport = true;
       };
       extraConfig = ''
@@ -57,7 +58,7 @@
         module-margin-left = 1
         module-margin-right = 1
 
-        font-0 = Fira Code:pixelsize=13;1
+        font-0 = Iosevka crtschin:pixelsize=13;1
         font-1 = Font Awesome 6 Brands Regular:pixelsize=13;1
         font-2 = Font Awesome 6 Free Solid:pixelsize=13;1
         font-3 = Font Awesome 6 Free Regular:pixelsize=13;1
