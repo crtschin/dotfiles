@@ -16,7 +16,7 @@ in {
   programs = {
     rofi = {
       enable = true;
-      font = "FontAwesome, Iosevka crtschin, Fira Code 12, DejaVu Sans Mono 12";
+      font = "FontAwesome, Fira Code 12, Iosevka crtschin, DejaVu Sans Mono 12";
       terminal = "${pkgs.kitty}/bin/kitty";
       theme = "gruvbox-dark-soft";
       extraConfig = {
@@ -47,7 +47,7 @@ in {
     polybar.script = polybarStart;
     picom = {
       package = pkgs.picom;
-      enable = true;
+      enable = false;
       fade = true;
       fadeDelta = 2;
       inactiveOpacity = 0.8;

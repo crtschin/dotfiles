@@ -27,8 +27,8 @@
   gtk = {
     enable = true;
     font = {
-      package = pkgs.iosevka;
-      name = "Iosevka crtschin";
+      package = pkgs.fira-code;
+      name = "Fira Code";
       size = 12;
     };
     theme = {

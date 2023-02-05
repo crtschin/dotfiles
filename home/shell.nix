@@ -187,7 +187,7 @@ in
     kitty = {
       enable = true;
       font = {
-        name = "Iosevka crtschin";
+        name = "Fira Code";
         size = 14;
       };
       theme = "Gruvbox Material Dark Soft";
@@ -262,11 +262,11 @@ in
           };
         };
         font = {
-          normal.family = "Iosevka crtschin";
+          normal.family = "Fira Code";
           normal.style = "Regular";
-          bold.family = "Iosevka crtschin";
+          bold.family = "Fira Code";
           bold.style = "Bold";
-          italic.family = "Iosevka crtschin";
+          italic.family = "Fira Code";
           italic.style = "Light Italic";
           size = 13;
         };

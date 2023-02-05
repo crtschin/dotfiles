@@ -45,6 +45,10 @@ in {
       xclip
       gitui
       ncdu
+      niv
+      any-nix-shell
+      cachix
+
       direnv
 
       nix-direnv
@@ -63,7 +67,7 @@ in {
       simplescreenrecorder
       spotify
       spotifyd
-      texlive.combined.scheme-basic
+      texlive.combined.scheme-small
       vlc
       vscode
       rnix-lsp
@@ -77,7 +81,6 @@ in {
       papirus-icon-theme
       gruvbox-dark-gtk
       gruvbox-dark-icons-gtk
-      iosevka
     ];
   };
 
@@ -194,5 +197,6 @@ in {
     TERMINAL = "kitty";
     RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
     GIT_EDITOR = "${pkgs.vim}/bin/vim";
+    NIXPKGS_ALLOW_INSECURE = 1;
   };
 }
