@@ -12,8 +12,23 @@ let
       sha256 = "sha256-Oou2IeNNAqR00ZT3bss/DbhrJjGeMsn9dBBYhgdafBw=";
     };
   };
+
+  fish-git-abbr = pkgs.fishPlugins.buildFishPlugin rec {
+    pname = "fish-git-abbr";
+    version = "0.2.1";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "lewisacidic";
+      repo = pname;
+      rev = "${version}";
+      sha256 = "sha256-Oou2IeNNAqR00ZT3bss/DbhrJjGeMsn9dBBYhgdafBw=";
+    };
+  };
+
   devFishPlugins = with pkgs.fishPlugins; [
+    fish-git-abbr
     done
+    sponge
     foreign-env
     fzf-fish
     pisces
@@ -128,6 +143,8 @@ in
           set fish_greeting
           set __done_notify_sound 1
         end
+
+        abbr --add --global --position anywhere -- gbranch "(git branch --list --sort=-committerdate | string trim | fzf --preview=\"git log --stat -n 10 --decorate --color=always {}\")"
 
         function __direnv_export_eval --on-event fish_prompt
             begin

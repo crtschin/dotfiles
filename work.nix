@@ -61,6 +61,9 @@
       mermaid-cli
       pgadmin
       solaar
+      postman
+      jmeter
+      haskellPackages.profiteur
       nix_gl
       _1password
     ];

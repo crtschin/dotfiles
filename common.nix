@@ -1,23 +1,5 @@
 { config, pkgs, ... }:
-
 let
-  iosevka = pkgs.iosevka.override {
-    set = "crtschin";
-    privateBuildPlan = ''
-    [buildPlans.iosevka-crtschin]
-    family = "Iosevka crtschin"
-    spacing = "normal"
-    serifs = "sans"
-    no-cv-ss = false
-    export-glyph-names = true
-
-      [buildPlans.iosevka-crtschin.variants]
-      inherits = "ss05"
-
-      [buildPlans.iosevka-crtschin.ligations]
-      inherits = "dlig"
-    '';
-  };
 in {
   imports = [
     ./home/i3.nix
@@ -50,6 +32,7 @@ in {
       cachix
 
       direnv
+      p7zip
 
       nix-direnv
       nix-tree
@@ -100,6 +83,10 @@ in {
       enable = true;
     };
 
+    autorandr = {
+      enable = true;
+    };
+
     btop = {
       enable = true;
       settings = {
@@ -121,6 +108,12 @@ in {
       # Prevent bad objects from spreading.
       # transfer.fsckObjects = true;
       extraConfig = {
+        alias = {
+          lc = "!fish -c 'git checkout (git branch --list --sort=-committerdate | string trim | fzf --preview=\"git log --stat -n 10 --decorate --color=always {}\")'";
+          oc = "!fish -c 'git checkout (git for-each-ref refs/remotes/origin/ --format=\"%(refname:short)\" --sort=-committerdate|perl -p -e \"s#^origin/##g\"|head -100|string trim|fzf --preview=\"git log --stat -n 10 --decorate --color=always origin/{}\")'";
+          fpush = "git push --force-with-lease";
+        };
+        blame.ignoreRevsFile = ".git-blame-ignore-revs";
         pager = {
           diff = "delta";
           log = "delta";
@@ -178,6 +171,10 @@ in {
   services = {
     playerctld = {
       enable = true;
+    };
+    autorandr = {
+      enable = true;
+      ignoreLid = true;
     };
   };
 
