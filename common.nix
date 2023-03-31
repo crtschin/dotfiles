@@ -1,10 +1,17 @@
 { config, pkgs, ... }:
 let
 in {
+  nixpkgs.overlays = [
+    (import ./home/overlays/rice.nix)
+  ];
+
   imports = [
     ./home/i3.nix
     ./home/shell.nix
     ./home/services.nix
+    ./home/modules/kitty.nix
+    ./home/modules/fish.nix
+    ./home/modules/starship.nix
   ];
 
   systemd.user.startServices = "sd-switch";
@@ -111,7 +118,7 @@ in {
         alias = {
           lc = "!fish -c 'git checkout (git branch --list --sort=-committerdate | string trim | fzf --preview=\"git log --stat -n 10 --decorate --color=always {}\")'";
           oc = "!fish -c 'git checkout (git for-each-ref refs/remotes/origin/ --format=\"%(refname:short)\" --sort=-committerdate|perl -p -e \"s#^origin/##g\"|head -100|string trim|fzf --preview=\"git log --stat -n 10 --decorate --color=always origin/{}\")'";
-          fpush = "git push --force-with-lease";
+          fpush = "push --force-with-lease";
         };
         blame.ignoreRevsFile = ".git-blame-ignore-revs";
         pager = {
@@ -172,10 +179,10 @@ in {
     playerctld = {
       enable = true;
     };
-    autorandr = {
-      enable = true;
-      ignoreLid = true;
-    };
+    # autorandr = {
+    #   enable = true;
+    #   ignoreLid = true;
+    # };
   };
 
   # This value determines the Home Manager release that your
@@ -187,11 +194,10 @@ in {
   # the Home Manager release notes for a list of state version
   # changes in each release.
   home.stateVersion = "21.05";
-
   home.sessionVariables = {
-    EDITOR = "code";
+    EDITOR = "${pkgs.vscode}/bin/code";
     SHELL = "${pkgs.fish}/bin/fish";
-    TERMINAL = "kitty";
+    TERMINAL = "${pkgs.kitty}/bin/kitty";
     RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
     GIT_EDITOR = "${pkgs.vim}/bin/vim";
     NIXPKGS_ALLOW_INSECURE = 1;

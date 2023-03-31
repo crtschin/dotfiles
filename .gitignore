@@ -1,6 +1,7 @@
 results
 home.nix
 hardware-configuration.nix
+flake.lock
 
 !.config/global.gitignore
 .config/

@@ -1,17 +1,7 @@
-{ config, pkgs, ... }:
-
-{
+{ config, pkgs, inputs, ... }:
+let
+in {
   nixpkgs.overlays = [ (self: super: {
-    nix_gl = (import (fetchGit {
-      ref = "flathub";
-      url = "https://github.com/KiruyaMomochi/nixGL.git";
-      rev = "5d59e457ddc019561a2de3d7fe46d3a7fe61a44c";
-    }) {}).auto.nixGLDefault;
-
-    nix_gl_wrapper = program: pkgs.writeShellScriptBin program.pname ''
-      exec ${self.nix_gl}/bin/nixGL ${program}/bin/${program.pname} "$@"
-    '';
-
     # Usage notice, install wrapped packages in `/usr/bin`
     native_wrapper = program: pkgs.writeShellScriptBin program.pname ''
       PATH=/usr/bin:${program}/bin ${program.pname} "$@"
@@ -39,15 +29,12 @@
 
     betterlockscreen = self.native_wrapper super.betterlockscreen;
     i3lock = self.native_wrapper super.i3lock-color;
-
-    brave = self.nix_gl_wrapper super.brave;
-    kitty = self.nix_gl_wrapper super.kitty;
-    alacritty = self.nix_gl_wrapper super.alacritty;
-    picom = self.nix_gl_wrapper super.picom;
   }) ];
 
   imports = [
     ./common.nix
+    ./home/modules/nixgl.nix
+    ./home/modules/general-overlay.nix
   ];
 
   targets.genericLinux.enable = true;
@@ -64,8 +51,10 @@
       postman
       jmeter
       haskellPackages.profiteur
-      nix_gl
       _1password
+
+      graphviz
+      gprof2dot
     ];
   };
 
@@ -94,7 +83,7 @@
           set --export NIXPKGS_ALLOW_UNFREE 1
 
           # Channable specific
-          . ${.config/channable.fish}
+          . ${inputs.channableFishFile}
         end
 
         fzf_configure_bindings --git_status=\a
