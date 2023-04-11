@@ -6,14 +6,7 @@ let
     src = inputs.fish-pisces;
   };
 
-  fish-git-abbr = pkgs.fishPlugins.buildFishPlugin rec {
-    pname = "fish-git-abbr";
-    version = "0.2.1";
-    src = inputs.fish-git-abbr;
-  };
-
   devFishPlugins = with pkgs.fishPlugins; [
-    fish-git-abbr
     fish-pisces
     done
     sponge
@@ -48,6 +41,7 @@ in {
         kssh = "kitty +kitten ssh";
         kicat = "kitty +kitten icat";
         copy = "xclip -sel clip";
+        psql = "pgcli";
         gu = "${pkgs.gitui}/bin/gitui";
         watch = "watch -d";
         "..." = "cd ../..";
@@ -85,6 +79,10 @@ in {
             rev = "2fd3d2157d5271ca3575b13daec975ca4c10577a";
             sha256 = "0mb01y1d0g8ilsr5m8a71j6xmqlyhf8w4xjf00wkk8k41cz3ypky";
           };
+        }
+        {
+          name = "plugin-git";
+          src = pkgs.fishPlugins.plugin-git.src;
         }
       ];
     };

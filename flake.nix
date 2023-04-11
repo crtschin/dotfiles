@@ -38,10 +38,6 @@
       url = "github:laughedelic/pisces";
       flake = false;
     };
-    fish-git-abbr = {
-      url = "github:lewisacidic/fish-git-abbr";
-      flake = false;
-    };
     fish-z = {
       url = "github:jethrokuan/z";
       flake = false;
@@ -60,11 +56,7 @@
         config = { allowUnfree = true; };
       };
 
-      # I don't want to include work stuff in this repo, so we expose a function that constructs
-      # the home manager configuration if you pass it a list of additional modules that you want
-      # to include.
-      # The homeManagerConfiguration call must be done inside this flake, because it refers to
-      # files within the repo (for example mc-lists.el).
+      # Lifted from https://github.com/yoricksijsling/dotfiles
       makeHomeConfiguration = {extraModules ? []}: home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = {

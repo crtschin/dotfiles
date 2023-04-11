@@ -2,17 +2,7 @@
 
 let
   mod = "Mod4";
-  polybarStart = ''
-    for m in $(polybar --list-monitors | ${pkgs.coreutils}/bin/cut -d":" -f1); do
-      MONITOR=$m polybar --reload main &
-    done
-    ''
-  ;
 in {
-  imports = [
-    ./polybar.nix
-  ];
-
   programs = {
     rofi = {
       enable = true;
@@ -44,7 +34,6 @@ in {
       enable = false;
       lockCmd = "${pkgs.betterlockscreen}/bin/betterlockscreen -l dim";
     };
-    polybar.script = polybarStart;
     picom = {
       package = pkgs.picom;
       enable = false;

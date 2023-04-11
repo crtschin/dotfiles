@@ -1,6 +1,12 @@
 { config, lib, pkgs, ... }:
-
-{
+let
+  polybarStart = ''
+    for m in $(polybar --list-monitors | ${pkgs.coreutils}/bin/cut -d":" -f1); do
+      MONITOR=$m polybar --reload main &
+    done
+    ''
+  ;
+in {
   services = {
     polybar = {
       enable = true;
@@ -11,6 +17,7 @@
         pulseSupport = true;
         githubSupport = true;
       };
+      script = polybarStart;
       extraConfig = ''
         [colors]
         background = #282828

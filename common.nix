@@ -9,8 +9,9 @@ in {
     ./home/i3.nix
     ./home/shell.nix
     ./home/services.nix
-    ./home/modules/kitty.nix
     ./home/modules/fish.nix
+    ./home/modules/kitty.nix
+    ./home/modules/polybar.nix
     ./home/modules/starship.nix
   ];
 
@@ -148,7 +149,10 @@ in {
         # right actions for !fixup and !squash commits.
         rebase.autosquash = true;
         # Include tags with commits that we push
-        push.followTags = true;
+        push = {
+          followTags = true;
+          autoSetupRemote = true;
+        };
         # Sort tags in version order, e.g. `v1 v2 .. v9 v10` instead
         # of `v1 v10 .. v9`
         tag.sort = "version:refname";

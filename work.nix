@@ -47,6 +47,7 @@ in {
       monitor-heap
       mermaid-cli
       pgadmin
+      pgcli
       solaar
       postman
       jmeter
