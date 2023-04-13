@@ -59,12 +59,13 @@ in {
       simplescreenrecorder
       spotify
       spotifyd
-      texlive.combined.scheme-small
+      texlive.combined.scheme-full
       vlc
       vscode
       rnix-lsp
       hivemind
       pipe-rename
+      filezilla
 
       dejavu_fonts
       fira-code

@@ -1,9 +1,9 @@
 {
   inputs = {
-    channableFishFile = {
-      url = "file+file:///home/curtis/dotfiles/.config/channable.fish";
-      flake = false;
-    };
+    # channableFishFile = {
+    #   url = "file+file:///home/curtis/dotfiles/.config/channable.fish";
+    #   flake = false;
+    # };
 
     nixpkgs = {
       url = "github:nixos/nixpkgs/nixos-unstable";
@@ -74,7 +74,7 @@
       };
 
       nixosConfigurations = {
-        hostname = nixpkgs.lib.nixosSystem {
+        personal = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
             ./configuration.nix

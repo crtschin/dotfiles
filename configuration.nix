@@ -60,7 +60,10 @@
   };
 
   # Video settings
-  services.xserver.videoDrivers = [ "modesetting" ];
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.opengl.enable = true;
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+  hardware.nvidia.modesetting.enable = true;
 
   # Configure keymap in X11
   services.xserver.layout = "us";
@@ -92,6 +95,7 @@
     extraGroups = [ "wheel" "networkmanager" ];
     shell = pkgs.fish;
   };
+  programs.fish.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
