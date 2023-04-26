@@ -6,17 +6,13 @@
     };
 
     nixpkgs = {
-      url = "flake:nixpkgs/nixpkgs-unstable";
-      # url = "flake:nixpkgs/nixos-22.11";
-      # url = "flake:nixpkgs/c3912035d00ef755ab19394488b41feab95d2e40";
+      url = "github:nixos/nixpkgs/nixos-unstable";
     };
 
     flake-utils.url = "github:numtide/flake-utils";
 
     home-manager = {
       url = "github:nix-community/home-manager";
-      # url = "github:nix-community/home-manager/release-22.11";
-      inputs.utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

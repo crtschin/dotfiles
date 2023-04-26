@@ -1,20 +1,24 @@
 { config, pkgs, inputs, ... }:
 let
   nixGLOverlay = (self: super: {
-    nixGLWrapper = program: pkgs.writeShellScriptBin program.pname ''
+    nixGLWrap = program: pkgs.writeShellScriptBin program.pname ''
       #!/bin/sh
       ${self.nixgl.auto.nixGLDefault}/bin/nixGL ${program}/bin/${program.pname} "$@"
     '';
-    nixGLIntelWrapper = program: pkgs.writeShellScriptBin program.pname ''
+    nixGLIntelWrap = program: pkgs.writeShellScriptBin program.pname ''
       #!/bin/sh
       ${self.nixgl.nixGLIntel}/bin/nixGLIntel ${program}/bin/${program.pname} "$@"
     '';
-    myNixGL = self.nixGLIntelWrapper;
+    myNixGLWrap = self.nixGLWrap;
+    myNixGLWrapper = pkgs.writeShellScriptBin "nixGL" ''
+      #!/bin/sh
+      ${self.nixgl.auto.nixGLDefault}/bin/nixGL "$@"
+    '';
 
-    picom = self.myNixGL super.picom;
-    brave = self.myNixGL super.brave;
-    kitty = self.myNixGL super.kitty;
-    alacritty = self.myNixGL super.alacritty;
+    picom = self.myNixGLWrap super.picom;
+    brave = self.myNixGLWrap super.brave;
+    kitty = self.myNixGLWrap super.kitty;
+    alacritty = self.myNixGLWrap super.alacritty;
   });
 in
 {

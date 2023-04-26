@@ -28,13 +28,14 @@ in {
       pavucontrol
       playerctl
       ripgrep
-      s-tui
       tig
       hyperfine
       du-dust
       xclip
       gitui
       ncdu
+      bpftrace
+
       niv
       any-nix-shell
       cachix
@@ -200,7 +201,6 @@ in {
   home.stateVersion = "21.05";
   home.sessionVariables = {
     EDITOR = "${pkgs.vscode}/bin/code";
-    SHELL = "${pkgs.fish}/bin/fish";
     TERMINAL = "${pkgs.kitty}/bin/kitty";
     RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
     GIT_EDITOR = "${pkgs.vim}/bin/vim";

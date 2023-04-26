@@ -3,7 +3,7 @@
     "channableFishFile": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-gfSPn29WuKbtJkK3EULp7SAWwpbd4UXeNOfL6xxuGio=",
+        "narHash": "sha256-ZPRWkkDClCgxn7/5gDHnjogRh3L+h+GKSI68Runj5Zo=",
         "type": "file",
         "url": "file:///home/curtis/dotfiles/.config/channable.fish"
       },
@@ -15,11 +15,11 @@
     "fish-bass": {
       "flake": false,
       "locked": {
-        "lastModified": 1613707305,
-        "narHash": "sha256-fl4/Pgtkojk5AE52wpGDnuLajQxHoVqyphE90IIPYFU=",
+        "lastModified": 1682309832,
+        "narHash": "sha256-3mFlFiqGfQ+GfNshwKfhQ39AuNMdt8Nv2Vgb7bBV7L4=",
         "owner": "edc",
         "repo": "bass",
-        "rev": "2fd3d2157d5271ca3575b13daec975ca4c10577a",
+        "rev": "f3a547b0239cf8529d35c1922dd242bacf751d3b",
         "type": "github"
       },
       "original": {
@@ -150,17 +150,14 @@
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
-        ],
-        "utils": [
-          "flake-utils"
         ]
       },
       "locked": {
-        "lastModified": 1681162249,
-        "narHash": "sha256-jh5fLaTxR5XowXA0CN/1Gs2qbvVdmdPCSeO424XWZLI=",
+        "lastModified": 1682419509,
+        "narHash": "sha256-+/HI3RbJcEKQ5+55dECzh8geginsbabsA0R3ORKi2Us=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "4e79c6a414ce59fd1a53ab77899c77ab87774e6b",
+        "rev": "6142193635ecdafb9a231bd7d1880b9b7b210d19",
         "type": "github"
       },
       "original": {
@@ -314,17 +311,18 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1681124868,
-        "narHash": "sha256-B93QD0zFE6yc7R5F0bwdhY+y7s5UU9nrlhAAw1OA9mI=",
-        "owner": "NixOS",
+        "lastModified": 1682453498,
+        "narHash": "sha256-WoWiAd7KZt5Eh6n+qojcivaVpnXKqBsVgpixpV2L9CE=",
+        "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "21f48f0d273ef58c46b9b4c14cf5706c72a36e43",
+        "rev": "c8018361fa1d1650ee8d4b96294783cf564e8a7f",
         "type": "github"
       },
       "original": {
-        "id": "nixpkgs",
-        "ref": "nixpkgs-unstable",
-        "type": "indirect"
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "pre-commit-hooks": {
