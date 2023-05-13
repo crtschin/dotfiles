@@ -1,15 +1,13 @@
 {
   inputs = {
-    # channableFishFile = {
-    #   url = "file+file:///home/curtis/dotfiles/.config/channable.fish";
-    #   flake = false;
-    # };
-
     nixpkgs = {
-      url = "github:nixos/nixpkgs/nixos-unstable";
+      # url = "flake:nixpkgs/nixpkgs-unstable";
+      url = "flake:nixpkgs/nixos-22.11";
     };
 
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -18,6 +16,7 @@
 
     nix-direnv = {
       url = "github:nix-community/nix-direnv/2.2.1";
+      inputs.flake-utils.follows = "flake-utils";
     };
 
     nixgl = {
