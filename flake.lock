@@ -32,6 +32,22 @@
         "type": "github"
       }
     },
+    "fish-plugin-git": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1679069453,
+        "narHash": "sha256-tsw+npcOga8NBM1F8hnsT69k33FS5nK1zaPB1ohasPk=",
+        "owner": "jhillyerd",
+        "repo": "plugin-git",
+        "rev": "1697adf8861a15178f4794de566d14d295c79b39",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jhillyerd",
+        "repo": "plugin-git",
+        "type": "github"
+      }
+    },
     "fish-z": {
       "flake": false,
       "locked": {
@@ -348,6 +364,7 @@
       "inputs": {
         "fish-bass": "fish-bass",
         "fish-pisces": "fish-pisces",
+        "fish-plugin-git": "fish-plugin-git",
         "fish-z": "fish-z",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",

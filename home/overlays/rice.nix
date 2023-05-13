@@ -10,7 +10,7 @@ let
 
   _themeNameToThemePath = name:
     let
-    in "${self.kitty-themes}/share/kitty-themes/themes/${name}.conf";
+    in "${self.kitty-themes}/themes/${name}.conf";
 in {
   # Modified from the following to change the path to the theme
   # https://github.com/bertof/nix-rice/blob/main/kitty-themes.nix

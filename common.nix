@@ -35,6 +35,7 @@ in {
       gitui
       ncdu
       bpftrace
+      fasd
 
       niv
       any-nix-shell

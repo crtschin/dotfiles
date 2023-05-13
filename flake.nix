@@ -33,6 +33,10 @@
       url = "github:laughedelic/pisces";
       flake = false;
     };
+    fish-plugin-git = {
+      url = "github:jhillyerd/plugin-git";
+      flake = false;
+    };
     fish-z = {
       url = "github:jethrokuan/z";
       flake = false;

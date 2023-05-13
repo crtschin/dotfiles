@@ -7,14 +7,19 @@ let
   };
 
   devFishPlugins = with pkgs.fishPlugins; [
-    fish-pisces
+    bass
+    colored-man-pages
+    # fish-async-prompt
+    # plugin-git
+    pisces
+    # puffer
     done
     sponge
     foreign-env
     fzf-fish
   ];
 in {
-  home.packages = with pkgs; devFishPlugins;
+  home.packages = devFishPlugins;
   programs = {
     starship.enableFishIntegration = true;
 
@@ -42,6 +47,7 @@ in {
         kicat = "kitty +kitten icat";
         copy = "xclip -sel clip";
         psql = "pgcli";
+        z = "j";
         gu = "${pkgs.gitui}/bin/gitui";
         watch = "watch -d";
         "..." = "cd ../..";
@@ -63,26 +69,8 @@ in {
       enable = true;
       plugins = [
         {
-          name = "z";
-          src = pkgs.fetchFromGitHub {
-            owner = "jethrokuan";
-            repo = "z";
-            rev = "e0e1b9dfdba362f8ab1ae8c1afc7ccf62b89f7eb";
-            sha256 = "0dbnir6jbwjpjalz14snzd3cgdysgcs3raznsijd6savad3qhijc";
-          };
-        }
-        {
-          name = "bass";
-          src = pkgs.fetchFromGitHub {
-            owner = "edc";
-            repo = "bass";
-            rev = "2fd3d2157d5271ca3575b13daec975ca4c10577a";
-            sha256 = "0mb01y1d0g8ilsr5m8a71j6xmqlyhf8w4xjf00wkk8k41cz3ypky";
-          };
-        }
-        {
           name = "plugin-git";
-          src = pkgs.fishPlugins.plugin-git.src;
+          src = inputs.fish-plugin-git;
         }
       ];
     };

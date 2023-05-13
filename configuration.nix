@@ -17,9 +17,14 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "crtschin"; # Define your hostname.
-  networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;
+  networking = {
+    hostName = "crtschin"; # Define your hostname.
+    wireless.enable = false;  # Enables wireless support via wpa_supplicant.
+    networkmanager = {
+      enable = true;
+      wifi.backend = "iwd";
+    };
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
@@ -101,8 +106,10 @@
   sound.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
-  services.xserver.libinput.touchpad.tapping = true;
+  services.xserver.libinput = {
+    enable = true;
+    touchpad.tapping = true;
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.crtschin = {
