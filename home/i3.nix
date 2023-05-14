@@ -1,12 +1,15 @@
-{ config, lib, pkgs, ... }:
-
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   mod = "Mod4";
 in {
   programs = {
     rofi = {
       enable = true;
-      font = "FontAwesome, Fira Code 12, DejaVu Sans Mono 12";
+      font = "FontAwesome, ${pkgs.rice.font.monospace.name}, DejaVu Sans Mono 12";
       terminal = "${pkgs.kitty}/bin/kitty";
       theme = "gruvbox-dark-soft";
       extraConfig = {
@@ -50,8 +53,7 @@ in {
         focus-exclude = [
           "class_g ?= 'rofi'"
         ];
-        blur =
-        {
+        blur = {
           method = "gaussian";
           size = 10;
           deviation = 5.0;
@@ -63,24 +65,24 @@ in {
   };
 
   xresources.properties = {
-    "*background"= "#282828";
-    "*foreground"= "#ebdbb2";
-    "*color0"=  "#282828";
-    "*color8"=  "#928374";
-    "*color1"=  "#cc241d";
-    "*color9"=  "#fb4934";
-    "*color2"=  "#98971a";
-    "*color10"= "#b8bb26";
-    "*color3"=  "#d79921";
-    "*color11"= "#fabd2f";
-    "*color4"=  "#458588";
-    "*color12"= "#83a598";
-    "*color5"=  "#b16286";
-    "*color13"= "#d3869b";
-    "*color6"=  "#689d6a";
-    "*color14"= "#8ec07c";
-    "*color7"=  "#a89984";
-    "*color15"= "#ebdbb2";
+    "*background" = "#282828";
+    "*foreground" = "#ebdbb2";
+    "*color0" = "#282828";
+    "*color1" = "#cc241d";
+    "*color2" = "#98971a";
+    "*color3" = "#d79921";
+    "*color4" = "#458588";
+    "*color5" = "#b16286";
+    "*color6" = "#689d6a";
+    "*color7" = "#a89984";
+    "*color8" = "#928374";
+    "*color9" = "#fb4934";
+    "*color10" = "#b8bb26";
+    "*color11" = "#fabd2f";
+    "*color12" = "#83a598";
+    "*color13" = "#d3869b";
+    "*color14" = "#8ec07c";
+    "*color15" = "#ebdbb2";
   };
 
   xsession = {
@@ -94,7 +96,7 @@ in {
           inner = 10;
         };
         fonts = {
-          names = ["Font Awesome 5 Free, Fira Code, DejaVu Sans Mono, Monospace"];
+          names = ["Font Awesome 5 Free, ${pkgs.rice.font.monospace.name}, DejaVu Sans Mono, Monospace"];
           style = "Bold Semi-Condensed";
           size = 11.0;
         };
@@ -138,7 +140,7 @@ in {
         # client.urgent           $red $red $white $red $red
 
         for_window [class=".*"] border pixel 2
-        # for_window [class=".*"] title_format "<span font='Fira Code 12'>%title</span>"
+        # for_window [class=".*"] title_format "<span font='${pkgs.rice.font.monospace.name}'>%title</span>"
         exec_always --no-startup-id polybar-msg cmd restart
         exec --no-startup-id ${pkgs.nitrogen}/bin/nitrogen --restore
         exec --no-startup-id systemctl --user start playerctld polybar picom
@@ -161,8 +163,7 @@ in {
         workspace 8 output secondary
         workspace 9 output secondary
         workspace 10 output secondary
-        ''
-      ;
+      '';
     };
   };
 }

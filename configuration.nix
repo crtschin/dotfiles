@@ -1,17 +1,20 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    /etc/nixos/cachix.nix
+  ];
 
   nixpkgs.config.allowUnfree = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.trusted-users = ["root" "crtschin"];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -19,10 +22,10 @@
 
   networking = {
     hostName = "crtschin"; # Define your hostname.
-    wireless.enable = false;  # Enables wireless support via wpa_supplicant.
+    wireless.enable = false; # Enables wireless support via wpa_supplicant.
     networkmanager = {
       enable = true;
-      wifi.backend = "iwd";
+      # wifi.backend = "iwd";
     };
   };
 
@@ -65,7 +68,7 @@
   };
 
   # Video settings
-  services.xserver.videoDrivers = [ "modesetting" ];
+  services.xserver.videoDrivers = ["modesetting"];
   hardware.opengl.enable = true;
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
   hardware.nvidia.modesetting.enable = true;
@@ -81,7 +84,7 @@
     # Set udev rules to recognize qmk boards
     (pkgs.writeTextFile {
       name = "crtschin_udev";
-      text = (builtins.readFile ./qmk/50-qmk.rules);
+      text = builtins.readFile ./qmk/50-qmk.rules;
       destination = "/etc/udev/rules.d/50-crtschin.rules";
     })
   ];
@@ -90,7 +93,7 @@
   hardware = {
     pulseaudio = {
       enable = true;
-      extraModules = [ pkgs.pulseaudio-modules-bt ];
+      extraModules = [];
       package = pkgs.pulseaudioFull;
     };
     bluetooth = {
@@ -114,7 +117,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.crtschin = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = ["wheel" "networkmanager"];
     shell = pkgs.fish;
   };
   programs.fish.enable = true;

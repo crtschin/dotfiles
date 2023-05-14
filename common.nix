@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
-let
+{
+  config,
+  pkgs,
+  ...
+}: let
 in {
   nixpkgs.overlays = [
     (import ./home/overlays/rice.nix)
@@ -36,6 +39,7 @@ in {
       ncdu
       bpftrace
       fasd
+      alejandra
 
       niv
       any-nix-shell
@@ -71,10 +75,12 @@ in {
       dejavu_fonts
       fira-code
       font-awesome
-      source-serif-pro
+      source-code-pro
       papirus-icon-theme
       gruvbox-dark-gtk
       gruvbox-dark-icons-gtk
+
+      pkgs.rice.font.monospace.package
     ];
   };
 
@@ -83,10 +89,10 @@ in {
   xdg = {
     enable = true;
     mime.enable = true;
-    systemDirs.data = [ "/usr/share" "/usr/local/share" ];
+    systemDirs.data = ["/usr/share" "/usr/local/share"];
     configFile."direnv/direnvrc".text = ''
       source ${pkgs.nix-direnv}/share/nix-direnv/direnvrc
-      '';
+    '';
   };
 
   programs = {
@@ -140,8 +146,8 @@ in {
           difftool = "${pkgs.meld}/bin/meld";
         };
         delta = {
-            features = "interactive unobtrusive-line-numbers decorations";
-            syntax-theme = "gruvbox-dark";
+          features = "interactive unobtrusive-line-numbers decorations";
+          syntax-theme = "gruvbox-dark";
         };
         diff = {
           algorithm = "histogram";
@@ -177,8 +183,7 @@ in {
       enable = true;
       extraConfig = ''
         syntax on
-        ''
-      ;
+      '';
     };
   };
 

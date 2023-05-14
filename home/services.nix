@@ -1,12 +1,11 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   systemd.user.services.update-lock-screens = {
     Unit = {
       Description = "Update lock screens";
     };
 
     Install = {
-      WantedBy = [ "timers.target" ];
+      WantedBy = ["timers.target"];
     };
 
     Timer = {
@@ -24,7 +23,7 @@
     };
 
     Install = {
-      WantedBy = [ "timers.target" ];
+      WantedBy = ["timers.target"];
     };
 
     Timer = {

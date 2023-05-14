@@ -1,7 +1,7 @@
 {
   inputs = {
     nixpkgs = {
-      # url = "flake:nixpkgs/nixpkgs-unstable";
+      # url = "flake:nixpkgs/nixos-unstable";
       url = "flake:nixpkgs/nixos-22.11";
     };
 
@@ -15,7 +15,7 @@
     };
 
     nix-direnv = {
-      url = "github:nix-community/nix-direnv/2.2.1";
+      url = "github:nix-community/nix-direnv/2.3.0";
       inputs.flake-utils.follows = "flake-utils";
     };
 
@@ -29,34 +29,39 @@
       url = "github:bertof/nix-rice";
     };
 
-    fish-pisces = {
-      url = "github:laughedelic/pisces";
-      flake = false;
-    };
     fish-plugin-git = {
       url = "github:jhillyerd/plugin-git";
       flake = false;
     };
-    fish-z = {
-      url = "github:jethrokuan/z";
+    fish-puffer = {
+      url = "github:nickeb96/puffer-fish";
       flake = false;
     };
-    fish-bass = {
-      url = "github:edc/bass";
+    fish-abbreviation-tips = {
+      url = "github:gazorby/fish-abbreviation-tips";
       flake = false;
     };
   };
-  outputs = { self, nixpkgs, home-manager, nix-rice, nixgl, ... }@inputs:
-    let
-      system = "x86_64-linux";
-      overlays = [ nix-rice.overlays.default nixgl.overlay ];
-      pkgs = nixpkgs.legacyPackages.${system} // {
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    nix-rice,
+    nixgl,
+    ...
+  } @ inputs: let
+    system = "x86_64-linux";
+    overlays = [nix-rice.overlays.default nixgl.overlay];
+    pkgs =
+      nixpkgs.legacyPackages.${system}
+      // {
         inherit overlays;
-        config = { allowUnfree = true; };
+        config = {allowUnfree = true;};
       };
 
-      # Lifted from https://github.com/yoricksijsling/dotfiles
-      makeHomeConfiguration = {extraModules ? []}: home-manager.lib.homeManagerConfiguration {
+    # Lifted from https://github.com/yoricksijsling/dotfiles
+    makeHomeConfiguration = {extraModules ? []}:
+      home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = {
           # Pass all inputs to every module. It's a bit excessive, but allows us to easily refer
@@ -65,29 +70,28 @@
           # The dotfiles argument always points to the flake root.
           dotfiles = self;
         };
-        modules = [ ] ++ extraModules;
+        modules = [] ++ extraModules;
       };
-    in
-    {
-      inherit makeHomeConfiguration;
+  in {
+    inherit makeHomeConfiguration;
 
-      homeConfigurations = {
-        work = makeHomeConfiguration { extraModules = [ ./work.nix ]; };
-        personal = makeHomeConfiguration { extraModules = [ ./personal.nix ]; };
-      };
+    homeConfigurations = {
+      work = makeHomeConfiguration {extraModules = [./work.nix];};
+      personal = makeHomeConfiguration {extraModules = [./personal.nix];};
+    };
 
-      nixosConfigurations = {
-        personal = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ./configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-            }
-          ];
-        };
+    nixosConfigurations = {
+      personal = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+          }
+        ];
       };
     };
+  };
 }

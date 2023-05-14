@@ -1,34 +1,18 @@
 {
   "nodes": {
-    "fish-bass": {
+    "fish-abbreviation-tips": {
       "flake": false,
       "locked": {
-        "lastModified": 1682309832,
-        "narHash": "sha256-3mFlFiqGfQ+GfNshwKfhQ39AuNMdt8Nv2Vgb7bBV7L4=",
-        "owner": "edc",
-        "repo": "bass",
-        "rev": "f3a547b0239cf8529d35c1922dd242bacf751d3b",
+        "lastModified": 1674487577,
+        "narHash": "sha256-F1t81VliD+v6WEWqj1c1ehFBXzqLyumx5vV46s/FZRU=",
+        "owner": "gazorby",
+        "repo": "fish-abbreviation-tips",
+        "rev": "8ed76a62bb044ba4ad8e3e6832640178880df485",
         "type": "github"
       },
       "original": {
-        "owner": "edc",
-        "repo": "bass",
-        "type": "github"
-      }
-    },
-    "fish-pisces": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1606703175,
-        "narHash": "sha256-Oou2IeNNAqR00ZT3bss/DbhrJjGeMsn9dBBYhgdafBw=",
-        "owner": "laughedelic",
-        "repo": "pisces",
-        "rev": "e45e0869855d089ba1e628b6248434b2dfa709c4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "laughedelic",
-        "repo": "pisces",
+        "owner": "gazorby",
+        "repo": "fish-abbreviation-tips",
         "type": "github"
       }
     },
@@ -48,19 +32,19 @@
         "type": "github"
       }
     },
-    "fish-z": {
+    "fish-puffer": {
       "flake": false,
       "locked": {
-        "lastModified": 1649439817,
-        "narHash": "sha256-+FUBM7CodtZrYKqU542fQD+ZDGrd2438trKM0tIESs0=",
-        "owner": "jethrokuan",
-        "repo": "z",
-        "rev": "85f863f20f24faf675827fb00f3a4e15c7838d76",
+        "lastModified": 1678892473,
+        "narHash": "sha256-aPxEHSXfiJJXosIm7b3Pd+yFnyz43W3GXyUB5BFAF54=",
+        "owner": "nickeb96",
+        "repo": "puffer-fish",
+        "rev": "5d3cb25e0d63356c3342fb3101810799bb651b64",
         "type": "github"
       },
       "original": {
-        "owner": "jethrokuan",
-        "repo": "z",
+        "owner": "nickeb96",
+        "repo": "puffer-fish",
         "type": "github"
       }
     },
@@ -161,11 +145,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1683989410,
-        "narHash": "sha256-puF/QsIkp4ch0sf6M5mNzbdZtYcq2MJHcKre9wJ3ZYo=",
+        "lastModified": 1684157850,
+        "narHash": "sha256-xGHTCgvAxO5CgAL6IAgE/VGRX2wob2Y+DPyqpXJ32oQ=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "6702b22b9805bc1879715d4111e3764cd4237aed",
+        "rev": "c0deab0effd576e70343cb5df0c64428e0e0d010",
         "type": "github"
       },
       "original": {
@@ -198,16 +182,16 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1674122683,
-        "narHash": "sha256-k/w17jlMRFiU2ACWHpjaqIKcVJGn8lPlNkiHtZPvO4A=",
+        "lastModified": 1681572461,
+        "narHash": "sha256-Y9Yf/RJvfoFKS4ptVhPc9X0tQUPWSSxkS11r7wGge+8=",
         "owner": "nix-community",
         "repo": "nix-direnv",
-        "rev": "deb67e437bc0cb87447ad6816749ab00926a14c2",
+        "rev": "2e583c8d42f38edaa6cae0bce43729fbd476ec6e",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
-        "ref": "2.2.1",
+        "ref": "2.3.0",
         "repo": "nix-direnv",
         "type": "github"
       }
@@ -259,11 +243,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1673606088,
-        "narHash": "sha256-wdYD41UwNwPhTdMaG0AIe7fE1bAdyHe6bB4HLUqUvck=",
+        "lastModified": 1681272286,
+        "narHash": "sha256-9X5p+gwYrowgbsRgkf14HFI0fkr6UikuwRIQAMlF1yI=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "37b97ae3dd714de9a17923d004a2c5b5543dfa6d",
+        "rev": "6b70761ea8c896aff8994eb367d9526686501860",
         "type": "github"
       },
       "original": {
@@ -322,11 +306,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1683928319,
-        "narHash": "sha256-maz0DRKixJVcNRMiAMWlJniiF8IuQ+WbfmlJJ8D+jfM=",
+        "lastModified": 1684130981,
+        "narHash": "sha256-5IPp/rUAOogega5xuRoxcpfkwlGDAyWdizL0Tp2GA4s=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "9656e85a15a0fe67847ee8cdb99a20d8df499962",
+        "rev": "d41eea2839de7de0f2cbe4aa90fde5db8afcd30a",
         "type": "github"
       },
       "original": {
@@ -362,10 +346,9 @@
     },
     "root": {
       "inputs": {
-        "fish-bass": "fish-bass",
-        "fish-pisces": "fish-pisces",
+        "fish-abbreviation-tips": "fish-abbreviation-tips",
         "fish-plugin-git": "fish-plugin-git",
-        "fish-z": "fish-z",
+        "fish-puffer": "fish-puffer",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "nix-direnv": "nix-direnv",

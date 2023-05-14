@@ -1,7 +1,10 @@
-{ config, lib, pkgs, ... }:
-let
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+in {
   home.packages = with pkgs; [
     exa
   ];
@@ -18,11 +21,12 @@ in
       };
       themes = {
         gruvbox = builtins.readFile (pkgs.fetchFromGitHub {
-          owner = "subnut";
-          repo = "gruvbox-tmTheme"; # Bat uses sublime syntax for its themes
-          rev = "64c47250e54298b91e2cf8d401320009aba9f991";
-          sha256 = "1kh0230maqvzynxxzv813bdgpcs1sh13cw1jw6piq6kigwbaw3kb";
-        } + "/gruvbox-dark.tmTheme");
+            owner = "subnut";
+            repo = "gruvbox-tmTheme"; # Bat uses sublime syntax for its themes
+            rev = "64c47250e54298b91e2cf8d401320009aba9f991";
+            sha256 = "1kh0230maqvzynxxzv813bdgpcs1sh13cw1jw6piq6kigwbaw3kb";
+          }
+          + "/gruvbox-dark.tmTheme");
       };
     };
 
@@ -31,10 +35,24 @@ in
       settings = {
         modal = true;
         verbs = [
-          { invocation = "edit"; shortcut = "e"; key = "enter";
-            execution = "$EDITOR {file}"; leave_broot = false; apply_to = "file"; }
-          { invocation = "view"; shortcut = "v"; execution = "bat {file}"; }
-          { invocation = "parent"; shortcut = "p"; execution = ":parent"; }
+          {
+            invocation = "edit";
+            shortcut = "e";
+            key = "enter";
+            execution = "$EDITOR {file}";
+            leave_broot = false;
+            apply_to = "file";
+          }
+          {
+            invocation = "view";
+            shortcut = "v";
+            execution = "bat {file}";
+          }
+          {
+            invocation = "parent";
+            shortcut = "p";
+            execution = ":parent";
+          }
           # { invocation = "text"; execution = "preview_text"; }
           # { invocation = "binary"; execution = "preview_binary"; }
           # { invocation = "image"; execution = "preview_image"; }
@@ -42,7 +60,10 @@ in
         default_flags = "gh";
         quit_on_last_cancel = true;
         imports = [
-          { file = "dark-gruvbox.hjson"; luma = ["dark" "unknown"]; }
+          {
+            file = "dark-gruvbox.hjson";
+            luma = ["dark" "unknown"];
+          }
         ];
       };
     };
@@ -90,8 +111,7 @@ in
         set-option -ga terminal-overrides \",screen-256color:Tc\"
         set -g mouse on
         set -g focus-events on
-        ''
-      ;
+      '';
     };
   };
 }

@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ./common.nix
   ];
@@ -27,8 +29,8 @@
   gtk = {
     enable = true;
     font = {
-      package = pkgs.fira-code;
-      name = "Fira Code";
+      package = pkgs.rice.font.monospace.package;
+      name = pkgs.rice.font.monospace.name;
       size = 12;
     };
     theme = {

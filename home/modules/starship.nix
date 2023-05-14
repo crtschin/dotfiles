@@ -1,12 +1,14 @@
-{ config, pkgs, inputs, ... }:
-let
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}: let
 in {
   programs = {
     starship = {
       enable = true;
       settings = {
-        # add_newline = false
-
         aws = {
           disabled = true;
         };
@@ -24,15 +26,18 @@ in {
           full_symbol = "🔋";
           charging_symbol = "🔌";
           discharging_symbol = "⚡";
-          display = [{
-            threshold = 45;
-            style = "bold yellow";
-            discharging_symbol = "💦";
-          } {
-            threshold = 10;
-            style = "bold red";
-            discharging_symbol = "💀";
-          }];
+          display = [
+            {
+              threshold = 45;
+              style = "bold yellow";
+              discharging_symbol = "💦";
+            }
+            {
+              threshold = 10;
+              style = "bold red";
+              discharging_symbol = "💀";
+            }
+          ];
         };
 
         character = {

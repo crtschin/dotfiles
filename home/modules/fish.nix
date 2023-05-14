@@ -1,18 +1,13 @@
-{ config, pkgs, inputs, ... }:
-let
-  fish-pisces = pkgs.fishPlugins.buildFishPlugin rec {
-    pname = "pisces";
-    version = "0.7.0";
-    src = inputs.fish-pisces;
-  };
-
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}: let
   devFishPlugins = with pkgs.fishPlugins; [
     bass
     colored-man-pages
-    # fish-async-prompt
-    # plugin-git
     pisces
-    # puffer
     done
     sponge
     foreign-env
@@ -30,8 +25,6 @@ in {
           set __done_notify_sound 1
         end
 
-        # abbr --add --global --position anywhere -- gbranch "(git branch --list --sort=-committerdate | string trim | fzf --preview=\"git log --stat -n 10 --decorate --color=always {}\")"
-
         function __direnv_export_eval --on-event fish_prompt
             begin
                 begin
@@ -39,8 +32,8 @@ in {
                 end 1>| source
             end 2>| egrep -v -e "^direnv: export"
         end
-        ''
-      ;
+      '';
+
       shellAliases = {
         kdiff = "kitty +kitten diff -o pygments_style=gruvbox-dark";
         kssh = "kitty +kitten ssh";
@@ -49,10 +42,7 @@ in {
         psql = "pgcli";
         z = "j";
         gu = "${pkgs.gitui}/bin/gitui";
-        watch = "watch -d";
-        "..." = "cd ../..";
-        "...." = "cd ../../..";
-        "....." = "cd ../../../..";
+        watch = "watch -c -d";
       };
       functions = {
         giffify = {
@@ -71,6 +61,14 @@ in {
         {
           name = "plugin-git";
           src = inputs.fish-plugin-git;
+        }
+        {
+          name = "fish-puffer";
+          src = inputs.fish-puffer;
+        }
+        {
+          name = "fish-abbreviation-tips";
+          src = inputs.fish-abbreviation-tips;
         }
       ];
     };

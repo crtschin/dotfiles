@@ -1,11 +1,14 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   polybarStart = ''
     for m in $(polybar --list-monitors | ${pkgs.coreutils}/bin/cut -d":" -f1); do
       MONITOR=$m polybar --reload main &
     done
-    ''
-  ;
+  '';
 in {
   services = {
     polybar = {
@@ -65,7 +68,7 @@ in {
         module-margin-left = 1
         module-margin-right = 1
 
-        font-0 = Fira Code:pixelsize=13;1
+        font-0 = ${pkgs.rice.font.monospace.name}:pixelsize=13;1
         font-1 = Font Awesome 6 Brands Regular:pixelsize=13;1
         font-2 = Font Awesome 6 Free Solid:pixelsize=13;1
         font-3 = Font Awesome 6 Free Regular:pixelsize=13;1
@@ -84,7 +87,7 @@ in {
 
         modules-left = i3
         modules-center = media
-        modules-right = pulseaudio filesystem memory cpu wlan date powermenu
+        modules-right = pulseaudio battery memory cpu wlan date powermenu
 
         [module/wlan]
         inherit=module/wlan_common
@@ -142,25 +145,36 @@ in {
         [module/cpu]
         type = internal/cpu
         interval = 2
-        format-prefix = " "
-        format-prefix-foreground = ''${colors.foreground-alt}
-        label = %percentage:2%%
+        format-prefix =
+        label =  %percentage:2%%
+
+        [module/battery]
+        type = internal/battery
+        full-at = 99
+        low-at = 10
+        battery = BAT0
+        adapter = ADP1
+        format-prefix =
+        format-charging = <label-charging>
+        format-discharging = <label-discharging>
+        label-charging = 🔌 %percentage%%
+        label-discharging = 🔋 %percentage%% (%time%)
+        poll-interval = 5
 
         [module/memory]
         type = internal/memory
         interval = 2
-        format-prefix = " "
-        format-prefix-foreground = ''${colors.foreground-alt}
-        label = %gb_free%
+        format-prefix =
+        label =  %gb_free%
 
         [module/wlan_common]
         type = internal/network
         interface = wlp59s0
         interval = 3.0
 
-        format-connected-prefix = " "
+        format-prefix =
         format-connected = <label-connected>
-        label-connected = %essid% (%local_ip%)
+        label-connected =  %essid% (%local_ip%)
 
         format-disconnected =
 
@@ -168,11 +182,7 @@ in {
         type = internal/network
         interface = enp5s0
         interval = 3.0
-
-        format-connected-prefix = " "
-        format-connected-prefix-foreground = ''${colors.foreground-alt}
-        label-connected = %local_ip%
-
+        label-connected =  %local_ip%
         format-disconnected =
 
         [module/date]
@@ -185,10 +195,10 @@ in {
         time = %H:%M
         time-alt = %H:%M:%S
 
-        format-prefix = 
+        format-prefix =
         format-prefix-foreground = ''${colors.foreground-alt}
 
-        label = %date% %time%
+        label =  %date% %time%
 
         [module/pulseaudio]
         type = internal/pulseaudio
@@ -292,8 +302,7 @@ in {
         margin-bottom = 0
 
         ; vim:ft=dosini
-        ''
-      ;
+      '';
     };
   };
 }
