@@ -29,6 +29,11 @@
       url = "github:bertof/nix-rice";
     };
 
+    gruvbox-tmTheme = {
+      url = "github:subnut/gruvbox-tmTheme";
+      flake = false;
+    };
+
     fish-plugin-git = {
       url = "github:jhillyerd/plugin-git";
       flake = false;

@@ -9,6 +9,7 @@
       MONITOR=$m polybar --reload main &
     done
   '';
+  rgbTheme = pkgs.riceRgbColorPalette;
 in {
   services = {
     polybar = {
@@ -23,20 +24,21 @@ in {
       script = polybarStart;
       extraConfig = ''
         [colors]
-        background = #282828
-        foreground = #ebdbb2
-        red        = #fb4934
-        green      = #b8bb26
-        yellow     = #fabd2f
-        blue       = #83a598
-        purple     = #d3869b
-        teal       = #8ec07c
-        orange     = #fe8019
-        gray       = #a89984
+        background = ${rgbTheme.background}
+        foreground = ${rgbTheme.foreground}
+        red        = ${rgbTheme.normal.red}
+        green      = ${rgbTheme.normal.green}
+        yellow     = ${rgbTheme.normal.yellow}
+        blue       = ${rgbTheme.normal.blue}
+        purple     = ${rgbTheme.normal.magenta}
+        teal       = ${rgbTheme.normal.cyan}
+        lightgray  = ${rgbTheme.bright.black}
+        gray       = ${rgbTheme.normal.black}
+        darkgray   = ${rgbTheme.dark.black}
 
-        background-alt = #444
+        background-alt = ''${colors.darkgray}
         foreground-alt = ''${colors.gray}
-        primary = ''${colors.blue}
+        primary = ''${colors.green}
         secondary = ''${colors.teal}
         alert = ''${colors.purple}
 
@@ -210,20 +212,20 @@ in {
         label-muted = " muted"
         label-muted-minlen = 17
         label-muted-alignment = center
-        label-muted-foreground = #666
+        label-muted-foreground = ''${colors.lightgray}
 
         ramp-volume-0 = 
         ramp-volume-1 = 
         ramp-volume-2 = 
 
         bar-volume-width = 10
-        bar-volume-foreground-0 = #55aa55
-        bar-volume-foreground-1 = #55aa55
-        bar-volume-foreground-2 = #55aa55
-        bar-volume-foreground-3 = #55aa55
-        bar-volume-foreground-4 = #55aa55
-        bar-volume-foreground-5 = #f5a70a
-        bar-volume-foreground-6 = #ff5555
+        bar-volume-foreground-0 = ''${colors.green}
+        bar-volume-foreground-1 = ''${colors.green}
+        bar-volume-foreground-2 = ''${colors.green}
+        bar-volume-foreground-3 = ''${colors.green}
+        bar-volume-foreground-4 = ''${colors.green}
+        bar-volume-foreground-5 = ''${colors.yellow}
+        bar-volume-foreground-6 = ''${colors.red}
         bar-volume-gradient = false
         bar-volume-indicator = |
         ; bar-volume-indicator-font = 2

@@ -5,6 +5,7 @@
   ...
 }: let
   mod = "Mod4";
+  rgbTheme = pkgs.riceRgbColorPalette;
 in {
   programs = {
     rofi = {
@@ -21,15 +22,6 @@ in {
         normal-window = true;
       };
     };
-  };
-
-  xresources.properties = {
-    "Xft.antialias" = "1";
-    "Xft.autohint" = "0";
-    "Xft.hinting" = "1";
-    "Xft.hintstyle" = "hintnone";
-    "Xft.lcdfilter" = "lcddefault";
-    "Xft.rgba" = "rgb";
   };
 
   services = {
@@ -65,24 +57,31 @@ in {
   };
 
   xresources.properties = {
-    "*background" = "#282828";
-    "*foreground" = "#ebdbb2";
-    "*color0" = "#282828";
-    "*color1" = "#cc241d";
-    "*color2" = "#98971a";
-    "*color3" = "#d79921";
-    "*color4" = "#458588";
-    "*color5" = "#b16286";
-    "*color6" = "#689d6a";
-    "*color7" = "#a89984";
-    "*color8" = "#928374";
-    "*color9" = "#fb4934";
-    "*color10" = "#b8bb26";
-    "*color11" = "#fabd2f";
-    "*color12" = "#83a598";
-    "*color13" = "#d3869b";
-    "*color14" = "#8ec07c";
-    "*color15" = "#ebdbb2";
+    "Xft.antialias" = "1";
+    "Xft.autohint" = "0";
+    "Xft.hinting" = "1";
+    "Xft.hintstyle" = "hintnone";
+    "Xft.lcdfilter" = "lcddefault";
+    "Xft.rgba" = "rgb";
+
+    "*background" = rgbTheme.background;
+    "*foreground" = rgbTheme.foreground;
+    "*color0" = rgbTheme.color0;
+    "*color1" = rgbTheme.color1;
+    "*color2" = rgbTheme.color2;
+    "*color3" = rgbTheme.color3;
+    "*color4" = rgbTheme.color4;
+    "*color5" = rgbTheme.color5;
+    "*color6" = rgbTheme.color6;
+    "*color7" = rgbTheme.color7;
+    "*color8" = rgbTheme.color8;
+    "*color9" = rgbTheme.color9;
+    "*color10" = rgbTheme.color10;
+    "*color11" = rgbTheme.color11;
+    "*color12" = rgbTheme.color12;
+    "*color13" = rgbTheme.color13;
+    "*color14" = rgbTheme.color14;
+    "*color15" = rgbTheme.color15;
   };
 
   xsession = {
@@ -119,15 +118,15 @@ in {
         #######
 
         # set primary gruvbox colorscheme colors
-        set $bg #282828
-        set $red #cc241d
-        set $green #98971a
-        set $yellow #d79921
-        set $blue #458588
-        set $purple #b16286
-        set $aqua #689d68
-        set $gray #a89984
-        set $darkgray #1d2021
+        set $bg ${rgbTheme.background}
+        set $red ${rgbTheme.normal.red}
+        set $green ${rgbTheme.normal.green}
+        set $yellow ${rgbTheme.normal.yellow}
+        set $blue ${rgbTheme.normal.blue}
+        set $purple ${rgbTheme.normal.magenta}
+        set $aqua ${rgbTheme.normal.cyan}
+        set $gray ${rgbTheme.normal.white}
+        set $darkgray ${rgbTheme.normal.black}
         # green gruvbox
         client.focused          $green $green $darkgray $purple $green
         client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray

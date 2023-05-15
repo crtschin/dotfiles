@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }: let
 in {
@@ -20,13 +21,7 @@ in {
         theme = "gruvbox-dark";
       };
       themes = {
-        gruvbox = builtins.readFile (pkgs.fetchFromGitHub {
-            owner = "subnut";
-            repo = "gruvbox-tmTheme"; # Bat uses sublime syntax for its themes
-            rev = "64c47250e54298b91e2cf8d401320009aba9f991";
-            sha256 = "1kh0230maqvzynxxzv813bdgpcs1sh13cw1jw6piq6kigwbaw3kb";
-          }
-          + "/gruvbox-dark.tmTheme");
+        gruvbox = builtins.readFile (inputs.gruvbox-tmTheme + "/gruvbox (Dark) (Soft).tmTheme");
       };
     };
 
@@ -53,9 +48,6 @@ in {
             shortcut = "p";
             execution = ":parent";
           }
-          # { invocation = "text"; execution = "preview_text"; }
-          # { invocation = "binary"; execution = "preview_binary"; }
-          # { invocation = "image"; execution = "preview_image"; }
         ];
         default_flags = "gh";
         quit_on_last_cancel = true;

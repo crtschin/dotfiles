@@ -138,6 +138,22 @@
         "type": "github"
       }
     },
+    "gruvbox-tmTheme": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1680116497,
+        "narHash": "sha256-bihd6lgKZygwsgOzp/0/bgt4hWhIrOcBkFhw8giywyk=",
+        "owner": "subnut",
+        "repo": "gruvbox-tmTheme",
+        "rev": "429749e29c84724b72b71a80dfdd67be2e0bc506",
+        "type": "github"
+      },
+      "original": {
+        "owner": "subnut",
+        "repo": "gruvbox-tmTheme",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -350,6 +366,7 @@
         "fish-plugin-git": "fish-plugin-git",
         "fish-puffer": "fish-puffer",
         "flake-utils": "flake-utils",
+        "gruvbox-tmTheme": "gruvbox-tmTheme",
         "home-manager": "home-manager",
         "nix-direnv": "nix-direnv",
         "nix-rice": "nix-rice",
