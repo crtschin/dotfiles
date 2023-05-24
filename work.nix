@@ -60,7 +60,7 @@ in {
       jmeter
       haskellPackages.profiteur
       _1password
-      myNixGLWrapper
+      stack
 
       graphviz
       gprof2dot

@@ -57,20 +57,17 @@ in {
       brave
       ffmpeg
       flameshot
-      firefox
       fortune
       gimp
       imagemagick
       simplescreenrecorder
       spotify
       spotifyd
-      texlive.combined.scheme-full
-      vlc
+      firefox
       vscode
       rnix-lsp
       hivemind
       pipe-rename
-      filezilla
 
       dejavu_fonts
       fira-code
@@ -130,7 +127,7 @@ in {
           oc = "!fish -c 'git checkout (git for-each-ref refs/remotes/origin/ --format=\"%(refname:short)\" --sort=-committerdate|perl -p -e \"s#^origin/##g\"|head -100|string trim|fzf --preview=\"git log --stat -n 10 --decorate --color=always origin/{}\")'";
           fpush = "push --force-with-lease";
         };
-        blame.ignoreRevsFile = ".git-blame-ignore-revs";
+        # blame.ignoreRevsFile = ".git-blame-ignore-revs";
         pager = {
           diff = "delta";
           log = "delta";

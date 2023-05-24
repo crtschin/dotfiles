@@ -1,8 +1,13 @@
 {
   inputs = {
+    channableFishFile = {
+      url = "file+file:///home/curtis/dotfiles/.config/channable.fish";
+      flake = false;
+    };
+
     nixpkgs = {
-      # url = "flake:nixpkgs/nixos-unstable";
-      url = "flake:nixpkgs/nixos-22.11";
+      url = "flake:nixpkgs/nixos-unstable";
+      # url = "flake:nixpkgs/nixos-22.11";
     };
 
     flake-utils = {

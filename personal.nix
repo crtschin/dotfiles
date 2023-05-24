@@ -23,6 +23,10 @@
       rustc
       rustfmt
       cargo
+
+      texlive.combined.scheme-full
+      vlc
+      filezilla
     ];
   };
 
