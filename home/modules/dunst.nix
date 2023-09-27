@@ -5,13 +5,13 @@
   ...
 }: let
 in {
-  programs = {
+  services = {
     dunst = {
       enable = true;
       settings = {
         global = {
-          font = "Hack 8";
-          allow_markup = ""yes"";
+          font = "${pkgs.rice.font.monospace.name} 12";
+          allow_markup = "yes";
           format = "<b>%s</b>\n%b";
           sort = "yes";
           indicate_hidden = "yes";
@@ -59,6 +59,6 @@ in {
             timeout = 0;
         };
       };
-    }
-  }
+    };
+  };
 }
