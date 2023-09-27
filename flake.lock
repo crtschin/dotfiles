@@ -1,5 +1,17 @@
 {
   "nodes": {
+    "channableFishFile": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-ZPRWkkDClCgxn7/5gDHnjogRh3L+h+GKSI68Runj5Zo=",
+        "type": "file",
+        "url": "file:///home/curtis/dotfiles/.config/channable.fish"
+      },
+      "original": {
+        "type": "file",
+        "url": "file:///home/curtis/dotfiles/.config/channable.fish"
+      }
+    },
     "fish-abbreviation-tips": {
       "flake": false,
       "locked": {
@@ -19,11 +31,11 @@
     "fish-plugin-git": {
       "flake": false,
       "locked": {
-        "lastModified": 1679069453,
-        "narHash": "sha256-tsw+npcOga8NBM1F8hnsT69k33FS5nK1zaPB1ohasPk=",
+        "lastModified": 1690577481,
+        "narHash": "sha256-pZY9gslSXbBhgrSCUAc+2jLSS674Db8jEH2iz/O2nVU=",
         "owner": "jhillyerd",
         "repo": "plugin-git",
-        "rev": "1697adf8861a15178f4794de566d14d295c79b39",
+        "rev": "641b8722948bde5863cc3a049c2fde394158122d",
         "type": "github"
       },
       "original": {
@@ -85,11 +97,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1681202837,
-        "narHash": "sha256-H+Rh19JDwRtpVPAWp64F+rlEtxUWBAQW28eAi3SRSzg=",
+        "lastModified": 1694529238,
+        "narHash": "sha256-zsNZZGTGnMOf9YpHKJqMSsa0dXbfmxeoJ7xHlrt+xmY=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "cfacdce06f30d2b68473a46042957675eebb3401",
+        "rev": "ff7b65b44d01cf9ba6a71320833626af21126384",
         "type": "github"
       },
       "original": {
@@ -161,11 +173,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1684157850,
-        "narHash": "sha256-xGHTCgvAxO5CgAL6IAgE/VGRX2wob2Y+DPyqpXJ32oQ=",
+        "lastModified": 1695708052,
+        "narHash": "sha256-QiWOrZcCmY+zH2NVM6/opZaMRMgam9u+qVYycKLqL10=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "c0deab0effd576e70343cb5df0c64428e0e0d010",
+        "rev": "dd88dbc69438384bd94f8282584a86798750028c",
         "type": "github"
       },
       "original": {
@@ -244,11 +256,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1676383589,
-        "narHash": "sha256-KCkWZXCjH+C4Kn7fUGSrEl5btk+sERHhZueSsvVbPWc=",
+        "lastModified": 1685908677,
+        "narHash": "sha256-E4zUPEUFyVWjVm45zICaHRpfGepfkE9Z2OECV9HXfA4=",
         "owner": "guibou",
         "repo": "nixGL",
-        "rev": "c917918ab9ebeee27b0dd657263d3f57ba6bb8ad",
+        "rev": "489d6b095ab9d289fe11af0219a9ff00fe87c7c5",
         "type": "github"
       },
       "original": {
@@ -322,16 +334,16 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1684130981,
-        "narHash": "sha256-5IPp/rUAOogega5xuRoxcpfkwlGDAyWdizL0Tp2GA4s=",
+        "lastModified": 1695360818,
+        "narHash": "sha256-JlkN3R/SSoMTa+CasbxS1gq+GpGxXQlNZRUh9+LIy/0=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "d41eea2839de7de0f2cbe4aa90fde5db8afcd30a",
+        "rev": "e35dcc04a3853da485a396bdd332217d0ac9054f",
         "type": "github"
       },
       "original": {
         "id": "nixpkgs",
-        "ref": "nixos-22.11",
+        "ref": "nixos-unstable",
         "type": "indirect"
       }
     },
@@ -362,6 +374,7 @@
     },
     "root": {
       "inputs": {
+        "channableFishFile": "channableFishFile",
         "fish-abbreviation-tips": "fish-abbreviation-tips",
         "fish-plugin-git": "fish-plugin-git",
         "fish-puffer": "fish-puffer",

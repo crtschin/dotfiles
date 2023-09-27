@@ -17,6 +17,7 @@
       '';
     myNixGLWrap = self.nixGLWrap;
 
+    nixGL = self.nixgl.auto.nixGLDefault;
     picom = self.myNixGLWrap super.picom;
     brave = self.myNixGLWrap super.brave;
     kitty = self.myNixGLWrap super.kitty;

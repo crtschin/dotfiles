@@ -17,9 +17,10 @@ in {
       package = pkgs.polybar.override {
         i3Support = true;
         alsaSupport = true;
-        iwSupport = true;
-        pulseSupport = true;
         githubSupport = true;
+        mpdSupport = true;
+        pulseSupport = true;
+        nlSupport = true;
       };
       script = polybarStart;
       extraConfig = ''

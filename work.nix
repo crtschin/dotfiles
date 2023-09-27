@@ -58,9 +58,9 @@ in {
       solaar
       postman
       jmeter
-      haskellPackages.profiteur
       _1password
       stack
+      nixGL
 
       graphviz
       gprof2dot

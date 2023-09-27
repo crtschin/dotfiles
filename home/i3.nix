@@ -148,7 +148,7 @@ in {
         assign [class="kitty"] 10
         assign [class="alacritty"] 10
         assign [class="Firefox"] 2
-        assign [class="brave"] 2
+        assign [class="Brave"] 2
         assign [class="pgadmin4"] 3
         assign [class="Spotify"] 9
 

@@ -4,10 +4,9 @@
   pkgs,
   inputs,
   ...
-}: let
-in {
+}: {
   home.packages = with pkgs; [
-    exa
+    eza
   ];
 
   programs = {
@@ -60,9 +59,26 @@ in {
       };
     };
 
-    exa = {
+    eza = {
       enable = true;
       enableAliases = true;
+    };
+
+    gh = {
+      enable = true;
+      settings = {
+        editor = "vim";
+        git_protocol = "ssh";
+        pager = "less";
+        browser = "brave";
+      };
+      gitCredentialHelper = {
+        enable = true;
+      };
+      extensions = [
+        pkgs.gh-dash
+        pkgs.gh-eco
+      ];
     };
 
     autojump = {

@@ -13,6 +13,7 @@ in {
     ./home/shell.nix
     ./home/services.nix
     ./home/modules/fish.nix
+    ./home/modules/dunst.nix
     ./home/modules/kitty.nix
     ./home/modules/polybar.nix
     ./home/modules/starship.nix
@@ -41,6 +42,7 @@ in {
       fasd
       alejandra
 
+      nil
       niv
       any-nix-shell
       cachix

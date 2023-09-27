@@ -43,6 +43,7 @@ in {
         z = "j";
         gu = "${pkgs.gitui}/bin/gitui";
         watch = "watch -c -d";
+        code = "nixGL code";
       };
       functions = {
         giffify = {
