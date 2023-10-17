@@ -31,7 +31,7 @@ in {
     };
     picom = {
       package = pkgs.picom;
-      enable = false;
+      enable = true;
       fade = true;
       fadeDelta = 2;
       inactiveOpacity = 0.8;

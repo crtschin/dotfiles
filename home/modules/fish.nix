@@ -56,6 +56,11 @@ in {
           description = "commandlinefu search";
           argumentNames = ["command"];
         };
+        echoserver = {
+          body = "while true; echo -e 'HTTP/1.1 200 OK\r\n' | nc -l $port; echo; end";
+          description = "echo server";
+          argumentNames = ["port"];
+        };
       };
       enable = true;
       plugins = [

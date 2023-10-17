@@ -27,12 +27,6 @@ in {
         done
       '';
 
-      mermaid-cli = pkgs.writeScriptBin "mmdc" ''
-        #!${pkgs.stdenv.shell}
-        exec ${pkgs.nodePackages.mermaid-cli}/bin/mmdc \
-        "$@"
-      '';
-
       betterlockscreen = self.native_wrapper super.betterlockscreen;
       i3lock = self.native_wrapper super.i3lock-color;
     })

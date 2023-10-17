@@ -20,7 +20,10 @@
         theme = "gruvbox-dark";
       };
       themes = {
-        gruvbox = builtins.readFile (inputs.gruvbox-tmTheme + "/gruvbox (Dark) (Soft).tmTheme");
+        gruvbox = {
+          src = inputs.gruvbox-tmTheme;
+          file = "gruvbox (Dark) (Soft).tmTheme";
+        };
       };
     };
 
