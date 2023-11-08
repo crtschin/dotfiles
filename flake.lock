@@ -3,7 +3,7 @@
     "channableFishFile": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-ZPRWkkDClCgxn7/5gDHnjogRh3L+h+GKSI68Runj5Zo=",
+        "narHash": "sha256-tXFQsxV/TNvBlGW9VNHZG2yGIVouy5mHDZkCRlOEEvA=",
         "type": "file",
         "url": "file:///home/curtis/dotfiles/.config/channable.fish"
       },
@@ -31,11 +31,11 @@
     "fish-plugin-git": {
       "flake": false,
       "locked": {
-        "lastModified": 1690577481,
-        "narHash": "sha256-pZY9gslSXbBhgrSCUAc+2jLSS674Db8jEH2iz/O2nVU=",
+        "lastModified": 1699380767,
+        "narHash": "sha256-efKPbsXxjHm1wVWPJCV8teG4DgZN5dshEzX8PWuhKo4=",
         "owner": "jhillyerd",
         "repo": "plugin-git",
-        "rev": "641b8722948bde5863cc3a049c2fde394158122d",
+        "rev": "c2b38f53f0b04bc67f9a0fa3d583bafb3f558718",
         "type": "github"
       },
       "original": {
@@ -173,11 +173,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1697526467,
-        "narHash": "sha256-xX+XzphGlGsNybVPIZHQXzEKCE3aBa/cafeEhHuyk3Q=",
+        "lastModified": 1699368917,
+        "narHash": "sha256-nUtGIWf86BOkUbtksWtfglvCZ/otP0FTZlQH8Rzc7PA=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "b25161c6a2c3b7cabb9cfdc70c35007c8ecb7241",
+        "rev": "6a8444467c83c961e2f5ff64fb4f422e303c98d3",
         "type": "github"
       },
       "original": {
@@ -334,11 +334,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1697059129,
-        "narHash": "sha256-9NJcFF9CEYPvHJ5ckE8kvINvI84SZZ87PvqMbH6pro0=",
+        "lastModified": 1699099776,
+        "narHash": "sha256-X09iKJ27mGsGambGfkKzqvw5esP1L/Rf8H3u3fCqIiU=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "5e4c2ada4fcd54b99d56d7bd62f384511a7e2593",
+        "rev": "85f1ba3e51676fa8cc604a3d863d729026a6b8eb",
         "type": "github"
       },
       "original": {

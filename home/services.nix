@@ -17,21 +17,21 @@
     };
   };
 
-  systemd.user.services.pgadmin4 = {
-    Unit = {
-      Description = "Runs pgAdmin4";
-    };
+  # systemd.user.services.pgadmin4 = {
+  #   Unit = {
+  #     Description = "Runs pgAdmin4";
+  #   };
 
-    Install = {
-      WantedBy = ["timers.target"];
-    };
+  #   Install = {
+  #     WantedBy = ["timers.target"];
+  #   };
 
-    Timer = {
-      OnBootSec = "5min";
-    };
+  #   Timer = {
+  #     OnBootSec = "5min";
+  #   };
 
-    Service = {
-      ExecStart = "${pkgs.pgadmin}/bin/pgadmin4";
-    };
-  };
+  #   Service = {
+  #     ExecStart = "${pkgs.pgadmin}/bin/pgadmin4";
+  #   };
+  # };
 }

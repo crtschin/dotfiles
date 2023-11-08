@@ -6,7 +6,6 @@
 }: let
   devFishPlugins = with pkgs.fishPlugins; [
     bass
-    colored-man-pages
     pisces
     done
     sponge

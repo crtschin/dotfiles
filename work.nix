@@ -47,13 +47,10 @@ in {
       gv
       monitor-heap
       mermaid-cli
-      pgadmin
       pgcli
       solaar
-      postman
       jmeter
       _1password
-      stack
       nixGL
 
       graphviz

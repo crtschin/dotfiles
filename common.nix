@@ -26,7 +26,6 @@ in {
     packages = with pkgs; [
       fd
       jq
-      arandr
       gitAndTools.git-absorb
       nitrogen
       pavucontrol
@@ -127,7 +126,6 @@ in {
         alias = {
           lc = "!fish -c 'git checkout (git branch --list --sort=-committerdate | string trim | fzf --preview=\"git log --stat -n 10 --decorate --color=always {}\")'";
           oc = "!fish -c 'git checkout (git for-each-ref refs/remotes/origin/ --format=\"%(refname:short)\" --sort=-committerdate|perl -p -e \"s#^origin/##g\"|head -100|string trim|fzf --preview=\"git log --stat -n 10 --decorate --color=always origin/{}\")'";
-          fpush = "push --force-with-lease";
         };
         # blame.ignoreRevsFile = ".git-blame-ignore-revs";
         pager = {
@@ -170,6 +168,10 @@ in {
       };
     };
 
+    man = {
+      enable = true;
+    };
+
     taskwarrior = {
       enable = false;
     };
@@ -206,6 +208,7 @@ in {
   # changes in each release.
   home.stateVersion = "21.05";
   home.sessionVariables = {
+    PAGER = "${pkgs.bat}/bin/bat";
     EDITOR = "${pkgs.vscode}/bin/code";
     TERMINAL = "${pkgs.kitty}/bin/kitty";
     RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
