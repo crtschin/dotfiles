@@ -51,7 +51,6 @@ in {
       solaar
       jmeter
       _1password
-      nixGL
 
       graphviz
       gprof2dot

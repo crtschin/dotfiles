@@ -31,7 +31,7 @@ in {
     };
     picom = {
       package = pkgs.picom;
-      enable = true;
+      enable = false;
       fade = true;
       fadeDelta = 2;
       inactiveOpacity = 0.8;
@@ -149,7 +149,6 @@ in {
         assign [class="alacritty"] 10
         assign [class="Firefox"] 2
         assign [class="Brave"] 2
-        assign [class="pgadmin4"] 3
         assign [class="Spotify"] 9
 
         workspace 1 output primary

@@ -97,7 +97,8 @@ in {
 
         haskell = {
           symbol = "λ";
-          format = "\\[[$symbol($ghc_version)]($style)\\]";
+          # format = "\\[[$symbol($ghc_version)]($style)\\]";
+          format = "\\[[$symbol]($style)\\]";
         };
 
         hostname = {
@@ -124,6 +125,7 @@ in {
 
         python = {
           symbol = "🐍";
+          # format = "\\[[$symbol$pyenv_prefix($version)(\($virtualenv\))]($style)\\]";
           format = "\\[[$symbol$pyenv_prefix($version)(\($virtualenv\))]($style)\\]";
           disabled = true;
         };
@@ -131,7 +133,8 @@ in {
         rust = {
           symbol = "🦀";
           version_format = "v$\{raw\}";
-          format = "\\[[$symbol$version]($style)\\]";
+          # format = "\\[[$symbol$version]($style)\\]";
+          format = "\\[[$symbol]($style)\\]";
           style = "bold green";
         };
 
@@ -142,7 +145,8 @@ in {
 
         nix_shell = {
           symbol = "🐚";
-          format = "\\[[$symbol$state]($style)\\]";
+          format = "\\[[$symbol]($style)\\]";
+          # format = "\\[[$symbol$state]($style)\\]";
           impure_msg = "[$name](bold blue)";
           pure_msg = "[$name](bold green)";
         };

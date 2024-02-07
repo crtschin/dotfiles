@@ -14,6 +14,11 @@
     nixGLWrap = program:
       pkgs.writeShellScriptBin program.pname ''
         #!/bin/sh
+
+        export NIXGL_LIBVA_DRIVERS_PATH=$LIBVA_DRIVERS_PATH
+        export NIXGL_LIBGL_DRIVERS_PATH=$LIBGL_DRIVERS_PATH
+        export NIXGL_LD_LIBRARY_PATH=$LD_LIBRARY_PATH
+        export NIXGL___EGL_VENDOR_LIBRARY_FILENAMES=$__EGL_VENDOR_LIBRARY_FILENAMES
         ${self.nixgl.auto.nixGLDefault}/bin/nixGL ${program}/bin/${program.pname} "$@"
       '';
     nixGLIntelWrap = program:
@@ -26,9 +31,9 @@
         export NIXGL___EGL_VENDOR_LIBRARY_FILENAMES=$__EGL_VENDOR_LIBRARY_FILENAMES
         ${self.nixgl.nixGLIntel}/bin/nixGLIntel ${program}/bin/${program.pname} "$@"
       '';
-    myNixGLWrap = self.nixGLWrap;
+    myNixGLWrap = self.nixGLIntelWrap;
 
-    nixGL = self.nixgl.auto.nixGLDefault;
+    nixGL = self.nixgl.nixGLIntel;
     picom = self.myNixGLWrap super.picom;
     brave = self.myNixGLWrap super.brave;
     kitty = self.myNixGLWrap super.kitty;
@@ -36,8 +41,16 @@
   };
 in {
   nixpkgs.overlays = [nixGLOverlay];
+  home = {
+    packages = with pkgs; [
+      nixGL
+    ];
+  };
   programs = {
     fish = {
+      shellAliases = {
+        code = "nixGLIntel code";
+      };
       shellInit = ''
         set LIBVA_DRIVERS_PATH $NIXGL_LIBVA_DRIVERS_PATH
         set LIBGL_DRIVERS_PATH $NIXGL_LIBGL_DRIVERS_PATH

@@ -20,6 +20,7 @@ in {
     fish = {
       interactiveShellInit = ''
         begin
+          set sponge_purge_only_on_exit true
           set fish_greeting
           set __done_notify_sound 1
         end
@@ -34,6 +35,8 @@ in {
       '';
 
       shellAliases = {
+        gcloud-operations-log = "gcloud compute operations list --format=\":(TIMESTAMP.date(tz=LOCAL))\" --sort-by=TIMESTAMP";
+        with-cachix-key = "vaultenv --secrets-file (echo \"cachix#signing-key\" | psub) -- ";
         kdiff = "kitty +kitten diff -o pygments_style=gruvbox-dark";
         kssh = "kitty +kitten ssh";
         kicat = "kitty +kitten icat";
@@ -42,7 +45,6 @@ in {
         z = "j";
         gu = "${pkgs.gitui}/bin/gitui";
         watch = "watch -c -d";
-        code = "nixGL code";
       };
       functions = {
         giffify = {

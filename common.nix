@@ -1,4 +1,5 @@
 {
+  lib,
   config,
   pkgs,
   ...
@@ -40,6 +41,7 @@ in {
       bpftrace
       fasd
       alejandra
+      pgadmin4
 
       nil
       niv
@@ -68,7 +70,6 @@ in {
       vscode
       rnix-lsp
       hivemind
-      pipe-rename
 
       dejavu_fonts
       fira-code
@@ -150,10 +151,14 @@ in {
           algorithm = "histogram";
           # Try to break up diffs at blank lines
           compactionHeuristic = true;
+          colorMoved = "dimmed_zebra";
         };
         # For interactive rebases, automatically reorder and set the
         # right actions for !fixup and !squash commits.
-        rebase.autosquash = true;
+        rebase = {
+          autosquash = true;
+          updateRefs = true;
+        };
         # Include tags with commits that we push
         push = {
           followTags = true;
