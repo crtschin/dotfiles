@@ -32,6 +32,7 @@ in {
       pavucontrol
       playerctl
       ripgrep
+      difftastic
       tig
       hyperfine
       du-dust
@@ -41,7 +42,7 @@ in {
       bpftrace
       fasd
       alejandra
-      pgadmin4
+      # pgadmin4
 
       nil
       niv
@@ -68,7 +69,6 @@ in {
       spotifyd
       firefox
       vscode
-      rnix-lsp
       hivemind
 
       dejavu_fonts

@@ -54,6 +54,9 @@ in {
 
       graphviz
       gprof2dot
+
+      pkgs.haskellPackages.ghcprofview
+      # pkgs.haskellPackages.hpview
     ];
   };
 

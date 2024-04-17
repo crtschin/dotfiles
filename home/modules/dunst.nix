@@ -34,29 +34,29 @@ in {
           startup_notification = false;
         };
         frame = {
-            width = 1;
-            color = "#83a598";
+          width = 1;
+          color = "#83a598";
         };
         shortcuts = {
-            close = "ctrl+space";
-            close_all = "ctrl+shift+space";
-            history = "ctrl+grave";
-            context = "ctrl+shift+period";
+          close = "ctrl+space";
+          close_all = "ctrl+shift+space";
+          history = "ctrl+grave";
+          context = "ctrl+shift+period";
         };
         urgency_low = {
-            background = "#282828";
-            foreground = "#ebdbb2";
-            timeout = 5;
+          background = "#282828";
+          foreground = "#ebdbb2";
+          timeout = 5;
         };
         urgency_normal = {
-            background = "#282828";
-            foreground = "#ebdbb2";
-            timeout = 20;
+          background = "#282828";
+          foreground = "#ebdbb2";
+          timeout = 20;
         };
         urgency_critical = {
-            background = "#282828";
-            foreground = "#ebdbb2";
-            timeout = 0;
+          background = "#282828";
+          foreground = "#ebdbb2";
+          timeout = 0;
         };
       };
     };
