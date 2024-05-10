@@ -34,7 +34,7 @@ in {
 
   imports = [
     ./common.nix
-    ./home/modules/nixgl.nix
+    # ./home/modules/nixgl.nix
     ./home/modules/general-overlay.nix
   ];
 
@@ -54,6 +54,13 @@ in {
 
       graphviz
       gprof2dot
+
+      # Create .conf file in /etc/tmpfiles.d/ containing a symlink entry
+      #     L+ /run/opengl-driver - - - - <nix-profile directory>
+      #   Ensures drivers are symlinked nixos-style to make them accessible from
+      #   nix-installed programs.
+      mesa.drivers
+      intel-media-driver
 
       pkgs.haskellPackages.ghcprofview
       # pkgs.haskellPackages.hpview

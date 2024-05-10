@@ -35,7 +35,7 @@ in {
     kitty = {
       enable = true;
       font = {
-        name = pkgs.rice.font.monospace.name;
+        name = pkgs.rice.font.normal.name;
         size = 14;
       };
       settings =

@@ -52,7 +52,7 @@ in {
         directory = {
           truncation_length = 10;
           truncation_symbol = "…/";
-          format = "[$path]($style)[$lock_symbol]($lock_style) with ";
+          format = "[$path](bold $style)[$lock_symbol]($lock_style)[ with ](bold)";
         };
 
         env_var = {

@@ -107,9 +107,8 @@ in {
         size = 10;
       };
       monospace = {
-        name = "Fira Code";
+        name = "FiraCode";
         package = self.fira-code;
-        # package = self.nerdfonts.override {fonts = ["FiraCode"];};
         size = 10;
       };
     };
