@@ -1,10 +1,9 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{
-  config,
-  pkgs,
-  ...
+{ config
+, pkgs
+, ...
 }: {
   imports = [
     # Include the results of the hardware scan.
@@ -13,8 +12,8 @@
   ];
 
   nixpkgs.config.allowUnfree = true;
-  nix.settings.experimental-features = ["nix-command" "flakes" "repl-flake"];
-  nix.settings.trusted-users = ["root" "crtschin"];
+  nix.settings.experimental-features = [ "nix-command" "flakes" "repl-flake" ];
+  nix.settings.trusted-users = [ "root" "crtschin" ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -49,6 +48,15 @@
     keyMap = "us";
   };
 
+  fonts.packages = with pkgs; [
+    liberation_ttf
+    fira-code
+    fira-code-symbols
+    dejavu_fonts
+    font-awesome
+    source-code-pro
+  ];
+
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
@@ -64,18 +72,21 @@
       enable = true;
       package = pkgs.i3-gaps;
     };
-    displayManager.defaultSession = "xfce+i3";
   };
+  services.displayManager.defaultSession = "xfce+i3";
 
   # Video settings
-  services.xserver.videoDrivers = ["modesetting"];
+  services.xserver.videoDrivers = [ "modesetting" ];
   hardware.opengl.enable = true;
+  hardware.opengl.extraPackages = [ pkgs.mesa.drivers ];
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
   hardware.nvidia.modesetting.enable = true;
 
   # Configure keymap in X11
-  services.xserver.layout = "us";
-  services.xserver.xkbOptions = "eurosign:e";
+  services.xserver.xkb = {
+    layout = "us";
+    options = "eurosign:e";
+  };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -93,8 +104,8 @@
   hardware = {
     pulseaudio = {
       enable = true;
-      extraModules = [];
-      package = pkgs.pulseaudioFull;
+      extraModules = [ ];
+      package = pkgs.pulseaudio.override { jackaudioSupport = true; };
     };
     bluetooth = {
       enable = true;
@@ -107,9 +118,24 @@
   };
   services.blueman.enable = true;
   sound.enable = true;
+  boot.kernelModules = [ "snd-seq" "snd-rawmidi" ];
+
+  services.jack = {
+    jackd.enable = true;
+    # support ALSA only programs via ALSA JACK PCM plugin
+    alsa.enable = false;
+    # support ALSA only programs via loopback device (supports programs like Steam)
+    loopback = {
+      enable = true;
+      # buffering parameters for dmix device to work with ALSA only semi-professional sound programs
+      #dmixConfig = ''
+      #  period_size 2048
+      #'';
+    };
+  };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput = {
+  services.libinput = {
     enable = true;
     touchpad.tapping = true;
   };
@@ -117,14 +143,21 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.crtschin = {
     isNormalUser = true;
-    extraGroups = ["wheel" "networkmanager"];
+    extraGroups = [ "wheel" "networkmanager" "jackaudio" ];
     shell = pkgs.fish;
   };
   programs.fish.enable = true;
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [];
+  # environment.systemPackages = [
+  #   (import (fetchTarball "https://install.devenv.sh/latest")).default
+  # ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -147,6 +180,14 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  # programs.nix-ld.enable = true;
+  # environment.variables = {
+  #   NIX_LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
+  #     pkgs.stdenv.cc.cc
+  #   ];
+  #   NIX_LD = pkgs.lib.fileContents "${pkgs.stdenv.cc}/nix-support/dynamic-linker";
+  # };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

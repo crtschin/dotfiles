@@ -5,10 +5,6 @@
   inputs,
   ...
 }: {
-  home.packages = with pkgs; [
-    eza
-  ];
-
   programs = {
     autorandr = {
       enable = true;

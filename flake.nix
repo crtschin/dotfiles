@@ -1,9 +1,9 @@
 {
   inputs = {
-    channableFishFile = {
-      url = "file+file:///home/curtis/dotfiles/.config/channable.fish";
-      flake = false;
-    };
+    # channableFishFile = {
+    #   url = "file+file:///home/curtis/dotfiles/.config/channable.fish";
+    #   flake = false;
+    # };
 
     nixpkgs = {
       url = "flake:nixpkgs/nixos-unstable";
@@ -32,6 +32,12 @@
 
     nix-rice = {
       url = "github:bertof/nix-rice";
+    };
+    tidal = {
+      url = "github:mitchmindtree/tidalcycles.nix";
+    };
+    musnix  = {
+      url = "github:musnix/musnix";
     };
 
     gruvbox-tmTheme = {
@@ -66,7 +72,9 @@
       nixpkgs.legacyPackages.${system}
       // {
         inherit overlays;
-        config = {allowUnfree = true;};
+        config = {
+          allowUnfree = true;
+        };
       };
 
     # Lifted from https://github.com/yoricksijsling/dotfiles

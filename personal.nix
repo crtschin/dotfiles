@@ -1,16 +1,30 @@
-{
-  config,
-  pkgs,
-  ...
+{ config
+, pkgs
+, inputs
+, ...
 }: {
   imports = [
     ./common.nix
+    ./home/modules/general-overlay.nix
   ];
 
+  nixpkgs.overlays = [ inputs.tidal.overlays.default ];
   home = rec {
     username = "crtschin";
     homeDirectory = "/home/${username}";
     packages = with pkgs; [
+      pciutils
+      iotop
+      pv
+      valgrind
+      discord
+      glxinfo
+
+      pavucontrol jack2 qjackctl jack2Full jack_capture
+      supercollider superdirt-start tidal
+
+      devenv
+      process-compose
       git
       htop
       arandr
@@ -19,7 +33,7 @@
       file
       wget
       gcc
-      python
+      python3
       rustc
       rustfmt
       cargo
@@ -27,6 +41,17 @@
       texlive.combined.scheme-full
       vlc
       filezilla
+    ];
+  };
+
+  programs.neovim = {
+    enable = true;
+    plugins = with pkgs.vimPlugins; [
+      vim-cool
+      vim-airline
+      vim-tidal
+      (nvim-treesitter.withPlugins (p: [p.haskell]))
+      vim-surround
     ];
   };
 
@@ -51,6 +76,9 @@
     random-background = {
       enable = true;
       imageDirectory = "%h/backgrounds";
+    };
+    picom = {
+      enable = false;
     };
   };
 
