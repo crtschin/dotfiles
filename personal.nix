@@ -86,8 +86,11 @@
     git = {
       userName = "crtschin";
       userEmail = "csochinjensem@gmail.com";
-      gpg.format = "ssh";
-      user.signingkey = "/home/crtschin/.ssh/id_rsa.pub"
+      extraConfig = {
+        gpg.format = "ssh";
+        user.signingkey = "/home/crtschin/.ssh/id_rsa.pub";
+        commit.gpgsign = true;
+      };
     };
 
     fish = {
