@@ -20,6 +20,7 @@
       valgrind
       discord
       glxinfo
+      unzip
 
       pavucontrol jack2 qjackctl jack2Full jack_capture
       supercollider superdirt-start tidal
