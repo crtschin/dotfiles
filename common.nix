@@ -25,52 +25,68 @@ in {
   nixpkgs.config.allowUnfree = true;
   home = rec {
     packages = with pkgs; [
-      fd
-      jq
-      gitAndTools.git-absorb
+      # Desktop
       nitrogen
+      betterlockscreen
+
+      # Sound
       pavucontrol
       playerctl
+
+      # Utils
+      fd
+      jq
       ripgrep
+      xclip
+      direnv
+      p7zip
+      hivemind
+
+      # Git
+      gitAndTools.git-absorb
       difftastic
       tig
-      hyperfine
-      du-dust
-      xclip
       gitui
-      ncdu
-      bpftrace
-      fasd
-      alejandra
-      # pgadmin4
 
+      # System
+      ncdu
+      du-dust
+      fastfetch
+
+      # Debugging
+      bpftrace
+
+      # Benchmarking
+      hyperfine
+
+      # DNS
+      dig
+
+      # nix
       nil
       niv
       any-nix-shell
       cachix
-
-      direnv
-      p7zip
-
       nix-direnv
       nix-tree
       nix-diff
       nvd
 
-      betterlockscreen
-      brave
+      # Media
       ffmpeg
       flameshot
-      fortune
       gimp
       imagemagick
       simplescreenrecorder
+
+      # Programs
+      brave
       spotify
       spotifyd
       firefox
       vscode
-      hivemind
 
+      # Customization
       dejavu_fonts
       fira-code
       font-awesome
@@ -78,8 +94,10 @@ in {
       papirus-icon-theme
       gruvbox-dark-gtk
       gruvbox-dark-icons-gtk
-
       pkgs.rice.font.monospace.package
+
+      # Fun
+      fortune
     ];
   };
 

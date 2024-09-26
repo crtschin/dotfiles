@@ -5,6 +5,7 @@
 }: {
   imports = [
     ./common.nix
+    ./home/modules/alacritty.nix
     ./home/modules/general-overlay.nix
   ];
 
@@ -38,7 +39,6 @@
       rustfmt
       cargo
 
-      texlive.combined.scheme-full
       vlc
       filezilla
     ];
@@ -86,6 +86,8 @@
     git = {
       userName = "crtschin";
       userEmail = "csochinjensem@gmail.com";
+      gpg.format = "ssh";
+      user.signingkey = "/home/crtschin/.ssh/id_rsa.pub"
     };
 
     fish = {
