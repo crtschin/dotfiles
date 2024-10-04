@@ -41,6 +41,7 @@ in {
       direnv
       p7zip
       hivemind
+      process-compose
 
       # Git
       gitAndTools.git-absorb
@@ -72,7 +73,6 @@ in {
       nix-diff
       nvd
 
-      # Media
       ffmpeg
       flameshot
       gimp
@@ -85,6 +85,8 @@ in {
       spotifyd
       firefox
       vscode
+      hivemind
+      okular
 
       # Customization
       dejavu_fonts
@@ -102,6 +104,23 @@ in {
   };
 
   fonts.fontconfig.enable = true;
+
+  gtk = {
+    enable = true;
+    font = {
+      package = pkgs.rice.font.monospace.package;
+      name = pkgs.rice.font.monospace.name;
+      size = 12;
+    };
+    theme = {
+      name = "gruvbox-dark";
+      package = pkgs.gruvbox-dark-gtk;
+    };
+    iconTheme = {
+      name = "gruvbox-dark";
+      package = pkgs.gruvbox-dark-icons-gtk;
+    };
+  };
 
   xdg = {
     enable = true;
@@ -128,6 +147,17 @@ in {
         theme_background = false;
         truecolor = true;
       };
+    };
+
+    brave = {
+      enable = true;
+      # https://chromium.googlesource.com/chromium/src/+/refs/heads/main/docs/gpu/vaapi.md
+      commandLineArgs = [
+        "--use-gl=angle"
+        "--use-angle=gl"
+        "--ignore-gpu-blocklist"
+        "--enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoEncoder"
+      ];
     };
 
     firefox = {

@@ -48,6 +48,7 @@ in {
       monitor-heap
       mermaid-cli
       pgcli
+      pgadmin4
       solaar
       jmeter
       _1password

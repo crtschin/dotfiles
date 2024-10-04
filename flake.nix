@@ -6,6 +6,7 @@
     # };
 
     nixpkgs = {
+      # url = "github:NixOS/nixpkgs?ref=7b9135d3ae24bf15ca0fac57f4114c99e28bec3b";
       url = "flake:nixpkgs/nixos-unstable";
       # url = "flake:nixpkgs/nixos-23.11";
     };
