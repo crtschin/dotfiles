@@ -1,9 +1,9 @@
 {
   inputs = {
-    # channableFishFile = {
-    #   url = "file+file:///home/curtis/dotfiles/.config/channable.fish";
-    #   flake = false;
-    # };
+    channableFishFile = {
+      url = "file+file:///home/curtis/dotfiles/.config/channable.fish";
+      flake = false;
+    };
 
     nixpkgs = {
       # url = "github:NixOS/nixpkgs?ref=7b9135d3ae24bf15ca0fac57f4114c99e28bec3b";
@@ -32,7 +32,7 @@
     };
 
     nix-rice = {
-      url = "github:bertof/nix-rice";
+      url = "github:bertof/nix-rice?ref=dddd03ed3c5e05c728b0df985f7af905b002f588";
     };
     tidal = {
       url = "github:mitchmindtree/tidalcycles.nix";

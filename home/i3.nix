@@ -1,16 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config, lib, pkgs, ... }:
+let
   mod = "Mod4";
   rgbTheme = pkgs.riceRgbColorPalette;
 in {
   programs = {
     rofi = {
       enable = true;
-      font = "FontAwesome, ${pkgs.rice.font.monospace.name}, DejaVu Sans Mono 12";
+      font =
+        "FontAwesome, ${pkgs.rice.font.monospace.name}, DejaVu Sans Mono 12";
       terminal = "${pkgs.kitty}/bin/kitty";
       theme = "gruvbox-dark-soft";
       extraConfig = {
@@ -42,9 +39,7 @@ in {
         mark-ovredir-focused = true;
         use-ewmh-active-win = true;
         detect-client-opacity = true;
-        focus-exclude = [
-          "class_g ?= 'rofi'"
-        ];
+        focus-exclude = [ "class_g ?= 'rofi'" ];
         blur = {
           method = "gaussian";
           size = 10;
@@ -91,11 +86,11 @@ in {
       enable = true;
       config = {
         modifier = mod;
-        gaps = {
-          inner = 10;
-        };
+        gaps = { inner = 10; };
         fonts = {
-          names = ["Font Awesome 5 Free, ${pkgs.rice.font.monospace.name}, DejaVu Sans Mono, Monospace"];
+          names = [
+            "Font Awesome 5 Free, ${pkgs.rice.font.monospace.name}, DejaVu Sans Mono, Monospace"
+          ];
           style = "Bold Semi-Condensed";
           size = 11.0;
         };
@@ -106,11 +101,12 @@ in {
           "${mod}+Return" = "exec $TERMINAL";
           "${mod}+Tab" = "workspace back_and_forth";
           "${mod}+Shift+r" = "restart";
-          "${mod}+l" = "exec ${pkgs.betterlockscreen}/bin/betterlockscreen -l dim";
+          "${mod}+l" =
+            "exec ${pkgs.betterlockscreen}/bin/betterlockscreen -l dim";
           "${mod}+m" = "move workspace to output left";
           "${mod}+Shift+p" = "exec flameshot gui";
         };
-        bars = [];
+        bars = [ ];
       };
       extraConfig = ''
         #######

@@ -66,6 +66,7 @@ in {
       # nix
       nil
       niv
+      nixfmt
       any-nix-shell
       cachix
       nix-direnv
@@ -80,10 +81,8 @@ in {
       simplescreenrecorder
 
       # Programs
-      brave
       spotify
       spotifyd
-      firefox
       vscode
       hivemind
       okular

@@ -1,9 +1,5 @@
-{
-  config,
-  pkgs,
-  inputs,
-  ...
-}: let
+{ config, pkgs, inputs, ... }:
+let
 in {
   nixpkgs.overlays = [
     (self: super: {
@@ -34,7 +30,7 @@ in {
 
   imports = [
     ./common.nix
-    # ./home/modules/nixgl.nix
+    ./home/modules/nixgl.nix
     ./home/modules/general-overlay.nix
   ];
 
@@ -48,7 +44,7 @@ in {
       monitor-heap
       mermaid-cli
       pgcli
-      pgadmin4
+      # pgadmin4
       solaar
       jmeter
       _1password
@@ -79,6 +75,11 @@ in {
     git = {
       userName = "Curtis Chin Jen Sem";
       userEmail = "curtis.chinjensem@channable.com";
+      extraConfig = {
+        gpg.format = "ssh";
+        user.signingkey = "/home/curtis/.ssh/id_ed25519.pub";
+        commit.gpgsign = true;
+      };
     };
 
     fish = {
