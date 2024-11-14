@@ -1,13 +1,7 @@
-{
-  lib,
-  config,
-  pkgs,
-  ...
-}: let
+{ lib, config, pkgs, ... }:
+let
 in {
-  nixpkgs.overlays = [
-    (import ./home/overlays/rice.nix)
-  ];
+  nixpkgs.overlays = [ (import ./home/overlays/rice.nix) ];
 
   imports = [
     ./home/i3.nix
@@ -124,20 +118,16 @@ in {
   xdg = {
     enable = true;
     mime.enable = true;
-    systemDirs.data = ["/usr/share" "/usr/local/share"];
+    systemDirs.data = [ "/usr/share" "/usr/local/share" ];
     configFile."direnv/direnvrc".text = ''
       source ${pkgs.nix-direnv}/share/nix-direnv/direnvrc
     '';
   };
 
   programs = {
-    home-manager = {
-      enable = true;
-    };
+    home-manager = { enable = true; };
 
-    autorandr = {
-      enable = true;
-    };
+    autorandr = { enable = true; };
 
     btop = {
       enable = true;
@@ -172,8 +162,10 @@ in {
       # transfer.fsckObjects = true;
       extraConfig = {
         alias = {
-          lc = "!fish -c 'git checkout (git branch --list --sort=-committerdate | string trim | fzf --preview=\"git log --stat -n 10 --decorate --color=always {}\")'";
-          oc = "!fish -c 'git checkout (git for-each-ref refs/remotes/origin/ --format=\"%(refname:short)\" --sort=-committerdate|perl -p -e \"s#^origin/##g\"|head -100|string trim|fzf --preview=\"git log --stat -n 10 --decorate --color=always origin/{}\")'";
+          lc =
+            "!fish -c 'git checkout (git branch --list --sort=-committerdate | string trim | fzf --preview=\"git log --stat -n 10 --decorate --color=always {}\")'";
+          oc =
+            "!fish -c 'git checkout (git for-each-ref refs/remotes/origin/ --format=\"%(refname:short)\" --sort=-committerdate|perl -p -e \"s#^origin/##g\"|head -100|string trim|fzf --preview=\"git log --stat -n 10 --decorate --color=always origin/{}\")'";
         };
         # blame.ignoreRevsFile = ".git-blame-ignore-revs";
         pager = {
@@ -195,6 +187,7 @@ in {
           syntax-theme = "gruvbox-dark";
         };
         diff = {
+          external = "difft";
           algorithm = "histogram";
           # Try to break up diffs at blank lines
           compactionHeuristic = true;
@@ -220,17 +213,11 @@ in {
       };
     };
 
-    man = {
-      enable = true;
-    };
+    man = { enable = true; };
 
-    taskwarrior = {
-      enable = false;
-    };
+    taskwarrior = { enable = false; };
 
-    gitui = {
-      enable = false;
-    };
+    gitui = { enable = false; };
 
     vim = {
       enable = true;
@@ -241,9 +228,7 @@ in {
   };
 
   services = {
-    playerctld = {
-      enable = true;
-    };
+    playerctld = { enable = true; };
     # autorandr = {
     #   enable = true;
     #   ignoreLid = true;
