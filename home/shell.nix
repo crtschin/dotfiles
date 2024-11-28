@@ -4,7 +4,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   programs = {
     autorandr = {
       enable = true;
@@ -52,7 +53,10 @@
         imports = [
           {
             file = "dark-gruvbox.hjson";
-            luma = ["dark" "unknown"];
+            luma = [
+              "dark"
+              "unknown"
+            ];
           }
         ];
       };

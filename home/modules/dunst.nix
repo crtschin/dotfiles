@@ -3,8 +3,10 @@
   pkgs,
   inputs,
   ...
-}: let
-in {
+}:
+let
+in
+{
   services = {
     dunst = {
       enable = true;

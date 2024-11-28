@@ -1,10 +1,12 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ config
-, pkgs
-, ...
-}: {
+{
+  config,
+  pkgs,
+  ...
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -12,8 +14,15 @@
   ];
 
   nixpkgs.config.allowUnfree = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" "repl-flake" ];
-  nix.settings.trusted-users = [ "root" "crtschin" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+    "repl-flake"
+  ];
+  nix.settings.trusted-users = [
+    "root"
+    "crtschin"
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -124,7 +133,10 @@
   };
   services.blueman.enable = true;
   sound.enable = true;
-  boot.kernelModules = [ "snd-seq" "snd-rawmidi" ];
+  boot.kernelModules = [
+    "snd-seq"
+    "snd-rawmidi"
+  ];
 
   services.jack = {
     jackd.enable = true;
@@ -149,7 +161,11 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.crtschin = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "jackaudio" ];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "jackaudio"
+    ];
     shell = pkgs.fish;
   };
   programs.fish.enable = true;

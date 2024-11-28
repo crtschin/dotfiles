@@ -3,14 +3,16 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   polybarStart = ''
     for m in $(polybar --list-monitors | ${pkgs.coreutils}/bin/cut -d":" -f1); do
       MONITOR=$m polybar --reload main &
     done
   '';
   rgbTheme = pkgs.riceRgbColorPalette;
-in {
+in
+{
   services = {
     polybar = {
       enable = true;

@@ -1,10 +1,17 @@
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 let
-in {
+in
+{
   nixpkgs.overlays = [
     (self: super: {
       # Usage notice, install wrapped packages in `/usr/bin`
-      native_wrapper = program:
+      native_wrapper =
+        program:
         pkgs.writeShellScriptBin program.pname ''
           PATH=/usr/bin:${program}/bin ${program.pname} "$@"
         '';

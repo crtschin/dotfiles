@@ -1,4 +1,10 @@
-{ config, pkgs, lib, inputs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}:
 let
   nixGLOverlay = self: super: {
     picom = config.lib.nixGL.wrap super.picom;
@@ -6,11 +12,15 @@ let
     kitty = config.lib.nixGL.wrap super.kitty;
     alacritty = config.lib.nixGL.wrap super.alacritty;
   };
-in {
+in
+{
   nixpkgs.overlays = [ nixGLOverlay ];
   nixGL.packages = inputs.nixgl.packages;
   nixGL.defaultWrapper = "mesa";
   nixGL.offloadWrapper = "mesaPrime";
-  nixGL.installScripts = [ "mesa" "mesaPrime" ];
+  nixGL.installScripts = [
+    "mesa"
+    "mesaPrime"
+  ];
   home.packages = [ ];
 }

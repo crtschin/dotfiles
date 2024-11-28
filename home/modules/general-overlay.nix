@@ -3,7 +3,8 @@
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   overlay = self: super: {
     nix-direnv = self.stdenv.mkDerivation rec {
       pname = "nix-direnv";
@@ -29,10 +30,14 @@
         homepage = "https://github.com/nix-community/nix-direnv";
         license = licenses.mit;
         platforms = platforms.unix;
-        maintainers = with maintainers; [mic92 bbenne10];
+        maintainers = with maintainers; [
+          mic92
+          bbenne10
+        ];
       };
     };
   };
-in {
-  nixpkgs.overlays = [overlay];
+in
+{
+  nixpkgs.overlays = [ overlay ];
 }

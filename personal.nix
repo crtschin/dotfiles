@@ -1,8 +1,10 @@
-{ config
-, pkgs
-, inputs
-, ...
-}: {
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
+{
   imports = [
     ./common.nix
     ./home/modules/alacritty.nix
@@ -22,8 +24,14 @@
       glxinfo
       unzip
 
-      pavucontrol jack2 qjackctl jack2Full jack_capture
-      supercollider superdirt-start tidal
+      pavucontrol
+      jack2
+      qjackctl
+      jack2Full
+      jack_capture
+      supercollider
+      superdirt-start
+      tidal
 
       devenv
       process-compose
@@ -51,7 +59,7 @@
       vim-cool
       vim-airline
       vim-tidal
-      (nvim-treesitter.withPlugins (p: [p.haskell]))
+      (nvim-treesitter.withPlugins (p: [ p.haskell ]))
       vim-surround
     ];
   };

@@ -3,8 +3,10 @@
   pkgs,
   inputs,
   ...
-}: let
-  strPalette = with pkgs.rice.colorPalette;
+}:
+let
+  strPalette =
+    with pkgs.rice.colorPalette;
     pkgs.lib.nix-rice.palette.toRgbHex rec {
       inherit
         color0
@@ -30,7 +32,8 @@
         selection_foreground
         ;
     };
-in {
+in
+{
   programs = {
     kitty = {
       enable = true;
@@ -38,22 +41,20 @@ in {
         name = pkgs.rice.font.normal.name;
         size = 14;
       };
-      settings =
-        {
-          clear_all_shortcuts = true;
-          copy_on_select = true;
-          cursor_shape = "block";
-          disable_ligatures = "cursor";
-          enable_audio_bell = true;
-          scrollback_lines = 10000;
-          shell = "${pkgs.fish}/bin/fish";
-          shell_integration = "no-cursor";
-          strip_trailing_spaces = "always";
-          tab_bar_style = "powerline";
-          tab_powerline_style = "slanted";
-          visual_bell_duration = "0.5";
-        }
-        // strPalette;
+      settings = {
+        clear_all_shortcuts = true;
+        copy_on_select = true;
+        cursor_shape = "block";
+        disable_ligatures = "cursor";
+        enable_audio_bell = true;
+        scrollback_lines = 10000;
+        shell = "${pkgs.fish}/bin/fish";
+        shell_integration = "no-cursor";
+        strip_trailing_spaces = "always";
+        tab_bar_style = "powerline";
+        tab_powerline_style = "slanted";
+        visual_bell_duration = "0.5";
+      } // strPalette;
       keybindings = {
         "ctrl+c" = "copy_or_interrupt";
         "ctrl+shift+c" = "copy_to_clipboard";

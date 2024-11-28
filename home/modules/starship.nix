@@ -3,8 +3,10 @@
   pkgs,
   inputs,
   ...
-}: let
-in {
+}:
+let
+in
+{
   programs = {
     starship = {
       enable = true;
@@ -67,7 +69,7 @@ in {
           format = "\\[[$symbol$branch]($style)\\]";
           symbol = "🌱";
           truncation_length = 13;
-          ignore_branches = ["master"];
+          ignore_branches = [ "master" ];
           style = "bold yellow";
         };
 

@@ -3,8 +3,10 @@
   pkgs,
   inputs,
   ...
-}: let
-in {
+}:
+let
+in
+{
   programs = {
     alacritty = {
       enable = true;
@@ -45,8 +47,12 @@ in {
           size = 13;
         };
         mouse = {
-          double_click = {threshold = 300;};
-          triple_click = {threshold = 300;};
+          double_click = {
+            threshold = 300;
+          };
+          triple_click = {
+            threshold = 300;
+          };
           hide_when_typing = true;
         };
         selection = {
@@ -65,7 +71,7 @@ in {
         };
         shell = {
           program = "${pkgs.fish}/bin/fish";
-          args = ["--command=${pkgs.tmux}/bin/tmux"];
+          args = [ "--command=${pkgs.tmux}/bin/tmux" ];
         };
       };
     };

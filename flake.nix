@@ -37,7 +37,7 @@
     tidal = {
       url = "github:mitchmindtree/tidalcycles.nix";
     };
-    musnix  = {
+    musnix = {
       url = "github:musnix/musnix";
     };
 
@@ -59,58 +59,65 @@
       flake = false;
     };
   };
-  outputs = {
-    self,
-    nixpkgs,
-    home-manager,
-    nix-rice,
-    nixgl,
-    ...
-  } @ inputs: let
-    system = "x86_64-linux";
-    overlays = [nix-rice.overlays.default nixgl.overlay];
-    pkgs =
-      nixpkgs.legacyPackages.${system}
-      // {
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      nix-rice,
+      nixgl,
+      ...
+    }@inputs:
+    let
+      system = "x86_64-linux";
+      overlays = [
+        nix-rice.overlays.default
+        nixgl.overlay
+      ];
+      pkgs = nixpkgs.legacyPackages.${system} // {
         inherit overlays;
         config = {
           allowUnfree = true;
         };
       };
 
-    # Lifted from https://github.com/yoricksijsling/dotfiles
-    makeHomeConfiguration = {extraModules ? []}:
-      home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = {
-          # Pass all inputs to every module. It's a bit excessive, but allows us to easily refer
-          # to stuff like inputs.nixgl.
-          inherit inputs;
-          # The dotfiles argument always points to the flake root.
-          dotfiles = self;
+      # Lifted from https://github.com/yoricksijsling/dotfiles
+      makeHomeConfiguration =
+        {
+          extraModules ? [ ],
+        }:
+        home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          extraSpecialArgs = {
+            # Pass all inputs to every module. It's a bit excessive, but allows us to easily refer
+            # to stuff like inputs.nixgl.
+            inherit inputs;
+            # The dotfiles argument always points to the flake root.
+            dotfiles = self;
+          };
+          modules = [ ] ++ extraModules;
         };
-        modules = [] ++ extraModules;
-      };
-  in {
-    inherit makeHomeConfiguration;
+    in
+    {
+      inherit makeHomeConfiguration;
 
-    homeConfigurations = {
-      work = makeHomeConfiguration {extraModules = [./work.nix];};
-      personal = makeHomeConfiguration {extraModules = [./personal.nix];};
-    };
+      homeConfigurations = {
+        work = makeHomeConfiguration { extraModules = [ ./work.nix ]; };
+        personal = makeHomeConfiguration { extraModules = [ ./personal.nix ]; };
+      };
 
-    nixosConfigurations = {
-      personal = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./configuration.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-          }
-        ];
+      nixosConfigurations = {
+        personal = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+            }
+          ];
+        };
       };
     };
-  };
 }
