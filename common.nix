@@ -27,7 +27,6 @@ in
     packages = with pkgs; [
       # Desktop
       nitrogen
-      betterlockscreen
 
       # Sound
       pavucontrol
@@ -53,6 +52,7 @@ in
       ncdu
       du-dust
       fastfetch
+      brightnessctl
 
       # Debugging
       bpftrace
@@ -75,7 +75,6 @@ in
       nvd
 
       ffmpeg
-      flameshot
       gimp
       imagemagick
       simplescreenrecorder
@@ -128,6 +127,7 @@ in
       "/usr/share"
       "/usr/local/share"
     ];
+
     configFile."direnv/direnvrc".text = ''
       source ${pkgs.nix-direnv}/share/nix-direnv/direnvrc
     '';
@@ -160,6 +160,16 @@ in
         "--ignore-gpu-blocklist"
         "--enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoEncoder"
       ];
+    };
+
+    direnv = {
+      enable = true;
+      nix-direnv = {
+        enable = true;
+      };
+      config = {
+        hide_env_diff = true;
+      };
     };
 
     firefox = {
@@ -228,6 +238,10 @@ in
       enable = true;
     };
 
+    nix-your-shell = {
+      enable = true;
+    };
+
     taskwarrior = {
       enable = false;
     };
@@ -264,7 +278,8 @@ in
   # changes in each release.
   home.stateVersion = "21.05";
   home.sessionVariables = {
-    PAGER = "${pkgs.bat}/bin/bat";
+    PAGER = "${pkgs.bat}/bin/bat -S";
+    MANPAGER = "${pkgs.bat}/bin/bat -S -l man";
     EDITOR = "${pkgs.vscode}/bin/code";
     TERMINAL = "${pkgs.kitty}/bin/kitty";
     RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";

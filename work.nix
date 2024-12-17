@@ -30,14 +30,15 @@ in
         done
       '';
 
-      betterlockscreen = self.native_wrapper super.betterlockscreen;
-      i3lock = self.native_wrapper super.i3lock-color;
+      # betterlockscreen = self.native_wrapper super.betterlockscreen;
+      # i3lock-color = self.native_wrapper super.i3lock-color;
     })
   ];
 
   imports = [
     ./common.nix
     ./home/modules/nixgl.nix
+    ./home/modules/ssh.nix
     ./home/modules/general-overlay.nix
   ];
 
@@ -59,12 +60,18 @@ in
       graphviz
       gprof2dot
 
+      sqlite
+      sqldiff
+      # i3lock-color
+
       # Create .conf file in /etc/tmpfiles.d/ containing a symlink entry
       #     L+ /run/opengl-driver - - - - <nix-profile directory>
       #   Ensures drivers are symlinked nixos-style to make them accessible from
       #   nix-installed programs.
       mesa.drivers
       intel-media-driver
+
+      bluetui
 
       pkgs.haskellPackages.ghcprofview
       # pkgs.haskellPackages.hpview

@@ -20,11 +20,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-direnv = {
-      url = "github:nix-community/nix-direnv/2.3.0";
-      inputs.flake-utils.follows = "flake-utils";
-    };
-
     nixgl = {
       url = "github:guibou/nixGL";
       inputs.flake-utils.follows = "flake-utils";
@@ -43,6 +38,16 @@
 
     gruvbox-tmTheme = {
       url = "github:subnut/gruvbox-tmTheme";
+      flake = false;
+    };
+
+    wofi-themes = {
+      url = "github:joao-vitor-sr/wofi-themes-collection/540e247819fbf8116d73e4fd2e4b481a25d81353";
+      flake = false;
+    };
+
+    Pipshag_dotfiles_gruvbox = {
+      url = "github:Pipshag/dotfiles_gruvbox/5a9ffe19953bde48bb42a4164fb43eb915de0aeb";
       flake = false;
     };
 

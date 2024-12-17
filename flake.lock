@@ -1,9 +1,26 @@
 {
   "nodes": {
+    "Pipshag_dotfiles_gruvbox": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1630769988,
+        "narHash": "sha256-COWRYU9z+RcKra6ZzHxp56oHB18sSNr8vxY5nTzfjf0=",
+        "owner": "Pipshag",
+        "repo": "dotfiles_gruvbox",
+        "rev": "5a9ffe19953bde48bb42a4164fb43eb915de0aeb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Pipshag",
+        "repo": "dotfiles_gruvbox",
+        "rev": "5a9ffe19953bde48bb42a4164fb43eb915de0aeb",
+        "type": "github"
+      }
+    },
     "channableFishFile": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-tXFQsxV/TNvBlGW9VNHZG2yGIVouy5mHDZkCRlOEEvA=",
+        "narHash": "sha256-PsUrg7URQeETihw6eEJLgnK+AftuG1UrlUbzTKFgVsk=",
         "type": "file",
         "url": "file:///home/curtis/dotfiles/.config/channable.fish"
       },
@@ -189,11 +206,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1732793095,
-        "narHash": "sha256-6TrknJ8CpvSSF4gviQSeD+wyj3siRcMvdBKhOXkEMKU=",
+        "lastModified": 1733133928,
+        "narHash": "sha256-gU40r9AfpIr4eq+0noM8yH1Hxf+EA3dqfIpFtQl8Y1E=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "2f7739d01080feb4549524e8f6927669b61c6ee3",
+        "rev": "873e39d5f4437d2f3ab06881fea8e63e45e1d011",
         "type": "github"
       },
       "original": {
@@ -233,28 +250,6 @@
       "original": {
         "owner": "musnix",
         "repo": "musnix",
-        "type": "github"
-      }
-    },
-    "nix-direnv": {
-      "inputs": {
-        "flake-utils": [
-          "flake-utils"
-        ],
-        "nixpkgs": "nixpkgs_2"
-      },
-      "locked": {
-        "lastModified": 1681572461,
-        "narHash": "sha256-Y9Yf/RJvfoFKS4ptVhPc9X0tQUPWSSxkS11r7wGge+8=",
-        "owner": "nix-community",
-        "repo": "nix-direnv",
-        "rev": "2e583c8d42f38edaa6cae0bce43729fbd476ec6e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "ref": "2.3.0",
-        "repo": "nix-direnv",
         "type": "github"
       }
     },
@@ -353,22 +348,6 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1681272286,
-        "narHash": "sha256-9X5p+gwYrowgbsRgkf14HFI0fkr6UikuwRIQAMlF1yI=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "6b70761ea8c896aff8994eb367d9526686501860",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_3": {
-      "locked": {
         "lastModified": 1681303793,
         "narHash": "sha256-JEdQHsYuCfRL2PICHlOiH/2ue3DwoxUX7DJ6zZxZXFk=",
         "owner": "NixOS",
@@ -383,13 +362,13 @@
         "type": "github"
       }
     },
-    "nixpkgs_4": {
+    "nixpkgs_3": {
       "locked": {
-        "lastModified": 1732521221,
-        "narHash": "sha256-2ThgXBUXAE1oFsVATK1ZX9IjPcS4nKFOAjhPNKuiMn0=",
+        "lastModified": 1733015953,
+        "narHash": "sha256-t4BBVpwG9B4hLgc6GUBuj3cjU7lP/PJfpTHuSqE+crk=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "4633a7c72337ea8fd23a4f2ba3972865e3ec685d",
+        "rev": "ac35b104800bff9028425fec3b6e8a41de2bbfff",
         "type": "github"
       },
       "original": {
@@ -398,7 +377,7 @@
         "type": "indirect"
       }
     },
-    "nixpkgs_5": {
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1722813957,
         "narHash": "sha256-IAoYyYnED7P8zrBFMnmp7ydaJfwTnwcnqxUElC1I26Y=",
@@ -422,7 +401,7 @@
           "flake-utils"
         ],
         "gitignore": "gitignore",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_2",
         "nixpkgs-stable": "nixpkgs-stable"
       },
       "locked": {
@@ -441,6 +420,7 @@
     },
     "root": {
       "inputs": {
+        "Pipshag_dotfiles_gruvbox": "Pipshag_dotfiles_gruvbox",
         "channableFishFile": "channableFishFile",
         "fish-abbreviation-tips": "fish-abbreviation-tips",
         "fish-plugin-git": "fish-plugin-git",
@@ -449,11 +429,11 @@
         "gruvbox-tmTheme": "gruvbox-tmTheme",
         "home-manager": "home-manager",
         "musnix": "musnix",
-        "nix-direnv": "nix-direnv",
         "nix-rice": "nix-rice",
         "nixgl": "nixgl",
-        "nixpkgs": "nixpkgs_4",
-        "tidal": "tidal"
+        "nixpkgs": "nixpkgs_3",
+        "tidal": "tidal",
+        "wofi-themes": "wofi-themes"
       }
     },
     "superdirt-src": {
@@ -505,7 +485,7 @@
     "tidal": {
       "inputs": {
         "dirt-samples-src": "dirt-samples-src",
-        "nixpkgs": "nixpkgs_5",
+        "nixpkgs": "nixpkgs_4",
         "superdirt-src": "superdirt-src",
         "tidal-src": "tidal-src",
         "vim-tidal-src": "vim-tidal-src",
@@ -571,6 +551,23 @@
       "original": {
         "owner": "supercollider-quarks",
         "repo": "vowel",
+        "type": "github"
+      }
+    },
+    "wofi-themes": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1694398570,
+        "narHash": "sha256-Pv23apL107K2DeWYBGuZz4IyZkqS0+A7n2yAZEpdbCw=",
+        "owner": "joao-vitor-sr",
+        "repo": "wofi-themes-collection",
+        "rev": "540e247819fbf8116d73e4fd2e4b481a25d81353",
+        "type": "github"
+      },
+      "original": {
+        "owner": "joao-vitor-sr",
+        "repo": "wofi-themes-collection",
+        "rev": "540e247819fbf8116d73e4fd2e4b481a25d81353",
         "type": "github"
       }
     }

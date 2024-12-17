@@ -1,22 +1,22 @@
 { pkgs, ... }:
 {
-  systemd.user.services.update-lock-screens = {
-    Unit = {
-      Description = "Update lock screens";
-    };
+  # systemd.user.services.update-lock-screens = {
+  #   Unit = {
+  #     Description = "Update lock screens";
+  #   };
 
-    Install = {
-      WantedBy = [ "timers.target" ];
-    };
+  #   Install = {
+  #     WantedBy = [ "timers.target" ];
+  #   };
 
-    Timer = {
-      OnBootSec = "5min";
-    };
+  #   Timer = {
+  #     OnBootSec = "1min";
+  #   };
 
-    Service = {
-      ExecStart = "${pkgs.betterlockscreen}/bin/betterlockscreen -u %h/Pictures/Wallpapers";
-    };
-  };
+  #   Service = {
+  #     ExecStart = "${pkgs.betterlockscreen}/bin/betterlockscreen -u %h/Pictures/Wallpapers";
+  #   };
+  # };
 
   # systemd.user.services.pgadmin4 = {
   #   Unit = {

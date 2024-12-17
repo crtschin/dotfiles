@@ -175,6 +175,11 @@
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
 
+  environment.pathsToLink = [
+    "/share/xdg-desktop-portal"
+    "/share/applications"
+  ];
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   # environment.systemPackages = [
