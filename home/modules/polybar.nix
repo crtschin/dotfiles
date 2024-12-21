@@ -25,14 +25,16 @@ in
           ];
           modules-left = [
             "sway/workspaces"
-            "wlr/taskbar"
+            # "wlr/taskbar"
           ];
           modules-center = [
-            "clock"
+            "mpris"
             "custom/separator"
             "sway/window"
           ];
           modules-right = [
+            "clock"
+            "custom/separator"
             "pulseaudio"
             "custom/separator"
             "cpu"
@@ -58,6 +60,25 @@ in
             };
             "scroll-step" = 1;
             "on-click" = "pavucontrol";
+          };
+          mpris = {
+            format = "{player_icon} {dynamic}";
+            format-paused = "{status_icon} <i>{dynamic}</i>";
+            dynamic-order = [
+              "title"
+              "artist"
+            ];
+            player-icons = {
+              default = "▶";
+              mpv = "🎵";
+            };
+            status-icons = {
+              paused = "⏸";
+            };
+            ignored-players = [
+              "firefox"
+              "brave"
+            ];
           };
           "sway/workspaces" = {
             disable-scroll = true;

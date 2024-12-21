@@ -11,6 +11,7 @@ let
     brave = config.lib.nixGL.wrap super.brave;
     kitty = config.lib.nixGL.wrap super.kitty;
     alacritty = config.lib.nixGL.wrap super.alacritty;
+    swayfx = config.lib.nixGL.wrap super.swayfx;
   };
 in
 {

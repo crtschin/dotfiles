@@ -38,7 +38,6 @@ in
   imports = [
     ./common.nix
     ./home/modules/nixgl.nix
-    ./home/modules/ssh.nix
     ./home/modules/general-overlay.nix
   ];
 
@@ -97,7 +96,7 @@ in
     };
 
     fish = {
-      interactiveShellInit = ''
+      shellInitLast = ''
         begin
           set fish_greeting
           set __done_notify_sound 1

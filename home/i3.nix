@@ -148,23 +148,52 @@ in
           ];
         }
         {
-          profile.name = "docked_dual";
-          profile.outputs = [
-            {
-              criteria = "eDP-1";
-              status = "disable";
-            }
-            {
-              criteria = "Dell Inc. DELL U2719D 74RRT13";
-              position = "0,0";
-              mode = "2560x1440";
-            }
-            {
-              criteria = "Dell Inc. DELL U2717D J0XYN99BA3TS";
-              position = "2560,0";
-              mode = "2560x1440";
-            }
-          ];
+          profile = {
+            name = "docked_dual";
+            outputs = [
+              {
+                criteria = "eDP-1";
+                status = "disable";
+              }
+              {
+                criteria = "Dell Inc. DELL U2719D 74RRT13";
+                position = "0,0";
+                mode = "2560x1440";
+              }
+              {
+                criteria = "Dell Inc. DELL U2717D J0XYN99BA3TS";
+                position = "2560,0";
+                mode = "2560x1440";
+              }
+            ];
+            exec = [
+              "exec swaymsg workspace 10, move workspace to \"Dell Inc. DELL U2717D J0XYN99BA3TS\""
+              "exec swaymsg workspace 1, move workspace to \"Dell Inc. DELL U2719D 74RRT13\""
+              "exec swaymsg workspace 2, move workspace to \"Dell Inc. DELL U2719D 74RRT13\""
+            ];
+          };
+        }
+        {
+          profile = {
+            name = "docked_left";
+            outputs = [
+              {
+                criteria = "eDP-1";
+                position = "0,0";
+                mode = "1920x1200";
+              }
+              {
+                criteria = "Dell Inc. DELL SE3223Q CS1SKK3";
+                position = "1920,0";
+                mode = "2560x1440";
+              }
+            ];
+            exec = [
+              "exec swaymsg workspace 10, move workspace to \"eDP-1\""
+              "exec swaymsg workspace 1, move workspace to \"Dell Inc. DELL SE3223Q CS1SKK3\""
+              "exec swaymsg workspace 2, move workspace to \"Dell Inc. DELL SE3223Q CS1SKK3\""
+            ];
+          };
         }
       ];
     };
@@ -208,17 +237,19 @@ in
       };
       sway = {
         enable = enableWayland;
-        package = pkgs.sway;
-        checkConfig = true;
-        systemd.enable = true;
+        package = pkgs.swayfx;
+        checkConfig = false;
+        # systemd.enable = true;
         wrapperFeatures = {
           gtk = true;
         };
         extraConfig = ''
           exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+          exec kitty
+          exec brave
 
           ${i3ColorTheme}
-          smart_gaps on
+          # smart_gaps on
           gaps inner 10
 
           ${i3Workspaces}
@@ -229,19 +260,18 @@ in
         config = {
           assigns = {
             "10: terminal" = [
-              { class = "kitty"; }
+              { app_id = "kitty"; }
             ];
             "9: music" = [
               { class = "Spotify"; }
             ];
             "2: web" = [
               { class = "Firefox"; }
-              { class = "Brave"; }
+              { instance = "brave-browser"; }
             ];
             "1: code" = [
               {
-                class = "Code";
-                window_role = "About";
+                instance = "code";
               }
             ];
           };
@@ -275,22 +305,6 @@ in
           bars = [ ];
           modifier = mod;
           terminal = "kitty";
-        };
-      };
-    };
-  };
-
-  xdg = {
-    portal = {
-      enable = enableWayland;
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-wlr
-      ];
-      config = {
-        common = {
-          default = [
-            "wlr"
-          ];
         };
       };
     };
