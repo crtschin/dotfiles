@@ -4,6 +4,11 @@
   inputs,
   ...
 }:
+let
+  overlay = self: super: {
+    useWayland = false;
+  };
+in
 {
   imports = [
     ./common.nix
@@ -11,7 +16,10 @@
     ./home/modules/general-overlay.nix
   ];
 
-  nixpkgs.overlays = [ inputs.tidal.overlays.default ];
+  nixpkgs.overlays = [
+    inputs.tidal.overlays.default
+    overlay
+  ];
   home = rec {
     username = "crtschin";
     homeDirectory = "/home/${username}";

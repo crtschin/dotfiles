@@ -6,7 +6,7 @@
   ...
 }:
 let
-  enableWayland = true;
+  enableWayland = pkgs.useWayland;
   mod = "Mod4";
   rgbTheme = pkgs.riceRgbColorPalette;
   toLockColor = color: lib.strings.removePrefix "#" color;
