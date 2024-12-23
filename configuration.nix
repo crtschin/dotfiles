@@ -92,8 +92,8 @@
 
   # Video settings
   services.xserver.videoDrivers = [ "modesetting" ];
-  hardware.opengl.enable = true;
-  hardware.opengl.extraPackages = [ pkgs.mesa.drivers ];
+  hardware.graphics.enable = true;
+  hardware.graphics.extraPackages = [ pkgs.mesa.drivers ];
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
   hardware.nvidia.modesetting.enable = true;
 
@@ -118,7 +118,7 @@
   # Enable sound.
   hardware = {
     pulseaudio = {
-      enable = true;
+      enable = false;
       extraModules = [ ];
       package = pkgs.pulseaudio.override { jackaudioSupport = true; };
     };
@@ -197,6 +197,7 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
+  programs.seahorse.enable = true;
   services.openssh.enable = true;
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.lightdm.enableGnomeKeyring = true;

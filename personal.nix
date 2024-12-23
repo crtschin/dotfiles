@@ -25,13 +25,8 @@
       unzip
 
       pavucontrol
-      jack2
-      qjackctl
-      jack2Full
-      jack_capture
-      supercollider
-      superdirt-start
-      tidal
+      # jack2 qjackctl jack2Full jack_capture
+      # supercollider superdirt-start tidal
 
       devenv
       process-compose
@@ -64,30 +59,13 @@
     ];
   };
 
-  gtk = {
-    enable = true;
-    font = {
-      package = pkgs.rice.font.monospace.package;
-      name = pkgs.rice.font.monospace.name;
-      size = 12;
-    };
-    theme = {
-      name = "gruvbox-dark";
-      package = pkgs.gruvbox-dark-gtk;
-    };
-    iconTheme = {
-      name = "gruvbox-dark";
-      package = pkgs.gruvbox-dark-icons-gtk;
-    };
-  };
-
   services = {
     random-background = {
       enable = true;
       imageDirectory = "%h/backgrounds";
     };
-    picom = {
-      enable = false;
+    ssh-agent = {
+      enable = true;
     };
   };
 

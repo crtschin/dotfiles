@@ -72,7 +72,7 @@ in
       plugins = [
         {
           name = "plugin-git";
-          src = inputs.fish-plugin-git;
+          src = pkgs.fishPlugins.plugin-git.src;
         }
         {
           name = "fish-puffer";
