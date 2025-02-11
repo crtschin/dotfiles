@@ -69,6 +69,66 @@ let
     workspace 8 output secondary
     workspace 9 output secondary
   '';
+  fixMonitorName = monitor: lib.strings.toLower (builtins.replaceStrings [ " " ] [ "_" ] monitor);
+  createLeftDockedProfile =
+    monitor:
+    let
+      monitor' = fixMonitorName monitor;
+    in
+    {
+      profile = {
+        name = "docked_left_${monitor'}";
+        outputs = [
+          {
+            criteria = "eDP-1";
+            position = "0,0";
+            mode = "1920x1200";
+          }
+          {
+            criteria = monitor;
+            position = "1920,0";
+            mode = "2560x1440";
+          }
+        ];
+        exec = [
+          "exec swaymsg workspace 10, move workspace to \"eDP-1\""
+          "exec swaymsg workspace 1, move workspace to \"'${monitor}'\""
+          "exec swaymsg workspace 2, move workspace to \"'${monitor}'\""
+        ];
+      };
+    };
+  createDualDockedProfile =
+    left: right:
+    let
+      left' = fixMonitorName left;
+      right' = fixMonitorName right;
+    in
+    {
+      profile = {
+        name = "docked_left_${left'}_${right'}";
+        outputs = [
+          {
+            criteria = "eDP-1";
+            status = "disable";
+          }
+          {
+            criteria = left;
+            position = "0,0";
+            mode = "1920x1080";
+          }
+          {
+            criteria = right;
+            position = "1920,0";
+            mode = "1920x1080";
+          }
+        ];
+        exec = [
+          "exec swaymsg workspace 10, move workspace to \"eDP-1\""
+          "exec swaymsg workspace 1, move workspace to \"'${left}'\""
+          "exec swaymsg workspace 2, move workspace to \"'${right}'\""
+        ];
+      };
+    };
 in
 {
   home.packages =
@@ -119,83 +179,71 @@ in
     };
     kanshi = {
       enable = enableWayland;
-      settings = [
-        {
-          profile.name = "undocked";
-          profile.outputs = [
-            {
-              criteria = "eDP-1";
-              status = "enable";
-              mode = "1920x1200";
-            }
-          ];
-        }
-        {
-          profile.name = "home";
-          profile.outputs = [
-            {
-              criteria = "eDP-1";
-              status = "enable";
-              mode = "1920x1200";
-              position = "1920,520";
-            }
-            {
-              criteria = "AOC 2460G5 F54GABA004914";
-              status = "enable";
-              mode = "1920x1080";
-              position = "0,0";
-            }
-          ];
-        }
-        {
-          profile = {
-            name = "docked_dual";
-            outputs = [
+      settings =
+        [
+          {
+            profile.name = "undocked";
+            profile.outputs = [
               {
                 criteria = "eDP-1";
-                status = "disable";
-              }
-              {
-                criteria = "Dell Inc. DELL U2719D 74RRT13";
-                position = "0,0";
-                mode = "2560x1440";
-              }
-              {
-                criteria = "Dell Inc. DELL U2717D J0XYN99BA3TS";
-                position = "2560,0";
-                mode = "2560x1440";
-              }
-            ];
-            exec = [
-              "exec swaymsg workspace 10, move workspace to \"Dell Inc. DELL U2717D J0XYN99BA3TS\""
-              "exec swaymsg workspace 1, move workspace to \"Dell Inc. DELL U2719D 74RRT13\""
-              "exec swaymsg workspace 2, move workspace to \"Dell Inc. DELL U2719D 74RRT13\""
-            ];
-          };
-        }
-        {
-          profile = {
-            name = "docked_left";
-            outputs = [
-              {
-                criteria = "eDP-1";
-                position = "0,0";
+                status = "enable";
                 mode = "1920x1200";
               }
+            ];
+          }
+          {
+            profile.name = "home";
+            profile.outputs = [
               {
-                criteria = "Dell Inc. DELL SE3223Q CS1SKK3";
-                position = "1920,0";
-                mode = "2560x1440";
+                criteria = "eDP-1";
+                status = "enable";
+                mode = "1920x1200";
+                position = "1920,520";
+              }
+              {
+                criteria = "AOC 2460G5 0x00001332";
+                status = "enable";
+                mode = "1920x1080";
+                position = "0,0";
               }
             ];
-            exec = [
-              "exec swaymsg workspace 10, move workspace to \"eDP-1\""
-              "exec swaymsg workspace 1, move workspace to \"Dell Inc. DELL SE3223Q CS1SKK3\""
-              "exec swaymsg workspace 2, move workspace to \"Dell Inc. DELL SE3223Q CS1SKK3\""
-            ];
-          };
-        }
-      ];
+          }
+          {
+            profile = {
+              name = "docked_dual";
+              outputs = [
+                {
+                  criteria = "eDP-1";
+                  status = "disable";
+                }
+                {
+                  criteria = "Dell Inc. DELL U2719D 74RRT13";
+                  position = "0,0";
+                  mode = "2560x1440";
+                }
+                {
+                  criteria = "Dell Inc. DELL U2717D J0XYN99BA3TS";
+                  position = "2560,0";
+                  mode = "2560x1440";
+                }
+              ];
+              exec = [
+                "exec swaymsg workspace 10, move workspace to \"Dell Inc. DELL U2717D J0XYN99BA3TS\""
+                "exec swaymsg workspace 1, move workspace to \"Dell Inc. DELL U2719D 74RRT13\""
+                "exec swaymsg workspace 2, move workspace to \"Dell Inc. DELL U2719D 74RRT13\""
+              ];
+            };
+          }
+          (createDualDockedProfile "AOC 2460G5 F54GABA004914" "Samsung Electric Company C27HG7x HTHJ700995")
+        ]
+        ++ (builtins.map createLeftDockedProfile [
+          "Iiyama North America PL3288UH 1169612412790"
+          "Iiyama North America PL3288UH 1169612412785"
+          "Dell Inc. DELL SE3223Q DH6SKK3"
+          "Dell Inc. DELL SE3223Q 7S1SKK3"
+          "Dell Inc. DELL SE3223Q CS1SKK3"
+          "Dell Inc. DELL SE3223Q D02SKK3"
+        ]);
     };
     screen-locker = {
       enable = false;

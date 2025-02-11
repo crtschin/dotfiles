@@ -52,7 +52,8 @@ in
       mermaid-cli
       pgcli
       # pgadmin4
-      solaar
+      # solaar
+      ltunify
       jmeter
       _1password
 
