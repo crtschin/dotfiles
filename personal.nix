@@ -69,7 +69,7 @@ in
 
   services = {
     random-background = {
-      enable = true;
+      # enable = true;
       imageDirectory = "%h/backgrounds";
     };
     ssh-agent = {

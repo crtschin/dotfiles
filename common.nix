@@ -10,7 +10,7 @@ in
   nixpkgs.overlays = [ (import ./home/overlays/rice.nix) ];
 
   imports = [
-    ./home/i3.nix
+    ./home/wm.nix
     ./home/shell.nix
     ./home/services.nix
     ./home/modules/fish.nix
@@ -278,6 +278,7 @@ in
   # changes in each release.
   home.stateVersion = "21.05";
   home.sessionVariables = {
+    XDG_SESSION_TYPE = "wayland";
     PAGER = "${pkgs.bat}/bin/bat -S";
     MANPAGER = "${pkgs.bat}/bin/bat -S -l man";
     EDITOR = "${pkgs.vscode}/bin/code";

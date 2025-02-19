@@ -42,6 +42,7 @@ in
         kdiff = "kitty +kitten diff -o pygments_style=gruvbox-dark";
         kssh = "kitty +kitten ssh";
         kicat = "kitty +kitten icat";
+        vscode = "code --ozone-platform=wayland";
         copy = "xclip -sel clip";
         psql = "pgcli";
         z = "j";
