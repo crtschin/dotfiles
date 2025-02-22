@@ -6,7 +6,7 @@
 }:
 let
   overlay = self: super: {
-    useWayland = false;
+    useWayland = true;
   };
 in
 {
@@ -72,9 +72,8 @@ in
       # enable = true;
       imageDirectory = "%h/backgrounds";
     };
-    ssh-agent = {
-      enable = true;
-    };
+    ssh-agent.enable = true;
+    gnome-keyring.enable = true;
   };
 
   programs = {

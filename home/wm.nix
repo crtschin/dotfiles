@@ -187,7 +187,7 @@ in
               {
                 criteria = "eDP-1";
                 status = "enable";
-                mode = "1920x1200";
+                mode = "1920x1080";
               }
             ];
           }
@@ -197,7 +197,7 @@ in
               {
                 criteria = "eDP-1";
                 status = "enable";
-                mode = "1920x1200";
+                mode = "1920x1080";
                 position = "1920,520";
               }
               {
@@ -231,6 +231,18 @@ in
                 "exec swaymsg workspace 10, move workspace to \"Dell Inc. DELL U2717D J0XYN99BA3TS\""
                 "exec swaymsg workspace 1, move workspace to \"Dell Inc. DELL U2719D 74RRT13\""
                 "exec swaymsg workspace 2, move workspace to \"Dell Inc. DELL U2719D 74RRT13\""
+              ];
+            };
+          }
+          {
+            profile = {
+              name = "docked_left";
+              outputs = [
+                {
+                  criteria = "eDP-1";
+                  position = "0,0";
+                  mode = "1920x1080";
+                }
               ];
             };
           }
@@ -333,9 +345,9 @@ in
           gaps inner 10
 
           ${i3Workspaces}
-          bar {
-            swaybar_command waybar
-          }
+          # bar {
+          #   swaybar_command waybar
+          # }
         '';
         config = {
           assigns = {

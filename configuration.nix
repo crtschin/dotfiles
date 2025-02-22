@@ -17,7 +17,6 @@
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
-    "repl-flake"
   ];
   nix.settings.trusted-users = [
     "root"
@@ -78,17 +77,20 @@
     desktopManager = {
       xterm.enable = false;
       xfce = {
-        enable = true;
+        enable = false;
         noDesktop = true;
         enableXfwm = false;
       };
     };
+    displayManager.gdm.enable = false;
+    displayManager.gdm.wayland = false;
     windowManager.i3 = {
-      enable = true;
+      enable = false;
       package = pkgs.i3-gaps;
     };
   };
-  services.displayManager.defaultSession = "xfce+i3";
+  services.displayManager.defaultSession = "sway";
+  services.displayManager.sddm.enable = true;
 
   # Video settings
   services.xserver.videoDrivers = [ "modesetting" ];
@@ -116,12 +118,12 @@
   ];
 
   # Enable sound.
+  services.pulseaudio = {
+    enable = false;
+    extraModules = [ ];
+    package = pkgs.pulseaudio.override { jackaudioSupport = true; };
+  };
   hardware = {
-    pulseaudio = {
-      enable = false;
-      extraModules = [ ];
-      package = pkgs.pulseaudio.override { jackaudioSupport = true; };
-    };
     bluetooth = {
       enable = true;
       settings = {
@@ -132,7 +134,6 @@
     };
   };
   services.blueman.enable = true;
-  sound.enable = true;
   boot.kernelModules = [
     "snd-seq"
     "snd-rawmidi"
@@ -168,6 +169,7 @@
     ];
     shell = pkgs.fish;
   };
+  programs.sway.enable = true;
   programs.fish.enable = true;
   programs.steam = {
     enable = true;
@@ -200,7 +202,11 @@
   programs.seahorse.enable = true;
   services.openssh.enable = true;
   services.gnome.gnome-keyring.enable = true;
-  security.pam.services.lightdm.enableGnomeKeyring = true;
+  security = {
+    pam.services.lightdm.enableGnomeKeyring = true;
+    pam.services.sddm.enableGnomeKeyring = true;
+    polkit.enable = true;
+  };
   programs.ssh.startAgent = true;
 
   # Open ports in the firewall.

@@ -67,6 +67,7 @@
   outputs =
     {
       self,
+      flake-utils,
       nixpkgs,
       home-manager,
       nix-rice,
@@ -124,5 +125,12 @@
           ];
         };
       };
-    };
+    }
+    // flake-utils.lib.eachDefaultSystem (
+      system: with pkgs; {
+        devShells.default = mkShell {
+          buildInputs = [ nixfmt-rfc-style ];
+        };
+      }
+    );
 }
