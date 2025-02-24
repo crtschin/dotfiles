@@ -25,12 +25,13 @@ in
           set sponge_purge_only_on_exit true
           set fish_greeting
           set __done_notify_sound 1
+          set --export SHELL ${pkgs.fish}/bin/fish
         end
 
         function __direnv_export_eval --on-event fish_prompt
             begin
                 begin
-                    ${pkgs.direnv}/bin/direnv export fish
+                    ${pkgs.direnv}/bin/direnv export ${pkgs.fish}/bin/fish
                 end 1>| source
             end 2>| egrep -v -e "^direnv: export"
         end

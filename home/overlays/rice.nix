@@ -15,7 +15,7 @@ let
     in
     "${self.kitty-themes}/share/kitty-themes/themes/${name}.conf";
 in
-{
+rec {
   # Modified from the following to change the path to the theme
   # https://github.com/bertof/nix-rice/blob/main/kitty-themes.nix
   kittyParseUtils = rec {
@@ -44,7 +44,7 @@ in
     riceKittyTheme = getThemeByName "GruvboxMaterialDarkSoft";
   };
 
-  riceRgbColorPalette =
+  riceColorPalette =
     with self.rice.colorPalette;
     self.lib.nix-rice.palette.toRgbHex rec {
       inherit
@@ -69,12 +69,19 @@ in
         cursor
         selection_background
         selection_foreground
+        ;
+    };
+  riceExtendedColorPalette =
+    with self.rice.colorPalette;
+    (self.lib.nix-rice.palette.toRgbHex rec {
+      inherit
         normal
         bright
         dark
         primary
         ;
-    };
+    })
+    // riceColorPalette;
   rice = with self.kittyParseUtils.riceKittyTheme; rec {
     colorPalette = rec {
       normal = palette.defaultPalette // {
@@ -100,9 +107,9 @@ in
       dark = palette.darken 10 normal;
       primary = {
         inherit background foreground;
-        theme = riceKittyTheme;
-        bright_foreground = color.brighten 10 riceKittyTheme.foreground;
-        dim_foreground = color.darken 10 riceKittyTheme.foreground;
+        theme = self.kittyParseUtils.riceKittyTheme;
+        bright_foreground = color.brighten 10 self.kittyParseUtils.riceKittyTheme.foreground;
+        dim_foreground = color.darken 10 self.kittyParseUtils.riceKittyTheme.foreground;
       };
     } // self.kittyParseUtils.riceKittyTheme;
     font = {

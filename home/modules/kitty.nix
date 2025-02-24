@@ -5,33 +5,7 @@
   ...
 }:
 let
-  strPalette =
-    with pkgs.rice.colorPalette;
-    pkgs.lib.nix-rice.palette.toRgbHex rec {
-      inherit
-        color0
-        color1
-        color2
-        color3
-        color4
-        color5
-        color6
-        color7
-        color8
-        color9
-        color10
-        color11
-        color12
-        color13
-        color14
-        color15
-        background
-        foreground
-        cursor
-        selection_background
-        selection_foreground
-        ;
-    };
+
 in
 {
   programs = {
@@ -54,7 +28,7 @@ in
         tab_bar_style = "powerline";
         tab_powerline_style = "slanted";
         visual_bell_duration = "0.5";
-      } // strPalette;
+      } // pkgs.riceColorPalette;
       keybindings = {
         "ctrl+c" = "copy_or_interrupt";
         "ctrl+shift+c" = "copy_to_clipboard";

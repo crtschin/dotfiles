@@ -97,7 +97,7 @@ in
         function __direnv_export_eval --on-event fish_prompt
             begin
                 begin
-                    ${pkgs.direnv}/bin/direnv export fish
+                    ${pkgs.direnv}/bin/direnv export ${pkgs.fish}/bin/fish
                 end 1>| source
             end 2>| egrep -v -e "^direnv: export"
         end

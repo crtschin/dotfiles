@@ -15,6 +15,7 @@ in
     ./home/services.nix
     ./home/modules/fish.nix
     ./home/modules/dunst.nix
+    ./home/modules/ghostty.nix
     ./home/modules/kitty.nix
     ./home/modules/polybar.nix
     ./home/modules/starship.nix

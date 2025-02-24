@@ -8,7 +8,7 @@
 let
   enableWayland = pkgs.useWayland;
   mod = "Mod4";
-  rgbTheme = pkgs.riceRgbColorPalette;
+  rgbTheme = pkgs.riceExtendedColorPalette;
   toLockColor = color: lib.strings.removePrefix "#" color;
   i3ColorTheme = ''
     # set primary gruvbox colorscheme colors

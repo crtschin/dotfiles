@@ -10,7 +10,7 @@ let
       MONITOR=$m polybar --reload main &
     done
   '';
-  rgbTheme = pkgs.riceRgbColorPalette;
+  rgbTheme = pkgs.riceExtendedColorPalette;
 in
 {
   programs = {

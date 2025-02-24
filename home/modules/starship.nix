@@ -10,6 +10,7 @@ in
   programs = {
     starship = {
       enable = true;
+      enableInteractive = true;
       settings = {
         aws = {
           disabled = true;
