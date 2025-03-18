@@ -86,7 +86,6 @@ in
       spotifyd
       vscode
       hivemind
-      okular
 
       # Customization
       dejavu_fonts
