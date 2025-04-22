@@ -94,7 +94,7 @@ in
               {
                 criteria = "eDP-1";
                 status = "enable";
-                mode = "1920x1080";
+                mode = "1920x1200";
               }
             ];
           }
@@ -119,6 +119,12 @@ in
           (createDualDockedIdenticalProfile {
             left_criteria = "Dell Inc. DELL U2717D J0XYN989CU9S";
             right_criteria = "Dell Inc. DELL U2719D 7RRBC23";
+            width = 2560;
+            height = 1440;
+          })
+          (createDualDockedIdenticalProfile {
+            left_criteria = "Dell Inc. DELL U2719D D8F5SS2";
+            right_criteria = "Dell Inc. DELL U2719D F2KFV13";
             width = 2560;
             height = 1440;
           })
@@ -149,6 +155,7 @@ in
           "Dell Inc. DELL SE3223Q CS1SKK3"
           "Dell Inc. DELL SE3223Q D02SKK3"
           "Dell Inc. DELL SE3223Q 7V1SKK3"
+          "Dell Inc. DELL SE3223Q D3XRKK3"
         ]);
     };
   };

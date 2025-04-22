@@ -1,5 +1,11 @@
 { pkgs, ... }:
 {
+  services.home-manager.autoExpire = {
+    enable = true;
+    store = {
+      cleanup = true;
+    };
+  };
   # systemd.user.services.update-lock-screens = {
   #   Unit = {
   #     Description = "Update lock screens";

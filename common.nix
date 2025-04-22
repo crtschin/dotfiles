@@ -239,6 +239,13 @@ in
       enable = true;
     };
 
+    jqp = {
+      enable = true;
+      settings = {
+        theme = "gruvbox";
+      };
+    };
+
     nix-your-shell = {
       enable = true;
     };
