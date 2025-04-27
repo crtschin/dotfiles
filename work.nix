@@ -15,6 +15,7 @@ let
         userEmail = "curtis.chinjensem@channable.com";
         signingKey = "/home/curtis/.ssh/id_ed25519.pub";
       };
+      wm = "sway";
     };
   };
 in
