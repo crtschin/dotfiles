@@ -1,6 +1,9 @@
 self: super:
 with self.lib.nix-rice;
 let
+  brighten = super.configuration.rice.brighten;
+  darken = super.configuration.rice.darken;
+
   _themePathToThemeName =
     path:
     let
@@ -9,11 +12,7 @@ let
     in
     theme_name;
 
-  _themeNameToThemePath =
-    name:
-    let
-    in
-    "${self.kitty-themes}/share/kitty-themes/themes/${name}.conf";
+  _themeNameToThemePath = name: "${self.kitty-themes}/share/kitty-themes/themes/${name}.conf";
 in
 rec {
   # Modified from the following to change the path to the theme
@@ -46,7 +45,7 @@ rec {
 
   riceColorPalette =
     with self.rice.colorPalette;
-    self.lib.nix-rice.palette.toRgbHex rec {
+    self.lib.nix-rice.palette.toRgbHex {
       inherit
         color0
         color1
@@ -73,7 +72,7 @@ rec {
     };
   riceExtendedColorPalette =
     with self.rice.colorPalette;
-    (self.lib.nix-rice.palette.toRgbHex rec {
+    (self.lib.nix-rice.palette.toRgbHex {
       inherit
         normal
         bright
@@ -82,7 +81,7 @@ rec {
         ;
     })
     // riceColorPalette;
-  rice = with self.kittyParseUtils.riceKittyTheme; rec {
+  rice = with self.kittyParseUtils.riceKittyTheme; {
     colorPalette = rec {
       normal = palette.defaultPalette // {
         black = color0;
@@ -94,7 +93,7 @@ rec {
         cyan = color6;
         white = color7;
       };
-      bright = palette.brighten 10 normal // {
+      bright = palette.brighten brighten normal // {
         black = color8;
         red = color9;
         green = color10;
@@ -104,12 +103,14 @@ rec {
         cyan = color14;
         white = color15;
       };
-      dark = palette.darken 10 normal;
+      dark = palette.darken darken normal;
       primary = {
         inherit background foreground;
         theme = self.kittyParseUtils.riceKittyTheme;
-        bright_foreground = color.brighten 10 self.kittyParseUtils.riceKittyTheme.foreground;
-        dim_foreground = color.darken 10 self.kittyParseUtils.riceKittyTheme.foreground;
+        bright_foreground = color.brighten brighten foreground;
+        dim_foreground = color.darken darken foreground;
+        bright_background = color.brighten brighten background;
+        dim_background = color.darken darken background;
       };
     } // self.kittyParseUtils.riceKittyTheme;
     font = {

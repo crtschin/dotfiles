@@ -7,8 +7,15 @@
 let
   overlay = self: super: {
     useWayland = true;
-    # betterlockscreen = self.native_wrapper super.betterlockscreen;
-    # i3lock-color = self.native_wrapper super.i3lock-color;
+    # betterlockscreen = self.nativeWrapper super.betterlockscreen;
+    # i3lock-color = self.nativeWrapper super.i3lock-color;
+    configuration = super.configuration // {
+      git = {
+        userName = "Curtis Chin Jen Sem";
+        userEmail = "curtis.chinjensem@channable.com";
+        signingKey = "/home/curtis/.ssh/id_ed25519.pub";
+      };
+    };
   };
 in
 {
@@ -17,7 +24,7 @@ in
   imports = [
     ./common.nix
     ./home/modules/nixgl.nix
-    ./home/modules/general-overlay.nix
+    ./home/overlays/entry.nix
   ];
 
   targets.genericLinux.enable = true;
@@ -65,16 +72,6 @@ in
   };
 
   programs = {
-    git = {
-      userName = "Curtis Chin Jen Sem";
-      userEmail = "curtis.chinjensem@channable.com";
-      extraConfig = {
-        gpg.format = "ssh";
-        user.signingkey = "/home/curtis/.ssh/id_ed25519.pub";
-        commit.gpgsign = true;
-      };
-    };
-
     fish = {
       shellInitLast = ''
         begin

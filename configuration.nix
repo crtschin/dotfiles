@@ -28,18 +28,11 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking = {
-    hostName = "crtschin"; # Define your hostname.
-    wireless.enable = false; # Enables wireless support via wpa_supplicant.
+    hostName = "crtschin";
+    wireless.enable = false;
     networkmanager = {
       enable = true;
-      # wifi.backend = "iwd";
     };
-
-    # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-    # Per-interface useDHCP will be mandatory in the future, so this generated config
-    # replicates the default behaviour.
-    useDHCP = false;
-    interfaces.wlp59s0.useDHCP = true;
   };
 
   nix.gc = {
@@ -159,6 +152,12 @@
     touchpad.tapping = true;
   };
 
+  virtualisation.docker.enable = true;
+  virtualisation.docker.rootless = {
+    enable = true;
+    setSocketVariable = true;
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.crtschin = {
     isNormalUser = true;
@@ -166,6 +165,7 @@
       "wheel"
       "networkmanager"
       "jackaudio"
+      "docker"
     ];
     shell = pkgs.fish;
   };

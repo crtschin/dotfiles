@@ -7,18 +7,27 @@
 let
   overlay = self: super: {
     useWayland = true;
+    configuration = {
+      git = {
+        userEmail = "csochinjensem@gmail.com";
+        userName = "crtschin";
+        signingKey = "/home/crtschin/.ssh/id_rsa.pub";
+      };
+      wm = "sway";
+    };
   };
 in
 {
   imports = [
     ./common.nix
-    ./home/modules/alacritty.nix
-    ./home/modules/general-overlay.nix
   ];
 
   nixpkgs.overlays = [
-    inputs.tidal.overlays.default
     overlay
+    inputs.tidal.overlays.default
+    (import ./home/overlays/entry.nix)
+    (import ./home/overlays/rice.nix)
+    (import ./home/overlays/wm.nix)
   ];
   home = rec {
     username = "crtschin";
@@ -33,9 +42,13 @@ in
       unzip
 
       pavucontrol
-      # jack2 qjackctl jack2Full jack_capture
+      jdk23
+      # jack2
+      # qjackctl jack2Full jack_capture
       # supercollider superdirt-start tidal
 
+      docker
+      docker-compose
       devenv
       process-compose
       git
@@ -77,16 +90,6 @@ in
   };
 
   programs = {
-    git = {
-      userName = "crtschin";
-      userEmail = "csochinjensem@gmail.com";
-      extraConfig = {
-        gpg.format = "ssh";
-        user.signingkey = "/home/crtschin/.ssh/id_rsa.pub";
-        commit.gpgsign = true;
-      };
-    };
-
     fish = {
       shellInit = ''
         begin

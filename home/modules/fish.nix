@@ -5,17 +5,20 @@
   ...
 }:
 let
-  devFishPlugins = with pkgs.fishPlugins; [
+  pkgsFishPlugins = with pkgs.fishPlugins; [
     bass
-    pisces
     done
-    sponge
+    fish-you-should-use
     foreign-env
     fzf-fish
+    pisces
+    plugin-git
+    puffer
+    sponge
   ];
 in
 {
-  home.packages = devFishPlugins;
+  home.packages = pkgsFishPlugins;
   programs = {
     starship.enableFishIntegration = true;
 
@@ -71,20 +74,11 @@ in
         };
       };
       enable = true;
-      plugins = [
-        {
-          name = "plugin-git";
-          src = pkgs.fishPlugins.plugin-git.src;
+      plugins = map (
+        plugin: with plugin; {
+          inherit name src;
         }
-        {
-          name = "fish-puffer";
-          src = inputs.fish-puffer;
-        }
-        {
-          name = "fish-abbreviation-tips";
-          src = inputs.fish-abbreviation-tips;
-        }
-      ];
+      ) pkgsFishPlugins;
     };
   };
 }

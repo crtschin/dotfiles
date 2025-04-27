@@ -1,9 +1,9 @@
 {
   inputs = {
-    channableFishFile = {
-      url = "file+file:///home/curtis/dotfiles/.config/channable.fish";
-      flake = false;
-    };
+    # channableFishFile = {
+    #   url = "file+file:///home/curtis/dotfiles/.config/channable.fish";
+    #   flake = false;
+    # };
 
     nixpkgs = {
       # url = "github:NixOS/nixpkgs?ref=7b9135d3ae24bf15ca0fac57f4114c99e28bec3b";
@@ -51,16 +51,16 @@
       flake = false;
     };
 
-    fish-plugin-git = {
-      url = "github:jhillyerd/plugin-git";
-      flake = false;
-    };
     fish-puffer = {
       url = "github:nickeb96/puffer-fish";
       flake = false;
     };
     fish-abbreviation-tips = {
       url = "github:gazorby/fish-abbreviation-tips";
+      flake = false;
+    };
+    fish-async-prompt = {
+      url = "github:acomagu/fish-async-prompt";
       flake = false;
     };
   };

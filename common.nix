@@ -4,28 +4,26 @@
   pkgs,
   ...
 }:
-let
-in
 {
-  nixpkgs.overlays = [ (import ./home/overlays/rice.nix) ];
-
   imports = [
-    ./home/wm.nix
     ./home/shell.nix
     ./home/services.nix
-    ./home/modules/fish.nix
     ./home/modules/dunst.nix
+    ./home/modules/fish.nix
     ./home/modules/ghostty.nix
+    ./home/modules/git.nix
+    ./home/modules/i3.nix
     ./home/modules/kanshi.nix
     ./home/modules/kitty.nix
     ./home/modules/polybar.nix
     ./home/modules/starship.nix
+    ./home/modules/sway.nix
   ];
 
   systemd.user.startServices = "sd-switch";
 
   nixpkgs.config.allowUnfree = true;
-  home = rec {
+  home = {
     packages = with pkgs; [
       # Desktop
       nitrogen
@@ -139,10 +137,6 @@ in
       enable = true;
     };
 
-    autorandr = {
-      enable = true;
-    };
-
     btop = {
       enable = true;
       settings = {
@@ -178,63 +172,6 @@ in
       package = pkgs.firefox;
     };
 
-    git = {
-      enable = true;
-      lfs.enable = true;
-      delta.enable = true;
-      # Prevent bad objects from spreading.
-      # transfer.fsckObjects = true;
-      extraConfig = {
-        alias = {
-          lc = "!fish -c 'git checkout (git branch --list --sort=-committerdate | string trim | fzf --preview=\"git log --stat -n 10 --decorate --color=always {}\")'";
-          oc = "!fish -c 'git checkout (git for-each-ref refs/remotes/origin/ --format=\"%(refname:short)\" --sort=-committerdate|perl -p -e \"s#^origin/##g\"|head -100|string trim|fzf --preview=\"git log --stat -n 10 --decorate --color=always origin/{}\")'";
-        };
-        # blame.ignoreRevsFile = ".git-blame-ignore-revs";
-        pager = {
-          diff = "delta";
-          log = "delta";
-          reflog = "delta";
-          show = "delta";
-        };
-        core = {
-          editor = "${pkgs.vim}/bin/vim";
-          excludesfile = "${./.config/global.gitignore}";
-        };
-        merge = {
-          conflictstyle = "diff3";
-          difftool = "${pkgs.meld}/bin/meld";
-        };
-        delta = {
-          features = "interactive unobtrusive-line-numbers decorations";
-          syntax-theme = "gruvbox-dark";
-        };
-        diff = {
-          external = "difft";
-          algorithm = "histogram";
-          # Try to break up diffs at blank lines
-          compactionHeuristic = true;
-          colorMoved = "dimmed_zebra";
-        };
-        # For interactive rebases, automatically reorder and set the
-        # right actions for !fixup and !squash commits.
-        rebase = {
-          autosquash = true;
-          updateRefs = true;
-        };
-        # Include tags with commits that we push
-        push = {
-          followTags = true;
-          autoSetupRemote = true;
-        };
-        # Sort tags in version order, e.g. `v1 v2 .. v9 v10` instead
-        # of `v1 v10 .. v9`
-        tag.sort = "version:refname";
-        # Remeber conflict resolutions. If the same conflict appears
-        # again, use the previous resolution.
-        rerere.enabled = true;
-      };
-    };
-
     man = {
       enable = true;
     };
@@ -267,13 +204,13 @@ in
   };
 
   services = {
+    flameshot = {
+      enable = true;
+      package = pkgs.flameshot;
+    };
     playerctld = {
       enable = true;
     };
-    # autorandr = {
-    #   enable = true;
-    #   ignoreLid = true;
-    # };
   };
 
   # This value determines the Home Manager release that your

@@ -4,8 +4,6 @@
   inputs,
   ...
 }:
-let
-in
 {
   programs = {
     starship = {
@@ -83,7 +81,7 @@ in
         };
 
         git_status = {
-          disabled = true;
+          disabled = false;
           conflicted = "⚔️";
           ahead = "🏎️💨";
           behind = "🐢";

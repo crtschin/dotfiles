@@ -153,4 +153,6 @@ fabric.properties
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,pycharm,linux,git
 
 .envrc
-.direnv/
+.direnv
+.vscode
+.direnv
