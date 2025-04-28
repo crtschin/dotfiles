@@ -1,7 +1,7 @@
 self: super:
 let
-  modifier = super.configuration.variables.modifier;
-  terminal = super.configuration.terminal;
+  configuration = super.configuration;
+  modifier = configuration.variables.modifier;
   rgbTheme = super.riceExtendedColorPalette;
   toLockColor = color: super.lib.strings.removePrefix "#" color;
   generic = programLauncher: lockscreenCmd: {
@@ -52,7 +52,7 @@ let
     keybindings = super.lib.mkOptionDefault {
       "${modifier}+p" = "exec PATH=~/.nix-profile/bin:$PATH ${programLauncher}";
       "${modifier}+q" = "kill";
-      "${modifier}+Return" = "exec PATH=~/.nix-profile/bin:$PATH ${terminal}/bin/${terminal.name}";
+      "${modifier}+Return" = "exec PATH=~/.nix-profile/bin:$PATH ${configuration.variables.terminal}";
       "${modifier}+Tab" = "workspace back_and_forth";
       "${modifier}+Shift+r" = "restart";
       "${modifier}+l" = lockscreenCmd;
@@ -103,7 +103,7 @@ let
   );
 in
 {
-  configuration = super.configuration // {
+  configuration = configuration // {
     i3 = i3Config;
     sway = swayConfig;
   };

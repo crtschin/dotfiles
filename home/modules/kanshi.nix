@@ -6,7 +6,7 @@
   ...
 }:
 let
-  enableWayland = pkgs.useWayland;
+  enabled = pkgs.configuration.flags.protocol.wayland;
   fixMonitorName = monitor: lib.strings.toLower (builtins.replaceStrings [ " " ] [ "_" ] monitor);
   createLeftDockedProfile =
     monitor:
@@ -85,7 +85,7 @@ in
 {
   services = {
     kanshi = {
-      enable = enableWayland;
+      enable = enabled;
       settings =
         [
           {

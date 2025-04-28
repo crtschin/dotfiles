@@ -3,14 +3,18 @@ let
   lib = super.lib;
 in
 rec {
-  configuration = super.configuration // {
-    terminal = super.kitty;
+  configuration = super.configuration // rec {
+    terminal = {
+      package = super.kitty;
+      name = "kitty";
+    };
     rice = {
       brighten = 20;
       darken = 20;
     };
     variables = {
       modifier = "Mod4";
+      terminal = "${terminal.package}/bin/${terminal.name}";
     };
     flags = rec {
       sway = super.configuration.wm == "sway";

@@ -16,19 +16,22 @@ let
       wm = "sway";
     };
   };
-in
-{
-  imports = [
-    ./common.nix
-  ];
 
-  nixpkgs.overlays = [
+  overlays = [
     overlay
     inputs.tidal.overlays.default
     (import ./home/overlays/entry.nix)
     (import ./home/overlays/rice.nix)
     (import ./home/overlays/wm.nix)
   ];
+in
+{
+  imports = [
+    ./common.nix
+  ];
+
+  nixpkgs.overlays = overlays;
+
   home = rec {
     username = "crtschin";
     homeDirectory = "/home/${username}";

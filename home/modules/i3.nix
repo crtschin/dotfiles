@@ -7,17 +7,15 @@
 }:
 let
   configuration = pkgs.configuration;
-  enableWayland = pkgs.useWayland;
   enabled = pkgs.configuration.flags.i3;
   rgbTheme = pkgs.riceExtendedColorPalette;
-  toLockColor = color: lib.strings.removePrefix "#" color;
 in
 {
   programs = {
     rofi = {
       enable = enabled;
       font = "FontAwesome, ${pkgs.rice.font.monospace.name}, DejaVu Sans Mono 12";
-      terminal = "${pkgs.kitty}/bin/kitty";
+      terminal = configuration.variables.terminal;
       theme = "gruvbox-dark-soft";
       extraConfig = {
         modi = "run,combi";

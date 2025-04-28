@@ -63,7 +63,7 @@ in
         config = {
           assigns = {
             "10: terminal" = [
-              { app_id = "kitty"; }
+              { app_id = configuration.terminal.name; }
             ];
             "9: music" = [
               { class = "Spotify"; }
@@ -80,9 +80,12 @@ in
           };
           fonts = configuration.sway.fonts;
           keybindings = configuration.sway.keybindings;
+          startup = [
+            { command = configuration.variables.terminal; }
+          ];
           bars = [ ];
           modifier = configuration.variables.modifier;
-          terminal = "kitty";
+          terminal = configuration.terminal.name;
         };
       };
     };

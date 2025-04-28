@@ -26,8 +26,8 @@ let
       gpg.format = "ssh";
     }
     // lib.optionalAttrs (sigingKey != null) {
-      user.signingkey = "/home/crtschin/.ssh/id_rsa.pub";
-      commit.gpgsign = true;
+      user.signingkey = sigingKey;
+      commit.gpgsign = false;
     };
 
 in

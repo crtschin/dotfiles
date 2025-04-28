@@ -227,7 +227,7 @@
     PAGER = "${pkgs.bat}/bin/bat -S";
     MANPAGER = "${pkgs.bat}/bin/bat -S -l man";
     EDITOR = "${pkgs.vscode}/bin/code";
-    TERMINAL = "${pkgs.kitty}/bin/kitty";
+    TERMINAL = pkgs.configuration.variables.terminal;
     RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
     GIT_EDITOR = "${pkgs.vim}/bin/vim";
     NIXPKGS_ALLOW_INSECURE = 1;

@@ -9,7 +9,7 @@ let
     useWayland = true;
     # betterlockscreen = self.nativeWrapper super.betterlockscreen;
     # i3lock-color = self.nativeWrapper super.i3lock-color;
-    configuration = super.configuration // {
+    configuration = {
       git = {
         userName = "Curtis Chin Jen Sem";
         userEmail = "curtis.chinjensem@channable.com";
@@ -18,14 +18,21 @@ let
       wm = "sway";
     };
   };
+
+  overlays = [
+    overlay
+    inputs.tidal.overlays.default
+    (import ./home/overlays/entry.nix)
+    (import ./home/overlays/rice.nix)
+    (import ./home/overlays/wm.nix)
+  ];
 in
 {
-  nixpkgs.overlays = [ overlay ];
+  nixpkgs.overlays = overlays;
 
   imports = [
     ./common.nix
     ./home/modules/nixgl.nix
-    ./home/overlays/entry.nix
   ];
 
   targets.genericLinux.enable = true;
@@ -84,7 +91,7 @@ in
           set --export NIXPKGS_ALLOW_UNFREE 1
 
           # Channable specific
-          . ${inputs.channableFishFile}
+          . ${./.config/channable.fish}
         end
       '';
     };

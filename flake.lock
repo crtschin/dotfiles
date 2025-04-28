@@ -52,25 +52,11 @@
     "fish-async-prompt": {
       "flake": false,
       "locked": {
-<<<<<<< HEAD
-        "lastModified": 1743177059,
-        "narHash": "sha256-0uEKw+7EXkf5u3p3hfthSfQO/2rr3wl35ela7P2vB0Q=",
-        "owner": "jhillyerd",
-        "repo": "plugin-git",
-        "rev": "d6950214b6b2392d3dbb2cb670f2a5f240090038",
-||||||| parent of f26d59e (Update)
-        "lastModified": 1728147436,
-        "narHash": "sha256-p7vvwisu3mvVOE1DcALbzuGJqWBcE1h71UjaopGdxE0=",
-        "owner": "jhillyerd",
-        "repo": "plugin-git",
-        "rev": "e4897db7abd43a74c902b5000c535b9da6ff766e",
-=======
         "lastModified": 1707036484,
         "narHash": "sha256-J7y3BjqwuEH4zDQe4cWylLn+Vn2Q5pv0XwOSPwhw/Z0=",
         "owner": "acomagu",
         "repo": "fish-async-prompt",
         "rev": "316aa03c875b58e7c7f7d3bc9a78175aa47dbaa8",
->>>>>>> f26d59e (Update)
         "type": "github"
       },
       "original": {
@@ -208,25 +194,11 @@
         ]
       },
       "locked": {
-<<<<<<< HEAD
-        "lastModified": 1745272532,
-        "narHash": "sha256-+sFbKw1vFkulKYxsAbz84N0V/goSg808IgFh8iWe/As=",
-||||||| parent of f26d59e (Update)
-        "lastModified": 1740060750,
-        "narHash": "sha256-FOC9OzJ5Ckh6VjzGSRh4F3UCUOdM8NrzQT19PQcQJ44=",
-=======
         "lastModified": 1745764360,
         "narHash": "sha256-GJEUJpZLkczMN6HXD0wdFX6KyDbvZe3v5orUhqEfK6w=",
->>>>>>> f26d59e (Update)
         "owner": "nix-community",
         "repo": "home-manager",
-<<<<<<< HEAD
-        "rev": "81541ea36d1fead4be7797e826ee325d4c19308b",
-||||||| parent of f26d59e (Update)
-        "rev": "0c0b0ac8af6ca76b1fcb514483a9bd73c18f1e8c",
-=======
         "rev": "50bb714a8259b0c29b6c3429099a3b837771dab4",
->>>>>>> f26d59e (Update)
         "type": "github"
       },
       "original": {
@@ -380,25 +352,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-<<<<<<< HEAD
-        "lastModified": 1744932701,
-        "narHash": "sha256-fusHbZCyv126cyArUwwKrLdCkgVAIaa/fQJYFlCEqiU=",
-||||||| parent of f26d59e (Update)
-        "lastModified": 1739866667,
-        "narHash": "sha256-EO1ygNKZlsAC9avfcwHkKGMsmipUk1Uc0TbrEZpkn64=",
-=======
         "lastModified": 1745526057,
         "narHash": "sha256-ITSpPDwvLBZBnPRS2bUcHY3gZSwis/uTe255QgMtTLA=",
->>>>>>> f26d59e (Update)
         "owner": "NixOS",
         "repo": "nixpkgs",
-<<<<<<< HEAD
-        "rev": "b024ced1aac25639f8ca8fdfc2f8c4fbd66c48ef",
-||||||| parent of f26d59e (Update)
-        "rev": "73cf49b8ad837ade2de76f87eb53fc85ed5d4680",
-=======
         "rev": "f771eb401a46846c1aebd20552521b233dd7e18b",
->>>>>>> f26d59e (Update)
         "type": "github"
       },
       "original": {
