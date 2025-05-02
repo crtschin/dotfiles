@@ -150,12 +150,14 @@ in
         ++ (builtins.map createLeftDockedProfile [
           "Iiyama North America PL3288UH 1169612412790"
           "Iiyama North America PL3288UH 1169612412785"
+          "Iiyama North America PL3288UH 1169612412871"
           "Dell Inc. DELL SE3223Q DH6SKK3"
           "Dell Inc. DELL SE3223Q 7S1SKK3"
           "Dell Inc. DELL SE3223Q CS1SKK3"
           "Dell Inc. DELL SE3223Q D02SKK3"
           "Dell Inc. DELL SE3223Q 7V1SKK3"
           "Dell Inc. DELL SE3223Q D3XRKK3"
+          "Dell Inc. DELL SE3223Q DDCSKK3"
         ]);
     };
   };

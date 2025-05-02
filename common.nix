@@ -45,7 +45,6 @@
       # Git
       gitAndTools.git-absorb
       difftastic
-      tig
       gitui
 
       # System
@@ -53,6 +52,9 @@
       du-dust
       fastfetch
       brightnessctl
+
+      # File Manager
+      yazi
 
       # Debugging
       bpftrace
@@ -77,7 +79,8 @@
       ffmpeg
       gimp
       imagemagick
-      simplescreenrecorder
+      obs-studio
+      asciinema
 
       # Programs
       spotify

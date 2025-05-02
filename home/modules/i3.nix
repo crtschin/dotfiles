@@ -7,13 +7,19 @@
 }:
 let
   configuration = pkgs.configuration;
-  enabled = pkgs.configuration.flags.i3;
+  enable = pkgs.configuration.flags.i3;
   rgbTheme = pkgs.riceExtendedColorPalette;
 in
 {
+  home.packages =
+    with pkgs;
+    onlyIfList enable [
+      simplescreenrecorder
+    ];
+
   programs = {
     rofi = {
-      enable = enabled;
+      inherit enable;
       font = "FontAwesome, ${pkgs.rice.font.monospace.name}, DejaVu Sans Mono 12";
       terminal = configuration.variables.terminal;
       theme = "gruvbox-dark-soft";
@@ -29,11 +35,8 @@ in
   };
 
   services = {
-    screen-locker = {
-      enable = false;
-    };
     polybar = {
-      enable = enabled;
+      inherit enable;
     };
     picom = {
       enable = false;
@@ -89,10 +92,10 @@ in
   };
 
   xsession = {
-    enable = enabled;
+    inherit enable;
     windowManager.i3 = {
       package = pkgs.i3-gaps;
-      enable = enabled;
+      inherit enable;
       config = {
         modifier = configuration.variables.modifier;
         gaps = {
