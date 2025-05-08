@@ -4,10 +4,40 @@
   inputs,
   ...
 }:
-let
-in
 {
   programs = {
+    tmux = {
+      enable = true;
+      clock24 = true;
+      historyLimit = 5000;
+      prefix = "C-Space";
+      extraConfig = ''
+        bind-key -n C-t new-window
+        bind-key -n C-w kill-window
+        bind-key -n C-Up previous-window
+        bind-key -n C-Down next-window
+        bind-key -n C-x kill-pane
+        bind-key -n C-n split-window -v
+        bind-key -n C-M-n split-window -h
+        bind-key -n M-Up select-pane -U
+        bind-key -n M-Down select-pane -D
+        bind-key -n M-Left select-pane -L
+        bind-key -n M-Right select-pane -R
+
+        bind -n M-s setw synchronize-panes
+
+        # Prevent vim from swallowing ctrl arrows
+        set-window-option -g xterm-keys on
+
+        # Use the screen terminal
+        set -g default-terminal screen
+
+        # Apply Tc
+        set-option -ga terminal-overrides \",screen:Tc\"
+        set -g mouse on
+        set -g focus-events on
+      '';
+    };
     alacritty = {
       enable = true;
       settings = {
@@ -47,29 +77,17 @@ in
           size = 13;
         };
         mouse = {
-          double_click = {
-            threshold = 300;
-          };
-          triple_click = {
-            threshold = 300;
-          };
           hide_when_typing = true;
         };
         selection = {
           semantic_escape_chars = ",│`|:\"' ()[]{}<>";
           save_to_clipboard = false;
         };
-        mouse_bindings = [
-          {
-            mouse = "Middle";
-            action = "PasteSelection";
-          }
-        ];
         cursor = {
           style = "Block";
           unfocused_hollow = true;
         };
-        shell = {
+        terminal.shell = {
           program = "${pkgs.fish}/bin/fish";
           args = [ "--command=${pkgs.tmux}/bin/tmux" ];
         };

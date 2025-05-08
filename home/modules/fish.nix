@@ -29,6 +29,8 @@ in
           set fish_greeting
           set __done_notify_sound 1
           set --export SHELL ${pkgs.fish}/bin/fish
+          ${pkgs.jump}/bin/jump shell fish | source
+          ${pkgs.jump}/bin/jump shell --bind=zz fish | source
         end
 
         function __direnv_export_eval --on-event fish_prompt

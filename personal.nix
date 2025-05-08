@@ -47,7 +47,7 @@ in
 
       pavucontrol
       jdk23
-      # jack2
+      jack2
       # qjackctl jack2Full jack_capture
       # supercollider superdirt-start tidal
 

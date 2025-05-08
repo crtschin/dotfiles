@@ -8,6 +8,7 @@
   imports = [
     ./home/shell.nix
     ./home/services.nix
+    ./home/modules/alacritty.nix
     ./home/modules/dunst.nix
     ./home/modules/fish.nix
     ./home/modules/ghostty.nix
@@ -41,6 +42,7 @@
       p7zip
       hivemind
       process-compose
+      jump
 
       # Git
       gitAndTools.git-absorb
