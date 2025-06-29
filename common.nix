@@ -75,6 +75,7 @@
       nix-tree
       nix-diff
       nvd
+      nix-output-monitor
 
       ffmpeg
       gimp
@@ -183,6 +184,41 @@
       enable = true;
       settings = {
         theme = "gruvbox";
+      };
+    };
+
+    pgcli = {
+      enable = true;
+      settings = {
+        main = {
+          destructive_statements_require_transaction = true;
+          smart_completion = true;
+          multi_line = true;
+          auto_expand = true;
+          destructive_warning = true;
+        };
+        colors = {
+          "Token.Menu.Completions.Completion.Current" = "bg:#ffffff #000000";
+          "Token.Menu.Completions.Completion" = "bg:#008888 #ffffff";
+          "Token.Menu.Completions.Meta.Current" = "bg:#44aaaa #000000";
+          "Token.Menu.Completions.Meta" = "bg:#448888 #ffffff";
+          "Token.Menu.Completions.MultiColumnMeta" = "bg:#aaffff #000000";
+          "Token.Menu.Completions.ProgressButton" = "bg:#003333";
+          "Token.Menu.Completions.ProgressBar" = "bg:#00aaaa";
+          "Token.SelectedText" = "#ffffff bg:#6666aa";
+          "Token.SearchMatch" = "#ffffff bg:#4444aa";
+          "Token.SearchMatch.Current" = "#ffffff bg:#44aa44";
+          "Token.Toolbar" = "bg:#222222 #aaaaaa";
+          "Token.Toolbar.Off" = "bg:#222222 #888888";
+          "Token.Toolbar.On" = "bg:#222222 #ffffff";
+          "Token.Toolbar.Search" = "noinherit bold";
+          "Token.Toolbar.Search.Text" = "nobold";
+          "Token.Toolbar.System" = "noinherit bold";
+          "Token.Toolbar.Arg" = "noinherit bold";
+          "Token.Toolbar.Arg.Text" = "nobold";
+          "Token.Toolbar.Transaction.Valid" = "bg:#222222 #00ff5f bold";
+          "Token.Toolbar.Transaction.Failed" = "bg:#222222 #ff005f bold";
+        };
       };
     };
 

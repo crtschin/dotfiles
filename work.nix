@@ -23,6 +23,7 @@ let
     overlay
     inputs.tidal.overlays.default
     (import ./home/overlays/entry.nix)
+    (import ./home/overlays/kanshi.nix)
     (import ./home/overlays/rice.nix)
     (import ./home/overlays/wm.nix)
   ];
@@ -44,7 +45,6 @@ in
       gv
       monitor-heap
       mermaid-cli
-      pgcli
       # pgadmin4
       # solaar
       ltunify
