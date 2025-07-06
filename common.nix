@@ -43,6 +43,7 @@
       hivemind
       process-compose
       jump
+      bluetui
 
       # Git
       gitAndTools.git-absorb

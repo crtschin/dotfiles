@@ -65,8 +65,6 @@ in
       mesa.drivers
       intel-media-driver
 
-      bluetui
-
       pkgs.haskellPackages.ghcprofview
       # pkgs.haskellPackages.hpview
     ];
