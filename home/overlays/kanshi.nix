@@ -12,13 +12,14 @@ rec {
       y,
       width,
       height,
+      enable ? true,
     }:
     {
+      status = if enable then "enable" else "disable";
       criteria = criteria;
       position = "${toString x},${toString y}";
       mode = "${toString width}x${toString height}";
     };
-
   createDockedProfile =
     {
       monitor,
@@ -28,7 +29,7 @@ rec {
     }:
     let
       laptopProfile = {
-        criteria = "eDP-1";
+        criteria = "eDP-1_";
         height = "1200";
         width = "1920";
       };
@@ -44,7 +45,7 @@ rec {
       left = canonicallyLeft;
       right = canonicallyRight;
       laptop = {
-        enable = false;
+        enable = null;
         x = 0;
         y = 0;
       };
@@ -81,6 +82,7 @@ rec {
         criteria = "eDP-1";
         x = monitors.laptop.x;
         y = monitors.laptop.y;
+        enable = monitors.laptop.enable;
         width = 1920;
         height = 1200;
       };
@@ -88,7 +90,7 @@ rec {
     {
       profile = {
         name = pkgs.createKanshiName "docked_dual_${monitors.left.criteria}_${monitors.right.criteria}";
-        outputs = (if monitors.laptop.enable then [ laptopProfile ] else [ ]) ++ [
+        outputs = (if monitors.laptop.enable == null then [ ] else [ laptopProfile ]) ++ [
           (pkgs.createKanshiProfile {
             criteria = monitors.right.criteria;
             x = monitors.left.width;
@@ -104,11 +106,17 @@ rec {
             height = monitors.left.height;
           })
         ];
-        exec = [
-          "exec swaymsg workspace 10, move workspace to \"eDP-1\""
-          "exec swaymsg workspace 1, move workspace to \"'${monitors.left.criteria}'\""
-          "exec swaymsg workspace 2, move workspace to \"'${monitors.right.criteria}'\""
-        ];
+        exec =
+          (
+            if monitors.laptop.enable == true then
+              [ "exec swaymsg workspace 10, move workspace to \"eDP-1\"" ]
+            else
+              [ ]
+          )
+          ++ [
+            "exec swaymsg workspace 1, move workspace to \"'${monitors.left.criteria}'\""
+            "exec swaymsg workspace 2, move workspace to \"'${monitors.right.criteria}'\""
+          ];
       };
     };
 }

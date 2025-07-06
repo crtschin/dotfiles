@@ -89,15 +89,21 @@
         enableXfwm = false;
       };
     };
-    displayManager.gdm.enable = false;
-    displayManager.gdm.wayland = false;
     windowManager.i3 = {
       enable = false;
       package = pkgs.i3-gaps;
     };
   };
-  services.displayManager.defaultSession = "sway";
-  services.displayManager.sddm.enable = true;
+  services = {
+    displayManager = {
+      defaultSession = "sway";
+      gdm = {
+        enable = false;
+        wayland = false;
+      };
+      sddm.enable = true;
+    };
+  };
 
   # Video settings
   services.xserver.videoDrivers = [ "modesetting" ];
