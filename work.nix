@@ -88,8 +88,7 @@ in
           set --export NIX_PATH $NIX_PATH:$HOME/.nix-defexpr/channels
           set --export NIXPKGS_ALLOW_UNFREE 1
 
-          # Channable specific
-          . ${./.config/channable.fish}
+          . ${./.config/work.fish}
         end
       '';
     };

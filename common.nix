@@ -97,7 +97,7 @@
       fira-code
       font-awesome
       source-code-pro
-      papirus-icon-theme
+      # papirus-icon-theme
       gruvbox-dark-gtk
       gruvbox-dark-icons-gtk
       pkgs.rice.font.monospace.package
