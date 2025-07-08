@@ -29,7 +29,7 @@ rec {
     }:
     let
       laptopProfile = {
-        criteria = "eDP-1_";
+        criteria = "eDP-1";
         height = "1200";
         width = "1920";
       };
