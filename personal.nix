@@ -17,6 +17,23 @@ let
     };
   };
 
+  droneSim =
+    pkgs: with pkgs; [
+      # unityhub
+      # ros
+      # gazebo
+    ];
+
+  _algoRave =
+    pkgs: with pkgs; [
+      qjackctl
+      jack2Full
+      jack_capture
+      supercollider
+      superdirt-start
+      tidal
+    ];
+
   overlays = [
     overlay
     inputs.tidal.overlays.default
@@ -36,41 +53,42 @@ in
   home = rec {
     username = "crtschin";
     homeDirectory = "/home/${username}";
-    packages = with pkgs; [
-      pciutils
-      iotop
-      pv
-      valgrind
-      discord
-      glxinfo
-      unzip
+    packages =
+      with pkgs;
+      (droneSim pkgs)
+      # ++ (algoRave pkgs)
+      ++ [
+        pciutils
+        iotop
+        pv
+        valgrind
+        discord
+        glxinfo
+        unzip
 
-      pavucontrol
-      jdk23
-      jack2
-      # qjackctl jack2Full jack_capture
-      # supercollider superdirt-start tidal
+        # qjackctl jack2Full jack_capture
+        # supercollider superdirt-start tidal
 
-      docker
-      docker-compose
-      devenv
-      process-compose
-      git
-      htop
-      arandr
-      curl
-      feh
-      file
-      wget
-      gcc
-      python3
-      rustc
-      rustfmt
-      cargo
+        docker
+        docker-compose
+        devenv
+        process-compose
+        git
+        htop
+        arandr
+        curl
+        feh
+        file
+        wget
+        gcc
+        python3
+        rustc
+        rustfmt
+        cargo
 
-      vlc
-      filezilla
-    ];
+        vlc
+        filezilla
+      ];
   };
 
   programs.neovim = {
@@ -108,8 +126,6 @@ in
                 end 1>| source
             end 2>| egrep -v -e "^direnv: export"
         end
-
-        set (gnome-keyring-daemon --start | string split "=")
       '';
     };
   };

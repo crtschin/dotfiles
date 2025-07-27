@@ -13,6 +13,7 @@
     ./home/modules/fish.nix
     ./home/modules/ghostty.nix
     ./home/modules/git.nix
+    ./home/modules/helix.nix
     ./home/modules/i3.nix
     ./home/modules/kanshi.nix
     ./home/modules/kitty.nix
@@ -97,6 +98,8 @@
       fira-code
       font-awesome
       source-code-pro
+      via
+
       # papirus-icon-theme
       gruvbox-dark-gtk
       gruvbox-dark-icons-gtk

@@ -1,5 +1,4 @@
-results
 home.nix
-hardware-configuration.nix
-
-result
+./hardware-configuration.nix
+./configuration.nix
+./flake.lock

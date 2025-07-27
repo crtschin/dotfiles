@@ -65,6 +65,12 @@ in
             height = 1440;
           })
           (createDualDockedIdenticalProfile {
+            leftCriteria = "HP Inc. HP E243 CNK0430BR5";
+            rightCriteria = "HP Inc. HP E243d CNC1211CS2";
+            width = 1920;
+            height = 1080;
+          })
+          (createDualDockedIdenticalProfile {
             leftCriteria = "HP Inc. HP E273 CNK0162V79";
             rightCriteria = "HP Inc. HP E273 CNK0162V7J";
             width = 1920;

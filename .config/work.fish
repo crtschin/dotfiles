@@ -14,14 +14,6 @@ function set_scale
     gsettings set org.gnome.desktop.interface text-scaling-factor "$argv[1]"
 end
 
-function compare-data
-    git diff --color-words --no-index investigation/import-compare-results/"$argv[1]"_import_mapping_v1_data investigation/import-compare-results/"$argv[1]"_import_mapping_v2_data
-end
-
-function compare-logs
-    git diff --color-words --no-index investigation/import-compare-results/"$argv[1]"_import_mapping_v2_shm_import_stdout.log investigation/import-compare-results/"$argv[1]"_import_mapping_v2_shm_import_stdout.log
-end
-
 function tag
     set ver (git describe --abbrev=0)
     string match -rq '(?<last_tag>\d+)' -- $ver
