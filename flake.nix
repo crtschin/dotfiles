@@ -6,6 +6,10 @@
       # url = "flake:nixpkgs/nixos-23.11";
     };
 
+    helix = {
+      url = "github:helix-editor/helix";
+    };
+
     flake-utils = {
       url = "github:numtide/flake-utils";
     };

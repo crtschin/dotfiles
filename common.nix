@@ -98,7 +98,11 @@
       fira-code
       font-awesome
       source-code-pro
+
+      # Keyboard
       via
+      vial
+      qmk
 
       # papirus-icon-theme
       gruvbox-dark-gtk

@@ -11,6 +11,7 @@ in
   programs = {
     helix = {
       enable = true;
+      package = (builtins.getFlake "github:helix-editor/helix").packages.${pkgs.system}.default;
       settings = {
         theme = "gruvbox_dark_soft";
         editor = {
