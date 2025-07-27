@@ -40,6 +40,14 @@ let
 
       for_window [class=".*"] border pixel 2
       # for_window [class=".*"] title_format "<span font='${super.rice.font.monospace.name}'>%title</span>"
+      
+      # Unbind unused layouts
+      unbindsym ${modifier}+b
+      unbindsym ${modifier}+e
+      unbindsym ${modifier}+h
+      unbindsym ${modifier}+s
+      unbindsym ${modifier}+v
+      unbindsym ${modifier}+w
     '';
     fonts = {
       names = [

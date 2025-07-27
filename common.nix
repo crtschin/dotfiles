@@ -70,7 +70,7 @@
       dig
 
       # nix
-      nil
+      nixd
       niv
       nixfmt-rfc-style
       any-nix-shell
@@ -275,10 +275,9 @@
     XDG_SESSION_TYPE = "wayland";
     PAGER = "${pkgs.bat}/bin/bat -S";
     MANPAGER = "${pkgs.bat}/bin/bat -S -l man";
-    EDITOR = "${pkgs.vscode}/bin/code";
     TERMINAL = pkgs.configuration.variables.terminal;
     RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
-    GIT_EDITOR = "${pkgs.vim}/bin/vim";
+    GIT_EDITOR = "${pkgs.helix}/bin/hx";
     NIXPKGS_ALLOW_INSECURE = 1;
   };
 }

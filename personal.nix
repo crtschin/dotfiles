@@ -37,6 +37,7 @@ let
   overlays = [
     overlay
     inputs.tidal.overlays.default
+    inputs.helix.overlays.default
     (import ./home/overlays/entry.nix)
     (import ./home/overlays/kanshi.nix)
     (import ./home/overlays/rice.nix)
