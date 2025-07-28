@@ -156,3 +156,5 @@ fabric.properties
 .direnv
 .vscode
 .direnv
+
+.helix

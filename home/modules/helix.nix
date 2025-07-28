@@ -68,13 +68,49 @@ in
         };
       };
       languages = {
-        language-server.ltex-ls-plus = {
-          command = "${pkgs.ltex-ls-plus}/bin/ltex-ls-plus";
+        language-server.harper = {
+          command = "${pkgs.harper}/bin/harper-ls";
+          args = ["--stdio"];
+          config = {
+            harper-ls = {
+              userDictPath = ../../.config/harper.dictionary;
+              linters = {
+                SentenceCapitalization = false;
+                BoringWords = true;
+              };
+            };
+          };
+        };
+        language-server.marksman = {
+          command = "${pkgs.marksman}/bin/marksman";
         };
         language = [
           {
             name = "git-commit";
-            language-servers = [ "ltex-ls-plus" ];
+            file-types = [ { glob = "COMMIT_EDITMSG"; } ];
+            soft-wrap = {
+              enable = true;
+              max-wrap = 4;
+              max-indent-retain = 16;
+              wrap-at-text-width = true;
+            };
+            text-width = 72;
+            rulers = [
+              50
+              72
+            ];
+            language-servers = [
+              "harper"
+              "marksman"
+            ];
+          }
+          {
+            name = "markdown";
+            file-types = [ "md" ];
+            language-servers = [
+              "harper"
+              "marksman"
+            ];
           }
         ];
       };
