@@ -2,3 +2,4 @@ home.nix
 ./hardware-configuration.nix
 ./configuration.nix
 ./flake.lock
+./.config/*.env

@@ -13,26 +13,76 @@ let
     "left" = "no_op";
     "right" = "no_op";
   };
-  clearSelection = makeKeymap "esc" [
-    "collapse_selection"
-    "keep_primary_selection"
+
+  # Movement
+  movementMacros =
+    startOfLineContents // previousBuffer // nextBuffer // previousSubword // nextSubword;
+  # Move to the first non-whitespace character in the line
+  startOfLineContents = makeKeymap "home" [
+    "goto_line_start"
+    "goto_first_nonwhitespace"
   ];
+  previousSubword = makeKeymap "A-home" [ "move_prev_sub_word_end" ];
+  nextSubword = makeKeymap "A-end" [ "move_next_sub_word_end" ];
+  # Previous/next buffer
+  previousBuffer = makeKeymap "H" "goto_previous_buffer";
+  nextBuffer = makeKeymap "L" "goto_next_buffer";
+
+  # Changes
+  # Move/copy line below/above
+  changeMacros = moveLineDown // moveLineUp // copyLineDown // copyLineUp;
+  moveLineDown = makeKeymap "A-j" [
+    "extend_to_line_bounds"
+    "delete_selection"
+    "paste_after"
+  ];
+  moveLineUp = makeKeymap "A-k" [
+    "extend_to_line_bounds"
+    "delete_selection"
+    "move_line_up"
+    "paste_before"
+  ];
+  copyLineDown = makeKeymap "A-J" [
+    "extend_to_line_bounds"
+    "yank"
+    "paste_after"
+  ];
+  copyLineUp = makeKeymap "A-K" [
+    "extend_to_line_bounds"
+    "yank"
+    "paste_before"
+  ];
+
+  # Selection
+  selectionMacros = clearSelection // selectAll // selectAllOccurance // nextOccurence // currentWord;
+  # Clear any selections
+  clearSelection = makeKeymap "esc" [
+    "keep_primary_selection"
+    "collapse_selection"
+  ];
+  # Select All
+  selectAll = makeKeymap "C-a" "@<%>";
+  # Select All Occurances of Selection
+  selectAllOccurance = makeKeymap "C-A" "@*%s<ret>";
+  # Select current word
+  currentWord = makeKeymap "A-w" "@miw";
   nextOccurence = makeKeymap "C-'" [
     "search_selection"
     "search_next"
   ];
-  # If already in select mode, just add new selection at next occurrence
-  expandSelection = makeKeymap "C-d" [
-    "search_selection"
-    "extend_search_next"
-  ];
-  # make sure there is only one selection, select word under cursor, set search to selection, then switch to select mode
+
+  # Make sure there is only one selection, select word under cursor, set search to selection, then switch to select mode
   initializeSelection = makeKeymap "C-d" [
     "keep_primary_selection"
     "move_next_word_end"
     "move_prev_word_start"
     "search_selection"
     "select_mode"
+  ];
+  # If already in select mode, just add new selection at next occurrence
+  expandSelection = makeKeymap "C-d" [
+    "search_selection"
+    "extend_search_next"
   ];
 in
 {
@@ -48,14 +98,14 @@ in
           lsp.display-messages = true;
           bufferline = "always";
           soft-wrap = {
-            enable = true;
-            wrap-at-text-width = true;
+            enable = false;
+            wrap-at-text-width = false;
           };
         };
         keys = {
-          insert = { } // initializeSelection;
-          normal = noArrowKeys // initializeSelection // clearSelection // nextOccurence;
-          select = noArrowKeys // expandSelection // clearSelection // nextOccurence;
+          insert = { };
+          normal = noArrowKeys // changeMacros // movementMacros // selectionMacros // initializeSelection;
+          select = noArrowKeys // movementMacros // selectionMacros // expandSelection;
         };
         editor = {
           auto-save = {
@@ -70,7 +120,7 @@ in
       languages = {
         language-server.harper = {
           command = "${pkgs.harper}/bin/harper-ls";
-          args = ["--stdio"];
+          args = [ "--stdio" ];
           config = {
             harper-ls = {
               userDictPath = ../../.config/harper.dictionary;

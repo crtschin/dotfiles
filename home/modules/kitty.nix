@@ -33,8 +33,6 @@ in
         "ctrl+c" = "copy_or_interrupt";
         "ctrl+shift+c" = "copy_to_clipboard";
         "ctrl+shift+v" = "paste_from_clipboard";
-        "shift+insert" = "paste_from_clipboard";
-        "ctrl+s" = "paste_from_selection";
 
         "alt+up" = "scroll_line_up";
         "alt+down" = "scroll_line_down";
