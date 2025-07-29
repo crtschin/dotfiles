@@ -16,12 +16,13 @@ let
 
   # Movement
   movementMacros =
-    startOfLineContents // previousBuffer // nextBuffer // previousSubword // nextSubword;
+    startOfLineContents // previousBuffer // nextBuffer // previousSubword // nextSubword // gotoWord;
   # Move to the first non-whitespace character in the line
   startOfLineContents = makeKeymap "home" [
     "goto_line_start"
     "goto_first_nonwhitespace"
   ];
+  gotoWord = makeKeymap "ret" "goto_word";
   previousSubword = makeKeymap "A-home" [ "move_prev_sub_word_end" ];
   nextSubword = makeKeymap "A-end" [ "move_next_sub_word_end" ];
   # Previous/next buffer
@@ -71,6 +72,13 @@ let
     "search_next"
   ];
 
+  windowMacros = {
+    "space" = {
+      "o" = "file_picker_in_current_buffer_directory";
+      "q" = ":write-buffer-close";
+    };
+  };
+
   # Make sure there is only one selection, select word under cursor, set search to selection, then switch to select mode
   initializeSelection = makeKeymap "C-d" [
     "keep_primary_selection"
@@ -94,45 +102,78 @@ in
       settings = {
         theme = "gruvbox_dark_soft";
         editor = {
+          cursor-shape = {
+            insert = "bar";
+            normal = "block";
+            select = "underline";
+          };
+          cursorline = true;
+          indent-guides = {
+            render = true;
+            character = "|";
+            skip-levels = 1;
+          };
           line-number = "relative";
-          lsp.display-messages = true;
+          lsp = {
+            auto-signature-help = true;
+            display-color-swatches = true;
+            display-inlay-hints = true;
+            display-messages = true;
+            display-progress-messages = true;
+            display-signature-help-docs = true;
+          };
+          statusline = {
+            left = [
+              "mode"
+              "spinner"
+              "diagnostics"
+            ];
+            center = [ "file-name" ];
+            right = [
+              "selections"
+              "position"
+              "file-encoding"
+              "file-type"
+            ];
+          };
           bufferline = "always";
           soft-wrap = {
             enable = false;
             wrap-at-text-width = false;
           };
-        };
-        keys = {
-          insert = { };
-          normal = noArrowKeys // changeMacros // movementMacros // selectionMacros // initializeSelection;
-          select = noArrowKeys // movementMacros // selectionMacros // expandSelection;
-        };
-        editor = {
           auto-save = {
             focus-lost = true;
           };
+          gutters = { };
           rulers = [
             80
             100
           ];
         };
+        keys = {
+          insert = { };
+          normal = noArrowKeys // windowMacros // changeMacros // movementMacros // selectionMacros // initializeSelection;
+          select = noArrowKeys // movementMacros // selectionMacros // expandSelection;
+        };
       };
       languages = {
-        language-server.harper = {
-          command = "${pkgs.harper}/bin/harper-ls";
-          args = [ "--stdio" ];
-          config = {
-            harper-ls = {
-              userDictPath = ../../.config/harper.dictionary;
-              linters = {
-                SentenceCapitalization = false;
-                BoringWords = true;
+        language-server = {
+          harper = {
+            command = "${pkgs.harper}/bin/harper-ls";
+            args = [ "--stdio" ];
+            config = {
+              harper-ls = {
+                userDictPath = ../../.config/harper.dictionary;
+                linters = {
+                  SentenceCapitalization = false;
+                  BoringWords = true;
+                };
               };
             };
           };
-        };
-        language-server.marksman = {
-          command = "${pkgs.marksman}/bin/marksman";
+          marksman = {
+            command = "${pkgs.marksman}/bin/marksman";
+          };
         };
         language = [
           {
@@ -157,6 +198,14 @@ in
           {
             name = "markdown";
             file-types = [ "md" ];
+            soft-wrap = {
+              enable = true;
+              max-wrap = 4;
+              max-indent-retain = 16;
+              wrap-at-text-width = true;
+            };
+            text-width = 80;
+            rulers = [ 80 ];
             language-servers = [
               "harper"
               "marksman"
