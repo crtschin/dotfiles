@@ -26,6 +26,7 @@
 
     broot = {
       enable = true;
+      enableFishIntegration = true;
       settings = {
         modal = true;
         verbs = [
@@ -38,21 +39,51 @@
             apply_to = "file";
           }
           {
-            invocation = "view";
+            invocation = "preview";
             shortcut = "v";
-            execution = "bat {file}";
-          }
-          {
-            invocation = "parent";
-            shortcut = "p";
-            execution = ":parent";
+            key = "enter";
+            internal = "open_preview";
           }
         ];
-        default_flags = "gh";
+        default_flags = "h";
         quit_on_last_cancel = true;
+        preview_transformers = [
+          {
+            input_extensions = [ "pdf" ];
+            output_extension = "png";
+            mode = "image";
+            command = [
+              "${pkgs.mupdf}/bin/mutool"
+              "draw"
+              "-w"
+              "1000"
+              "-o"
+              "{output-path}"
+              "{input-path}"
+            ];
+          }
+          {
+            input_extensions = [ "json" ];
+            output_extension = "json";
+            mode = "text";
+            command = [
+              "${pkgs.jq}/bin/jq"
+              "-C"
+            ];
+          }
+          {
+            input_extensions = [ "md" ];
+            output_extension = "md";
+            mode = "text";
+            command = [
+              "${pkgs.glow}/bin/glow"
+            ];
+          }
+        ];
+        enable_kitty_keyboard = true;
         imports = [
           {
-            file = "dark-gruvbox.hjson";
+            file = "skins/dark-gruvbox.hjson";
             luma = [
               "dark"
               "unknown"

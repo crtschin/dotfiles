@@ -49,7 +49,6 @@
       # Git
       gitAndTools.git-absorb
       difftastic
-      gitui
 
       # System
       ncdu
@@ -86,6 +85,7 @@
       imagemagick
       obs-studio
       asciinema
+      mupdf
 
       # Programs
       spotify
@@ -237,10 +237,6 @@
     };
 
     taskwarrior = {
-      enable = false;
-    };
-
-    gitui = {
       enable = false;
     };
 

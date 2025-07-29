@@ -16,7 +16,15 @@ let
 
   # Movement
   movementMacros =
-    startOfLineContents // previousBuffer // nextBuffer // previousSubword // nextSubword // gotoWord;
+    startOfLineContents
+    // smartTabMacros
+    // previousBuffer
+    // nextBuffer
+    // previousSubword
+    // nextSubword
+    // gotoWord
+    // previousWord
+    // nextWord;
   # Move to the first non-whitespace character in the line
   startOfLineContents = makeKeymap "home" [
     "goto_line_start"
@@ -25,9 +33,15 @@ let
   gotoWord = makeKeymap "ret" "goto_word";
   previousSubword = makeKeymap "A-home" [ "move_prev_sub_word_end" ];
   nextSubword = makeKeymap "A-end" [ "move_next_sub_word_end" ];
+  previousWord = makeKeymap "C-h" [ "move_prev_sub_word_end" ];
+  nextWord = makeKeymap "C-l" [ "move_next_sub_word_end" ];
   # Previous/next buffer
   previousBuffer = makeKeymap "H" "goto_previous_buffer";
   nextBuffer = makeKeymap "L" "goto_next_buffer";
+
+  smartTabMacros = smartTabMoveStart // smartTabMoveEnd;
+  smartTabMoveEnd = makeKeymap "tab" "move_parent_node_end";
+  smartTabMoveStart = makeKeymap "S-tab" "move_parent_node_start";
 
   # Changes
   # Move/copy line below/above
@@ -55,11 +69,12 @@ let
   ];
 
   # Selection
-  selectionMacros = clearSelection // selectAll // selectAllOccurance // nextOccurence // currentWord;
+  selectionMacros = clearSelection // selectAll // selectAllOccurance // currentWord;
   # Clear any selections
   clearSelection = makeKeymap "esc" [
     "keep_primary_selection"
     "collapse_selection"
+    "normal_mode"
   ];
   # Select All
   selectAll = makeKeymap "C-a" "@<%>";
@@ -67,15 +82,21 @@ let
   selectAllOccurance = makeKeymap "C-A" "@*%s<ret>";
   # Select current word
   currentWord = makeKeymap "A-w" "@miw";
-  nextOccurence = makeKeymap "C-'" [
-    "search_selection"
-    "search_next"
-  ];
 
   windowMacros = {
     "space" = {
       "o" = "file_picker_in_current_buffer_directory";
       "q" = ":write-buffer-close";
+      "l" = [
+        ":write-all"
+        ":new"
+        ":insert-output gitui >/dev/tty"
+        ":set mouse false"
+        ":set mouse true"
+        ":buffer-close!"
+        ":redraw"
+        ":reload-all"
+      ];
     };
   };
 
@@ -113,6 +134,10 @@ in
             character = "|";
             skip-levels = 1;
           };
+          idle-timeout = 50;
+          completion-timeout = 50;
+          completion-trigger-len = 0;
+          color-modes = true;
           line-number = "relative";
           lsp = {
             auto-signature-help = true;
@@ -143,6 +168,7 @@ in
           };
           auto-save = {
             focus-lost = true;
+            after-delay.enable = true;
           };
           gutters = { };
           rulers = [
@@ -152,7 +178,13 @@ in
         };
         keys = {
           insert = { };
-          normal = noArrowKeys // windowMacros // changeMacros // movementMacros // selectionMacros // initializeSelection;
+          normal =
+            noArrowKeys
+            // windowMacros
+            // changeMacros
+            // movementMacros
+            // selectionMacros
+            // initializeSelection;
           select = noArrowKeys // movementMacros // selectionMacros // expandSelection;
         };
       };
@@ -174,44 +206,58 @@ in
           marksman = {
             command = "${pkgs.marksman}/bin/marksman";
           };
+          simple-completion-language-server = {
+            command = "${pkgs.simple-completion-language-server}/bin/simple-completion-language-server";
+            environment = {
+              SNIPPETS_PATH = ./helix/snippets;
+            };
+          };
         };
-        language = [
-          {
-            name = "git-commit";
-            file-types = [ { glob = "COMMIT_EDITMSG"; } ];
-            soft-wrap = {
-              enable = true;
-              max-wrap = 4;
-              max-indent-retain = 16;
-              wrap-at-text-width = true;
-            };
-            text-width = 72;
-            rulers = [
-              50
-              72
-            ];
-            language-servers = [
-              "harper"
-              "marksman"
-            ];
-          }
-          {
-            name = "markdown";
-            file-types = [ "md" ];
-            soft-wrap = {
-              enable = true;
-              max-wrap = 4;
-              max-indent-retain = 16;
-              wrap-at-text-width = true;
-            };
-            text-width = 80;
-            rulers = [ 80 ];
-            language-servers = [
-              "harper"
-              "marksman"
-            ];
-          }
-        ];
+        language =
+          let
+            mkLspUsage =
+              lsps:
+              [
+                "simple-completion-language-server"
+                "harper"
+              ]
+              ++ lsps;
+          in
+          [
+            {
+              name = "git-commit";
+              file-types = [ { glob = "COMMIT_EDITMSG"; } ];
+              soft-wrap = {
+                enable = true;
+                max-wrap = 4;
+                max-indent-retain = 16;
+                wrap-at-text-width = true;
+              };
+              text-width = 72;
+              rulers = [
+                50
+                72
+              ];
+              language-servers = mkLspUsage [
+                "marksman"
+              ];
+            }
+            {
+              name = "markdown";
+              file-types = [ "md" ];
+              soft-wrap = {
+                enable = true;
+                max-wrap = 4;
+                max-indent-retain = 16;
+                wrap-at-text-width = true;
+              };
+              text-width = 80;
+              rulers = [ 80 ];
+              language-servers = mkLspUsage [
+                "marksman"
+              ];
+            }
+          ];
       };
     };
   };

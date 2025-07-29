@@ -132,7 +132,7 @@
     # Set udev rules to recognize qmk boards
     (pkgs.writeTextFile {
       name = "crtschin_udev";
-      text = builtins.readFile ../qmk/50-qmk.rules;
+      text = builtins.readFile ../qmk/planck_v6/50-qmk.rules;
       destination = "/etc/udev/rules.d/50-crtschin.rules";
     })
     pkgs.via

@@ -16,6 +16,7 @@ in
         size = 14;
       };
       settings = {
+        allow_remote_control = true;
         clear_all_shortcuts = true;
         copy_on_select = true;
         cursor_shape = "block";

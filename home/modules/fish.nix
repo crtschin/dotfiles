@@ -51,8 +51,11 @@ in
         vscode = "code --ozone-platform=wayland";
         copy = "xclip -sel clip";
         psql = "pgcli";
+        lla = "eza -la --group-directories-first --icons=auto --smart-group --no-permissions --no-user";
+        llaa = "eza -la --group-directories-first --icons=auto --smart-group";
         z = "j";
         gu = "${pkgs.gitui}/bin/gitui";
+        mkdir = "mkdir -p -v";
         watch = "watch -c -d";
       };
       functions = {

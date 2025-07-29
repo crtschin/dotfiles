@@ -10,6 +10,11 @@
       url = "github:helix-editor/helix";
     };
 
+    lix-module = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.3-1.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     flake-utils = {
       url = "github:numtide/flake-utils";
     };
@@ -68,6 +73,7 @@
       self,
       flake-utils,
       nixpkgs,
+      lix-module,
       home-manager,
       nix-rice,
       nixgl,
@@ -116,6 +122,7 @@
           system = "x86_64-linux";
           modules = [
             ./configuration.nix
+            lix-module.nixosModules.default
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;

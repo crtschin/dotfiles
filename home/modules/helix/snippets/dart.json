@@ -1,0 +1,169 @@
+{
+	//#region RxDart
+	"RxDart Input Stream": {
+		"prefix": "rxstrm",
+		"body": [
+			"Stream<${1:streamType}> get ${2:varName} => this._${2:varName}.stream;",
+			"",
+			"BehaviorSubject<${1:streamType}> _${2:varName} = BehaviorSubject();",
+			"$0",
+		],
+		"description": "Creates a new output Stream and corresponding Behavioursubject."
+	},
+	"RxDart Output Sink": {
+		"prefix": "rxsnk",
+		"body": [
+			"Sink<${1:sinkType}> get ${2:varName} => this._${2:varName}.sink;",
+			"",
+			"BehaviorSubject<${1:sinkType}> _${2:varName} = BehaviorSubject();",
+			"$0",
+		],
+		"description": "Creates a new input Sink and corresponding Behavioursubject."
+	},
+	//#endregion RxDart
+	//#region BuiltValue
+	"BuiltValue class": {
+		"prefix": "bvclass",
+		"body": [
+			"import 'package:built_value/built_value.dart';",
+			"import 'package:built_value/serializer.dart';",
+			"import 'package:built_collection/built_collection.dart';",
+			"",
+			"part '${TM_FILENAME_BASE}.g.dart';",
+			"",
+			"abstract class ${1:className} implements Built<${1:className}, ${1:className}Builder> {",
+			"\tstatic Serializer<${1:className}> get serializer => _$${1/(.)/${0:/downcase}/}Serializer;",
+			"",
+			"\t${1:className}._();",
+			"\tfactory ${1:className}([updates(${1:className}Builder b)]) = _$${1:className};",
+			"}",
+			"$0",
+		],
+		"description": "Creates a new file with the skeleton of an ResourceController."
+	},
+	"BuiltValue builder": {
+		"prefix": "bvbuilder",
+		"body": [
+			"abstract class ${1:className}Builder",
+			"\t\timplements Builder<${1:className}, ${1:className}Builder> {",
+			"",
+			"\tfactory ${1:className}Builder() = _$${1:className}Builder;",
+			"\t${1:className}Builder._();",
+			"}",
+			"$0",
+		],
+		"description": "Creates a new file with the skeleton of an ResourceController."
+	},
+	"BuiltValue enum": {
+		"prefix": "bvenum",
+		"body": [
+			"import 'package:built_value/built_value.dart';",
+			"import 'package:built_value/serializer.dart';",
+			"import 'package:built_collection/built_collection.dart';",
+			"",
+			"part '${TM_FILENAME_BASE}.g.dart';",
+			"",
+			"class ${1:className}Enum extends EnumClass {",
+			"\tstatic Serializer<${1:className}Enum> get serializer => _$${1/(.)/${0:/downcase}/}EnumSerializer;",
+			"",
+			"\tstatic const ${1:className}Enum $2 = _$$2;",
+			"\t$0",
+			"",
+			"\tconst ${1:className}Enum._(String name) : super(name);",
+			"\tstatic BuiltSet<${1:className}Enum> get values => _\\$values;",
+			"\tstatic ${1:className}Enum valueOf(String name) => _\\$valueOf(name);",
+			"}",
+		],
+		"description": "Creates a new file with the skeleton of an ResourceController."
+	},
+	//#endregion BuiltValue
+	//#region Aqueduct
+	"Aqueduct ResourceController": {
+		"prefix": "aqcontroller",
+		"body": [
+			"import 'package:aqueduct/aqueduct.dart';",
+			"",
+			"class ${1:className}Controller extends ResourceController {",
+			"\t$0",
+			"}"
+		],
+		"description": "Creates a new file with the skeleton of an ResourceController."
+	},
+	"Aqueduct Path Variable": {
+		"prefix": "aqbindpath",
+		"body": [
+			"@Bind.path(0:pathVariableName)",
+		],
+		"description": "Creates a new file with the skeleton of an ResourceController."
+	},
+	"Aqueduct URL Query Parameter": {
+		"prefix": "aqbindquery",
+		"body": [
+			"@Bind.query(${0:queryParameterName})",
+		],
+		"description": "Creates a new file with the skeleton of an ResourceController."
+	},
+	"Aqueduct Header": {
+		"prefix": "aqbindheader",
+		"body": [
+			"@Bind.header(${0:headerName})",
+		],
+		"description": "Creates a new file with the skeleton of an ResourceController."
+	},
+	"Aqueduct Request Body": {
+		"prefix": "aqbindbody",
+		"body": [
+			"@Bind.body()$0",
+		],
+		"description": "Creates a new file with the skeleton of an ResourceController."
+	},
+	"Aqueduct Operation": {
+		"prefix": "aqoperation",
+		"body": [
+			"@Operation$1",
+			"Future<Response> ${2:functionName}(${3:arguments}) async {",
+			"\t${0:functionBody}",
+			"}"
+		],
+		"description": "Creates a new file with the skeleton of an ResourceController."
+	},
+	"Aqueduct ManagedObject": {
+		"prefix": "aqmo",
+		"body": [
+			"import 'package:aqueduct/aqueduct.dart';",
+			"",
+			"class ${1:className} extends ManagedObject<_${1:className}> implements _${1:className} {}",
+			"class _${1:className} {",
+			"\t$0",
+			"}"
+		],
+		"description": "Creates the skeleton of a ManagedObject subclass"
+	},
+	"Aqueduct Column": {
+		"prefix": "aqcol",
+		"body": [
+			"@Column($0)",
+			"${1:className} ${2:tableVariable};"
+		],
+		"description": "Creates a ManagedObject column"
+	},
+	"Aqueduct Primary Column": {
+		"prefix": "aqprim",
+		"body": [
+			"@primaryKey",
+			"${1:className} ${2:tableVariable};",
+			"$0"
+		],
+		"description": "Creates a ManagedObject primary column"
+	},
+	"Aqueduct Relationship": {
+		"prefix": "aqrel",
+		"body": [
+			"@Relate(#${1:otherTableVariable})",
+			"${2:className} ${3:tableVariable};",
+			"$0"
+		],
+		"description": "Creates a ManagedObject relation column"
+	}
+	//#endregion Aqueduct
+}
