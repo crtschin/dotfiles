@@ -30,6 +30,7 @@ in
         strip_trailing_spaces = "always";
         tab_bar_style = "powerline";
         tab_powerline_style = "slanted";
+        update_check_interval = 0;
         visual_bell_duration = "0.5";
       } // pkgs.riceColorPalette;
       keybindings = {

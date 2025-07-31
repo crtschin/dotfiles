@@ -6,7 +6,7 @@ rec {
   configuration = super.configuration // rec {
     terminal = {
       package = super.kitty;
-      name = "kitty";
+      name = "kitty --single-instance";
     };
     rice = {
       brighten = 20;
