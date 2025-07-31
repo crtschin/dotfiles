@@ -10,6 +10,10 @@
       url = "github:helix-editor/helix";
     };
 
+    helix-crtschin = {
+      url = "github:crtschin/helix?ref=crts/scratch";
+    };
+
     lix-module = {
       url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.3-1.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -77,6 +81,7 @@
       home-manager,
       nix-rice,
       nixgl,
+      helix-crtschin,
       ...
     }@inputs:
     let
@@ -84,6 +89,7 @@
       overlays = [
         nix-rice.overlays.default
         nixgl.overlay
+        helix-crtschin.overlays.default
       ];
       pkgs = nixpkgs.legacyPackages.${system} // {
         inherit overlays;
@@ -110,8 +116,6 @@
         };
     in
     {
-      inherit makeHomeConfiguration;
-
       homeConfigurations = {
         work = makeHomeConfiguration { extraModules = [ ./work.nix ]; };
         personal = makeHomeConfiguration { extraModules = [ ./personal.nix ]; };
@@ -123,11 +127,6 @@
           modules = [
             ./configuration.nix
             lix-module.nixosModules.default
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-            }
           ];
         };
       };

@@ -86,7 +86,8 @@ let
   windowMacros = {
     "space" = {
       "o" = "file_picker_in_current_buffer_directory";
-      "q" = ":write-buffer-close";
+      "q" = ":buffer-close";
+      "Q" = ":write-buffer-close";
       "l" = [
         ":write-all"
         ":new"
@@ -98,6 +99,8 @@ let
         ":reload-all"
       ];
     };
+    "C-p" = "file_picker";
+    "C-P" = "command_palette";
   };
 
   # Make sure there is only one selection, select word under cursor, set search to selection, then switch to select mode
@@ -134,8 +137,8 @@ in
             character = "|";
             skip-levels = 1;
           };
-          idle-timeout = 50;
-          completion-timeout = 50;
+          idle-timeout = 200;
+          completion-timeout = 5;
           completion-trigger-len = 0;
           color-modes = true;
           line-number = "relative";

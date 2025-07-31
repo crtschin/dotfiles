@@ -41,11 +41,12 @@ in
         inherit enable;
         package = pkgs.swayfx;
         checkConfig = false;
-        # systemd.enable = true;
+        systemd.enable = true;
         wrapperFeatures = {
           gtk = true;
         };
         extraConfig = ''
+          include /etc/sway/config.d/*
           exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
           ${configuration.sway.colorTheme}
@@ -62,9 +63,9 @@ in
         '';
         config = {
           assigns = {
-            "10: terminal" = [
-              { app_id = configuration.terminal.name; }
-            ];
+            # "10: terminal" = [
+            #   { app_id = configuration.terminal.name; }
+            # ];
             "9: music" = [
               { class = "Spotify"; }
             ];

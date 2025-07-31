@@ -37,7 +37,6 @@ let
   overlays = [
     overlay
     inputs.tidal.overlays.default
-    inputs.helix.overlays.default
     (import ./home/overlays/entry.nix)
     (import ./home/overlays/kanshi.nix)
     (import ./home/overlays/rice.nix)
@@ -109,7 +108,7 @@ in
       imageDirectory = "%h/backgrounds";
     };
     ssh-agent.enable = true;
-    gnome-keyring.enable = true;
+    # gnome-keyring.enable = true;
   };
 
   programs = {

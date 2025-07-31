@@ -145,6 +145,16 @@
     extraModules = [ ];
     package = pkgs.pulseaudio.override { jackaudioSupport = true; };
   };
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;
+  };
+
+  # Bluetooth
   hardware = {
     bluetooth = {
       enable = true;
@@ -207,6 +217,15 @@
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-wlr
+    ];
+    xdgOpenUsePortal = true;
+  };
+
   environment.pathsToLink = [
     "/share/xdg-desktop-portal"
     "/share/applications"
@@ -229,19 +248,18 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  programs.seahorse.enable = true;
   services.openssh.enable = true;
   services.avahi = {
     nssmdns4 = false;
     enable = false;
   };
-  services.gnome.gnome-keyring.enable = true;
+  services.gnome.gnome-keyring.enable = false;
   security = {
-    pam.services.lightdm.enableGnomeKeyring = true;
-    pam.services.sddm.enableGnomeKeyring = true;
+    pam.services.lightdm.enableGnomeKeyring = false;
+    pam.services.sddm.enableGnomeKeyring = false;
     polkit.enable = true;
   };
-  # programs.ssh.startAgent = true;
+  programs.ssh.startAgent = true;
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
       description = "polkit-gnome-authentication-agent-1";

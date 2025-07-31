@@ -140,7 +140,20 @@
       "/usr/share"
       "/usr/local/share"
     ];
-
+    portal = {
+      enable = true;
+      config = {
+        sway = {
+          default = [ "gtk" ];
+          "org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
+          "org.freedesktop.impl.portal.ScreenCast" = [ "wlr" ];
+        };
+      };
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-wlr
+        xdg-desktop-portal-gtk
+      ];
+    };
     configFile."direnv/direnvrc".text = ''
       source ${pkgs.nix-direnv}/share/nix-direnv/direnvrc
     '';

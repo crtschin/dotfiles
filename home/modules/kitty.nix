@@ -20,6 +20,8 @@ in
         clear_all_shortcuts = true;
         copy_on_select = true;
         cursor_shape = "block";
+        cursor_trail = 3;
+        cursor_trail_decay = "0.1 0.4";
         disable_ligatures = "cursor";
         enable_audio_bell = true;
         scrollback_lines = 10000;
