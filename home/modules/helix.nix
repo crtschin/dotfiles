@@ -98,6 +98,7 @@ let
         ":redraw"
         ":reload-all"
       ];
+      "B" = ":echo %sh{git blame -L %{cursor_line},+1 %{buffer_name}}";
     };
     "C-p" = "file_picker";
     "C-P" = "command_palette";
@@ -139,11 +140,12 @@ in
           };
           idle-timeout = 200;
           completion-timeout = 5;
-          completion-trigger-len = 0;
+          completion-trigger-len = 2;
           color-modes = true;
           line-number = "relative";
           lsp = {
             auto-signature-help = true;
+            display-idle-hover-docs = true;
             display-color-swatches = true;
             display-inlay-hints = true;
             display-messages = true;

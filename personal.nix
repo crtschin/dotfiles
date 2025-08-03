@@ -63,8 +63,11 @@ in
         pv
         valgrind
         discord
+        signal-desktop
         glxinfo
         unzip
+        time
+        mold
 
         # qjackctl jack2Full jack_capture
         # supercollider superdirt-start tidal

@@ -92,6 +92,7 @@
       spotifyd
       vscode
       hivemind
+      zoom-us
 
       # Customization
       dejavu_fonts
@@ -251,13 +252,6 @@
 
     taskwarrior = {
       enable = false;
-    };
-
-    vim = {
-      enable = true;
-      extraConfig = ''
-        syntax on
-      '';
     };
   };
 

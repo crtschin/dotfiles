@@ -112,7 +112,7 @@
             # The dotfiles argument always points to the flake root.
             dotfiles = self;
           };
-          modules = [ ] ++ extraModules;
+          modules = extraModules;
         };
     in
     {
