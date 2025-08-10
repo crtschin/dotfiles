@@ -169,10 +169,11 @@
   boot.kernelModules = [
     "snd-seq"
     "snd-rawmidi"
+    "ecryptfs"
   ];
 
   services.jack = {
-    jackd.enable = true;
+    jackd.enable = false;
     # support ALSA only programs via ALSA JACK PCM plugin
     alsa.enable = false;
     # support ALSA only programs via loopback device (supports programs like Steam)
@@ -233,9 +234,9 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  # environment.systemPackages = [
-  #   (import (fetchTarball "https://install.devenv.sh/latest")).default
-  # ];
+  environment.systemPackages = [
+    pkgs.ecryptfs
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -258,6 +259,7 @@
     pam.services.lightdm.enableGnomeKeyring = false;
     pam.services.sddm.enableGnomeKeyring = false;
     polkit.enable = true;
+    pam.enableEcryptfs = true;
   };
   programs.ssh.startAgent = true;
   systemd = {

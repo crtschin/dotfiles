@@ -10,7 +10,7 @@
     windowManager = {
       hyprland = {
         enable = false;
-        xwayland.enable = true;
+        # xwayland.enable = true;
       };
     };
   };

@@ -69,19 +69,32 @@ let
   ];
 
   # Selection
-  selectionMacros = clearSelection // selectAll // selectAllOccurance // currentWord;
+  selectionMacros =
+    clearSelection
+    // selectAll
+    // selectAllAlias
+    // selectAllOccurance
+    // currentWord
+    // selectLineAbove
+    // selectLineBelow;
   # Clear any selections
   clearSelection = makeKeymap "esc" [
     "keep_primary_selection"
     "collapse_selection"
     "normal_mode"
   ];
+  selectLineBelow = makeKeymap "x" "select_line_below";
+  selectLineAbove = makeKeymap "X" "select_line_above";
   # Select All
-  selectAll = makeKeymap "C-a" "@<%>";
+  selectAll = makeKeymap "%" [
+    "save_selection"
+    "select_all"
+  ];
+  selectAllAlias = makeKeymap "C-a" "@<%>";
   # Select All Occurances of Selection
   selectAllOccurance = makeKeymap "C-A" "@*%s<ret>";
   # Select current word
-  currentWord = makeKeymap "A-w" "@miw";
+  currentWord = makeKeymap "'" "@miw";
 
   windowMacros = {
     "space" = {

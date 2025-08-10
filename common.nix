@@ -86,6 +86,7 @@
       obs-studio
       asciinema
       mupdf
+      qrencode
 
       # Programs
       spotify
@@ -246,9 +247,9 @@
       };
     };
 
-    nix-your-shell = {
-      enable = true;
-    };
+    # nix-your-shell = {
+    #   enable = true;
+    # };
 
     taskwarrior = {
       enable = false;
