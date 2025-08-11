@@ -7,6 +7,17 @@
 }:
 let
   makeKeymap = key: keymap: { ${key} = keymap; };
+  makeBufferWith = cmd: [
+    ":write-all"
+    ":new"
+    ":insert-output ${cmd} >/dev/tty"
+    ":set mouse false"
+    ":set mouse true"
+    ":buffer-close!"
+    ":redraw"
+    ":reload-all"
+  ];
+
   noArrowKeys = {
     "up" = "no_op";
     "down" = "no_op";
@@ -74,9 +85,10 @@ let
     // selectAll
     // selectAllAlias
     // selectAllOccurance
-    // currentWord
     // selectLineAbove
-    // selectLineBelow;
+    // selectLineBelow
+    // selectionBuffer
+    // selectionBufferBoundaries;
   # Clear any selections
   clearSelection = makeKeymap "esc" [
     "keep_primary_selection"
@@ -91,45 +103,48 @@ let
     "select_all"
   ];
   selectAllAlias = makeKeymap "C-a" "@<%>";
+  selectionBuffer = makeKeymap "*" "search_selection";
+  selectionBufferBoundaries = makeKeymap "A-*" "search_selection_detect_word_boundaries";
   # Select All Occurances of Selection
   selectAllOccurance = makeKeymap "C-A" "@*%s<ret>";
-  # Select current word
-  currentWord = makeKeymap "'" "@miw";
+  # Select current word, and otherwise jump to next instance of word
+  selectCurrentWord = makeKeymap "'" "@miw*v";
+  selectNextCurrentWord = makeKeymap "'" "@n,";
 
   windowMacros = {
     "space" = {
       "o" = "file_picker_in_current_buffer_directory";
       "q" = ":buffer-close";
       "Q" = ":write-buffer-close";
-      "l" = [
-        ":write-all"
-        ":new"
-        ":insert-output gitui >/dev/tty"
-        ":set mouse false"
-        ":set mouse true"
-        ":buffer-close!"
-        ":redraw"
-        ":reload-all"
-      ];
+      "P" = "no_op";
+      "p" = {
+        "g" = makeBufferWith "gitui";
+      };
       "B" = ":echo %sh{git blame -L %{cursor_line},+1 %{buffer_name}}";
+      "space" = [
+        ":format"
+        ":write"
+      ];
+      "C-space" = [
+        "format_selections"
+        ":write"
+      ];
     };
     "C-p" = "file_picker";
     "C-P" = "command_palette";
   };
+  normalMode = makeKeymap "v" "normal_mode";
 
   # Make sure there is only one selection, select word under cursor, set search to selection, then switch to select mode
-  initializeSelection = makeKeymap "C-d" [
-    "keep_primary_selection"
-    "move_next_word_end"
-    "move_prev_word_start"
-    "search_selection"
-    "select_mode"
-  ];
+  initializeSelection = makeKeymap "C-d" "@,miw*v";
   # If already in select mode, just add new selection at next occurrence
   expandSelection = makeKeymap "C-d" [
     "search_selection"
     "extend_search_next"
   ];
+
+  selectModeMacros = normalMode // expandSelection // selectNextCurrentWord;
+  normalModeMacros = initializeSelection // selectCurrentWord;
 in
 {
   programs = {
@@ -202,8 +217,8 @@ in
             // changeMacros
             // movementMacros
             // selectionMacros
-            // initializeSelection;
-          select = noArrowKeys // movementMacros // selectionMacros // expandSelection;
+            // normalModeMacros;
+          select = noArrowKeys // movementMacros // selectionMacros // selectModeMacros;
         };
       };
       languages = {

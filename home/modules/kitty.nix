@@ -50,7 +50,7 @@ in
         "ctrl+down" = "previous_tab";
         "ctrl+t" = "new_tab";
         "ctrl+w" = "close_tab";
-        "ctrl+n" = "new_window";
+        "ctrl+n" = "new_window_with_cwd";
         "ctrl+x" = "close_window";
         "ctrl+right" = "next_window";
         "ctrl+left" = "previous_window";
