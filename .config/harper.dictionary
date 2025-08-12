@@ -8,3 +8,11 @@ Stackage
 stackage
 PR
 pr
+docker
+dockerfile
+ghc
+GHC
+fourmolu
+hlint
+serializers
+serializer

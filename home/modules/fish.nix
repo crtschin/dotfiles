@@ -21,7 +21,10 @@ in
   home.packages = pkgsFishPlugins;
   programs = {
     starship.enableFishIntegration = true;
-
+    bash = {
+      enable = true;
+      bashrcExtra = "PATH=$PATH:$HOME/.nix-profile/bin";
+    };
     fish = {
       interactiveShellInit = ''
         begin
