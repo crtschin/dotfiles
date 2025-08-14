@@ -105,6 +105,7 @@
       via
       vial
       qmk
+      ttyper
 
       # papirus-icon-theme
       gruvbox-dark-gtk

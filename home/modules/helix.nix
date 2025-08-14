@@ -113,16 +113,24 @@ let
       "q" = ":buffer-close";
       "Q" = ":write-buffer-close";
       "P" = "no_op";
-      "l" = {
+      "p" = {
         "t" = makeBufferWith "gitui";
         "g" = makeBufferWith "lazygit";
         "d" = makeBufferWith "lazydocker";
         "s" = makeBufferWith "lazysql";
       };
-      "b" =
-        ":echo %sh{git show --no-patch --format='%%h (%%an: %%ar): %%s' $(git blame -p %{buffer_name} -L%{cursor_line},+1 | head -1 | cut -d' ' -f1)}";
-      "B" = ":sh gh browse %{buffer_name}:%{selection_line_start}-%{selection_line_end}";
-      "C-b" = ":sh ${pkgs.gitBlameURL} %{buffer_name} %{cursor_line}";
+      "g" = {
+        "g" = "changed_file_picker";
+        "b" =
+          ":echo %sh{git show --no-patch --format='%%h (%%an: %%ar): %%s' $(git blame -p %{buffer_name} -L%{cursor_line},+1 | head -1 | cut -d' ' -f1)}";
+        "B" = ":sh gh browse %{buffer_name}:%{selection_line_start}-%{selection_line_end}";
+        "C-b" = ":sh ${pkgs.gitBlameURL} %{buffer_name} %{cursor_line}";
+        "s" = [
+          ":write"
+          ":sh git add --"
+          ":redraw"
+        ];
+      };
       "space" = [
         ":format"
         ":write"
@@ -250,9 +258,6 @@ in
               SNIPPETS_PATH = ./helix/snippets;
             };
           };
-          # haskell-language-server = {
-          #   config.haskell.formattingProvider = "fourmolu";
-          # };
         };
         language =
           let
@@ -298,17 +303,6 @@ in
                 "marksman"
               ];
             }
-            # {
-            #   name = "haskell";
-            #   formatter = {
-            #     args = [
-            #       "-d"
-            #       "--stdin-input-file"
-            #       "%sh{dirname $DIRENV_FILE}/%{buffer_name}"
-            #     ];
-            #     command = "fourmolu";
-            #   };
-            # }
           ];
       };
     };
