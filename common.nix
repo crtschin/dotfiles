@@ -247,6 +247,22 @@
       };
     };
 
+    sioyek = {
+      enable = true;     
+    };
+
+    lazydocker = {
+      enable = true;
+    };
+
+    lazygit = {
+      enable = true;
+    };
+
+    lazysql = {
+      enable = true;
+    };
+    
     # nix-your-shell = {
     #   enable = true;
     # };

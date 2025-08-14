@@ -9,11 +9,7 @@ let
   makeKeymap = key: keymap: { ${key} = keymap; };
   makeBufferWith = cmd: [
     ":write-all"
-    ":new"
-    ":insert-output ${cmd} >/dev/tty"
-    ":set mouse false"
-    ":set mouse true"
-    ":buffer-close!"
+    ":run-shell-command kitty @ launch --wait-for-child-to-exit --no-response --copy-env --type=overlay --cwd=current lazygit"
     ":redraw"
     ":reload-all"
   ];
@@ -117,10 +113,16 @@ let
       "q" = ":buffer-close";
       "Q" = ":write-buffer-close";
       "P" = "no_op";
-      "p" = {
-        "g" = makeBufferWith "gitui";
+      "l" = {
+        "t" = makeBufferWith "gitui";
+        "g" = makeBufferWith "lazygit";
+        "d" = makeBufferWith "lazydocker";
+        "s" = makeBufferWith "lazysql";
       };
-      "B" = ":echo %sh{git blame -L %{cursor_line},+1 %{buffer_name}}";
+      "b" =
+        ":echo %sh{git show --no-patch --format='%%h (%%an: %%ar): %%s' $(git blame -p %{buffer_name} -L%{cursor_line},+1 | head -1 | cut -d' ' -f1)}";
+      "B" = ":sh gh browse %{buffer_name}:%{selection_line_start}-%{selection_line_end}";
+      "C-b" = ":sh ${pkgs.gitBlameURL} %{buffer_name} %{cursor_line}";
       "space" = [
         ":format"
         ":write"
@@ -222,6 +224,9 @@ in
         };
       };
       languages = {
+        use-grammars = {
+          except = [ ];
+        };
         language-server = {
           harper = {
             command = "${pkgs.harper}/bin/harper-ls";
@@ -245,6 +250,9 @@ in
               SNIPPETS_PATH = ./helix/snippets;
             };
           };
+          # haskell-language-server = {
+          #   config.haskell.formattingProvider = "fourmolu";
+          # };
         };
         language =
           let
@@ -290,6 +298,17 @@ in
                 "marksman"
               ];
             }
+            # {
+            #   name = "haskell";
+            #   formatter = {
+            #     args = [
+            #       "-d"
+            #       "--stdin-input-file"
+            #       "%sh{dirname $DIRENV_FILE}/%{buffer_name}"
+            #     ];
+            #     command = "fourmolu";
+            #   };
+            # }
           ];
       };
     };

@@ -27,6 +27,17 @@ rec {
     };
   };
 
+  gitBlameURL = super.writeScript "git-blame-url" ''
+    set -e
+    buffer_name=$1
+    cursor_line=$2
+    readarray -t blame_lines < <(git blame -p $buffer_name -L $cursor_line,+1)
+    origin_commit_hash=$(echo ''${blame_lines[0]} | awk "{print \$1}")
+    origin_commit_linenumber=$(echo ''${blame_lines[0]} | awk "{print \$2}")
+    origin_commit_file=$(echo ''${blame_lines[10]} | awk "{print \$3}")
+    gh browse $origin_commit_file:$origin_commit_linenumber --commit=$origin_commit_hash
+  '';
+
   # * Utilities
 
   assertOneOfSet =

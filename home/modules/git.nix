@@ -55,10 +55,7 @@ in
 
           popup_up: Some(( code: Char('p'), modifiers: "CONTROL")),
           popup_down: Some(( code: Char('n'), modifiers: "CONTROL")),
-          page_up: Some(( code: Char('b'), modifiers: "CONTROL")),
-          page_down: Some(( code: Char('f'), modifiers: "CONTROL")),
-          home: Some(( code: Char('g'), modifiers: "")),
-          end: Some(( code: Char('G'), modifiers: "SHIFT")),
+
           shift_up: Some(( code: Char('K'), modifiers: "SHIFT")),
           shift_down: Some(( code: Char('J'), modifiers: "SHIFT")),
 
