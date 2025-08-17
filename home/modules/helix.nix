@@ -125,11 +125,11 @@ let
           ":echo %sh{git show --no-patch --format='%%h (%%an: %%ar): %%s' $(git blame -p %{buffer_name} -L%{cursor_line},+1 | head -1 | cut -d' ' -f1)}";
         "B" = ":sh gh browse %{buffer_name}:%{selection_line_start}-%{selection_line_end}";
         "C-b" = ":sh ${pkgs.gitBlameURL} %{buffer_name} %{cursor_line}";
-        "s" = [
-          ":write"
-          ":sh git add --"
-          ":redraw"
-        ];
+        # "s" = [
+        #   ":write"
+        #   ":sh git add --"
+        #   ":redraw"
+        # ];
       };
       "space" = [
         ":format"

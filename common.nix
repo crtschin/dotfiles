@@ -45,6 +45,7 @@
       process-compose
       jump
       bluetui
+      jujutsu
 
       # Git
       gitAndTools.git-absorb
