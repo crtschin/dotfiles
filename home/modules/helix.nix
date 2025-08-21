@@ -31,6 +31,8 @@ let
     // nextSubword
     // gotoWord
     // previousWord
+    // pageUp
+    // pageDown
     // nextWord;
   # Move to the first non-whitespace character in the line
   startOfLineContents = makeKeymap "home" [
@@ -45,6 +47,8 @@ let
   # Previous/next buffer
   previousBuffer = makeKeymap "H" "goto_previous_buffer";
   nextBuffer = makeKeymap "L" "goto_next_buffer";
+  pageUp = makeKeymap "pageup" ":page-up-smooth";
+  pageDown = makeKeymap "pagedown" ":page-down-smooth";
 
   smartTabMacros = smartTabMoveStart // smartTabMoveEnd;
   smartTabMoveEnd = makeKeymap "tab" "move_parent_node_end";
@@ -157,6 +161,10 @@ let
   normalModeMacros = initializeSelection // selectCurrentWord;
 in
 {
+  xdg.configFile = {
+    "helix/init.scm".source = ../../.config/helix/init.scm;
+    "helix/helix.scm".source = ../../.config/helix/helix.scm;
+  };
   programs = {
     helix = {
       enable = true;
