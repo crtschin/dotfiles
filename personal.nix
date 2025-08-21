@@ -68,6 +68,7 @@ in
         unzip
         time
         mold
+        mediawriter
 
         # qjackctl jack2Full jack_capture
         # supercollider superdirt-start tidal
@@ -111,6 +112,7 @@ in
     };
     ssh-agent.enable = true;
     # gnome-keyring.enable = true;
+    udiskie.enable = true;
   };
 
   programs = {

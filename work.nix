@@ -2,17 +2,16 @@
   config,
   pkgs,
   inputs,
+  lib,
   ...
 }:
 let
   overlay = self: super: {
     useWayland = true;
-    # betterlockscreen = self.nativeWrapper super.betterlockscreen;
-    # i3lock-color = self.nativeWrapper super.i3lock-color;
     configuration = {
       git = {
         userName = "Curtis Chin Jen Sem";
-        userEmail = "curtis.chinjensem@channable.com";
+        userEmail = "curtis.chinjensem@scrive.com";
         signingKey = "/home/curtis/.ssh/id_ed25519.pub";
       };
       wm = "sway";
@@ -21,7 +20,6 @@ let
 
   overlays = [
     overlay
-    inputs.tidal.overlays.default
     (import ./home/overlays/entry.nix)
     (import ./home/overlays/kanshi.nix)
     (import ./home/overlays/rice.nix)
@@ -76,10 +74,7 @@ in
   };
 
   services = {
-    random-background = {
-      # enable = true;
-      imageDirectory = "%h/Pictures/Wallpapers";
-    };
+    random-background = { };
   };
 
   programs = {

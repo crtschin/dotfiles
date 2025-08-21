@@ -220,7 +220,9 @@ in
           ];
         };
         keys = {
-          insert = { };
+          insert = {
+            "C-." = "completion";
+          };
           normal =
             noArrowKeys
             // windowMacros
@@ -258,7 +260,21 @@ in
               SNIPPETS_PATH = ./helix/snippets;
             };
           };
+          haskell-language-server = {
+            config = {
+              sessionLoading = "multipleComponents";
+            };
+          };
         };
+        # grammar = [
+        #   {
+        #     "name" = "cabal";
+        #     "source" = {
+        #       git = "https://gitlab.com/magus/tree-sitter-cabal";
+        #       rev = "7d5fa6887ae05a0b06d046f1e754c197c8ad869b";
+        #     };
+        #   }
+        # ];
         language =
           let
             mkLspUsage =
@@ -270,6 +286,11 @@ in
               ++ lsps;
           in
           [
+            # {
+            #   name = "cabal";
+            #   file-types = [ "cabal" ];
+            #   grammar = "cabal";
+            # }
             {
               name = "git-commit";
               file-types = [ { glob = "COMMIT_EDITMSG"; } ];

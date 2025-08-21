@@ -8,16 +8,14 @@
   imports = [
     ./home/shell.nix
     ./home/services.nix
-    ./home/modules/alacritty.nix
     ./home/modules/dunst.nix
     ./home/modules/fish.nix
     ./home/modules/ghostty.nix
     ./home/modules/git.nix
     ./home/modules/helix.nix
-    ./home/modules/i3.nix
     ./home/modules/kanshi.nix
     ./home/modules/kitty.nix
-    ./home/modules/polybar.nix
+    ./home/modules/waybar.nix
     ./home/modules/starship.nix
     ./home/modules/sway.nix
   ];
@@ -141,8 +139,8 @@
     enable = true;
     mime.enable = true;
     systemDirs.data = [
-      "/usr/share"
-      "/usr/local/share"
+      # "/usr/share"
+      # "/usr/local/share"
     ];
     portal = {
       enable = true;
@@ -265,10 +263,6 @@
     lazysql = {
       enable = true;
     };
-
-    # nix-your-shell = {
-    #   enable = true;
-    # };
 
     taskwarrior = {
       enable = false;

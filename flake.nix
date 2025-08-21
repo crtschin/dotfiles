@@ -12,7 +12,7 @@
     };
 
     helix-crtschin = {
-      url = "github:crtschin/helix?ref=crts/scratch";
+      url = "github:crtschin/helix?ref=crts/scratch-with-plugins";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

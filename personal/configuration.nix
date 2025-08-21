@@ -78,12 +78,6 @@
     source-code-pro
   ];
 
-  services = {
-    flatpak = {
-      enable = true;
-    };
-  };
-
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
@@ -109,6 +103,7 @@
       };
       sddm.wayland.enable = true;
     };
+    udisks2.enable = true;
   };
 
   # Video settings

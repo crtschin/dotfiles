@@ -216,16 +216,16 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1755786195,
-        "narHash": "sha256-Tlu5FMTGQlt4ksEd5dF385nUj6FqIFaHyI0y3yQRUWo=",
+        "lastModified": 1755788758,
+        "narHash": "sha256-xjqVySj72i2d9TZPwb0lO0uVVTNcG5tGt1Q6GAJNpSk=",
         "owner": "crtschin",
         "repo": "helix",
-        "rev": "6ee5118960d0eecade2c575589348152d3d5ac9f",
+        "rev": "5b8650beef9d4da24bceeac420d9a5a050d8e52b",
         "type": "github"
       },
       "original": {
         "owner": "crtschin",
-        "ref": "crts/scratch",
+        "ref": "crts/scratch-with-plugins",
         "repo": "helix",
         "type": "github"
       }

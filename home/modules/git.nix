@@ -74,6 +74,16 @@ in
         '';
     };
 
+    jujutsu = {
+      enable = true;
+      settings = {
+        user = {
+          name = precondition.userName;
+          email = precondition.userEmail;
+        };
+      };
+    };
+
     git = with precondition; {
       inherit userName userEmail;
       enable = true;
