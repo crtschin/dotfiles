@@ -39,7 +39,7 @@ in
   targets.genericLinux.enable = true;
 
   home = rec {
-    username = "curtis";
+    username = "crtschin";
     homeDirectory = "/home/${username}";
     packages = with pkgs; [
       gv
@@ -50,6 +50,11 @@ in
       ltunify
       jmeter
       _1password
+
+      docker
+      docker-compose
+      devenv
+      process-compose
 
       graphviz
       gprof2dot

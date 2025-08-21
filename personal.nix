@@ -78,7 +78,6 @@ in
         process-compose
         git
         htop
-        arandr
         curl
         feh
         file

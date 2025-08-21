@@ -152,8 +152,9 @@
         };
       };
       extraPortals = with pkgs; [
-        xdg-desktop-portal-wlr
+        kdePackages.xdg-desktop-portal-kde
         xdg-desktop-portal-gtk
+        xdg-desktop-portal-wlr
       ];
     };
     configFile."direnv/direnvrc".text = ''
@@ -248,7 +249,7 @@
     };
 
     sioyek = {
-      enable = true;     
+      enable = true;
     };
 
     lazydocker = {
@@ -262,7 +263,7 @@
     lazysql = {
       enable = true;
     };
-    
+
     # nix-your-shell = {
     #   enable = true;
     # };
@@ -299,5 +300,6 @@
     RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
     GIT_EDITOR = "${pkgs.helix}/bin/hx";
     NIXPKGS_ALLOW_INSECURE = 1;
+    GTK_USE_PORTAL = 1;
   };
 }

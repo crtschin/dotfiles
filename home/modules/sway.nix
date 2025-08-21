@@ -39,11 +39,12 @@ in
     windowManager = {
       sway = {
         inherit enable;
-        package = pkgs.swayfx;
+        package = pkgs.sway;
         checkConfig = false;
         systemd.enable = true;
         wrapperFeatures = {
-          gtk = true;
+          gtk = false;
+          base = true;
         };
         extraConfig = ''
           include /etc/sway/config.d/*

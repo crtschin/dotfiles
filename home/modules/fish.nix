@@ -23,7 +23,7 @@ in
     starship.enableFishIntegration = true;
     bash = {
       enable = true;
-      bashrcExtra = "PATH=$PATH:$HOME/.nix-profile/bin";
+      bashrcExtra = "PATH=$PATH:$HOME/.nix-profile/bin:$HOME/.cargo/bin";
     };
     fish = {
       interactiveShellInit = ''

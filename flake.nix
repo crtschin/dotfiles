@@ -2,16 +2,18 @@
   inputs = {
     nixpkgs = {
       # url = "github:NixOS/nixpkgs?ref=7b9135d3ae24bf15ca0fac57f4114c99e28bec3b";
-      url = "flake:nixpkgs/nixos-unstable";
+      url = "github:NixOS/nixpkgs/nixos-unstable";
       # url = "flake:nixpkgs/nixos-23.11";
     };
 
     helix = {
       url = "github:helix-editor/helix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     helix-crtschin = {
       url = "github:crtschin/helix?ref=crts/scratch";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     flake-utils = {
