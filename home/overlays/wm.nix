@@ -42,7 +42,6 @@ let
       # Unbind unused layouts
       unbindsym ${modifier}+b
       unbindsym ${modifier}+e
-      unbindsym ${modifier}+h
       unbindsym ${modifier}+s
       unbindsym ${modifier}+v
       unbindsym ${modifier}+w
@@ -51,8 +50,8 @@ let
       names = [
         "Font Awesome 5 Free, ${super.rice.font.monospace.name}, DejaVu Sans Mono, Monospace"
       ];
-      style = "Bold Semi-Condensed";
-      size = 11.0;
+      # style = "Bold Semi-Condensed";
+      size = super.rice.font.monospace.size;
     };
 
     keybindings = super.lib.mkOptionDefault {
@@ -61,7 +60,7 @@ let
       "${modifier}+Return" = "exec PATH=~/.nix-profile/bin:$PATH ${configuration.variables.terminal}";
       "${modifier}+Tab" = "workspace back_and_forth";
       "${modifier}+Shift+r" = "restart";
-      "${modifier}+l" = lockscreenCmd;
+      "${modifier}+Shift+l" = lockscreenCmd;
       "${modifier}+m" = "move workspace to output left";
       "${modifier}+Shift+p" = "exec flameshot gui";
     };

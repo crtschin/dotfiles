@@ -9,7 +9,7 @@ let
   makeKeymap = key: keymap: { ${key} = keymap; };
   makeBufferWith = cmd: [
     ":write-all"
-    ":run-shell-command kitty @ launch --wait-for-child-to-exit --no-response --copy-env --type=overlay --cwd=current lazygit"
+    ":run-shell-command kitty @ launch --wait-for-child-to-exit --no-response --copy-env --type=overlay --cwd=current ${cmd}"
     ":redraw"
     ":reload-all"
   ];
@@ -47,8 +47,8 @@ let
   # Previous/next buffer
   previousBuffer = makeKeymap "H" "goto_previous_buffer";
   nextBuffer = makeKeymap "L" "goto_next_buffer";
-  pageUp = makeKeymap "pageup" ":page-up-smooth";
-  pageDown = makeKeymap "pagedown" ":page-down-smooth";
+  pageUp = makeKeymap "pageup" "page_up";
+  pageDown = makeKeymap "pagedown" "page_down";
 
   smartTabMacros = smartTabMoveStart // smartTabMoveEnd;
   smartTabMoveEnd = makeKeymap "tab" "move_parent_node_end";
@@ -117,6 +117,14 @@ let
       "q" = ":buffer-close";
       "Q" = ":write-buffer-close";
       "P" = "no_op";
+      "C" = "no_op";
+      "C-c" = "toggle_block_comments";
+      "c" = {
+        # Turn something into a record selector combinatory
+        "s" = "@bems(bi.<esc>";
+        # Turn a field selection to use dot selection
+        "f" = "@be*d<A-d>ea.<esc>p";
+      };
       "p" = {
         "t" = makeBufferWith "gitui";
         "g" = makeBufferWith "lazygit";
@@ -162,14 +170,16 @@ let
 in
 {
   xdg.configFile = {
-    "helix/init.scm".source = ../../.config/helix/init.scm;
-    "helix/helix.scm".source = ../../.config/helix/helix.scm;
+    # "helix/init.scm".source = ../../.config/helix/init.scm;
+    # "helix/helix.scm".source = ../../.config/helix/helix.scm;
   };
   programs = {
     helix = {
       enable = true;
       defaultEditor = true;
-      package = pkgs.helix;
+      package = pkgs.helix.overrideAttrs (oa: {
+        cargoBuildFeatures = (oa.cargoBuildFeatures or [ ]) ++ [ "steel" ];
+      });
       settings = {
         theme = "gruvbox_dark_soft";
         editor = {

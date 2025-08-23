@@ -40,6 +40,8 @@ in
 
         "alt+up" = "scroll_line_up";
         "alt+down" = "scroll_line_down";
+        "alt+k" = "scroll_line_up";
+        "alt+j" = "scroll_line_down";
         "alt+page_up" = "scroll_page_up";
         "alt+page_down" = "scroll_page_down";
         "alt+home" = "scroll_home";
@@ -48,6 +50,8 @@ in
 
         "ctrl+up" = "next_tab";
         "ctrl+down" = "previous_tab";
+        "ctrl+k" = "next_tab";
+        "ctrl+j" = "previous_tab";
         "ctrl+t" = "new_tab";
         "ctrl+w" = "close_tab";
         "ctrl+n" = "new_window_with_cwd";

@@ -88,8 +88,6 @@
       qrencode
 
       # Programs
-      spotify
-      spotifyd
       vscode
       hivemind
       zoom-us

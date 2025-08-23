@@ -117,12 +117,12 @@ rec {
       normal = {
         name = "Cantarell";
         package = self.cantarell-fonts;
-        size = 10;
+        size = 10.0;
       };
       monospace = {
         name = "FiraCode";
         package = self.fira-code;
-        size = 10;
+        size = 10.0;
       };
     };
     opacity = 0.95;

@@ -47,7 +47,7 @@ in
       # solaar
       ltunify
       jmeter
-      _1password
+      _1password-cli
 
       docker
       docker-compose

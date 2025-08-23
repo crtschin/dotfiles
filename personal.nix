@@ -63,6 +63,7 @@ in
         pv
         valgrind
         discord
+        spotify
         signal-desktop
         glxinfo
         unzip
