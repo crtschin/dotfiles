@@ -9,7 +9,11 @@ let
   makeKeymap = key: keymap: { ${key} = keymap; };
   makeBufferWith = cmd: [
     ":write-all"
-    ":run-shell-command kitty @ launch --wait-for-child-to-exit --no-response --copy-env --type=overlay --cwd=current ${cmd}"
+    ":new"
+    ":insert-output ${cmd} >/dev/tty"
+    ":set mouse false"
+    ":set mouse true"
+    ":buffer-close!"
     ":redraw"
     ":reload-all"
   ];
@@ -27,32 +31,34 @@ let
     // smartTabMacros
     // previousBuffer
     // nextBuffer
-    // previousSubword
-    // nextSubword
     // gotoWord
-    // previousWord
     // pageUp
     // pageDown
-    // nextWord;
+    // insertMacros;
   # Move to the first non-whitespace character in the line
   startOfLineContents = makeKeymap "home" [
     "goto_line_start"
     "goto_first_nonwhitespace"
   ];
   gotoWord = makeKeymap "ret" "goto_word";
-  previousSubword = makeKeymap "A-home" [ "move_prev_sub_word_end" ];
-  nextSubword = makeKeymap "A-end" [ "move_next_sub_word_end" ];
-  previousWord = makeKeymap "C-h" [ "move_prev_sub_word_end" ];
-  nextWord = makeKeymap "C-l" [ "move_next_sub_word_end" ];
   # Previous/next buffer
   previousBuffer = makeKeymap "H" "goto_previous_buffer";
   nextBuffer = makeKeymap "L" "goto_next_buffer";
   pageUp = makeKeymap "pageup" "page_up";
   pageDown = makeKeymap "pagedown" "page_down";
-
   smartTabMacros = smartTabMoveStart // smartTabMoveEnd;
   smartTabMoveEnd = makeKeymap "tab" "move_parent_node_end";
   smartTabMoveStart = makeKeymap "S-tab" "move_parent_node_start";
+
+  insertMacros = {}
+    // previousWord
+    // nextWord
+    // previousSubword
+    // nextSubword;
+  previousWord = makeKeymap "A-home" [ "move_prev_word_end" ];
+  nextWord = makeKeymap "A-end" [ "move_next_word_start" ];
+  previousSubword = makeKeymap "C-home" [ "move_prev_sub_word_end" ];
+  nextSubword = makeKeymap "C-end" [ "move_next_sub_word_start" ];
 
   # Changes
   # Move/copy line below/above
@@ -137,6 +143,8 @@ let
           ":echo %sh{git show --no-patch --format='%%h (%%an: %%ar): %%s' $(git blame -p %{buffer_name} -L%{cursor_line},+1 | head -1 | cut -d' ' -f1)}";
         "B" = ":sh gh browse %{buffer_name}:%{selection_line_start}-%{selection_line_end}";
         "C-b" = ":sh ${pkgs.gitBlameURL} %{buffer_name} %{cursor_line}";
+        "s" = ":git-inline.stage-lines";
+        "c" = makeBufferWith "git commit";
         # "s" = [
         #   ":write"
         #   ":sh git add --"
@@ -240,7 +248,7 @@ in
         keys = {
           insert = {
             "C-." = "completion";
-          };
+          } // insertMacros;
           normal =
             noArrowKeys
             // windowMacros
