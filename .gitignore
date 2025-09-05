@@ -1,5 +1,6 @@
 home.nix
-./hardware-configuration.nix
-./configuration.nix
-./flake.lock
-./.config/*.env
+/hardware-configuration.nix
+/configuration.nix
+/flake.lock
+/.config/*.env
+/.config/*secrets*

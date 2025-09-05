@@ -91,6 +91,7 @@
       vscode
       hivemind
       zoom-us
+      spotify
 
       # Customization
       dejavu_fonts

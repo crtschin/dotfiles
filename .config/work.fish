@@ -118,3 +118,4 @@ set --export NIX_PATH $NIX_PATH:$HOME/.nix-defexpr/channels
 # Connecting production postgres
 # Setup postgres port-forwarding with:
 # > gssh <server> -- -L 5501:localhost:5432 -N
+set --export SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/ssh-agent.socket"

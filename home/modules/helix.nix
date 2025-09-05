@@ -50,11 +50,7 @@ let
   smartTabMoveEnd = makeKeymap "tab" "move_parent_node_end";
   smartTabMoveStart = makeKeymap "S-tab" "move_parent_node_start";
 
-  insertMacros = {}
-    // previousWord
-    // nextWord
-    // previousSubword
-    // nextSubword;
+  insertMacros = { } // previousWord // nextWord // previousSubword // nextSubword;
   previousWord = makeKeymap "A-home" [ "move_prev_word_end" ];
   nextWord = makeKeymap "A-end" [ "move_next_word_start" ];
   previousSubword = makeKeymap "C-home" [ "move_prev_sub_word_end" ];
@@ -136,6 +132,7 @@ let
         "g" = makeBufferWith "lazygit";
         "d" = makeBufferWith "lazydocker";
         "s" = makeBufferWith "lazysql";
+        "y" = makeBufferWith "yazi";
       };
       "g" = {
         "g" = "changed_file_picker";
@@ -248,7 +245,8 @@ in
         keys = {
           insert = {
             "C-." = "completion";
-          } // insertMacros;
+          }
+          // insertMacros;
           normal =
             noArrowKeys
             // windowMacros
@@ -286,10 +284,31 @@ in
               SNIPPETS_PATH = ./helix/snippets;
             };
           };
+          mdpls = {
+            command = "mdpls";
+            config = {
+              markdown.preview.auto = true;
+            };
+          };
           haskell-language-server = {
             config = {
               sessionLoading = "multipleComponents";
             };
+          };
+          basedpyright = {
+            command = "basedpyright-langserver";
+            args = ["--stdio"];
+            except-features = ["format" "code-action"];
+            config = {
+              basedpyright.analysis = {
+                autoSearchPaths = true;
+                diagnosticMode = "openFilesOnly";
+              };
+            };
+          };
+          ruff = {
+            command = "ruff";
+            args = ["server" "--preview"];
           };
         };
         # grammar = [
@@ -336,18 +355,23 @@ in
               ];
             }
             {
+              name = "python";
+              language-servers = [ "basedpyright" "ruff" ];
+            }
+            {
               name = "markdown";
               file-types = [ "md" ];
               soft-wrap = {
                 enable = true;
                 max-wrap = 4;
                 max-indent-retain = 16;
-                wrap-at-text-width = true;
+                wrap-at-text-width = false;
               };
               text-width = 80;
               rulers = [ 80 ];
               language-servers = mkLspUsage [
                 "marksman"
+                "mdpls"
               ];
             }
           ];
