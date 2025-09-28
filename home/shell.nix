@@ -104,7 +104,6 @@
         editor = "vim";
         git_protocol = "ssh";
         pager = "less";
-        browser = "brave";
       };
       gitCredentialHelper = {
         enable = true;

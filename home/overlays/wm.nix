@@ -63,8 +63,8 @@ let
       "${modifier}+Shift+l" = lockscreenCmd;
       "${modifier}+m" = "move workspace to output left";
       "${modifier}+Shift+p" = "exec flameshot gui";
-      "XF86AudioRaiseVolume" = "exec playerctl volume 0.1+";
-      "XF86AudioLowerVolume" = "exec playerctl volume 0.1-";
+      "XF86AudioRaiseVolume" = "exec playerctl volume 0.05+";
+      "XF86AudioLowerVolume" = "exec playerctl volume 0.05-";
       "XF86AudioStop" = "exec playerctl play-pause";
     };
     workspaces = ''

@@ -114,6 +114,7 @@ let
   selectNextCurrentWord = makeKeymap "'" "@n,";
 
   windowMacros = {
+    "=" = ":reflow";
     "space" = {
       "o" = "file_picker_in_current_buffer_directory";
       "q" = ":buffer-close";
@@ -157,8 +158,7 @@ let
         ":write"
       ];
     };
-    "C-p" = "file_picker";
-    "C-P" = "command_palette";
+    "C-p" = "file_picker"; "C-P" = "command_palette";
   };
   normalMode = makeKeymap "v" "normal_mode";
 
@@ -278,6 +278,15 @@ in
           marksman = {
             command = "${pkgs.marksman}/bin/marksman";
           };
+          docker-language-server = {
+            command = "${pkgs.docker-language-server}/bin/docker-language-server";
+            args = [ "start" "--stdio" ];
+            config = {
+              docker-language-server = {
+                telemetry = "off";
+              };
+            };
+          };
           simple-completion-language-server = {
             command = "${pkgs.simple-completion-language-server}/bin/simple-completion-language-server";
             environment = {
@@ -288,11 +297,15 @@ in
             command = "mdpls";
             config = {
               markdown.preview.auto = true;
+              markdown.preview.browser = "firefox";
             };
           };
           haskell-language-server = {
             config = {
               sessionLoading = "multipleComponents";
+              rename = {
+                config = "crossModule";
+              };
             };
           };
           basedpyright = {
@@ -357,6 +370,14 @@ in
             {
               name = "python";
               language-servers = [ "basedpyright" "ruff" ];
+            }
+            {
+              name = "dockerfile";
+              language-servers = [ "docker-language-server" ];
+            }
+            {
+              name = "docker-compose";
+              language-servers = [ "docker-language-server" ];
             }
             {
               name = "markdown";

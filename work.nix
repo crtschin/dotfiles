@@ -12,6 +12,7 @@ let
       git = {
         userName = "Curtis Chin Jen Sem";
         userEmail = "curtis.chinjensem@scrive.com";
+        # userEmail = "csochinjensem@gmail.com";
         signingKey = "/home/curtis/.ssh/id_ed25519.pub";
       };
       wm = "sway";
@@ -53,6 +54,7 @@ in
       docker-compose
       devenv
       process-compose
+      actionlint
 
       graphviz
       gprof2dot
@@ -65,7 +67,7 @@ in
       #     L+ /run/opengl-driver - - - - <nix-profile directory>
       #   Ensures drivers are symlinked nixos-style to make them accessible from
       #   nix-installed programs.
-      mesa.drivers
+      mesa
       intel-media-driver
 
       pkgs.haskellPackages.ghcprofview
@@ -87,6 +89,7 @@ in
           # Non-NixOS setting
           set --export NIX_PATH $NIX_PATH:$HOME/.nix-defexpr/channels
           set --export NIXPKGS_ALLOW_UNFREE 1
+          set --export GIT_SSH "/usr/bin/ssh"
 
           . ${./.config/work.fish}
         end

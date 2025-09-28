@@ -80,7 +80,7 @@ in
           width = 1920;
           height = 1080;
           laptop = {
-            enable = true;
+            enable = false;
             x = 1920;
             y = 1080;
           };

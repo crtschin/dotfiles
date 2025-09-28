@@ -12,3 +12,6 @@ serializers
 serializer
 monadic
 mutexes
+ECR
+CI
+CD

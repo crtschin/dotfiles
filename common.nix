@@ -35,6 +35,8 @@
       # Utils
       fd
       jq
+      fx
+      jc
       ripgrep
       xclip
       direnv
@@ -115,7 +117,10 @@
     ];
   };
 
-  fonts.fontconfig.enable = true;
+  fonts.fontconfig = {
+    enable = true;
+    antialias = true;
+  };
 
   gtk = {
     enable = true;
@@ -252,6 +257,14 @@
     };
 
     lazydocker = {
+      enable = true;
+    };
+
+    jjui = {
+      enable = true;
+    };
+
+    swappy = {
       enable = true;
     };
 
