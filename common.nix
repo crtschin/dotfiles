@@ -119,7 +119,6 @@
 
   fonts.fontconfig = {
     enable = true;
-    antialias = true;
   };
 
   gtk = {
