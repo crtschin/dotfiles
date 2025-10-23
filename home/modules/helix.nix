@@ -177,6 +177,7 @@ in
   xdg.configFile = {
     # "helix/init.scm".source = ../../.config/helix/init.scm;
     # "helix/helix.scm".source = ../../.config/helix/helix.scm;
+    "helix/runtime/queries/cabal/highlights.scm".source = ../../.config/helix/cabal/highlights.scm;
   };
   programs = {
     helix = {
@@ -324,15 +325,15 @@ in
             args = ["server" "--preview"];
           };
         };
-        # grammar = [
-        #   {
-        #     "name" = "cabal";
-        #     "source" = {
-        #       git = "https://gitlab.com/magus/tree-sitter-cabal";
-        #       rev = "7d5fa6887ae05a0b06d046f1e754c197c8ad869b";
-        #     };
-        #   }
-        # ];
+        grammar = [
+          {
+            "name" = "cabal";
+            "source" = {
+              git = "https://github.com/crtschin/tree-sitter-cabal";
+              rev = "2fc3b701d6ca17467a9ab35719403e0893e4e971";
+            };
+          }
+        ];
         language =
           let
             mkLspUsage =
@@ -380,13 +381,21 @@ in
               language-servers = [ "docker-language-server" ];
             }
             {
+              name = "cabal";
+              file-types = [ "cabal" ];
+              rulers = [ 80 ];
+              language-servers = mkLspUsage [
+                "haskell-language-server"
+              ];
+            }
+            {
               name = "markdown";
               file-types = [ "md" ];
               soft-wrap = {
                 enable = true;
                 max-wrap = 4;
                 max-indent-retain = 16;
-                wrap-at-text-width = false;
+                wrap-at-text-width = true;
               };
               text-width = 80;
               rulers = [ 80 ];

@@ -58,6 +58,7 @@ let
       "${modifier}+p" = "exec PATH=~/.nix-profile/bin:$PATH ${programLauncher}";
       "${modifier}+q" = "kill";
       "${modifier}+Return" = "exec PATH=~/.nix-profile/bin:$PATH ${configuration.variables.terminal}";
+      "${modifier}+Shift+Return" = "exec PATH=~/.nix-profile/bin:$PATH ${configuration.variables.terminal} quick-access-terminal";
       "${modifier}+Tab" = "workspace back_and_forth";
       "${modifier}+Shift+r" = "restart";
       "${modifier}+Shift+l" = lockscreenCmd;

@@ -61,7 +61,7 @@
       yazi
 
       # Debugging
-      bpftrace
+      # bpftrace
 
       # Benchmarking
       hyperfine
@@ -85,7 +85,6 @@
       gimp
       imagemagick
       obs-studio
-      asciinema
       mupdf
       qrencode
 
@@ -119,6 +118,9 @@
 
   fonts.fontconfig = {
     enable = true;
+    antialiasing = true;
+    hinting = "slight";
+    subpixelRendering = "rgb";
   };
 
   gtk = {
@@ -170,15 +172,6 @@
       enable = true;
     };
 
-    btop = {
-      enable = true;
-      settings = {
-        color_theme = "gruvbox_dark";
-        theme_background = false;
-        truecolor = true;
-      };
-    };
-
     brave = {
       enable = true;
       # https://chromium.googlesource.com/chromium/src/+/refs/heads/main/docs/gpu/vaapi.md
@@ -188,6 +181,15 @@
         "--ignore-gpu-blocklist"
         "--enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoEncoder"
       ];
+    };
+
+    btop = {
+      enable = true;
+      settings = {
+        color_theme = "gruvbox_dark";
+        theme_background = false;
+        truecolor = true;
+      };
     };
 
     direnv = {
@@ -205,7 +207,7 @@
       package = pkgs.firefox;
     };
 
-    man = {
+    jjui = {
       enable = true;
     };
 
@@ -214,6 +216,26 @@
       settings = {
         theme = "gruvbox";
       };
+    };
+
+    lazydocker = {
+      enable = true;
+    };
+
+    lazygit = {
+      enable = true;
+    };
+
+    lazysql = {
+      enable = true;
+    };
+
+    man = {
+      enable = true;
+    };
+
+    nix-search-tv = {
+      enable = true;
     };
 
     pgcli = {
@@ -255,23 +277,7 @@
       enable = true;
     };
 
-    lazydocker = {
-      enable = true;
-    };
-
-    jjui = {
-      enable = true;
-    };
-
     swappy = {
-      enable = true;
-    };
-
-    lazygit = {
-      enable = true;
-    };
-
-    lazysql = {
       enable = true;
     };
 

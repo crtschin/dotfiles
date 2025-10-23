@@ -32,7 +32,9 @@ in
         tab_powerline_style = "slanted";
         update_check_interval = 0;
         visual_bell_duration = "0.5";
-      } // pkgs.riceColorPalette;
+      }
+      // pkgs.riceColorPalette;
+      quickAccessTerminalConfig = { };
       keybindings = {
         "ctrl+c" = "copy_or_interrupt";
         "ctrl+shift+c" = "copy_to_clipboard";

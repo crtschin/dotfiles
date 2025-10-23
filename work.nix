@@ -70,7 +70,9 @@ in
       mesa
       intel-media-driver
 
-      pkgs.haskellPackages.ghcprofview
+      # copilot-language-server
+      github-copilot-cli
+      # pkgs.haskellPackages.ghcprofview
       # pkgs.haskellPackages.hpview
     ];
   };
