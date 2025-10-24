@@ -158,7 +158,8 @@ let
         ":write"
       ];
     };
-    "C-p" = "file_picker"; "C-P" = "command_palette";
+    "C-p" = "file_picker";
+    "C-P" = "command_palette";
   };
   normalMode = makeKeymap "v" "normal_mode";
 
@@ -189,22 +190,33 @@ in
       settings = {
         theme = "gruvbox_dark_soft";
         editor = {
+          bufferline = "always";
+          color-modes = true;
+          completion-replace = true;
+          completion-timeout = 5;
+          completion-trigger-len = 2;
+          cursorline = true;
+          cursorcolumn = true;
+          idle-timeout = 200;
+          jump-label-alphabet = "jklfdsahgzuiorewqytm,.vcxnb";
+          line-number = "relative";
+          popup-border = "all";
+          scrolloff = 4;
+          trim-final-newlines = true;
+          trim-trailing-whitespace = true;
           cursor-shape = {
             insert = "bar";
             normal = "block";
             select = "underline";
           };
-          cursorline = true;
+          file-picker = {
+            hidden = false;
+          };
           indent-guides = {
             render = true;
             character = "|";
             skip-levels = 1;
           };
-          idle-timeout = 200;
-          completion-timeout = 5;
-          completion-trigger-len = 2;
-          color-modes = true;
-          line-number = "relative";
           lsp = {
             auto-signature-help = true;
             display-idle-hover-docs = true;
@@ -228,7 +240,6 @@ in
               "file-type"
             ];
           };
-          bufferline = "always";
           soft-wrap = {
             enable = false;
             wrap-at-text-width = false;
@@ -281,7 +292,10 @@ in
           };
           docker-language-server = {
             command = "${pkgs.docker-language-server}/bin/docker-language-server";
-            args = [ "start" "--stdio" ];
+            args = [
+              "start"
+              "--stdio"
+            ];
             config = {
               docker-language-server = {
                 telemetry = "off";
@@ -311,8 +325,11 @@ in
           };
           basedpyright = {
             command = "basedpyright-langserver";
-            args = ["--stdio"];
-            except-features = ["format" "code-action"];
+            args = [ "--stdio" ];
+            except-features = [
+              "format"
+              "code-action"
+            ];
             config = {
               basedpyright.analysis = {
                 autoSearchPaths = true;
@@ -322,7 +339,10 @@ in
           };
           ruff = {
             command = "ruff";
-            args = ["server" "--preview"];
+            args = [
+              "server"
+              "--preview"
+            ];
           };
         };
         grammar = [
@@ -370,7 +390,10 @@ in
             }
             {
               name = "python";
-              language-servers = [ "basedpyright" "ruff" ];
+              language-servers = [
+                "basedpyright"
+                "ruff"
+              ];
             }
             {
               name = "dockerfile";
