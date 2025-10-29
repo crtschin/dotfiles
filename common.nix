@@ -62,6 +62,7 @@
 
       # Debugging
       # bpftrace
+      xxd
 
       # Benchmarking
       hyperfine
