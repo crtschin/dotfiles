@@ -38,7 +38,7 @@ let
 
       for_window [class=".*"] border pixel 2
       # for_window [class=".*"] title_format "<span font='${super.rice.font.monospace.name}'>%title</span>"
-      
+
       # Unbind unused layouts
       unbindsym ${modifier}+b
       unbindsym ${modifier}+e
@@ -51,7 +51,7 @@ let
         "Font Awesome 5 Free, ${super.rice.font.monospace.name}, DejaVu Sans Mono, Monospace"
       ];
       # style = "Bold Semi-Condensed";
-      size = super.rice.font.monospace.size;
+      size = "${toString super.rice.font.monospace.size}";
     };
 
     keybindings = super.lib.mkOptionDefault {

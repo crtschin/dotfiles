@@ -115,14 +115,16 @@ rec {
     } // self.kittyParseUtils.riceKittyTheme;
     font = {
       normal = {
-        name = "Cantarell";
-        package = self.cantarell-fonts;
-        size = 10.0;
+        name = "FiraCode";
+        package = self.fira-code;
+        size = 12;
+        weight = 500;
       };
       monospace = {
         name = "FiraCode";
         package = self.fira-code;
-        size = 10.0;
+        size = 12;
+        weight = 500;
       };
     };
     opacity = 0.95;

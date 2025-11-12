@@ -7,12 +7,15 @@
 }:
 {
   programs = {
-    vim = {
+    neovim = {
       enable = true;
-      package = pkgs.neovim;
       extraConfig = ''
         syntax on
+        set number relativenumber
       '';
+      plugins = with pkgs.awesomeNeovimPlugins; [ ];
+      viAlias = true;
+      vimAlias = true;
     };
   };
 }

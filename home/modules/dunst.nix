@@ -12,7 +12,7 @@ in
       enable = true;
       settings = {
         global = {
-          font = "${pkgs.rice.font.monospace.name} 12";
+          font = "${pkgs.rice.font.monospace.name} ${toString pkgs.rice.font.monospace.size}";
           allow_markup = "yes";
           format = "<b>%s</b>\n%b";
           sort = "yes";

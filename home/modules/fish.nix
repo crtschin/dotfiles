@@ -43,6 +43,8 @@ in
                 end 1>| source
             end 2>| egrep -v -e "^direnv: export"
         end
+
+        fish_add_path /home/crtschin/.opencode/bin
       '';
 
       shellAliases = {

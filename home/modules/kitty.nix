@@ -12,7 +12,7 @@ in
     kitty = {
       enable = true;
       font = {
-        name = pkgs.rice.font.normal.name;
+        name = pkgs.rice.font.monospace.name;
         size = 14;
       };
       settings = {

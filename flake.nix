@@ -56,6 +56,8 @@
       flake = false;
     };
 
+    awesome-neovim-plugins.url = "github:m15a/flake-awesome-neovim-plugins";
+
     fish-puffer = {
       url = "github:nickeb96/puffer-fish";
       flake = false;
@@ -78,6 +80,7 @@
       nix-rice,
       nixgl,
       helix-crtschin,
+      awesome-neovim-plugins,
       ...
     }@inputs:
     let
@@ -86,6 +89,7 @@
         nix-rice.overlays.default
         nixgl.overlay
         helix-crtschin.overlays.default
+        awesome-neovim-plugins.overlays.default
       ];
       pkgs = nixpkgs.legacyPackages.${system} // {
         inherit overlays;

@@ -15,9 +15,10 @@
     ./home/modules/helix.nix
     ./home/modules/kanshi.nix
     ./home/modules/kitty.nix
-    ./home/modules/waybar.nix
     ./home/modules/starship.nix
     ./home/modules/sway.nix
+    ./home/modules/vim.nix
+    ./home/modules/waybar.nix
   ];
 
   systemd.user.startServices = "sd-switch";
@@ -48,12 +49,12 @@
       jujutsu
 
       # Git
-      gitAndTools.git-absorb
+      git-absorb
       difftastic
 
       # System
       ncdu
-      du-dust
+      dust
       fastfetch
       brightnessctl
 
@@ -110,6 +111,7 @@
       # papirus-icon-theme
       gruvbox-dark-gtk
       gruvbox-dark-icons-gtk
+      pkgs.rice.font.normal.package
       pkgs.rice.font.monospace.package
 
       # Fun
@@ -127,9 +129,9 @@
   gtk = {
     enable = true;
     font = {
-      package = pkgs.rice.font.monospace.package;
-      name = pkgs.rice.font.monospace.name;
-      size = 12;
+      package = pkgs.rice.font.normal.package;
+      name = pkgs.rice.font.normal.name;
+      size = pkgs.rice.font.normal.size;
     };
     theme = {
       name = "gruvbox-dark";
