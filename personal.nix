@@ -95,17 +95,6 @@ in
       ];
   };
 
-  programs.neovim = {
-    enable = true;
-    plugins = with pkgs.vimPlugins; [
-      vim-cool
-      vim-airline
-      vim-tidal
-      (nvim-treesitter.withPlugins (p: [ p.haskell ]))
-      vim-surround
-    ];
-  };
-
   services = {
     random-background = {
       # enable = true;

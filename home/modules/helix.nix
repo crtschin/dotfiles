@@ -311,7 +311,7 @@ in
           mdpls = {
             command = "mdpls";
             config = {
-              markdown.preview.auto = true;
+              markdown.preview.auto = false;
               markdown.preview.browser = "firefox";
             };
           };
@@ -321,6 +321,7 @@ in
               rename = {
                 config = "crossModule";
               };
+              formattingProvider = "fourmolu";
             };
           };
           basedpyright = {

@@ -7,21 +7,23 @@
 }:
 let
   nixGLOverlay = self: super: {
-    picom = config.lib.nixGL.wrap super.picom;
     brave = config.lib.nixGL.wrap super.brave;
+    firefox = config.lib.nixGL.wrap super.firefox;
     kitty = config.lib.nixGL.wrap super.kitty;
     alacritty = config.lib.nixGL.wrap super.alacritty;
-    swayfx = config.lib.nixGL.wrap super.swayfx;
   };
 in
 {
   nixpkgs.overlays = [ nixGLOverlay ];
-  nixGL.packages = inputs.nixgl.packages;
-  nixGL.defaultWrapper = "mesa";
-  nixGL.offloadWrapper = "mesaPrime";
-  nixGL.installScripts = [
-    "mesa"
-    "mesaPrime"
-  ];
-  home.packages = [ ];
+  targets.genericLinux = {
+    nixGL = {
+      packages = inputs.nixgl.packages;
+      defaultWrapper = "mesa";
+      offloadWrapper = "mesaPrime";
+      installScripts = [
+        "mesa"
+        "mesaPrime"
+      ];
+    };
+  };
 }

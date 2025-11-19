@@ -101,7 +101,7 @@
     gh = {
       enable = true;
       settings = {
-        editor = "vim";
+        editor = "hx";
         git_protocol = "ssh";
         pager = "less";
       };

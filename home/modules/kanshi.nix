@@ -51,32 +51,32 @@ in
           };
         })
         (createDualDockedIdenticalProfile {
-          leftCriteria = "Dell Inc. DELL U2719D 74RRT13";
-          rightCriteria = "Dell Inc. DELL U2717D J0XYN99BA3TS";
+          left = "Dell Inc. DELL U2719D 74RRT13";
+          right = "Dell Inc. DELL U2717D J0XYN99BA3TS";
           width = 2560;
           height = 1440;
         })
         (createDualDockedIdenticalProfile {
-          leftCriteria = "Dell Inc. DELL U2717D J0XYN989CU9S";
-          rightCriteria = "Dell Inc. DELL U2719D 7RRBC23";
+          left = "Dell Inc. DELL U2717D J0XYN989CU9S";
+          right = "Dell Inc. DELL U2719D 7RRBC23";
           width = 2560;
           height = 1440;
         })
         (createDualDockedIdenticalProfile {
-          leftCriteria = "Dell Inc. DELL U2719D D8F5SS2";
-          rightCriteria = "Dell Inc. DELL U2719D F2KFV13";
+          left = "Dell Inc. DELL U2719D D8F5SS2";
+          right = "Dell Inc. DELL U2719D F2KFV13";
           width = 2560;
           height = 1440;
         })
         (createDualDockedIdenticalProfile {
-          leftCriteria = "HP Inc. HP E243 CNK0430BR5";
-          rightCriteria = "HP Inc. HP E243d CNC1211CS2";
+          left = "HP Inc. HP E243 CNK0430BR5";
+          right = "HP Inc. HP E243d CNC1211CS2";
           width = 1920;
           height = 1080;
         })
         (createDualDockedIdenticalProfile {
-          leftCriteria = "HP Inc. HP E273 CNK0162V79";
-          rightCriteria = "HP Inc. HP E273 CNK0162V7J";
+          left = "HP Inc. HP E273 CNK0162V79";
+          right = "HP Inc. HP E273 CNK0162V7J";
           width = 1920;
           height = 1080;
           laptop = {

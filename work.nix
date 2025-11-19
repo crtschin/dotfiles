@@ -35,7 +35,12 @@ in
     ./home/modules/nixgl.nix
   ];
 
-  targets.genericLinux.enable = true;
+  targets.genericLinux = {
+    enable = true;
+    gpu = {
+      enable = false;
+    };
+  };
 
   home = rec {
     username = "crtschin";

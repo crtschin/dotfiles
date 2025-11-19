@@ -67,7 +67,7 @@
         git_branch = {
           format = "\\[[$symbol$branch]($style)\\]";
           symbol = "🌱";
-          truncation_length = 13;
+          truncation_length = 30;
           ignore_branches = [ "master" ];
           style = "bold yellow";
         };

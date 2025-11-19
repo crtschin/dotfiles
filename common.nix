@@ -70,6 +70,7 @@
 
       # DNS
       dig
+      just
 
       # nix
       nixd
@@ -95,6 +96,7 @@
       hivemind
       zoom-us
       spotify
+      signal-desktop
 
       # Customization
       dejavu_fonts
@@ -190,8 +192,9 @@
       enable = true;
       settings = {
         color_theme = "gruvbox_dark";
-        theme_background = false;
+        theme_background = true;
         truecolor = true;
+        vim_keys = true;
       };
     };
 

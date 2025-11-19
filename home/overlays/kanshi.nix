@@ -52,8 +52,8 @@ rec {
     };
   createDualDockedIdenticalProfile =
     {
-      leftCriteria,
-      rightCriteria,
+      left,
+      right,
       width,
       height,
       laptop ? {
@@ -64,12 +64,12 @@ rec {
     }:
     createDualDockedProfile {
       left = {
-        criteria = leftCriteria;
+        criteria = left;
         width = width;
         height = height;
       };
       right = {
-        criteria = rightCriteria;
+        criteria = right;
         width = width;
         height = height;
       };
