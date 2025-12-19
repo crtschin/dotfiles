@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  email,
   ...
 }:
 let
@@ -9,7 +10,7 @@ let
     useWayland = true;
     configuration = {
       git = {
-        userEmail = "curtis.chinjensem@scrive.com";
+        userEmail = email;
         userName = "crtschin";
         signingKey = "/home/crtschin/.ssh/id_rsa.pub";
       };

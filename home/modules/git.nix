@@ -37,7 +37,7 @@ in
     gitui = {
       enable = true;
       theme = ''
-        (  
+        (
           selection_bg: Some("${pkgs.riceExtendedColorPalette.selection_background}"),
           selection_fg: Some("${pkgs.riceExtendedColorPalette.selection_foreground}"),
           command_fg: Some("${pkgs.riceExtendedColorPalette.background}"),
@@ -94,6 +94,9 @@ in
       lfs.enable = true;
       # Prevent bad objects from spreading.
       # transfer.fsckObjects = true;
+      attributes = [
+        "* merge=mergiraf"
+      ];
       settings = recursiveMerge [
         {
           user = {
@@ -118,6 +121,10 @@ in
           merge = {
             conflictstyle = "diff3";
             difftool = "${pkgs.meld}/bin/meld";
+            "mergiraf" = {
+              name = "mergiraf";
+              driver = "mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L";
+            };
           };
           delta = {
             features = "interactive unobtrusive-line-numbers decorations";

@@ -51,6 +51,7 @@
       # Git
       git-absorb
       difftastic
+      mergiraf
 
       # System
       ncdu

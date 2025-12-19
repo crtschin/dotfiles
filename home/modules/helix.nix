@@ -316,6 +316,7 @@ in
             };
           };
           haskell-language-server = {
+            command = "haskell-language-server-wrapper";
             config = {
               sessionLoading = "multipleComponents";
               rename = {
@@ -375,7 +376,7 @@ in
               name = "git-commit";
               file-types = [ { glob = "COMMIT_EDITMSG"; } ];
               soft-wrap = {
-                enable = true;
+                enable = false;
                 max-wrap = 4;
                 max-indent-retain = 16;
                 wrap-at-text-width = true;
@@ -413,10 +414,40 @@ in
               ];
             }
             {
+              name = "haskell";
+              scope = "source.haskell";
+              injection-regex = "hs|haskell";
+              file-types = [
+                "hs"
+                "hs-boot"
+                "hsc"
+              ];
+              roots = [
+                "Setup.hs"
+                "stack.yaml"
+                "cabal.project"
+                "hie.yaml"
+              ];
+              shebangs = [
+                "runhaskell"
+                "stack"
+              ];
+              comment-token = "--";
+              block-comment-tokens = {
+                start = "{-";
+                end = "-}";
+              };
+              language-servers = mkLspUsage [ "haskell-language-server" ];
+              indent = {
+                tab-width = 2;
+                unit = "  ";
+              };
+            }
+            {
               name = "markdown";
               file-types = [ "md" ];
               soft-wrap = {
-                enable = true;
+                enable = false;
                 max-wrap = 4;
                 max-indent-retain = 16;
                 wrap-at-text-width = true;

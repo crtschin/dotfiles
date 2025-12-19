@@ -102,6 +102,7 @@
       makeHomeConfiguration =
         {
           extraModules ? [ ],
+          email ? "csochinjensem@gmail.com",
         }:
         home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
@@ -109,6 +110,7 @@
             # Pass all inputs to every module. It's a bit excessive, but allows us to easily refer
             # to stuff like inputs.nixgl.
             inherit inputs;
+            inherit email;
             # The dotfiles argument always points to the flake root.
             dotfiles = self;
           };
@@ -117,7 +119,8 @@
     in
     {
       homeConfigurations = {
-        work = makeHomeConfiguration { extraModules = [ ./work.nix ]; };
+        work = makeHomeConfiguration { extraModules = [ ./work.nix ]; email = "curtis.chinjensem@scrive.com"; };
+        impromptu = makeHomeConfiguration { extraModules = [ ./work.nix ]; };
         personal = makeHomeConfiguration { extraModules = [ ./personal.nix ]; };
       };
 

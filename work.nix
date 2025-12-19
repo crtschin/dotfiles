@@ -3,6 +3,7 @@
   pkgs,
   inputs,
   lib,
+  email,
   ...
 }:
 let
@@ -11,8 +12,7 @@ let
     configuration = {
       git = {
         userName = "Curtis Chin Jen Sem";
-        userEmail = "curtis.chinjensem@scrive.com";
-        # userEmail = "csochinjensem@gmail.com";
+        userEmail = email;
         signingKey = "/home/curtis/.ssh/id_ed25519.pub";
       };
       wm = "sway";
@@ -77,6 +77,7 @@ in
 
       # copilot-language-server
       github-copilot-cli
+      gemini-cli
       # pkgs.haskellPackages.ghcprofview
       # pkgs.haskellPackages.hpview
     ];

@@ -7,5 +7,5 @@ hm command target:
 news target: (hm "news" target)
 switch target: (hm "switch" target)
 
-update target:
+update:
   nix flake update --flake .
