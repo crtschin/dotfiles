@@ -25,6 +25,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-std = {
+      url = "github:chessai/nix-std";
+    };
+
     nixgl = {
       url = "github:guibou/nixGL";
       inputs.flake-utils.follows = "flake-utils";
@@ -70,6 +74,10 @@
       url = "github:acomagu/fish-async-prompt";
       flake = false;
     };
+    nix-doom-emacs-unstraightened = {
+      url = "github:marienz/nix-doom-emacs-unstraightened";
+      inputs.nixpkgs.follows = "";
+    };
   };
   outputs =
     {
@@ -81,10 +89,12 @@
       nixgl,
       helix-crtschin,
       awesome-neovim-plugins,
+      nix-std,
       ...
     }@inputs:
     let
       system = "x86_64-linux";
+      std = nix-std;
       overlays = [
         nix-rice.overlays.default
         nixgl.overlay
@@ -111,15 +121,19 @@
             # to stuff like inputs.nixgl.
             inherit inputs;
             inherit email;
+            inherit std;
             # The dotfiles argument always points to the flake root.
             dotfiles = self;
           };
-          modules = extraModules;
+          modules = extraModules ++ [ inputs.nix-doom-emacs-unstraightened.homeModule ];
         };
     in
     {
       homeConfigurations = {
-        work = makeHomeConfiguration { extraModules = [ ./work.nix ]; email = "curtis.chinjensem@scrive.com"; };
+        work = makeHomeConfiguration {
+          extraModules = [ ./work.nix ];
+          email = "curtis.chinjensem@scrive.com";
+        };
         impromptu = makeHomeConfiguration { extraModules = [ ./work.nix ]; };
         personal = makeHomeConfiguration { extraModules = [ ./personal.nix ]; };
       };

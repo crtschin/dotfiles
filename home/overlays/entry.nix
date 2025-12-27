@@ -22,7 +22,7 @@ with lib; rec {
       i3 = super.configuration.wm == "i3";
       protocol = {
         x = i3;
-        wayland = i3 || hyprland || sway;
+        wayland = hyprland || sway;
       };
     };
   };

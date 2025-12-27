@@ -7,7 +7,7 @@ let
   configuration = pkgs.configuration;
   rgbTheme = pkgs.riceExtendedColorPalette;
   modifier = "SUPER";
-  enable = configuration.flags.hyprland or false;
+  enable = configuration.flags.hyprland;
 in
 {
   # Install packages only when hyprland is enabled
@@ -20,13 +20,6 @@ in
       hyprpaper     # Wallpaper daemon for Hyprland
       hyprlauncher  # Application launcher for Hyprland
     ];
-
-  programs = {
-    # Status bar configuration (shared with sway)
-    waybar = {
-      inherit enable;
-    };
-  };
 
   # Hyprlauncher service with gruvbox theming
   services.hyprlauncher = {
@@ -153,7 +146,7 @@ in
               enabled = false;
             };
             # Disable drop shadows for minimal appearance
-            drop_shadow = false;
+            # drop_shadow = false;
           };
 
           # Animation settings

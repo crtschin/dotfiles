@@ -3,6 +3,7 @@
   lib,
   pkgs,
   inputs,
+  std,
   ...
 }:
 let
@@ -86,7 +87,7 @@ let
     clearSelection
     // selectAll
     // selectAllAlias
-    // selectAllOccurance
+    // selectAllOccurrence
     // selectLineAbove
     // selectLineBelow
     // selectionBuffer
@@ -107,8 +108,8 @@ let
   selectAllAlias = makeKeymap "C-a" "@<%>";
   selectionBuffer = makeKeymap "*" "search_selection";
   selectionBufferBoundaries = makeKeymap "A-*" "search_selection_detect_word_boundaries";
-  # Select All Occurances of Selection
-  selectAllOccurance = makeKeymap "C-A" "@*%s<ret>";
+  # Select All Occurrences of Selection
+  selectAllOccurrence = makeKeymap "C-A" "@*%s<ret>";
   # Select current word, and otherwise jump to next instance of word
   selectCurrentWord = makeKeymap "'" "@miw*v";
   selectNextCurrentWord = makeKeymap "'" "@n,";
@@ -179,6 +180,7 @@ in
     # "helix/init.scm".source = ../../.config/helix/init.scm;
     # "helix/helix.scm".source = ../../.config/helix/helix.scm;
     "helix/runtime/queries/cabal/highlights.scm".source = ../../.config/helix/cabal/highlights.scm;
+    "codebook/codebook.toml".source = ../../.config/codebook.toml;
   };
   programs = {
     helix = {
@@ -201,6 +203,7 @@ in
           jump-label-alphabet = "jklfdsahgzuiorewqytm,.vcxnb";
           line-number = "relative";
           popup-border = "all";
+          rainbow-brackets = true;
           scrolloff = 4;
           trim-final-newlines = true;
           trim-trailing-whitespace = true;
@@ -274,18 +277,9 @@ in
           except = [ ];
         };
         language-server = {
-          harper = {
-            command = "${pkgs.harper}/bin/harper-ls";
-            args = [ "--stdio" ];
-            config = {
-              harper-ls = {
-                userDictPath = ../../.config/harper.dictionary;
-                linters = {
-                  SentenceCapitalization = false;
-                  BoringWords = true;
-                };
-              };
-            };
+          codebook-lsp = {
+            command = "${pkgs.codebook}/bin/codebook-lsp";
+            args = [ "serve" ];
           };
           marksman = {
             command = "${pkgs.marksman}/bin/marksman";
@@ -362,16 +356,11 @@ in
               lsps:
               [
                 "simple-completion-language-server"
-                "harper"
+                "codebook-lsp"
               ]
               ++ lsps;
           in
           [
-            # {
-            #   name = "cabal";
-            #   file-types = [ "cabal" ];
-            #   grammar = "cabal";
-            # }
             {
               name = "git-commit";
               file-types = [ { glob = "COMMIT_EDITMSG"; } ];
@@ -391,19 +380,23 @@ in
               ];
             }
             {
+              name = "nix";
+              language-servers = mkLspUsage [ "nixd" ];
+            }
+            {
               name = "python";
-              language-servers = [
+              language-servers = mkLspUsage [
                 "basedpyright"
                 "ruff"
               ];
             }
             {
               name = "dockerfile";
-              language-servers = [ "docker-language-server" ];
+              language-servers = mkLspUsage [ "docker-language-server" ];
             }
             {
               name = "docker-compose";
-              language-servers = [ "docker-language-server" ];
+              language-servers = mkLspUsage [ "docker-language-server" ];
             }
             {
               name = "cabal";

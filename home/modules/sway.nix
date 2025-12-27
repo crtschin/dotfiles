@@ -9,6 +9,7 @@ let
   configuration = pkgs.configuration;
   rgbTheme = pkgs.riceExtendedColorPalette;
   enable = configuration.flags.sway;
+  wayland = configuration.flags.protocol.wayland;
 in
 {
   home.packages =
@@ -22,10 +23,10 @@ in
 
   programs = {
     waybar = {
-      inherit enable;
+      enable = wayland;
     };
     wofi = {
-      inherit enable;
+      enable = wayland;
       style = ''
         ${builtins.readFile (inputs.wofi-themes + "/themes/gruvbox.css")}
       '';

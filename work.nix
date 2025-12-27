@@ -32,6 +32,7 @@ in
 
   imports = [
     ./common.nix
+    ./home/modules/hyprland.nix
     ./home/modules/nixgl.nix
   ];
 
