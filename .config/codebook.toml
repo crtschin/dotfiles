@@ -23,7 +23,8 @@ words = [ "codebook", "rustc", "polyvariadic", "nixpkgs", "hackage",
         , "subword", "combinatory", "esc", "gitui", "lazygit", "lazydocker",
         "lazysql" , "yazi", "bufferline", "cursorline", "cursorcolumn",
         "gruvbox", "pkgs", "scrolloff", "statusline", "basedpyright",
-        "langserver", "nixd" ]
+        "langserver", "nixd", "bsl", "accum", "unur", "bindgen", "rts",
+        "varargs", "libcurl", "libclang", "sed" ]
 
 # Words that should always be flagged as incorrect
 # Default: []

@@ -194,7 +194,7 @@ in
         editor = {
           bufferline = "always";
           color-modes = true;
-          completion-replace = true;
+          completion-replace = false;
           completion-timeout = 5;
           completion-trigger-len = 2;
           cursorline = true;
