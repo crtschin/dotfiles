@@ -24,7 +24,10 @@ words = [ "codebook", "rustc", "polyvariadic", "nixpkgs", "hackage",
         "lazysql" , "yazi", "bufferline", "cursorline", "cursorcolumn",
         "gruvbox", "pkgs", "scrolloff", "statusline", "basedpyright",
         "langserver", "nixd", "bsl", "accum", "unur", "bindgen", "rts",
-        "varargs", "libcurl", "libclang", "sed" ]
+        "varargs", "libcurl", "libclang", "sed", "stm", "alloc", "alloca"
+        , "multishot", "oneshot", "fold", "foldl'", "foldl", "foldr", "inlinable"
+        , "inlineable", "malloc", "fst", "snd"
+        ]
 
 # Words that should always be flagged as incorrect
 # Default: []
@@ -50,7 +53,7 @@ ignore_patterns = [
 # Default: 3
 # Set to 0 to check all words including single letters
 # Set to 2 to check words with 2 or more characters
-min_word_length = 3
+min_word_length = 4
 
 # Whether to use global configuration (project config only)
 # Set to false to completely ignore global settings
