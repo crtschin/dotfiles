@@ -6,24 +6,19 @@
       # url = "flake:nixpkgs/nixos-23.11";
     };
 
-    helix = {
-      url = "github:helix-editor/helix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    helix-crtschin = {
-      url = "github:crtschin/helix?ref=crts/scratch-with-plugins";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     flake-utils = {
       url = "github:numtide/flake-utils";
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      # url = "github:nix-community/home-manager";
+      #
+      # TODO: Remove after https://github.com/nix-community/home-manager/pull/8449 is merged
+      url = "github:Azd325/home-manager?ref=dd2a4042de626ed458f5866b02b4b58e0acb4b12";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # UTIL
 
     nix-std = {
       url = "github:chessai/nix-std";
@@ -35,14 +30,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # RICE
+
     nix-rice = {
       url = "github:bertof/nix-rice?ref=dddd03ed3c5e05c728b0df985f7af905b002f588";
-    };
-    tidal = {
-      url = "github:mitchmindtree/tidalcycles.nix";
-    };
-    musnix = {
-      url = "github:musnix/musnix";
     };
 
     gruvbox-tmTheme = {
@@ -55,12 +46,30 @@
       flake = false;
     };
 
-    Pipshag_dotfiles_gruvbox = {
-      url = "github:Pipshag/dotfiles_gruvbox/5a9ffe19953bde48bb42a4164fb43eb915de0aeb";
-      flake = false;
+    # EDITOR
+
+    helix = {
+      url = "github:helix-editor/helix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    helix-crtschin = {
+      url = "github:crtschin/helix?ref=crts/scratch-with-plugins";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    steel = {
+      url = "github:mattwparas/steel";
+      flake = true;
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     awesome-neovim-plugins.url = "github:m15a/flake-awesome-neovim-plugins";
+    nix-doom-emacs-unstraightened = {
+      url = "github:marienz/nix-doom-emacs-unstraightened";
+      inputs.nixpkgs.follows = "";
+    };
+
+    # SHELL
 
     fish-puffer = {
       url = "github:nickeb96/puffer-fish";
@@ -73,10 +82,6 @@
     fish-async-prompt = {
       url = "github:acomagu/fish-async-prompt";
       flake = false;
-    };
-    nix-doom-emacs-unstraightened = {
-      url = "github:marienz/nix-doom-emacs-unstraightened";
-      inputs.nixpkgs.follows = "";
     };
   };
   outputs =

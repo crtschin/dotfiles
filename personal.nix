@@ -18,26 +18,8 @@ let
     };
   };
 
-  droneSim =
-    pkgs: with pkgs; [
-      # unityhub
-      # ros
-      # gazebo
-    ];
-
-  _algoRave =
-    pkgs: with pkgs; [
-      qjackctl
-      jack2Full
-      jack_capture
-      supercollider
-      superdirt-start
-      tidal
-    ];
-
   overlays = [
     overlay
-    inputs.tidal.overlays.default
     (import ./home/overlays/entry.nix)
     (import ./home/overlays/kanshi.nix)
     (import ./home/overlays/rice.nix)
