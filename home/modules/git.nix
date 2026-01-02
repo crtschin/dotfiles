@@ -27,7 +27,7 @@ let
       gpg.format = "ssh";
     }
     // lib.optionalAttrs (sigingKey != null) {
-      user.signingkey = sigingKey;
+      user.signingKey = sigingKey;
       commit.gpgsign = false;
     };
 
@@ -82,6 +82,10 @@ in
           name = precondition.userName;
           email = precondition.userEmail;
         };
+        author = {
+          name = precondition.userName;
+          email = precondition.userEmail;
+        };
       };
     };
 
@@ -100,8 +104,13 @@ in
       settings = recursiveMerge [
         {
           user = {
-            email = userEmail;
-            name = userName;
+            name = precondition.userName;
+            email = precondition.userEmail;
+            useConfigOnly = true;
+          };
+          author = {
+            name = precondition.userName;
+            email = precondition.userEmail;
           };
           alias = {
             lc = "!fish -c 'git checkout (git branch --list --sort=-committerdate | string trim | fzf --preview=\"git log --stat -n 10 --decorate --color=always {}\")'";
