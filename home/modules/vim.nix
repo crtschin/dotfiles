@@ -8,7 +8,7 @@
 {
   programs = {
     neovim = {
-      enable = false;
+      enable = true;
       extraConfig = "";
       extraLuaConfig = builtins.readFile ../../.config/nvim/init.lua;
       extraPackages = with pkgs; [
@@ -56,6 +56,7 @@
           nvim-cmp
           luasnip
           cmp_luasnip
+          lean-nvim
 
           # Formatting
           conform-nvim

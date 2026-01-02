@@ -177,9 +177,9 @@ let
 in
 {
   xdg.configFile = {
-    # "helix/init.scm".source = ../../.config/helix/init.scm;
-    # "helix/helix.scm".source = ../../.config/helix/helix.scm;
-    "helix/runtime/queries/cabal/highlights.scm".source = ../../.config/helix/cabal/highlights.scm;
+    "helix/init.scm".source = ./helix/init.scm;
+    "helix/helix.scm".source = ./helix/helix.scm;
+    "helix/runtime/queries/cabal/highlights.scm".source = ./helix/cabal/highlights.scm;
     "codebook/codebook.toml".source = ../../.config/codebook.toml;
   };
   programs = {
