@@ -319,6 +319,9 @@ in
               formattingProvider = "fourmolu";
             };
           };
+          steel-language-server = {
+            command = "steel-language-server";
+          };
           basedpyright = {
             command = "basedpyright-langserver";
             args = [ "--stdio" ];
@@ -397,6 +400,15 @@ in
             {
               name = "docker-compose";
               language-servers = mkLspUsage [ "docker-language-server" ];
+            }
+            {
+              name = "scheme";
+              language-servers = mkLspUsage [ "steel-language-server" ];
+              formatter = {
+                command = "scmfmt";
+                args = [ "/dev/stdin" ];
+              };
+              auto-format = true;
             }
             {
               name = "cabal";
