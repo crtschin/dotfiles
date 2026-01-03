@@ -9,3 +9,7 @@ switch target: (hm "switch" target)
 
 update:
   nix flake update --flake .
+
+save:
+  git add -u
+  git commit -m "Update"
