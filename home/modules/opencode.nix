@@ -16,8 +16,13 @@ in
         auto = true;
         prune = true;
       };
+      keybinds = {
+        leader = "ctrl+space";
+      };
     };
     skills = {
+      steel-helix-ui = ./opencode/skills-helix-steel-ui.md;
+      steel-helix-plugin = ./opencode/skills-helix-steel-plugin.md;
       steel = ''
         ${builtins.readFile ./opencode/skills-steel.md}
 
