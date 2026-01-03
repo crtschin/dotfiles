@@ -405,8 +405,8 @@ in
               name = "scheme";
               language-servers = mkLspUsage [ "steel-language-server" ];
               formatter = {
-                command = "scmfmt";
-                args = [ "/dev/stdin" ];
+               command = "${pkgs.parinfer-rust}/bin/parinfer-rust";
+                args = [ "--mode" "paren" "-l" "scheme" ];
               };
               auto-format = true;
             }
