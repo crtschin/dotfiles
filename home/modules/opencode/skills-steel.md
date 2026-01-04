@@ -1,6 +1,6 @@
 ---
 name: steel-scheme
-description: Steel Scheme programming language (R5RS-compliant Scheme variant in Rust) with immutable data structures, FFI, modules, macros, contracts, transducers. Use when working with Steel code, writing Steel programs, embedding Steel in Rust, or asking about Steel syntax/API.
+description: Steel Scheme language reference: syntax, built-ins, FFI, modules, macros, contracts, and transducers.
 ---
 
 # Steel Scheme

@@ -1,6 +1,6 @@
 ---
 name: helix-steel-ui
-description: Structure asynchronous UI elements for Helix plugins using Steel
+description: Helix Steel UI framework: async components, state machines, VTE terminals, render loops.
 license: MIT
 compatibility: opencode
 ---

@@ -1,6 +1,6 @@
 ---
 name: helix-buffer-modification
-description: Guide for performing text/rope modifications in Helix editor buffers using Steel
+description: Helix buffer manipulation: rope operations, text edits, cursors, and transactions.
 metadata:
   short-description: Modify Helix buffer content with rope operations
 ---

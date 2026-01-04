@@ -1,6 +1,6 @@
 ---
 name: helix-steel-plugin
-description: Develop Helix editor plugins and Steel libraries with Rust FFI integration
+description: Helix Steel plugin development: package structure, FFI integration, and library patterns.
 license: MIT
 compatibility: opencode
 ---
