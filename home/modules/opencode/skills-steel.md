@@ -1,6 +1,6 @@
 ---
 name: steel-scheme
-description: Steel Scheme language reference: syntax, built-ins, FFI, modules, macros, contracts, and transducers.
+description: Steel Scheme language reference; syntax, built-ins, FFI, modules, macros, contracts, and transducers.
 ---
 
 # Steel Scheme

@@ -1,6 +1,6 @@
 ---
 name: helix-buffer-modification
-description: Helix buffer manipulation: rope operations, text edits, cursors, and transactions.
+description: Helix buffer manipulation; rope operations, text edits, cursors, and transactions.
 metadata:
   short-description: Modify Helix buffer content with rope operations
 ---

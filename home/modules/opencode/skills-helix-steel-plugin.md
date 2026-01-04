@@ -1,6 +1,6 @@
 ---
 name: helix-steel-plugin
-description: Helix Steel plugin development: package structure, FFI integration, and library patterns.
+description: Helix Steel plugin development; package structure, FFI integration, and library patterns.
 license: MIT
 compatibility: opencode
 ---
