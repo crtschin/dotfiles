@@ -21,13 +21,16 @@ in
       };
     };
     skills = {
-      steel-helix-buffer = ./opencode/skills-helix-steel-buffer.md;
-      steel-helix-plugin = ./opencode/skills-helix-steel-plugin.md;
-      steel-helix-ui = ./opencode/skills-helix-steel-ui.md;
+      steel-threading = ./opencode/skills-steel-threading.md;
+      helix-steel-buffer = ./opencode/skills-helix-steel-buffer.md;
+      helix-steel-plugin = ''
+        ${builtins.readFile ./opencode/skills-helix-steel-plugin.md}
+        Helix-builtin steel functions can be found here: '${inputs.helix-crtschin}/steel-docs.md'.
+      '';
+      helix-steel-ui = ./opencode/skills-helix-steel-ui.md;
       steel = ''
         ${builtins.readFile ./opencode/skills-steel.md}
-
-        Paths to relative Steel documentation is relative to: '${inputs.steel}/docs/src/'
+         Relative paths to Steel documentation is relative to: '${inputs.steel}/docs/src/'.
       '';
     };
     agents = {
