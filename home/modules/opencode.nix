@@ -17,12 +17,13 @@ in
         prune = true;
       };
       keybinds = {
-        leader = "ctrl+space";
+        leader = "ctrl+shift+p";
       };
     };
     skills = {
-      steel-helix-ui = ./opencode/skills-helix-steel-ui.md;
+      steel-helix-buffer = ./opencode/skills-helix-steel-buffer.md;
       steel-helix-plugin = ./opencode/skills-helix-steel-plugin.md;
+      steel-helix-ui = ./opencode/skills-helix-steel-ui.md;
       steel = ''
         ${builtins.readFile ./opencode/skills-steel.md}
 
