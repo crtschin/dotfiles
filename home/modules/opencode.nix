@@ -23,6 +23,7 @@ in
     skills = {
       steel-threading = ./opencode/skills-steel-threading.md;
       helix-steel-buffer = ./opencode/skills-helix-steel-buffer.md;
+      helix-steel-styling = ./opencode/skills-helix-steel-styling.md;
       helix-steel-plugin = ''
         ${builtins.readFile ./opencode/skills-helix-steel-plugin.md}
         Helix-builtin steel functions can be found here: '${inputs.helix-crtschin}/steel-docs.md'.
