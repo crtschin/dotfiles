@@ -29,6 +29,7 @@ in
         Helix-builtin steel functions can be found here: '${inputs.helix-crtschin}/steel-docs.md'.
       '';
       helix-steel-ui = ./opencode/skills-helix-steel-ui.md;
+      skill-authoring = ./opencode/skills-skill-authoring.md;
       steel = ''
         ${builtins.readFile ./opencode/skills-steel.md}
          Relative paths to Steel documentation is relative to: '${inputs.steel}/docs/src/'.
