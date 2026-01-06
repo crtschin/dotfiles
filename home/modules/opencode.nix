@@ -19,6 +19,9 @@ in
       keybinds = {
         leader = "ctrl+shift+p";
       };
+      permission = {
+        bash = "ask";
+      };
     };
     skills = {
       steel-threading = ./opencode/skills-steel-threading.md;
