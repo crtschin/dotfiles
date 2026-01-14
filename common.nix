@@ -76,7 +76,7 @@
       # nix
       nixd
       niv
-      nixfmt-rfc-style
+      nixfmt
       any-nix-shell
       cachix
       nix-direnv

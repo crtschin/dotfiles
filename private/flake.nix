@@ -1,0 +1,8 @@
+{
+  description = "Private";
+  outputs =
+    { ... }:
+    {
+      homeModule = { ... }: { };
+    };
+}

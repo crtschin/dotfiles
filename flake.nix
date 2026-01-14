@@ -11,10 +11,7 @@
     };
 
     home-manager = {
-      # url = "github:nix-community/home-manager";
-      #
-      # TODO: Remove after https://github.com/nix-community/home-manager/pull/8449 is merged
-      url = "github:Azd325/home-manager?ref=dd2a4042de626ed458f5866b02b4b58e0acb4b12";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -86,7 +83,7 @@
 
     # PRIVATE
     private = {
-      url = "github:crtschin/privatefiles";
+      url = "path:./private";
     };
   };
   outputs =
@@ -165,7 +162,7 @@
     // flake-utils.lib.eachDefaultSystem (
       system: with pkgs; {
         devShells.default = mkShell {
-          buildInputs = [ nixfmt-rfc-style ];
+          buildInputs = [ nixfmt ];
         };
       }
     );
