@@ -83,6 +83,11 @@
       url = "github:acomagu/fish-async-prompt";
       flake = false;
     };
+
+    # PRIVATE
+    private = {
+      url = "github:crtschin/privatefiles";
+    };
   };
   outputs =
     {
@@ -95,6 +100,7 @@
       helix-crtschin,
       awesome-neovim-plugins,
       nix-std,
+      private,
       ...
     }@inputs:
     let
@@ -130,7 +136,11 @@
             # The dotfiles argument always points to the flake root.
             dotfiles = self;
           };
-          modules = extraModules ++ [ inputs.nix-doom-emacs-unstraightened.homeModule ];
+          modules = [
+            private.homeModule
+            inputs.nix-doom-emacs-unstraightened.homeModule
+          ]
+          ++ extraModules;
         };
     in
     {

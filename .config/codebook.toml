@@ -26,7 +26,7 @@ words = [ "codebook", "rustc", "polyvariadic", "nixpkgs", "hackage",
         "langserver", "nixd", "bsl", "accum", "unur", "bindgen", "rts",
         "varargs", "libcurl", "libclang", "sed", "stm", "alloc", "alloca"
         , "multishot", "oneshot", "fold", "foldl'", "foldl", "foldr", "inlinable"
-        , "inlineable", "malloc", "fst", "snd"
+        , "inlineable", "malloc", "fst", "snd", "fmap"
         ]
 
 # Words that should always be flagged as incorrect

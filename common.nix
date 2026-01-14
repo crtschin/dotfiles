@@ -15,7 +15,6 @@
     ./home/modules/helix.nix
     ./home/modules/kanshi.nix
     ./home/modules/kitty.nix
-    ./home/modules/opencode.nix
     ./home/modules/starship.nix
     ./home/modules/sway.nix
     ./home/modules/vim.nix
