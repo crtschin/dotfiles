@@ -10,7 +10,7 @@
     neovim = {
       enable = true;
       extraConfig = "";
-      extraLuaConfig = builtins.readFile ../../.config/nvim/init.lua;
+      initLua = builtins.readFile ../../.config/nvim/init.lua;
       extraPackages = with pkgs; [
         # Language Servers (matching Helix config)
         harper

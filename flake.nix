@@ -83,7 +83,7 @@
 
     # PRIVATE
     private = {
-      url = "path:./private";
+      url = "path:/home/crtschin/personal/privatefiles";
     };
   };
   outputs =

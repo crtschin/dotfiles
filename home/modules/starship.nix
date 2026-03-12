@@ -56,6 +56,11 @@
           format = "[$path](bold $style)[$lock_symbol]($lock_style)[ with ](bold)";
         };
 
+        elm = {
+          format = "\\[[$symbol$branch]($style)\\]";
+          symbol = "🌳";
+        };
+
         env_var = {
           IN_NIX = {
             default = "";
@@ -115,7 +120,7 @@
           format = "\\[$symbol[$ram(|$swap)]($style)\\]";
           threshold = 0;
           style = "bold dimmed white";
-          disabled = false;
+          disabled = true;
         };
 
         nodejs = {

@@ -55,6 +55,8 @@ in
       ltunify
       jmeter
       _1password-cli
+      netbird
+      netbird-ui
 
       docker
       docker-compose
