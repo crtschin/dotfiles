@@ -8,7 +8,7 @@ news target: (hm "news" target)
 switch target: (hm "switch" target)
 
 update:
-  nix flake update --flake .
+  nix flake update .
 
 save:
   git add -u
