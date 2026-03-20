@@ -48,7 +48,6 @@ in
         valgrind
         discord
         spotify
-        signal-desktop
         glxinfo
         unzip
         time

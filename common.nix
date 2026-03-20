@@ -47,6 +47,7 @@
       jump
       bluetui
       jujutsu
+      glow
 
       # Git
       git-absorb
@@ -97,7 +98,8 @@
       hivemind
       zoom-us
       spotify
-      signal-desktop
+      scli
+      signal-cli
 
       # Customization
       dejavu_fonts
