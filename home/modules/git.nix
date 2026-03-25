@@ -98,9 +98,9 @@ in
       lfs.enable = true;
       # Prevent bad objects from spreading.
       # transfer.fsckObjects = true;
-      attributes = [
-        "* merge=mergiraf"
-      ];
+      # attributes = [
+      #   "* merge=mergiraf"
+      # ];
       settings = recursiveMerge [
         {
           user = {
@@ -130,10 +130,10 @@ in
           merge = {
             conflictstyle = "diff3";
             difftool = "${pkgs.meld}/bin/meld";
-            "mergiraf" = {
-              name = "mergiraf";
-              driver = "mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L";
-            };
+            # "mergiraf" = {
+            #   name = "mergiraf";
+            #   driver = "mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L";
+            # };
           };
           delta = {
             features = "interactive unobtrusive-line-numbers decorations";
