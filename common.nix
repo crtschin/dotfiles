@@ -231,6 +231,10 @@
       enable = true;
     };
 
+    lazyworktree = {
+      enable = true;
+    };
+
     lazygit = {
       enable = true;
     };

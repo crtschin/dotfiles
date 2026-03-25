@@ -59,7 +59,9 @@ in
         lla = "eza -la --group-directories-first --icons=auto --smart-group --no-permissions --no-user";
         llaa = "eza -la --group-directories-first --icons=auto --smart-group";
         z = "j";
-        gu = "${pkgs.gitui}/bin/gitui";
+        gt = "${pkgs.gitui}/bin/gitui";
+        ld = "${pkgs.lazydocker}/bin/lazydocker";
+        lw = "${pkgs.lazyworktree}/bin/lazyworktree";
         mkdir = "mkdir -p -v";
         watch = "watch -c -d";
       };
@@ -71,11 +73,6 @@ in
             "video_file"
             "gif_name"
           ];
-        };
-        commandlinefu = {
-          body = "curl -sX GET https://www.commandlinefu.com/commands/tagged/163/$command/json | jq -c \".[]\" | fzf --preview=\"jq -n {}\" | jq \".command\"";
-          description = "commandlinefu search";
-          argumentNames = [ "command" ];
         };
         echoserver = {
           body = "while true; echo -e 'HTTP/1.1 200 OK\r\n' | nc -l $port; echo; end";

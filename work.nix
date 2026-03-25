@@ -55,8 +55,8 @@ in
       ltunify
       jmeter
       _1password-cli
-      netbird
-      netbird-ui
+      # netbird
+      # netbird-ui
 
       docker
       docker-compose
@@ -84,19 +84,6 @@ in
       # pkgs.haskellPackages.ghcprofview
       # pkgs.haskellPackages.hpview
     ];
-  };
-
-  systemd.user.services.netbird-work = {
-    Unit = {
-      Description = "Netbird VPN connection to Scrive";
-    };
-
-    Service = {
-      Type = "oneshot";
-      RemainAfterExit = true;
-      ExecStart = "${pkgs.netbird}/bin/netbird up --management-url https://netbird.scrive.io:443 --daemon-addr unix:///var/run/netbird.sock";
-      ExecStop = "${pkgs.netbird}/bin/netbird down --daemon-addr unix:///var/run/netbird.sock";
-    };
   };
 
   services = {
