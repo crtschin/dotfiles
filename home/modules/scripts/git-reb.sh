@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Save original HEAD
 orig=$(git rev-parse HEAD)
 

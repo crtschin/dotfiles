@@ -162,7 +162,7 @@
     // flake-utils.lib.eachDefaultSystem (
       system: with pkgs; {
         devShells.default = mkShell {
-          buildInputs = [ nixfmt ];
+          buildInputs = [ nixfmt shellcheck  ruff basedpyright ];
         };
       }
     );
