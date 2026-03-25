@@ -65,21 +65,6 @@ in
         mkdir = "mkdir -p -v";
         watch = "watch -c -d";
       };
-      functions = {
-        giffify = {
-          body = "ffmpeg -i $video_file -r 15 -vf \"scale=1024:-1,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse\" $giff_name.gif";
-          description = "giffify <video_file> <gif_name>";
-          argumentNames = [
-            "video_file"
-            "gif_name"
-          ];
-        };
-        echoserver = {
-          body = "while true; echo -e 'HTTP/1.1 200 OK\r\n' | nc -l $port; echo; end";
-          description = "echo server";
-          argumentNames = [ "port" ];
-        };
-      };
       enable = true;
       plugins = map (
         plugin: with plugin; {

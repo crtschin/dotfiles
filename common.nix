@@ -10,6 +10,7 @@
     ./home/services.nix
     ./home/modules/dunst.nix
     ./home/modules/fish.nix
+    ./home/modules/scripts.nix
     ./home/modules/ghostty.nix
     ./home/modules/git.nix
     ./home/modules/helix.nix
