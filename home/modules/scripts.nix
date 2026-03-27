@@ -12,10 +12,15 @@ let
     runtimeInputs = [ pkgs.ffmpeg ];
     text = builtins.readFile ./scripts/giffify.sh;
   };
-  git-reb = pkgs.writeShellApplication {
-    name = "git-reb";
+  git-co = pkgs.writeShellApplication {
+    name = "git-co";
     runtimeInputs = [ pkgs.git ];
-    text = builtins.readFile ./scripts/git-reb.sh;
+    text = builtins.readFile ./scripts/git-co.sh;
+  };
+  git-rb = pkgs.writeShellApplication {
+    name = "git-rb";
+    runtimeInputs = [ pkgs.git ];
+    text = builtins.readFile ./scripts/git-rb.sh;
   };
   with-temp-postgres = pkgs.writeShellApplication {
     name = "with-temp-postgres";
@@ -28,7 +33,8 @@ in
     echoserver
     free-port
     giffify
-    git-reb
+    git-co
+    git-rb
     with-temp-postgres
   ];
 }
