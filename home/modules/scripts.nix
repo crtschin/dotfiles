@@ -22,6 +22,16 @@ let
     runtimeInputs = [ pkgs.git ];
     text = builtins.readFile ./scripts/git-rb.sh;
   };
+  git-reauthor = pkgs.writeShellApplication {
+    name = "git-reauthor";
+    runtimeInputs = [ pkgs.git ];
+    text = builtins.readFile ./scripts/git-reauthor.sh;
+  };
+  git-to-worktree = pkgs.writeShellApplication {
+    name = "git-to-worktree";
+    runtimeInputs = [ pkgs.git ];
+    text = builtins.readFile ./scripts/git-to-worktree.sh;
+  };
   with-temp-postgres = pkgs.writeShellApplication {
     name = "with-temp-postgres";
     runtimeInputs = [  free-port pkgs.postgresql ];
@@ -35,6 +45,8 @@ in
     giffify
     git-co
     git-rb
+    git-reauthor
+    git-to-worktree
     with-temp-postgres
   ];
 }
