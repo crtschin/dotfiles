@@ -12,15 +12,15 @@ let
     runtimeInputs = [ pkgs.ffmpeg ];
     text = builtins.readFile ./scripts/giffify.sh;
   };
-  git-co = pkgs.writeShellApplication {
-    name = "git-co";
+  git-swing = pkgs.writeShellApplication {
+    name = "git-swing";
     runtimeInputs = [ pkgs.git ];
-    text = builtins.readFile ./scripts/git-co.sh;
+    text = builtins.readFile ./scripts/git-swing.sh;
   };
-  git-rb = pkgs.writeShellApplication {
-    name = "git-rb";
+  git-reroot = pkgs.writeShellApplication {
+    name = "git-reroot";
     runtimeInputs = [ pkgs.git ];
-    text = builtins.readFile ./scripts/git-rb.sh;
+    text = builtins.readFile ./scripts/git-reroot.sh;
   };
   git-reauthor = pkgs.writeShellApplication {
     name = "git-reauthor";
@@ -43,8 +43,8 @@ in
     echoserver
     free-port
     giffify
-    git-co
-    git-rb
+    git-swing
+    git-reroot
     git-reauthor
     git-to-worktree
     with-temp-postgres

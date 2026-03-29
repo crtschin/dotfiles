@@ -5,7 +5,7 @@ orig=$(git rev-parse HEAD)
 # Check if working tree is dirty (tracked files only)
 needs_pop=false
 if ! git diff --quiet || ! git diff --cached --quiet; then
-  git stash push -m "git-reb auto stash"
+  git stash push -m "git-reroot auto stash"
   needs_pop=true
 fi
 
@@ -26,7 +26,7 @@ if [ "$needs_pop" = true ]; then
     git checkout -- . && git clean -fd   # clear failed merge state
     git reset --hard "$orig"             # undo the rebase
     git stash pop                        # now pops cleanly against original base
-    echo "git-reb: stash pop conflicted with rebase result; reverted to original state" >&2
+    echo "git-reroot: stash pop conflicted with rebase result; reverted to original state" >&2
     exit 1
   fi
 fi

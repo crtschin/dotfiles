@@ -2,7 +2,7 @@
 # Check if working tree is dirty (tracked files only)
 needs_pop=false
 if ! git diff --quiet || ! git diff --cached --quiet; then
-  git stash push -m "git-co auto stash"
+  git stash push -m "git-swing auto stash"
   needs_pop=true
 fi
 
