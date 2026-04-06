@@ -101,6 +101,7 @@ in
       # attributes = [
       #   "* merge=mergiraf"
       # ];
+      signing.format = "openpgp";
       settings = recursiveMerge [
         {
           user = {

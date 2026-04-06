@@ -131,8 +131,7 @@
     hinting = "slight";
     subpixelRendering = "rgb";
   };
-
-  gtk = {
+  gtk = rec {
     enable = true;
     font = {
       package = pkgs.rice.font.normal.package;
@@ -143,6 +142,7 @@
       name = "gruvbox-dark";
       package = pkgs.gruvbox-dark-gtk;
     };
+    gtk4.theme = theme;
     iconTheme = {
       name = "gruvbox-dark";
       package = pkgs.gruvbox-dark-icons-gtk;

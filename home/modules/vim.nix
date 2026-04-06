@@ -15,7 +15,7 @@
         # Language Servers (matching Helix config)
         harper
         marksman
-        dockerfile-language-server-nodejs
+        dockerfile-language-server
         simple-completion-language-server
         haskell-language-server
         basedpyright

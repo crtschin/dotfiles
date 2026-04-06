@@ -37,6 +37,11 @@ let
     runtimeInputs = [  free-port pkgs.postgresql ];
     text = builtins.readFile ./scripts/with-temp-postgres.sh;
   };
+  repeat = pkgs.writeShellApplication {
+    name = "repeat";
+    runtimeInputs = [ ];
+    text = builtins.readFile ./scripts/repeat.sh;
+  };
 in
 {
   home.packages = [
@@ -48,5 +53,6 @@ in
     git-reauthor
     git-to-worktree
     with-temp-postgres
+    repeat
   ];
 }
