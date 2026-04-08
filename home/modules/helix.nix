@@ -352,6 +352,20 @@ in
               rev = "2fc3b701d6ca17467a9ab35719403e0893e4e971";
             };
           }
+          {
+            "name" = "nix";
+            "source" = {
+              git = "https://github.com/nix-community/tree-sitter-nix";
+              rev = "master";
+            };
+          }
+          {
+            "name" = "gitcommit";
+            "source" = {
+              git = "https://github.com/gbprod/tree-sitter-gitcommit";
+              rev = "main";
+            };
+          }
         ];
         language =
           let

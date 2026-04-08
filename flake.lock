@@ -534,8 +534,8 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1775483599,
-        "narHash": "sha256-NDDl70QHudGw0A2Fdl35LwGeLtgC417gr1J8xRlxuzk=",
+        "lastModified": 1775484474,
+        "narHash": "sha256-0q5VT1zug4qFgPrdqlEHY9CSL8FclfkeRhF8tMEgbDY=",
         "path": "/home/crtschin/personal/privatefiles",
         "type": "path"
       },
