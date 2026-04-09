@@ -121,6 +121,8 @@ let
       "q" = ":buffer-close";
       "Q" = ":write-buffer-close";
       "P" = "no_op";
+      "e" = "file_explorer";
+      "E" = "file_explorer_in_current_buffer_directory";
       "C" = "no_op";
       "C-c" = "toggle_block_comments";
       "c" = {
@@ -142,7 +144,7 @@ let
           ":echo %sh{git show --no-patch --format='%%h (%%an: %%ar): %%s' $(git blame -p %{buffer_name} -L%{cursor_line},+1 | head -1 | cut -d' ' -f1)}";
         "B" = ":sh gh browse %{buffer_name}:%{selection_line_start}-%{selection_line_end}";
         "C-b" = ":sh ${pkgs.gitBlameURL} %{buffer_name} %{cursor_line}";
-        "s" = ":git-inline.stage-lines";
+        # "s" = ":git-inline.stage-lines";
         "c" = makeBufferWith "git commit";
         # "s" = [
         #   ":write"
