@@ -490,11 +490,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1773646010,
-        "narHash": "sha256-iYrs97hS7p5u4lQzuNWzuALGIOdkPXvjz7bviiBjUu8=",
+        "lastModified": 1775710090,
+        "narHash": "sha256-ar3rofg+awPB8QXDaFJhJ2jJhu+KqN/PRCXeyuXR76E=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "5b2c2d84341b2afb5647081c1386a80d7a8d8605",
+        "rev": "4c1018dae018162ec878d42fec712642d214fdfa",
         "type": "github"
       },
       "original": {
@@ -534,8 +534,8 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1775484474,
-        "narHash": "sha256-0q5VT1zug4qFgPrdqlEHY9CSL8FclfkeRhF8tMEgbDY=",
+        "lastModified": 1775865944,
+        "narHash": "sha256-T1n2hsqVexyTeSqmCstUARRzZ7A5UAt30e/F/BKDg0w=",
         "path": "/home/crtschin/personal/privatefiles",
         "type": "path"
       },
