@@ -1,27 +1,15 @@
 #!/usr/bin/env bash
-times=1
+set -euo pipefail
 
-while [[ $# -gt 0 ]]; do
-  case "$1" in
-    --times)
-      times="$2"
-      shift 2
-      ;;
-    --)
-      shift
-      break
-      ;;
-    *)
-      break
-      ;;
-  esac
-done
+# Usage: repeat <N> <command...>
 
-if [[ $# -eq 0 ]]; then
-  echo "Usage: repeat --times N <command> [args...]" >&2
+if [[ $# -lt 2 ]] || ! [[ $1 =~ ^[0-9]+$ ]]; then
+  echo "Usage: repeat <N> <command...>" >&2
   exit 1
 fi
 
-for (( i = 0; i < times; i++ )); do
+count=$1; shift
+
+for ((i = 0; i < count; i++)); do
   "$@"
 done

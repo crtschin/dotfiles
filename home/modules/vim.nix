@@ -10,6 +10,8 @@
     neovim = {
       enable = true;
       extraConfig = "";
+      withRuby = false;
+      withPython3 = false;
       initLua = builtins.readFile ../../.config/nvim/init.lua;
       extraPackages = with pkgs; [
         # Language Servers (matching Helix config)

@@ -468,7 +468,7 @@ in
               name = "markdown";
               file-types = [ "md" ];
               soft-wrap = {
-                enable = false;
+                enable = true;
                 max-wrap = 4;
                 max-indent-retain = 16;
                 wrap-at-text-width = true;

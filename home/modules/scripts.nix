@@ -1,5 +1,32 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let
+  writeClickPython3Bin =
+    name: settings: body:
+    let
+      # Ensure click is in libraries if not already
+      allSettings = settings // {
+        libraries = (settings.libraries or [ ]) ++ [ pkgs.python3Packages.click ];
+        flakeIgnore = (settings.flakeIgnore or [ ]) ++ [
+          "E501" # E265 block comment should start with '# '
+          "E265" # E501 line too long
+        ];
+
+      };
+      bin = pkgs.writers.writePython3Bin name allSettings body;
+      envVar = "_${lib.replaceStrings [ "-" ] [ "_" ] (lib.toUpper name)}_COMPLETE";
+    in
+    pkgs.symlinkJoin {
+      name = "${name}-with-completions";
+      paths = [ bin ];
+      postBuild = ''
+        if [ -x $out/bin/${name} ]; then
+          mkdir -p $out/share/fish/vendor_completions.d
+          ${envVar}=fish_source $out/bin/${name} \
+            > $out/share/fish/vendor_completions.d/${name}.fish || true
+        fi
+      '';
+    };
+
   free-port = pkgs.writers.writePython3Bin "free-port" { } (builtins.readFile ./scripts/free-port.py);
 
   echoserver = pkgs.writeShellApplication {
@@ -34,7 +61,10 @@ let
   };
   with-temp-postgres = pkgs.writeShellApplication {
     name = "with-temp-postgres";
-    runtimeInputs = [  free-port pkgs.postgresql ];
+    runtimeInputs = [
+      free-port
+      pkgs.postgresql
+    ];
     text = builtins.readFile ./scripts/with-temp-postgres.sh;
   };
   repeat = pkgs.writeShellApplication {
