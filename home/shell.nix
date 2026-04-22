@@ -7,8 +7,13 @@
 }:
 {
   programs = {
-    autorandr = {
+    asciinema = {
       enable = true;
+      settings = { };
+    };
+
+    autorandr = {
+      enable = false;
     };
 
     bat = {

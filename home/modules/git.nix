@@ -119,10 +119,10 @@ in
           };
           # blame.ignoreRevsFile = ".git-blame-ignore-revs";
           pager = {
-            diff = "delta";
-            log = "delta";
-            reflog = "delta";
-            show = "delta";
+            # log = "delta";
+            # diff = "delta";
+            # reflog = "delta";
+            # show = "delta";
           };
           core = {
             editor = "${pkgs.vim}/bin/vim";

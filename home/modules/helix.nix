@@ -119,11 +119,17 @@ let
     "space" = {
       "o" = "file_picker_in_current_buffer_directory";
       "q" = ":buffer-close";
-      "Q" = ":write-buffer-close";
+      "Q" = ":buffer-close!";
       "P" = "no_op";
       "e" = "file_explorer";
       "E" = "file_explorer_in_current_buffer_directory";
       "C" = "no_op";
+      "k" = "goto_hover";
+      "K" = [
+        ":yank-diagnostic"
+        ":new"
+        ":clipboard-paste-before"
+      ];
       "C-c" = "toggle_block_comments";
       "c" = {
         # Turn something into a record selector combinatory
@@ -318,7 +324,6 @@ in
               rename = {
                 config = "crossModule";
               };
-              formattingProvider = "fourmolu";
             };
           };
           steel-language-server = {
@@ -421,8 +426,13 @@ in
               name = "scheme";
               language-servers = mkLspUsage [ "steel-language-server" ];
               formatter = {
-               command = "${pkgs.parinfer-rust}/bin/parinfer-rust";
-                args = [ "--mode" "paren" "-l" "scheme" ];
+                command = "${pkgs.parinfer-rust}/bin/parinfer-rust";
+                args = [
+                  "--mode"
+                  "paren"
+                  "-l"
+                  "scheme"
+                ];
               };
               auto-format = true;
             }
