@@ -6,6 +6,10 @@
       cleanup = true;
     };
   };
+  services.lorri = {
+    enable = true;
+    enableNotifications = true;
+  };
   # systemd.user.services.update-lock-screens = {
   #   Unit = {
   #     Description = "Update lock screens";

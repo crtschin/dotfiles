@@ -360,6 +360,13 @@ in
             };
           }
           {
+            "name" = "cabal_project";
+            "source" = {
+              git = "https://github.com/crtschin/tree-sitter-cabal-project";
+              rev = "cffa0d1825979c5365c0afd26fe2671b7b7d6b21";
+            };
+          }
+          {
             "name" = "nix";
             "source" = {
               git = "https://github.com/nix-community/tree-sitter-nix";
@@ -439,6 +446,17 @@ in
             {
               name = "cabal";
               file-types = [ "cabal" ];
+              rulers = [ 80 ];
+              language-servers = mkLspUsage [
+                "haskell-language-server"
+              ];
+            }
+            {
+              name = "cabal_project";
+              file-types = [
+                { "glob" = "cabal.project"; }
+                { "glob" = "cabal.project.local"; }
+              ];
               rulers = [ 80 ];
               language-servers = mkLspUsage [
                 "haskell-language-server"

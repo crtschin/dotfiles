@@ -93,6 +93,7 @@ in
         flakeDir = "/home/crtschin/personal/dotfiles";
         frequency = "weekly";
         useFlake = true;
+        preSwitchCommands = ["nix flake update"];
       };
     };
   };

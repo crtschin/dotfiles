@@ -131,6 +131,7 @@
     hinting = "slight";
     subpixelRendering = "rgb";
   };
+
   gtk = rec {
     enable = true;
     font = {
@@ -215,6 +216,9 @@
     firefox = {
       enable = true;
       package = pkgs.firefox;
+      # TODO: Change this to
+      # configPath = "${config.xdg.configHome}/mozilla/firefox";
+      configPath = ".mozilla/firefox";
     };
 
     jjui = {
@@ -253,7 +257,7 @@
     };
 
     pgcli = {
-      enable = true;
+      enable = false;
       settings = {
         main = {
           destructive_statements_require_transaction = true;

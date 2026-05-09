@@ -93,4 +93,8 @@ with lib; rec {
   flameshot = super.flameshot.override {
     enableWlrSupport = configuration.flags.protocol.wayland;
   };
+
+  # pgcli = super.pgcli.overrideAttrs (_: {
+  #   doCheck = false;
+  # });
 }

@@ -29,6 +29,12 @@ let
 
   free-port = pkgs.writers.writePython3Bin "free-port" { } (builtins.readFile ./scripts/free-port.py);
 
+  cabal-dep-paths = writeClickPython3Bin "cabal-dep-paths" {
+    flakeIgnore = [
+      "E501" # line too long
+    ];
+  } (builtins.readFile ./scripts/cabal-dep-paths.py);
+
   echoserver = pkgs.writeShellApplication {
     name = "echoserver";
     runtimeInputs = [ ];
@@ -75,6 +81,7 @@ let
 in
 {
   home.packages = [
+    cabal-dep-paths
     echoserver
     free-port
     giffify
