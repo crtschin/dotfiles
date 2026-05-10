@@ -35,7 +35,7 @@ flag_words = ["todo", "fixme"]
 
 # List of glob patterns for paths to ignore when spell checking
 # Default: []
-ignore_paths = ["target/**/*", "**/*.json", ".git/**/*"]
+ignore_paths = ["target/**/*", "**/*.json", ".git/**/*", "**/*.cabal"]
 
 # List of regex patterns to ignore when spell checking
 # Patterns are matched against each line of text, not individual words
@@ -47,6 +47,16 @@ ignore_patterns = [
     "\\d{3}-\\d{2}-\\d{4}",      # Social Security Number format
     "^[A-Z]{2,}$",               # All caps words like "HTML", "CSS"
     "https?://[^\\s]+"           # URLs
+]
+
+# Tag-based filtering: skip categories of tokens that produce noise.
+# Tags are prefix-matched. We still check comments, strings, type names
+# (Haskell type/class identifiers land on the bare `identifier` tag),
+# fields, parameters, and constants.
+# Default: []
+exclude_tags = [
+    "identifier.variable",  # Haskell top-level function/value defs (per haskell.scm)
+    "identifier.module",    # Haskell `module Foo.Bar where` headers
 ]
 
 # Minimum word length to check (words shorter than this are ignored)

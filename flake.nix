@@ -46,11 +46,8 @@
     # EDITOR
 
     tree-sitter-cabal = {
+      # url = "path:/home/crtschin/personal/tree-sitter-cabal";
       url = "github:crtschin/tree-sitter-cabal";
-      flake = false;
-    };
-    tree-sitter-cabal-project = {
-      url = "github:crtschin/tree-sitter-cabal-project";
       flake = false;
     };
 

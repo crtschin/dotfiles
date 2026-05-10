@@ -187,8 +187,8 @@ in
   xdg.configFile = {
     "helix/init.scm".source = ./helix/init.scm;
     "helix/helix.scm".source = ./helix/helix.scm;
-    "helix/runtime/queries/cabal/highlights.scm".source = "${inputs.tree-sitter-cabal}/queries/highlights.scm";
-    "helix/runtime/queries/cabal_project/highlights.scm".source = "${inputs.tree-sitter-cabal-project}/queries/highlights.scm";
+    "helix/runtime/queries/cabal/highlights.scm".source = "${inputs.tree-sitter-cabal}/tree-sitter-cabal/queries/highlights.scm";
+    "helix/runtime/queries/cabal_project/highlights.scm".source = "${inputs.tree-sitter-cabal}/tree-sitter-cabal-project/queries/highlights.scm";
     "codebook/codebook.toml".source = ../../.config/codebook.toml;
   };
   programs = {
@@ -355,11 +355,11 @@ in
         grammar = [
           {
             "name" = "cabal";
-            "source".path = inputs.tree-sitter-cabal.outPath;
+            "source".path = "${inputs.tree-sitter-cabal}/tree-sitter-cabal";
           }
           {
             "name" = "cabal_project";
-            "source".path = inputs.tree-sitter-cabal-project.outPath;
+            "source".path = "${inputs.tree-sitter-cabal}/tree-sitter-cabal-project";
           }
           {
             "name" = "nix";
