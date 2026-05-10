@@ -1,14 +1,25 @@
 { pkgs, ... }:
 {
-  services.home-manager.autoExpire = {
-    enable = true;
-    store = {
-      cleanup = true;
+  services = {
+    lorri = {
+      enable = true;
+      enableNotifications = true;
     };
-  };
-  services.lorri = {
-    enable = true;
-    enableNotifications = true;
+    home-manager = {
+      autoUpgrade = {
+        enable = false;
+        flakeDir = "/home/crtschin/personal/dotfiles";
+        frequency = "weekly";
+        useFlake = true;
+        preSwitchCommands = [ "nix flake update" ];
+      };
+      autoExpire = {
+        enable = true;
+        store = {
+          cleanup = true;
+        };
+      };
+    };
   };
   # systemd.user.services.update-lock-screens = {
   #   Unit = {

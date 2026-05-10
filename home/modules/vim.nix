@@ -8,7 +8,7 @@
 {
   programs = {
     neovim = {
-      enable = true;
+      enable = false;
       extraConfig = "";
       withRuby = false;
       withPython3 = false;

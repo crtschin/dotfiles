@@ -184,13 +184,19 @@ let
   normalModeMacros = initializeSelection // selectCurrentWord;
 in
 {
-  xdg.configFile = {
-    "helix/init.scm".source = ./helix/init.scm;
-    "helix/helix.scm".source = ./helix/helix.scm;
-    "helix/runtime/queries/cabal/highlights.scm".source = "${inputs.tree-sitter-cabal}/tree-sitter-cabal/queries/highlights.scm";
-    "helix/runtime/queries/cabal_project/highlights.scm".source = "${inputs.tree-sitter-cabal}/tree-sitter-cabal-project/queries/highlights.scm";
-    "codebook/codebook.toml".source = ../../.config/codebook.toml;
-  };
+  xdg.configFile =
+    let
+      cabalPkgs = inputs.tree-sitter-cabal.packages.${pkgs.system};
+    in
+    {
+      "helix/init.scm".source = ./helix/init.scm;
+      "helix/helix.scm".source = ./helix/helix.scm;
+      "helix/runtime/queries/cabal/highlights.scm".source = "${cabalPkgs.tree-sitter-cabal}/queries/highlights.scm";
+      "helix/runtime/queries/cabal_project/highlights.scm".source = "${cabalPkgs.tree-sitter-cabal-project}/queries/highlights.scm";
+      "helix/runtime/grammars/cabal.so".source = "${cabalPkgs.tree-sitter-cabal}/parser";
+      "helix/runtime/grammars/cabal_project.so".source = "${cabalPkgs.tree-sitter-cabal-project}/parser";
+      "codebook/codebook.toml".source = ../../.config/codebook.toml;
+    };
   programs = {
     helix = {
       enable = true;
@@ -355,24 +361,32 @@ in
         grammar = [
           {
             "name" = "cabal";
-            "source".path = "${inputs.tree-sitter-cabal}/tree-sitter-cabal";
+            "source" = {
+              git = "https://github.com/crtschin/tree-sitter-cabal";
+              rev = inputs.tree-sitter-cabal.rev;
+              subdir = "tree-sitter-cabal";
+            };
           }
           {
             "name" = "cabal_project";
-            "source".path = "${inputs.tree-sitter-cabal}/tree-sitter-cabal-project";
+            "source" = {
+              git = "https://github.com/crtschin/tree-sitter-cabal";
+              rev = inputs.tree-sitter-cabal.rev;
+              subdir = "tree-sitter-cabal-project";
+            };
           }
           {
             "name" = "nix";
             "source" = {
               git = "https://github.com/nix-community/tree-sitter-nix";
-              rev = "master";
+              rev = inputs.tree-sitter-nix.rev;
             };
           }
           {
             "name" = "gitcommit";
             "source" = {
               git = "https://github.com/gbprod/tree-sitter-gitcommit";
-              rev = "main";
+              rev = inputs.tree-sitter-gitcommit.rev;
             };
           }
         ];

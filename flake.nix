@@ -48,6 +48,16 @@
     tree-sitter-cabal = {
       # url = "path:/home/crtschin/personal/tree-sitter-cabal";
       url = "github:crtschin/tree-sitter-cabal";
+      flake = true;
+    };
+
+    tree-sitter-nix = {
+      url = "github:nix-community/tree-sitter-nix";
+      flake = false;
+    };
+
+    tree-sitter-gitcommit = {
+      url = "github:gbprod/tree-sitter-gitcommit";
       flake = false;
     };
 
