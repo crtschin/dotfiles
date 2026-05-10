@@ -562,6 +562,8 @@
         "nixpkgs": "nixpkgs_3",
         "private": "private",
         "steel": "steel",
+        "tree-sitter-cabal": "tree-sitter-cabal",
+        "tree-sitter-cabal-project": "tree-sitter-cabal-project",
         "wofi-themes": "wofi-themes"
       }
     },
@@ -703,6 +705,38 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "tree-sitter-cabal": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1760214251,
+        "narHash": "sha256-zbKYRM5dl4/YwpBG4sBfEopUl8AvWZPRKDGO4cERz4g=",
+        "owner": "crtschin",
+        "repo": "tree-sitter-cabal",
+        "rev": "bd88018734bde8ae6f475089d5a890d546b716d4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "crtschin",
+        "repo": "tree-sitter-cabal",
+        "type": "github"
+      }
+    },
+    "tree-sitter-cabal-project": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1778373130,
+        "narHash": "sha256-GjbmsfzLQVbQu/JTaPZ3fEpAmZiqmaSitltx4Mhnbj0=",
+        "owner": "crtschin",
+        "repo": "tree-sitter-cabal-project",
+        "rev": "792d340b7609b8ebda18d76127a66a1512a0af45",
+        "type": "github"
+      },
+      "original": {
+        "owner": "crtschin",
+        "repo": "tree-sitter-cabal-project",
         "type": "github"
       }
     },

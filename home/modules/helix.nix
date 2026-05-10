@@ -187,7 +187,8 @@ in
   xdg.configFile = {
     "helix/init.scm".source = ./helix/init.scm;
     "helix/helix.scm".source = ./helix/helix.scm;
-    "helix/runtime/queries/cabal/highlights.scm".source = ./helix/cabal/highlights.scm;
+    "helix/runtime/queries/cabal/highlights.scm".source = "${inputs.tree-sitter-cabal}/queries/highlights.scm";
+    "helix/runtime/queries/cabal_project/highlights.scm".source = "${inputs.tree-sitter-cabal-project}/queries/highlights.scm";
     "codebook/codebook.toml".source = ../../.config/codebook.toml;
   };
   programs = {
@@ -354,17 +355,11 @@ in
         grammar = [
           {
             "name" = "cabal";
-            "source" = {
-              git = "https://github.com/crtschin/tree-sitter-cabal";
-              rev = "2fc3b701d6ca17467a9ab35719403e0893e4e971";
-            };
+            "source".path = inputs.tree-sitter-cabal.outPath;
           }
           {
             "name" = "cabal_project";
-            "source" = {
-              git = "https://github.com/crtschin/tree-sitter-cabal-project";
-              rev = "cffa0d1825979c5365c0afd26fe2671b7b7d6b21";
-            };
+            "source".path = inputs.tree-sitter-cabal-project.outPath;
           }
           {
             "name" = "nix";
@@ -453,14 +448,18 @@ in
             }
             {
               name = "cabal_project";
+              scope = "source.cabal_project";
               file-types = [
                 { "glob" = "cabal.project"; }
                 { "glob" = "cabal.project.local"; }
               ];
+              comment-tokens = "--";
+              indent = {
+                tab-width = 2;
+                unit = "  ";
+              };
               rulers = [ 80 ];
-              language-servers = mkLspUsage [
-                "haskell-language-server"
-              ];
+              language-servers = mkLspUsage [ "haskell-language-server" ];
             }
             {
               name = "haskell";
