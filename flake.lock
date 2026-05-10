@@ -779,11 +779,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1778449496,
-        "narHash": "sha256-pZLqWYAhJ5GlClHURh4A3+A5v4vLcAqbnPQte2a/aF0=",
+        "lastModified": 1778455080,
+        "narHash": "sha256-Krr3eI68wICklmvx0myjodzKIFVfB0hCekNS3/+sKLQ=",
         "owner": "crtschin",
         "repo": "tree-sitter-cabal",
-        "rev": "4b404042e9ebaf52d2b51abaf0f215a725586000",
+        "rev": "d1d060c53f09f6a0e9ab48601ca8fbff855abb3b",
         "type": "github"
       },
       "original": {
