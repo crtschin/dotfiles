@@ -7,8 +7,8 @@ let
   generic = programLauncher: lockscreenCmd: {
     assign = ''
       assign [class="Code"] 1
-      assign [class="Firefox"] 2
-      assign [class="Brave"] 2
+      assign [class="Firefox"] 3
+      assign [class="Brave"] 3
       assign [class="Spotify"] 9
     '';
     colorTheme = ''

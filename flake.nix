@@ -3,7 +3,7 @@
     nixpkgs = {
       # url = "github:NixOS/nixpkgs?ref=7b9135d3ae24bf15ca0fac57f4114c99e28bec3b";
       url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-      # url = "flake:nixpkgs/nixos-23.11";
+      # url = "flake:nixpkgs/nixos-26.11";
     };
 
     flake-utils = {
@@ -12,7 +12,7 @@
 
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # UTIL
@@ -47,6 +47,7 @@
 
     tree-sitter-cabal = {
       # url = "path:/home/crtschin/personal/tree-sitter-cabal";
+      # url = "github:crtschin/tree-sitter-cabal/crtschin/next";
       url = "github:crtschin/tree-sitter-cabal";
       flake = true;
     };

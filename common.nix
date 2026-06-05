@@ -15,11 +15,13 @@
     ./home/modules/git.nix
     ./home/modules/helix.nix
     ./home/modules/kanshi.nix
+    ./home/modules/chat.nix
     ./home/modules/kitty.nix
     ./home/modules/starship.nix
     ./home/modules/sway.nix
     ./home/modules/vim.nix
     ./home/modules/waybar.nix
+    ./home/modules/zed.nix
   ];
 
   systemd.user.startServices = "sd-switch";

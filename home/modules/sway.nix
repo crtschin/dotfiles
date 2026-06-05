@@ -71,7 +71,7 @@ in
             "9: music" = [
               { class = "Spotify"; }
             ];
-            "2: web" = [
+            "3: web" = [
               { class = "Firefox"; }
               { instance = "brave-browser"; }
             ];
@@ -85,6 +85,8 @@ in
           keybindings = configuration.sway.keybindings;
           startup = [
             { command = configuration.variables.terminal; }
+            { command = "${pkgs.firefox}/bin/firefox"; }
+            { command = "${pkgs.spotify}/bin/spotify"; }
           ];
           bars = [ ];
           modifier = configuration.variables.modifier;

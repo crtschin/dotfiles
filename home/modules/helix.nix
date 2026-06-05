@@ -116,6 +116,7 @@ let
 
   windowMacros = {
     "=" = ":reflow";
+    "+" = "format_selections";
     "space" = {
       "o" = "file_picker_in_current_buffer_directory";
       "q" = ":buffer-close";
@@ -192,7 +193,13 @@ in
       "helix/init.scm".source = ./helix/init.scm;
       "helix/helix.scm".source = ./helix/helix.scm;
       "helix/runtime/queries/cabal/highlights.scm".source = "${cabalPkgs.tree-sitter-cabal}/queries/highlights.scm";
+      "helix/runtime/queries/cabal/tags.scm".source = "${cabalPkgs.tree-sitter-cabal}/queries/tags.scm";
+      "helix/runtime/queries/cabal/textobjects.scm".source = "${cabalPkgs.tree-sitter-cabal}/queries/textobjects.scm";
+      "helix/runtime/queries/cabal/indents.scm".source = "${cabalPkgs.tree-sitter-cabal}/queries/indents.scm";
       "helix/runtime/queries/cabal_project/highlights.scm".source = "${cabalPkgs.tree-sitter-cabal-project}/queries/highlights.scm";
+      "helix/runtime/queries/cabal_project/tags.scm".source = "${cabalPkgs.tree-sitter-cabal-project}/queries/tags.scm";
+      "helix/runtime/queries/cabal_project/textobjects.scm".source = "${cabalPkgs.tree-sitter-cabal-project}/queries/textobjects.scm";
+      "helix/runtime/queries/cabal_project/indents.scm".source = "${cabalPkgs.tree-sitter-cabal-project}/queries/indents.scm";
       "helix/runtime/grammars/cabal.so".source = "${cabalPkgs.tree-sitter-cabal}/parser";
       "helix/runtime/grammars/cabal_project.so".source = "${cabalPkgs.tree-sitter-cabal-project}/parser";
       "codebook/codebook.toml".source = ../../.config/codebook.toml;

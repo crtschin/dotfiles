@@ -91,7 +91,7 @@ in
 
     delta = {
       enable = true;
-      enableGitIntegration = true;
+      # enableGitIntegration = true;
     };
     git = with precondition; {
       enable = true;
@@ -119,18 +119,18 @@ in
           };
           # blame.ignoreRevsFile = ".git-blame-ignore-revs";
           pager = {
-            # log = "delta";
-            # diff = "delta";
-            # reflog = "delta";
-            # show = "delta";
+            log = "delta";
+            # diff = "difft";
+            reflog = "delta";
+            show = "delta";
           };
           core = {
             editor = "${pkgs.vim}/bin/vim";
             excludesfile = "${../../.config/global.gitignore}";
           };
           merge = {
-            conflictstyle = "diff3";
-            difftool = "${pkgs.meld}/bin/meld";
+            # conflictstyle = "diff3";
+            # difftool = "${pkgs.meld}/bin/meld";
             # "mergiraf" = {
             #   name = "mergiraf";
             #   driver = "mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L";
