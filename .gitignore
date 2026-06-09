@@ -4,3 +4,4 @@ home.nix
 /flake.lock
 /.config/*.env
 /.config/*secrets*
+.pre-commit-config.yaml

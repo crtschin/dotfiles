@@ -192,14 +192,21 @@ in
     {
       "helix/init.scm".source = ./helix/init.scm;
       "helix/helix.scm".source = ./helix/helix.scm;
-      "helix/runtime/queries/cabal/highlights.scm".source = "${cabalPkgs.tree-sitter-cabal}/queries/highlights.scm";
+      "helix/runtime/queries/cabal/highlights.scm".source =
+        "${cabalPkgs.tree-sitter-cabal}/queries/highlights.scm";
       "helix/runtime/queries/cabal/tags.scm".source = "${cabalPkgs.tree-sitter-cabal}/queries/tags.scm";
-      "helix/runtime/queries/cabal/textobjects.scm".source = "${cabalPkgs.tree-sitter-cabal}/queries/textobjects.scm";
-      "helix/runtime/queries/cabal/indents.scm".source = "${cabalPkgs.tree-sitter-cabal}/queries/indents.scm";
-      "helix/runtime/queries/cabal_project/highlights.scm".source = "${cabalPkgs.tree-sitter-cabal-project}/queries/highlights.scm";
-      "helix/runtime/queries/cabal_project/tags.scm".source = "${cabalPkgs.tree-sitter-cabal-project}/queries/tags.scm";
-      "helix/runtime/queries/cabal_project/textobjects.scm".source = "${cabalPkgs.tree-sitter-cabal-project}/queries/textobjects.scm";
-      "helix/runtime/queries/cabal_project/indents.scm".source = "${cabalPkgs.tree-sitter-cabal-project}/queries/indents.scm";
+      "helix/runtime/queries/cabal/textobjects.scm".source =
+        "${cabalPkgs.tree-sitter-cabal}/queries/textobjects.scm";
+      "helix/runtime/queries/cabal/indents.scm".source =
+        "${cabalPkgs.tree-sitter-cabal}/queries/indents.scm";
+      "helix/runtime/queries/cabal_project/highlights.scm".source =
+        "${cabalPkgs.tree-sitter-cabal-project}/queries/highlights.scm";
+      "helix/runtime/queries/cabal_project/tags.scm".source =
+        "${cabalPkgs.tree-sitter-cabal-project}/queries/tags.scm";
+      "helix/runtime/queries/cabal_project/textobjects.scm".source =
+        "${cabalPkgs.tree-sitter-cabal-project}/queries/textobjects.scm";
+      "helix/runtime/queries/cabal_project/indents.scm".source =
+        "${cabalPkgs.tree-sitter-cabal-project}/queries/indents.scm";
       "helix/runtime/grammars/cabal.so".source = "${cabalPkgs.tree-sitter-cabal}/parser";
       "helix/runtime/grammars/cabal_project.so".source = "${cabalPkgs.tree-sitter-cabal-project}/parser";
       "codebook/codebook.toml".source = ../../.config/codebook.toml;
@@ -510,6 +517,50 @@ in
               indent = {
                 tab-width = 2;
                 unit = "  ";
+              };
+              # Haskell-Debugger (hdb) DAP adapter.
+              # Requires GHC >= 9.14.1 and `hdb` on PATH; install with:
+              #   cabal install haskell-debugger \
+              #     --allow-newer=base,time,containers,ghc,ghc-bignum,template-haskell \
+              #     --enable-executable-dynamic
+              # hdb runs as a DAP server over TCP: Helix spawns `hdb server --port <port>`
+              # then connects to 127.0.0.1:<port>. Start a session with `:debug-start`.
+              debugger = {
+                name = "haskell-debugger";
+                transport = "tcp";
+                command = "hdb";
+                args = [ "server" ];
+                port-arg = "--port {}";
+                templates = [
+                  {
+                    # Helix has no ${file}/${workspaceFolder} variables, so these are
+                    # prompted; entryPoint and projectRoot have defaults (just press enter).
+                    name = "main";
+                    request = "launch";
+                    completion = [
+                      {
+                        name = "entryFile";
+                        completion = "filename";
+                      }
+                      {
+                        name = "entryPoint";
+                        default = "main";
+                      }
+                      {
+                        name = "projectRoot";
+                        completion = "directory";
+                        default = ".";
+                      }
+                    ];
+                    args = {
+                      entryFile = "{0}";
+                      entryPoint = "{1}";
+                      projectRoot = "{2}";
+                      entryArgs = [ ];
+                      extraGhcArgs = [ ];
+                    };
+                  }
+                ];
               };
             }
             {

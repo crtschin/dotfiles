@@ -10,6 +10,11 @@
       url = "github:numtide/flake-utils";
     };
 
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       # inputs.nixpkgs.follows = "nixpkgs";
@@ -107,6 +112,7 @@
     {
       self,
       flake-utils,
+      git-hooks,
       nixpkgs,
       home-manager,
       nix-rice,
@@ -130,6 +136,45 @@
         inherit overlays;
         config = {
           allowUnfree = true;
+        };
+      };
+
+      pythonEnv = pkgs.python3.withPackages (ps: [ ps.click ]);
+
+      # The hook's pyright must resolve third-party imports (click in
+      # cabal-dep-paths.py), so wrap it with pythonEnv on PATH. pass_filenames
+      # = false (below) types the whole pyrightconfig.json scope.
+      pyright-typecheck = pkgs.writeShellApplication {
+        name = "pyright-typecheck";
+        runtimeInputs = [
+          pkgs.pyright
+          pythonEnv
+        ];
+        text = "pyright";
+      };
+
+      # Formatting / lint / type hooks: installed into .git/hooks on
+      # `nix develop` and enforced by `nix flake check`. The .sh scripts are
+      # already shellcheck'd by writeShellApplication at build time; there are
+      # no Python tests yet, so neither is gated here.
+      pre-commit-check = git-hooks.lib.${system}.run {
+        src = ./.;
+        hooks = {
+          nixfmt-rfc-style = {
+            enable = true;
+            # pkgs.nixfmt-rfc-style is a deprecated alias; use the canonical attr.
+            package = pkgs.nixfmt;
+          };
+          ruff.enable = true;
+          ruff-format.enable = true;
+          pyright-typecheck = {
+            enable = true;
+            name = "pyright";
+            entry = "${pyright-typecheck}/bin/pyright-typecheck";
+            language = "system";
+            files = "^home/modules/scripts/.*\\.py$";
+            pass_filenames = false;
+          };
         };
       };
 
@@ -178,13 +223,20 @@
     }
     // flake-utils.lib.eachDefaultSystem (
       system: with pkgs; {
+        # `nix flake check` runs the formatting / lint / type hooks over the tree.
+        checks.pre-commit-check = pre-commit-check;
+
         devShells.default = mkShell {
+          # Entering the shell installs this repo's git pre-commit hook.
+          inherit (pre-commit-check) shellHook;
           buildInputs = [
             nixfmt
             shellcheck
             ruff
             basedpyright
-          ];
+            pythonEnv
+          ]
+          ++ pre-commit-check.enabledPackages;
         };
       }
     );

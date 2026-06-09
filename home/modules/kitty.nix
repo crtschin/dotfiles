@@ -50,6 +50,7 @@ in
         "alt+end" = "scroll_end";
         "alt+h" = "show_scrollback";
 
+        "ctrl+f1" = "detach_tab";
         "ctrl+up" = "next_tab";
         "ctrl+down" = "previous_tab";
         "ctrl+k" = "next_tab";
