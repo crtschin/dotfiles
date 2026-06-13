@@ -34,6 +34,7 @@ in
     ./common.nix
     ./home/modules/hyprland.nix
     ./home/modules/nixgl.nix
+    inputs.private.workModule
   ];
 
   targets.genericLinux = {
@@ -54,7 +55,6 @@ in
       # solaar
       ltunify
       jmeter
-      _1password-cli
       # netbird
       # netbird-ui
 
@@ -78,8 +78,6 @@ in
       mesa
       intel-media-driver
 
-      # copilot-language-server
-      github-copilot-cli
       gemini-cli
       # pkgs.haskellPackages.ghcprofview
       # pkgs.haskellPackages.hpview

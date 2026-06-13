@@ -17,7 +17,7 @@
 
     home-manager = {
       url = "github:nix-community/home-manager";
-      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # UTIL
@@ -36,6 +36,9 @@
 
     nix-rice = {
       url = "github:bertof/nix-rice?ref=dddd03ed3c5e05c728b0df985f7af905b002f588";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.pre-commit-hooks.follows = "git-hooks";
     };
 
     gruvbox-tmTheme = {
@@ -55,6 +58,8 @@
       # url = "github:crtschin/tree-sitter-cabal/crtschin/next";
       url = "github:crtschin/tree-sitter-cabal";
       flake = true;
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.utils.follows = "flake-utils";
     };
 
     tree-sitter-nix = {
@@ -75,6 +80,7 @@
     helix-crtschin = {
       url = "github:crtschin/helix?ref=crts/scratch-with-plugins";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.rust-overlay.follows = "helix/rust-overlay";
     };
 
     steel = {
@@ -82,7 +88,10 @@
       flake = true;
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    awesome-neovim-plugins.url = "github:m15a/flake-awesome-neovim-plugins";
+    awesome-neovim-plugins = {
+      url = "github:m15a/flake-awesome-neovim-plugins";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-doom-emacs-unstraightened = {
       url = "github:marienz/nix-doom-emacs-unstraightened";
       inputs.nixpkgs.follows = "";
@@ -106,6 +115,8 @@
     # PRIVATE
     private = {
       url = "path:/home/crtschin/personal/privatefiles";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.git-hooks.follows = "git-hooks";
     };
   };
   outputs =
