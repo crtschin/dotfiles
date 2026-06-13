@@ -11,7 +11,7 @@
   mkLspUsage,
 }:
 let
-  cabalPkgs = inputs.tree-sitter-cabal.packages.${pkgs.system};
+  cabalPkgs = inputs.tree-sitter-haskell-contrib.packages.${pkgs.system};
   # Link a grammar package's parser and its Helix queries into Helix's
   # runtime. `lang` is the Helix language (its runtime dir + <lang>.so); the
   # grammars ship their query files under queries/helix/.
@@ -26,12 +26,12 @@ let
         value.source = "${pkg}/queries/helix/${q}.scm";
       }) queries
     );
-  # Grammar source entries all live in the same tree-sitter-cabal flake input.
+  # Grammar source entries all live in the same tree-sitter-haskell-contrib flake input.
   mkGrammarSource = name: subdir: {
     inherit name;
     "source" = {
-      git = "https://github.com/crtschin/tree-sitter-cabal";
-      rev = inputs.tree-sitter-cabal.rev;
+      git = "https://github.com/crtschin/tree-sitter-haskell-contrib";
+      rev = inputs.tree-sitter-haskell-contrib.rev;
       inherit subdir;
     };
   };

@@ -101,7 +101,7 @@ in
       # attributes = [
       #   "* merge=mergiraf"
       # ];
-      signing.format = "openpgp";
+      signing.format = "ssh";
       settings = recursiveMerge [
         {
           user = {

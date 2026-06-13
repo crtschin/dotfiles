@@ -5,7 +5,9 @@ orig=$(git rev-parse HEAD)
 # Check if working tree is dirty (tracked files only)
 needs_pop=false
 if ! git diff --quiet || ! git diff --cached --quiet; then
-  git stash push -m "git-reauthor auto stash"
+  # --include-untracked so the recovery path's `git clean -fd` cannot delete
+  # untracked files: they are stashed and restored by the final `git stash pop`.
+  git stash push --include-untracked -m "git-reauthor auto stash"
   needs_pop=true
 fi
 

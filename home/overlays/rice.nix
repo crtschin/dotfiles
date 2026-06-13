@@ -112,7 +112,8 @@ rec {
         bright_background = color.brighten brighten background;
         dim_background = color.darken darken background;
       };
-    } // self.kittyParseUtils.riceKittyTheme;
+    }
+    // self.kittyParseUtils.riceKittyTheme;
     font = {
       normal = {
         name = "FiraCode";

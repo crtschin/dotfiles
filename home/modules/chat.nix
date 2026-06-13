@@ -13,7 +13,10 @@ let
   # assumed to match the client name.
   workspace = 2;
   clients = [
-    { name = "senpai"; package = pkgs.senpai; }
+    {
+      name = "senpai";
+      package = pkgs.senpai;
+    }
     # { name = "gomuks"; package = pkgs.gomuks; }
   ];
 

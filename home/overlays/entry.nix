@@ -2,7 +2,8 @@ self: super:
 let
   lib = super.lib;
 in
-with lib; rec {
+with lib;
+rec {
   configuration = super.configuration // rec {
     terminal = {
       package = super.kitty;
@@ -61,18 +62,24 @@ with lib; rec {
       PATH=/usr/bin:${program}/bin ${program.pname} "$@"
     '';
 
-  recursiveMerge = attrList:
-    let f = attrPath:
-      zipAttrsWith (n: values:
-        if tail values == []
-          then head values
-        else if all isList values
-          then unique (concatLists values)
-        else if all isAttrs values
-          then f (attrPath ++ [n]) values
-        else last values
-      );
-    in f [] attrList;
+  recursiveMerge =
+    attrList:
+    let
+      f =
+        attrPath:
+        zipAttrsWith (
+          n: values:
+          if tail values == [ ] then
+            head values
+          else if all isList values then
+            unique (concatLists values)
+          else if all isAttrs values then
+            f (attrPath ++ [ n ]) values
+          else
+            last values
+        );
+    in
+    f [ ] attrList;
 
   # * Actual overrides
 

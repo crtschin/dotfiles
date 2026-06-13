@@ -120,6 +120,7 @@ let
       "e" = "file_explorer";
       "E" = "file_explorer_in_current_buffer_directory";
       "C" = "no_op";
+      "l" = "show_code_lenses_under_cursor";
       "k" = "goto_hover";
       "K" = [
         ":yank-diagnostic"

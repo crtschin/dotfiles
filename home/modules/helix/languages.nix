@@ -54,10 +54,10 @@ in
         };
       };
       steel-language-server = {
-        command = "steel-language-server";
+        command = "${pkgs.steel-language-server}/bin/steel-language-server";
       };
       basedpyright = {
-        command = "basedpyright-langserver";
+        command = "${pkgs.basedpyright}/bin/basedpyright-langserver";
         args = [ "--stdio" ];
         except-features = [
           "format"
@@ -71,7 +71,7 @@ in
         };
       };
       ruff = {
-        command = "ruff";
+        command = "${pkgs.ruff}/bin/ruff";
         args = [
           "server"
           "--preview"

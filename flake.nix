@@ -53,10 +53,10 @@
 
     # EDITOR
 
-    tree-sitter-cabal = {
-      # url = "path:/home/crtschin/personal/tree-sitter-cabal";
-      # url = "github:crtschin/tree-sitter-cabal/crtschin/next";
-      url = "github:crtschin/tree-sitter-cabal";
+    tree-sitter-haskell-contrib = {
+      # url = "path:/home/crtschin/personal/tree-sitter-haskell-contrib";
+      # url = "github:crtschin/tree-sitter-haskell-contrib/crtschin/next";
+      url = "github:crtschin/tree-sitter-haskell-contrib";
       flake = true;
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.utils.follows = "flake-utils";

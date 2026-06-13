@@ -98,7 +98,6 @@
 
       # Programs
       vscode
-      hivemind
       zoom-us
       spotify
       scli

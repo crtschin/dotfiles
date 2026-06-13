@@ -14,11 +14,11 @@ in
   home.packages =
     with pkgs;
     pkgs.onlyIfList enable [
-      waybar        # Status bar (shared with sway)
-      wl-clipboard  # Wayland clipboard utilities
-      grim          # Screenshot utility for Wayland
-      hyprpaper     # Wallpaper daemon for Hyprland
-      hyprlauncher  # Application launcher for Hyprland
+      waybar # Status bar (shared with sway)
+      wl-clipboard # Wayland clipboard utilities
+      grim # Screenshot utility for Wayland
+      hyprpaper # Wallpaper daemon for Hyprland
+      hyprlauncher # Application launcher for Hyprland
     ];
 
   # Hyprlauncher service with gruvbox theming

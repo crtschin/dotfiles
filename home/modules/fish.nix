@@ -44,7 +44,7 @@ in
             end 2>| grep -v -E "^direnv: export"
         end
 
-        fish_add_path /home/crtschin/.opencode/bin
+        fish_add_path ${config.home.homeDirectory}/.opencode/bin
       '';
 
       shellAliases = {

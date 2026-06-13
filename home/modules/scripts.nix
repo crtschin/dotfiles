@@ -7,8 +7,8 @@ let
       allSettings = settings // {
         libraries = (settings.libraries or [ ]) ++ [ pkgs.python3Packages.click ];
         flakeIgnore = (settings.flakeIgnore or [ ]) ++ [
-          "E501" # E265 block comment should start with '# '
-          "E265" # E501 line too long
+          "E501" # line too long
+          "E265" # block comment should start with '# '
         ];
 
       };

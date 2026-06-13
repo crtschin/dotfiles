@@ -8,12 +8,11 @@
 }:
 let
   overlay = self: super: {
-    useWayland = true;
     configuration = {
       git = {
         userName = "Curtis Chin Jen Sem";
         userEmail = email;
-        signingKey = "/home/curtis/.ssh/id_ed25519.pub";
+        signingKey = "/home/crtschin/.ssh/id_ed25519.pub";
       };
       wm = "sway";
     };
@@ -32,7 +31,6 @@ in
 
   imports = [
     ./common.nix
-    ./home/modules/hyprland.nix
     ./home/modules/nixgl.nix
     inputs.private.workModule
   ];
@@ -61,7 +59,6 @@ in
       docker
       docker-compose
       devenv
-      process-compose
       actionlint
 
       graphviz

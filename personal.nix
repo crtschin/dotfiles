@@ -8,7 +8,6 @@
 }:
 let
   overlay = self: super: {
-    useWayland = true;
     configuration = {
       git = {
         userEmail = email;
@@ -37,52 +36,39 @@ in
   home = rec {
     username = "crtschin";
     homeDirectory = "/home/${username}";
-    packages =
-      with pkgs;
-      (droneSim pkgs)
-      # ++ (algoRave pkgs)
-      ++ [
-        pciutils
-        iotop
-        pv
-        valgrind
-        discord
-        spotify
-        glxinfo
-        unzip
-        time
-        mold
-        mediawriter
+    packages = with pkgs; [
+      pciutils
+      iotop
+      pv
+      valgrind
+      discord
+      mesa-demos
+      unzip
+      time
+      mold
+      mediawriter
 
-        # qjackctl jack2Full jack_capture
-        # supercollider superdirt-start tidal
+      docker
+      docker-compose
+      devenv
+      git
+      htop
+      curl
+      feh
+      file
+      wget
+      gcc
+      python3
+      rustc
+      rustfmt
+      cargo
 
-        docker
-        docker-compose
-        devenv
-        process-compose
-        git
-        htop
-        curl
-        feh
-        file
-        wget
-        gcc
-        python3
-        rustc
-        rustfmt
-        cargo
-
-        vlc
-        filezilla
-      ];
+      vlc
+      filezilla
+    ];
   };
 
   services = {
-    random-background = {
-      # enable = true;
-      imageDirectory = "%h/backgrounds";
-    };
     ssh-agent.enable = true;
     # gnome-keyring.enable = true;
     udiskie.enable = true;
@@ -94,14 +80,6 @@ in
         begin
           set fish_greeting
           set __done_notify_sound 1
-        end
-
-        function __direnv_export_eval --on-event fish_prompt
-            begin
-                begin
-                    ${pkgs.direnv}/bin/direnv export ${pkgs.fish}/bin/fish
-                end 1>| source
-            end 2>| grep -v -E "^direnv: export"
         end
       '';
     };

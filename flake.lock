@@ -187,6 +187,22 @@
         "type": "github"
       }
     },
+    "flake-compat_4": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1767039857,
+        "narHash": "sha256-vNpUSpF5Nuw8xvDLj2KCwwksIbjua2LZCqhV1LNRDns=",
+        "owner": "NixOS",
+        "repo": "flake-compat",
+        "rev": "5edf11c44bc78a0d334f6334cdaf7d60d732daab",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
@@ -226,6 +242,22 @@
         "type": "github"
       }
     },
+    "ghc-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1781254447,
+        "narHash": "sha256-rmiO5xydzY4zD0JYx8/2saQbrJ6NYxxwArU3MuBAVP8=",
+        "owner": "ghc",
+        "repo": "ghc",
+        "rev": "674858e3fb1b7fe644d7ec5d4b0c6d9f18d7bc51",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ghc",
+        "repo": "ghc",
+        "type": "github"
+      }
+    },
     "git-hooks": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -248,9 +280,54 @@
         "type": "github"
       }
     },
+    "git-hooks_2": {
+      "inputs": {
+        "flake-compat": "flake-compat_4",
+        "gitignore": "gitignore_2",
+        "nixpkgs": [
+          "tree-sitter-haskell-contrib",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1778507602,
+        "narHash": "sha256-kTwur1wV+01SdqskVMSo6JMEpg71ps3HpbFY2GsflKs=",
+        "owner": "cachix",
+        "repo": "git-hooks.nix",
+        "rev": "61ab0e80d9c7ab14c256b5b453d8b3fb0189ba0a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cachix",
+        "repo": "git-hooks.nix",
+        "type": "github"
+      }
+    },
     "gitignore": {
       "inputs": {
         "nixpkgs": [
+          "git-hooks",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1709087332,
+        "narHash": "sha256-HG2cCnktfHsKV0s4XW83gU3F57gaTljL9KNSuG6bnQs=",
+        "owner": "hercules-ci",
+        "repo": "gitignore.nix",
+        "rev": "637db329424fd7e46cf4185293b9cc8c88c95394",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "gitignore.nix",
+        "type": "github"
+      }
+    },
+    "gitignore_2": {
+      "inputs": {
+        "nixpkgs": [
+          "tree-sitter-haskell-contrib",
           "git-hooks",
           "nixpkgs"
         ]
@@ -317,11 +394,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1779912214,
-        "narHash": "sha256-DOqHhYGPmDUWN/lVgdgejD4AeuCupK0ZIH7T/exmOKQ=",
+        "lastModified": 1781369416,
+        "narHash": "sha256-2IEvzbbEfzG9hMLiqrVT11+aj4zd+pzPysA2E0WUnK8=",
         "owner": "crtschin",
         "repo": "helix",
-        "rev": "bba8f370c922d28a6720dc1118be0a603daccbdf",
+        "rev": "5fe74227b1c74d44d2ed7c3581ce7ae8e0a75b82",
         "type": "github"
       },
       "original": {
@@ -527,8 +604,8 @@
         "nixpkgs": "nixpkgs",
         "private": "private",
         "steel": "steel",
-        "tree-sitter-cabal": "tree-sitter-cabal",
         "tree-sitter-gitcommit": "tree-sitter-gitcommit",
+        "tree-sitter-haskell-contrib": "tree-sitter-haskell-contrib",
         "tree-sitter-nix": "tree-sitter-nix",
         "wofi-themes": "wofi-themes"
       }
@@ -638,31 +715,6 @@
         "type": "github"
       }
     },
-    "tree-sitter-cabal": {
-      "inputs": {
-        "cabal-src": "cabal-src",
-        "hls-src": "hls-src",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "utils": [
-          "flake-utils"
-        ]
-      },
-      "locked": {
-        "lastModified": 1781170187,
-        "narHash": "sha256-bpiB7B41ooDitIWOsly8Swl1d9pw7VAFXNKuvFeC7cc=",
-        "owner": "crtschin",
-        "repo": "tree-sitter-cabal",
-        "rev": "3f69a7243e9de9be6b9adacb7b2844143a2167f3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "crtschin",
-        "repo": "tree-sitter-cabal",
-        "type": "github"
-      }
-    },
     "tree-sitter-gitcommit": {
       "flake": false,
       "locked": {
@@ -676,6 +728,33 @@
       "original": {
         "owner": "gbprod",
         "repo": "tree-sitter-gitcommit",
+        "type": "github"
+      }
+    },
+    "tree-sitter-haskell-contrib": {
+      "inputs": {
+        "cabal-src": "cabal-src",
+        "ghc-src": "ghc-src",
+        "git-hooks": "git-hooks_2",
+        "hls-src": "hls-src",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "utils": [
+          "flake-utils"
+        ]
+      },
+      "locked": {
+        "lastModified": 1781349872,
+        "narHash": "sha256-8wAZPtFuimxf/HThWDPIFYIztIB+wXYpJ4uZN8H3Nzs=",
+        "owner": "crtschin",
+        "repo": "tree-sitter-haskell-contrib",
+        "rev": "0c9bc20e48b3849f532981bbde1d04ef7771be9b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "crtschin",
+        "repo": "tree-sitter-haskell-contrib",
         "type": "github"
       }
     },
