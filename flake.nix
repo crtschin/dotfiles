@@ -32,6 +32,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    tuicr = {
+      url = "github:agavra/tuicr";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.utils.follows = "flake-utils";
+    };
+
     # RICE
 
     nix-rice = {
@@ -70,6 +76,12 @@
     tree-sitter-gitcommit = {
       url = "github:gbprod/tree-sitter-gitcommit";
       flake = false;
+    };
+
+    treehouse = {
+      url = "path:/home/crtschin/personal/treehouse";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
     };
 
     helix = {

@@ -33,6 +33,21 @@ let
 
 in
 {
+  home.packages = [
+    inputs.tuicr.packages.${pkgs.system}.default
+  ];
+
+  # tuicr: https://github.com/agavra/tuicr/blob/main/docs/CONFIG.md
+  xdg.configFile."tuicr/config.toml".text = ''
+    theme = "gruvbox-dark"
+    # Kept at the default ";"; space would shadow the built-in toggle-expand
+    # and commit-picker selection bindings, which tuicr does not let us remap.
+    leader = ";"
+
+    [forge]
+    comment_type_prefix = false
+  '';
+
   programs = {
     gitui = {
       enable = true;

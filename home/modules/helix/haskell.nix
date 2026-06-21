@@ -35,6 +35,50 @@ let
       inherit subdir;
     };
   };
+
+  # GHC Core dump extensions, shared by the ghc_core language and treehouse's
+  # extension->language map below (single definition site).
+  ghcCoreFileTypes = [
+    "dump-simpl"
+    "dump-ds"
+    "dump-ds-preopt"
+    "dump-prep"
+    "dump-spec"
+    "dump-spec-constr"
+    "dump-cse"
+    "dump-float-out"
+    "dump-float-in"
+    "dump-worker-wrapper"
+    "dump-call-arity"
+    "dump-exitify"
+    "dump-liberate-case"
+    "dump-occur-anal"
+    "dump-late-cc"
+    "dump-static-argument-transformation"
+    "dump-simpl-iterations"
+  ];
+
+  # treehouse: generic tree-sitter LSP. Gives symbols + go-to-definition for GHC
+  # Core dumps by running the ghc_core grammar's tags query. It reads this XDG
+  # config (no args), mapping the Core dump extensions to the grammar's parser
+  # and Helix query directory (which is where tags.scm lives).
+  ghcCoreGrammar = cabalPkgs.tree-sitter-ghc-core;
+  treehousePkg = inputs.treehouse.packages.${pkgs.system}.default;
+  treehouseConfig = pkgs.writeText "treehouse-config.json" (
+    builtins.toJSON {
+      languages.ghc_core = {
+        grammar = "${ghcCoreGrammar}/parser";
+        symbol = "ghc_core";
+        queries = "${ghcCoreGrammar}/queries/helix";
+      };
+      extensions = builtins.listToAttrs (
+        map (ft: {
+          name = ".${ft}";
+          value = "ghc_core";
+        }) ghcCoreFileTypes
+      );
+    }
+  );
 in
 {
   # Grammar parsers + Helix queries linked into the runtime.
@@ -44,6 +88,8 @@ in
       "tags"
       "textobjects"
       "indents"
+      "locals"
+      "rainbows"
     ]
     // mkGrammar "cabal_project" cabalPkgs.tree-sitter-cabal-project [
       "highlights"
@@ -57,23 +103,32 @@ in
       "tags"
       "textobjects"
       "indents"
+      "locals"
+      "rainbows"
     ]
     // mkGrammar "ghc_stg" cabalPkgs.tree-sitter-ghc-stg [
       "highlights"
       "tags"
       "textobjects"
       "indents"
+      "locals"
+      "rainbows"
     ]
     // mkGrammar "ghc_cmm" cabalPkgs.tree-sitter-ghc-cmm [
       "highlights"
       "tags"
       "textobjects"
       "indents"
+      "locals"
+      "rainbows"
     ]
     // mkGrammar "ghc_dump" cabalPkgs.tree-sitter-ghc-dump [
       "highlights"
       "injections"
-    ];
+    ]
+    // {
+      "treehouse/config.json".source = treehouseConfig;
+    };
 
   languageServers = {
     haskell-language-server = {
@@ -84,6 +139,9 @@ in
           config = "crossModule";
         };
       };
+    };
+    treehouse = {
+      command = "${treehousePkg}/bin/treehouse";
     };
   };
 
@@ -123,25 +181,10 @@ in
     {
       name = "ghc_core";
       scope = "source.ghc_core";
-      file-types = [
-        "dump-simpl"
-        "dump-ds"
-        "dump-ds-preopt"
-        "dump-prep"
-        "dump-spec"
-        "dump-spec-constr"
-        "dump-cse"
-        "dump-float-out"
-        "dump-float-in"
-        "dump-worker-wrapper"
-        "dump-call-arity"
-        "dump-exitify"
-        "dump-liberate-case"
-        "dump-occur-anal"
-        "dump-late-cc"
-        "dump-static-argument-transformation"
-        "dump-simpl-iterations"
-      ];
+      file-types = ghcCoreFileTypes;
+      # treehouse provides symbols + go-to-definition for Core bindings. Bare
+      # list (no mkLspUsage): spellcheck/completion on generated Core is noise.
+      language-servers = [ "treehouse" ];
       comment-tokens = "--";
       indent = {
         tab-width = 2;
