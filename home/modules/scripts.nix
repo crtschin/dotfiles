@@ -50,6 +50,15 @@ let
     runtimeInputs = [ pkgs.git ];
     text = builtins.readFile ./scripts/git-swing.sh;
   };
+  git-duw = pkgs.writeShellApplication {
+    name = "git-duw";
+    runtimeInputs = [
+      pkgs.git
+      pkgs.gh
+      pkgs.jq
+    ];
+    text = builtins.readFile ./scripts/git-duw.sh;
+  };
   git-reroot = pkgs.writeShellApplication {
     name = "git-reroot";
     runtimeInputs = [ pkgs.git ];
@@ -86,6 +95,7 @@ in
     free-port
     giffify
     git-swing
+    git-duw
     git-reroot
     git-reauthor
     git-to-worktree

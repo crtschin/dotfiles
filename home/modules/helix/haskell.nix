@@ -11,7 +11,7 @@
   mkLspUsage,
 }:
 let
-  cabalPkgs = inputs.tree-sitter-haskell-contrib.packages.${pkgs.system};
+  haskellContrib = inputs.tree-sitter-haskell-contrib.packages.${pkgs.system};
   # Link a grammar package's parser and its Helix queries into Helix's
   # runtime. `lang` is the Helix language (its runtime dir + <lang>.so); the
   # grammars ship their query files under queries/helix/.
@@ -62,7 +62,7 @@ let
   # Core dumps by running the ghc_core grammar's tags query. It reads this XDG
   # config (no args), mapping the Core dump extensions to the grammar's parser
   # and Helix query directory (which is where tags.scm lives).
-  ghcCoreGrammar = cabalPkgs.tree-sitter-ghc-core;
+  ghcCoreGrammar = haskellContrib.tree-sitter-ghc-core;
   treehousePkg = inputs.treehouse.packages.${pkgs.system}.default;
   treehouseConfig = pkgs.writeText "treehouse-config.json" (
     builtins.toJSON {
@@ -77,13 +77,24 @@ let
           value = "ghc_core";
         }) ghcCoreFileTypes
       );
+      # Core dumps live under dist-newstyle, which projects gitignore. Whitelist
+      # it (over the gitignore prune) so treehouse scans sibling dumps and
+      # cross-file go-to-definition resolves; markers root the scan at the
+      # project so the whole tree is in scope.
+      workspace = {
+        markers = [
+          "cabal.project"
+          ".git"
+        ];
+        whitelist = [ "dist-newstyle" ];
+      };
     }
   );
 in
 {
   # Grammar parsers + Helix queries linked into the runtime.
   configFile =
-    mkGrammar "cabal" cabalPkgs.tree-sitter-cabal [
+    mkGrammar "cabal" haskellContrib.tree-sitter-cabal [
       "highlights"
       "tags"
       "textobjects"
@@ -91,14 +102,14 @@ in
       "locals"
       "rainbows"
     ]
-    // mkGrammar "cabal_project" cabalPkgs.tree-sitter-cabal-project [
+    // mkGrammar "cabal_project" haskellContrib.tree-sitter-cabal-project [
       "highlights"
       "tags"
       "textobjects"
       "indents"
     ]
     # GHC intermediate-language dumps: Core/STG/Cmm members + the dump container.
-    // mkGrammar "ghc_core" cabalPkgs.tree-sitter-ghc-core [
+    // mkGrammar "ghc_core" haskellContrib.tree-sitter-ghc-core [
       "highlights"
       "tags"
       "textobjects"
@@ -106,7 +117,7 @@ in
       "locals"
       "rainbows"
     ]
-    // mkGrammar "ghc_stg" cabalPkgs.tree-sitter-ghc-stg [
+    // mkGrammar "ghc_stg" haskellContrib.tree-sitter-ghc-stg [
       "highlights"
       "tags"
       "textobjects"
@@ -114,7 +125,7 @@ in
       "locals"
       "rainbows"
     ]
-    // mkGrammar "ghc_cmm" cabalPkgs.tree-sitter-ghc-cmm [
+    // mkGrammar "ghc_cmm" haskellContrib.tree-sitter-ghc-cmm [
       "highlights"
       "tags"
       "textobjects"
@@ -122,7 +133,7 @@ in
       "locals"
       "rainbows"
     ]
-    // mkGrammar "ghc_dump" cabalPkgs.tree-sitter-ghc-dump [
+    // mkGrammar "ghc_dump" haskellContrib.tree-sitter-ghc-dump [
       "highlights"
       "injections"
     ]

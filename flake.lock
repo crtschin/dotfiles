@@ -58,11 +58,11 @@
     "cabal-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1780871107,
-        "narHash": "sha256-PcAQ8oBkWYrGC9rp1NOD38t30babdM1PBX70gsL+RbM=",
+        "lastModified": 1781463185,
+        "narHash": "sha256-8FBPkOgDoSmyrrS4i8Y0IU7oKGR9ewTdQMecTinpzRE=",
         "owner": "haskell",
         "repo": "cabal",
-        "rev": "e08f28b8d138665b431a3c4fa956f078a1393eab",
+        "rev": "cdac62103d94037b0f03d6343c997aaf6e2778e7",
         "type": "github"
       },
       "original": {
@@ -564,11 +564,11 @@
     "hls-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1780879244,
-        "narHash": "sha256-bSL3cylW2j3bgXkPLOxrDIk6fzS0WewzsAyC10uCmvo=",
+        "lastModified": 1781539222,
+        "narHash": "sha256-hEgsVHyLYZprY+WoopaoifaiYi4lFeYR+Mip1inrWig=",
         "owner": "haskell",
         "repo": "haskell-language-server",
-        "rev": "28c87603a6a5709ceaefa0030ec5cc86cf81bc53",
+        "rev": "6cd3581c8880173283f3d508894d2247140f36c3",
         "type": "github"
       },
       "original": {
@@ -606,14 +606,18 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1781964869,
-        "narHash": "sha256-YcGwXYWUk3+xsstTgBkohi4vN/gurvDQ6yh0HPjjXDM=",
-        "path": "/home/crtschin/personal/hs-bindgen",
-        "type": "path"
+        "lastModified": 1781906799,
+        "narHash": "sha256-mcfwiyYPd2gzqHOcqCVtxoHlBFAR01LFEv9puBL8QGQ=",
+        "owner": "well-typed",
+        "repo": "hs-bindgen",
+        "rev": "cdadc401b023294f8a8672bc5171b48cdabf4cb7",
+        "type": "github"
       },
       "original": {
-        "path": "/home/crtschin/personal/hs-bindgen",
-        "type": "path"
+        "owner": "well-typed",
+        "repo": "hs-bindgen",
+        "rev": "cdadc401b023294f8a8672bc5171b48cdabf4cb7",
+        "type": "github"
       }
     },
     "kitty-themes-src": {
@@ -818,8 +822,8 @@
         ]
       },
       "locked": {
-        "lastModified": 1781993671,
-        "narHash": "sha256-7Ei/N36NfC79HdP0gNfFAOQ5m9jq9jnEUS9ywxYODlw=",
+        "lastModified": 1782077458,
+        "narHash": "sha256-IXP0YIZCRri6V0PD9U7HrRUQSGWDAqtv6YYCXZoaPmk=",
         "path": "/home/crtschin/personal/privatefiles",
         "type": "path"
       },
@@ -1007,11 +1011,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781474781,
-        "narHash": "sha256-xfgpoipKwAlDjMVv7WSnJB+5olHeS/3V3pouqvOoOxo=",
+        "lastModified": 1782065975,
+        "narHash": "sha256-jP+ZkYvYhHHp2OO7M3HYjCmieO2BiTXlYC/7ZU1h+pc=",
         "owner": "crtschin",
         "repo": "tree-sitter-haskell-contrib",
-        "rev": "366a6e46ace24c273065ff81814634b12738516f",
+        "rev": "59c59036282703d41d5219973be67f8c5401f055",
         "type": "github"
       },
       "original": {
@@ -1070,8 +1074,8 @@
         ]
       },
       "locked": {
-        "lastModified": 1782005302,
-        "narHash": "sha256-36gesHd0E4C8XZ2/+pYjSA/9hsBjqGLIkkocrommmYs=",
+        "lastModified": 1782078540,
+        "narHash": "sha256-0/8LkOxtxUvkV0kk6maJRo9Rl6n+noItyE0AUVcw7YE=",
         "path": "/home/crtschin/personal/treehouse",
         "type": "path"
       },
