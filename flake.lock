@@ -822,8 +822,8 @@
         ]
       },
       "locked": {
-        "lastModified": 1782077458,
-        "narHash": "sha256-IXP0YIZCRri6V0PD9U7HrRUQSGWDAqtv6YYCXZoaPmk=",
+        "lastModified": 1782244888,
+        "narHash": "sha256-x7kpcrvuisjhX3A1UTOVy0KNMHLulbkv+bPIEpi0aKE=",
         "path": "/home/crtschin/personal/privatefiles",
         "type": "path"
       },
@@ -1074,8 +1074,8 @@
         ]
       },
       "locked": {
-        "lastModified": 1782078540,
-        "narHash": "sha256-0/8LkOxtxUvkV0kk6maJRo9Rl6n+noItyE0AUVcw7YE=",
+        "lastModified": 1782244570,
+        "narHash": "sha256-hH2jfiZ0DfSLdxKRk2YgAAtDWElP0xXeoraAYGwcQlg=",
         "path": "/home/crtschin/personal/treehouse",
         "type": "path"
       },
