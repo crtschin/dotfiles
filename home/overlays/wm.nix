@@ -63,7 +63,10 @@ let
       "${modifier}+Tab" = "workspace back_and_forth";
       "${modifier}+Shift+r" = "restart";
       "${modifier}+Shift+l" = lockscreenCmd;
-      "${modifier}+m" = "move workspace to output left";
+      # Move workspace to the next active output, regardless of whether the
+      # other monitor is docked left/right or above/below (see kanshi `side`).
+      "${modifier}+m" =
+        "exec swaymsg move workspace to output \"$(swaymsg -t get_outputs | jq -r '[.[] | select(.active)] as $o | $o[(($o | map(.focused) | index(true)) + 1) % ($o | length)].name')\"";
       "${modifier}+Shift+p" = "exec flameshot gui";
       "XF86AudioRaiseVolume" = "exec playerctl volume 0.05+";
       "XF86AudioLowerVolume" = "exec playerctl volume 0.05-";
