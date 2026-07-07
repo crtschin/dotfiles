@@ -144,6 +144,11 @@
           style = "bold green";
         };
 
+        typst = {
+          symbol = "𝐭";
+          format = "\\[[$symbol]($style)\\]";
+        };
+
         status = {
           format = "\\[[$symbol$status]($style)\\]";
           disabled = true;

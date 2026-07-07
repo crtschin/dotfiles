@@ -82,6 +82,8 @@
       url = "path:/home/crtschin/personal/treehouse";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
+      # Transitive, and the last input pinning its own nixpkgs tree.
+      inputs.hs-bindgen.inputs.nixpkgs.follows = "nixpkgs";
     };
 
     helix = {
@@ -155,8 +157,8 @@
         helix-crtschin.overlays.default
         awesome-neovim-plugins.overlays.default
       ];
-      pkgs = nixpkgs.legacyPackages.${system} // {
-        inherit overlays;
+      pkgs = import nixpkgs {
+        inherit system overlays;
         config = {
           allowUnfree = true;
         };
@@ -164,9 +166,12 @@
 
       pythonEnv = pkgs.python3.withPackages (ps: [ ps.click ]);
 
-      # The hook's pyright must resolve third-party imports (click in
-      # cabal-dep-paths.py), so wrap it with pythonEnv on PATH. pass_filenames
-      # = false (below) types the whole pyrightconfig.json scope.
+      # Ships forge, the cog installer `just install-plugins` drives.
+      steelPkg = inputs.steel.packages.${system}.steel;
+
+      # The hook's pyright must resolve third-party imports, so wrap it with
+      # pythonEnv on PATH. pass_filenames = false types the whole
+      # pyrightconfig.json scope.
       pyright-typecheck = pkgs.writeShellApplication {
         name = "pyright-typecheck";
         runtimeInputs = [
@@ -176,16 +181,16 @@
         text = "pyright";
       };
 
-      # Formatting / lint / type hooks: installed into .git/hooks on
-      # `nix develop` and enforced by `nix flake check`. The .sh scripts are
-      # already shellcheck'd by writeShellApplication at build time; there are
-      # no Python tests yet, so neither is gated here.
+      # Formatting, lint and type hooks. `nix develop` installs them into
+      # .git/hooks and `nix flake check` enforces them. Neither shell nor Python
+      # tests are gated here. writeShellApplication already shellchecks the .sh
+      # scripts at build time, and there are no Python tests yet.
       pre-commit-check = git-hooks.lib.${system}.run {
         src = ./.;
         hooks = {
           nixfmt-rfc-style = {
             enable = true;
-            # pkgs.nixfmt-rfc-style is a deprecated alias; use the canonical attr.
+            # pkgs.nixfmt-rfc-style is a deprecated alias for this attr.
             package = pkgs.nixfmt;
           };
           ruff.enable = true;
@@ -210,8 +215,8 @@
         home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = {
-            # Pass all inputs to every module. It's a bit excessive, but allows us to easily refer
-            # to stuff like inputs.nixgl.
+            # Excessive, but it lets any module refer to inputs.nixgl and friends
+            # without threading them through.
             inherit inputs;
             inherit email;
             inherit std;
@@ -226,6 +231,9 @@
         };
     in
     {
+      # Local Helix Steel cogs to forge-install
+      helixSteelPlugins = private.steelPlugins;
+
       homeConfigurations = {
         work = makeHomeConfiguration {
           extraModules = [ ./work.nix ];
@@ -244,8 +252,8 @@
         };
       };
     }
-    // flake-utils.lib.eachDefaultSystem (
-      system: with pkgs; {
+    // flake-utils.lib.eachSystem [ system ] (
+      _: with pkgs; {
         # `nix flake check` runs the formatting / lint / type hooks over the tree.
         checks.pre-commit-check = pre-commit-check;
 
@@ -258,6 +266,7 @@
             ruff
             basedpyright
             pythonEnv
+            steelPkg
           ]
           ++ pre-commit-check.enabledPackages;
         };

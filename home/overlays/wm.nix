@@ -4,6 +4,18 @@ let
   modifier = configuration.variables.modifier;
   rgbTheme = super.riceExtendedColorPalette;
   toLockColor = color: super.lib.strings.removePrefix "#" color;
+  # Cycles through the active outputs, so it works whichever side the other
+  # monitor is docked on (see kanshi `side`).
+  moveWorkspaceToNextOutput = self.writeShellApplication {
+    name = "sway-move-workspace-to-next-output";
+    runtimeInputs = [
+      self.sway
+      self.jq
+    ];
+    text = ''
+      swaymsg move workspace to output "$(swaymsg -t get_outputs | jq -r '[.[] | select(.active)] as $o | $o[(($o | map(.focused) | index(true)) + 1) % ($o | length)].name')"
+    '';
+  };
   generic = programLauncher: lockscreenCmd: {
     assign = ''
       assign [class="Code"] 1
@@ -61,16 +73,13 @@ let
       "${modifier}+Shift+Return" =
         "exec PATH=~/.nix-profile/bin:$PATH ${configuration.variables.terminal} quick-access-terminal";
       "${modifier}+Tab" = "workspace back_and_forth";
-      "${modifier}+Shift+r" = "restart";
+      "${modifier}+Shift+r" = "reload";
       "${modifier}+Shift+l" = lockscreenCmd;
-      # Move workspace to the next active output, regardless of whether the
-      # other monitor is docked left/right or above/below (see kanshi `side`).
-      "${modifier}+m" =
-        "exec swaymsg move workspace to output \"$(swaymsg -t get_outputs | jq -r '[.[] | select(.active)] as $o | $o[(($o | map(.focused) | index(true)) + 1) % ($o | length)].name')\"";
-      "${modifier}+Shift+p" = "exec flameshot gui";
-      "XF86AudioRaiseVolume" = "exec playerctl volume 0.05+";
-      "XF86AudioLowerVolume" = "exec playerctl volume 0.05-";
-      "XF86AudioStop" = "exec playerctl play-pause";
+      "${modifier}+m" = "exec ${super.lib.getExe moveWorkspaceToNextOutput}";
+      "${modifier}+Shift+p" = "exec ${super.lib.getExe self.flameshot} gui";
+      "XF86AudioRaiseVolume" = "exec ${super.lib.getExe self.playerctl} volume 0.05+";
+      "XF86AudioLowerVolume" = "exec ${super.lib.getExe self.playerctl} volume 0.05-";
+      "XF86AudioStop" = "exec ${super.lib.getExe self.playerctl} play-pause";
     };
     workspaces = ''
       workspace 10 output primary
@@ -89,7 +98,7 @@ let
   swayConfig = generic "${super.wofi}/bin/wofi --show run,drun" swaylockCommand;
   swaylockCommand = (
     super.lib.concatStrings [
-      "exec swaylock"
+      "exec ${super.swaylock}/bin/swaylock"
       " -n"
       " -c ${toLockColor rgbTheme.background}"
       " --font ${super.rice.font.monospace.name}"

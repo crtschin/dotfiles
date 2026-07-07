@@ -61,22 +61,15 @@ function nrun
     nix shell -f default.nix -c $argv
 end
 
-function giffify --description "giffify <video_file> <gif_name>"
-    ffmpeg -i $argv[1] -r 15 -vf "scale=1024:-1,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" $argv[2].gif
-end
-
 alias grep='grep --color=auto'
 alias gssh='gcloud compute ssh --tunnel-through-iap '
 
-alias gcloud-operations-log='gcloud compute operations list --format=":(TIMESTAMP.date(tz=LOCAL))" --sort-by=TIMESTAMP'
-alias with-cachix-key="vaultenv --secrets-file (echo \"cachix#signing-key\" | psub) -- "
 
 alias ndb='nrc ./with-test-db.sh $SHELL'
 alias path='echo $PATH'
 
 alias codesec='nrc vaultenv -- code . --wait'
 alias codes='nrc code . --wait'
-alias watch='watch -d'
 
 # set --export PATH "$HOME/.local/bin:$PATH"
 set --export LC_ALL "C.UTF-8"
@@ -84,8 +77,6 @@ set --export LC_ALL "C.UTF-8"
 # Rust
 # bass source "$HOME/.cargo/env"
 
-set fish_greeting
-set -U __done_notify_sound 1
 
 # As a reminder for fzf keybindings
 # Ctrl + F       : file search
@@ -94,8 +85,6 @@ set -U __done_notify_sound 1
 # Ctrl + R       : reverse-i-search (search command history)
 # Ctrl + V       : variable search
 
-# Non-nixos specific commands
-set --export NIX_PATH $NIX_PATH:$HOME/.nix-defexpr/channels
 
 # if ! (ip addr | grep -q 'inet 1.2.3.4/32 scope global lo');
 #     echo "Setting up 1.2.3.4 loopback"

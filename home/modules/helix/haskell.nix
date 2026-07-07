@@ -11,10 +11,10 @@
   mkLspUsage,
 }:
 let
-  haskellContrib = inputs.tree-sitter-haskell-contrib.packages.${pkgs.system};
-  # Link a grammar package's parser and its Helix queries into Helix's
-  # runtime. `lang` is the Helix language (its runtime dir + <lang>.so); the
-  # grammars ship their query files under queries/helix/.
+  haskellContrib = inputs.tree-sitter-haskell-contrib.packages.${pkgs.stdenv.hostPlatform.system};
+  # Link a grammar package's parser and its Helix queries into Helix's runtime.
+  # `lang` names the Helix language, giving both the runtime dir and <lang>.so.
+  # The grammars ship their query files under queries/helix/.
   mkGrammar =
     lang: pkg: queries:
     {
@@ -37,7 +37,7 @@ let
   };
 
   # GHC Core dump extensions, shared by the ghc_core language and treehouse's
-  # extension->language map below (single definition site).
+  # extension to language map below.
   ghcCoreFileTypes = [
     "dump-simpl"
     "dump-ds"
@@ -58,12 +58,12 @@ let
     "dump-simpl-iterations"
   ];
 
-  # treehouse: generic tree-sitter LSP. Gives symbols + go-to-definition for GHC
-  # Core dumps by running the ghc_core grammar's tags query. It reads this XDG
-  # config (no args), mapping the Core dump extensions to the grammar's parser
-  # and Helix query directory (which is where tags.scm lives).
+  # treehouse is a generic tree-sitter LSP. It gives symbols and go-to-definition
+  # for GHC Core dumps by running the ghc_core grammar's tags query. Taking no
+  # arguments, it reads this XDG config to map the Core dump extensions to the
+  # grammar's parser and to the Helix query directory holding tags.scm.
   ghcCoreGrammar = haskellContrib.tree-sitter-ghc-core;
-  treehousePkg = inputs.treehouse.packages.${pkgs.system}.default;
+  treehousePkg = inputs.treehouse.packages.${pkgs.stdenv.hostPlatform.system}.default;
   treehouseConfig = pkgs.writeText "treehouse-config.json" (
     builtins.toJSON {
       languages.ghc_core = {
@@ -77,10 +77,10 @@ let
           value = "ghc_core";
         }) ghcCoreFileTypes
       );
-      # Core dumps live under dist-newstyle, which projects gitignore. Whitelist
-      # it (over the gitignore prune) so treehouse scans sibling dumps and
-      # cross-file go-to-definition resolves; markers root the scan at the
-      # project so the whole tree is in scope.
+      # Core dumps live under dist-newstyle, which projects gitignore. Whitelisting
+      # it over the gitignore prune lets treehouse scan sibling dumps, so cross-file
+      # go-to-definition resolves. Markers root the scan at the project, putting the
+      # whole tree in scope.
       workspace = {
         markers = [
           "cabal.project"
@@ -193,8 +193,9 @@ in
       name = "ghc_core";
       scope = "source.ghc_core";
       file-types = ghcCoreFileTypes;
-      # treehouse provides symbols + go-to-definition for Core bindings. Bare
-      # list (no mkLspUsage): spellcheck/completion on generated Core is noise.
+      # treehouse provides symbols and go-to-definition for Core bindings. This
+      # skips mkLspUsage because spellcheck and completion on generated Core is
+      # noise.
       language-servers = [ "treehouse" ];
       comment-tokens = "--";
       indent = {
@@ -281,11 +282,11 @@ in
         unit = "  ";
       };
       # Haskell-Debugger (hdb) DAP adapter.
-      # Requires GHC >= 9.14.1 and `hdb` on PATH; install with:
+      # Requires GHC >= 9.14.1 and `hdb` on PATH. Install with:
       #   cabal install haskell-debugger \
       #     --allow-newer=base,time,containers,ghc,ghc-bignum,template-haskell \
       #     --enable-executable-dynamic
-      # hdb runs as a DAP server over TCP: Helix spawns `hdb server --port <port>`
+      # hdb runs as a DAP server over TCP. Helix spawns `hdb server --port <port>`
       # then connects to 127.0.0.1:<port>. Start a session with `:debug-start`.
       debugger = {
         name = "haskell-debugger";
@@ -295,8 +296,8 @@ in
         port-arg = "--port {}";
         templates = [
           {
-            # Helix has no ${file}/${workspaceFolder} variables, so these are
-            # prompted; entryPoint and projectRoot have defaults (just press enter).
+            # Helix has no ${file} or ${workspaceFolder} variables, so these get
+            # prompted. entryPoint and projectRoot have defaults, so press enter.
             name = "main";
             request = "launch";
             completion = [

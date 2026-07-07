@@ -6,7 +6,7 @@
 }:
 let
   lib = pkgs.lib;
-  recursiveMerge = pkgs.recursiveMerge;
+  deltaBin = lib.getExe pkgs.delta;
   precondition =
     assert lib.asserts.assertMsg (builtins.hasAttr "git" pkgs.configuration) ''
       Should configure git using an overlay
@@ -21,27 +21,22 @@ let
       userEmail = pkgs.configuration.git.userEmail;
       signingKey = pkgs.configuration.git.signingKey;
     };
-  gpgSign =
-    sigingKey:
-    {
-      gpg.format = "ssh";
-    }
-    // lib.optionalAttrs (sigingKey != null) {
-      user.signingKey = sigingKey;
-      commit.gpgsign = false;
-    };
-
 in
 {
   home.packages = [
-    inputs.tuicr.packages.${pkgs.system}.default
+    # Not programs.delta. That module only adds this package while git
+    # integration is off, and setting any `options` there wraps delta in
+    # `--config <store file>`, which it loads instead of gitconfig. The [delta]
+    # section below and per-repo overrides such as diffsbs would go silent.
+    pkgs.delta
+    inputs.tuicr.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   # tuicr: https://github.com/agavra/tuicr/blob/main/docs/CONFIG.md
   xdg.configFile."tuicr/config.toml".text = ''
     theme = "gruvbox-dark"
-    # Kept at the default ";"; space would shadow the built-in toggle-expand
-    # and commit-picker selection bindings, which tuicr does not let us remap.
+    # Kept at the default. Space would shadow the built-in toggle-expand and
+    # commit-picker selection bindings, which tuicr does not let us remap.
     leader = ";"
 
     [forge]
@@ -104,11 +99,7 @@ in
       };
     };
 
-    delta = {
-      enable = true;
-      # enableGitIntegration = true;
-    };
-    git = with precondition; {
+    git = {
       enable = true;
       lfs.enable = true;
       # Prevent bad objects from spreading.
@@ -116,72 +107,72 @@ in
       # attributes = [
       #   "* merge=mergiraf"
       # ];
-      signing.format = "ssh";
-      settings = recursiveMerge [
-        {
-          user = {
-            name = precondition.userName;
-            email = precondition.userEmail;
-            useConfigOnly = true;
-          };
-          author = {
-            name = precondition.userName;
-            email = precondition.userEmail;
-          };
-          alias = {
-            lc = "!fish -c 'git checkout (git branch --list --sort=-committerdate | string trim | fzf --preview=\"git log --stat -n 10 --decorate --color=always {}\")'";
-            oc = "!fish -c 'git checkout (git for-each-ref refs/remotes/origin/ --format=\"%(refname:short)\" --sort=-committerdate|perl -p -e \"s#^origin/##g\"|head -100|string trim|fzf --preview=\"git log --stat -n 10 --decorate --color=always origin/{}\")'";
-          };
-          # blame.ignoreRevsFile = ".git-blame-ignore-revs";
-          pager = {
-            log = "delta";
-            # diff = "difft";
-            reflog = "delta";
-            show = "delta";
-          };
-          core = {
-            editor = "${pkgs.vim}/bin/vim";
-            excludesfile = "${../../.config/global.gitignore}";
-          };
-          merge = {
-            # conflictstyle = "diff3";
-            # difftool = "${pkgs.meld}/bin/meld";
-            # "mergiraf" = {
-            #   name = "mergiraf";
-            #   driver = "mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L";
-            # };
-          };
-          delta = {
-            features = "interactive unobtrusive-line-numbers decorations";
-            syntax-theme = "gruvbox-dark";
-          };
-          diff = {
-            external = "difft";
-            algorithm = "histogram";
-            # Try to break up diffs at blank lines
-            compactionHeuristic = true;
-            colorMoved = "dimmed_zebra";
-          };
-          # For interactive rebases, automatically reorder and set the
-          # right actions for !fixup and !squash commits.
-          rebase = {
-            autosquash = true;
-            updateRefs = true;
-          };
-          # Include tags with commits that we push
-          push = {
-            followTags = true;
-            autoSetupRemote = true;
-          };
-          # Sort tags in version order, e.g. `v1 v2 .. v9 v10` instead
-          # of `v1 v10 .. v9`
-          tag.sort = "version:refname";
-          # Remeber conflict resolutions. If the same conflict appears
-          # again, use the previous resolution.
-          rerere.enabled = true;
-        }
-        (gpgSign signingKey)
-      ];
+      # Also emits gpg.ssh.program, the ssh-keygen signer path.
+      signing = {
+        format = "ssh";
+        key = precondition.signingKey;
+        signByDefault = false;
+      };
+      settings = {
+        user = {
+          name = precondition.userName;
+          email = precondition.userEmail;
+          useConfigOnly = true;
+        };
+        author = {
+          name = precondition.userName;
+          email = precondition.userEmail;
+        };
+        alias = {
+          lc = "!fish -c 'git checkout (git branch --list --sort=-committerdate | string trim | fzf --preview=\"git log --stat -n 10 --decorate --color=always {}\")'";
+          oc = "!fish -c 'git checkout (git for-each-ref refs/remotes/origin/ --format=\"%(refname:short)\" --sort=-committerdate|perl -p -e \"s#^origin/##g\"|head -100|string trim|fzf --preview=\"git log --stat -n 10 --decorate --color=always origin/{}\")'";
+        };
+        # blame.ignoreRevsFile = ".git-blame-ignore-revs";
+        # Absolute, so an earlier `delta` on PATH cannot take over the pager.
+        pager = {
+          log = deltaBin;
+          # diff = "difft";
+          reflog = deltaBin;
+          show = deltaBin;
+        };
+        # The pager settings above do not reach interactive staging, so `git add
+        # -p` would render raw diffs.
+        interactive.diffFilter = "${deltaBin} --color-only";
+        delta = {
+          features = "interactive unobtrusive-line-numbers decorations";
+          syntax-theme = "gruvbox-dark";
+        };
+        core = {
+          # core.editor outranks EDITOR, so name the editor explicitly. Uses the
+          # configured package, since `pkgs.helix` lacks the Steel build.
+          editor = lib.getExe' config.programs.helix.package "hx";
+          excludesfile = "${../../.config/global.gitignore}";
+        };
+        diff = {
+          external = "difft";
+          algorithm = "histogram";
+          # Try to break up diffs at blank lines
+          compactionHeuristic = true;
+          colorMoved = "dimmed_zebra";
+        };
+        # For interactive rebases, automatically reorder and set the
+        # right actions for !fixup and !squash commits.
+        rebase = {
+          autosquash = true;
+          updateRefs = true;
+        };
+        # Include tags with commits that we push
+        push = {
+          followTags = true;
+          autoSetupRemote = true;
+        };
+        # Sort tags in version order, e.g. `v1 v2 .. v9 v10` instead
+        # of `v1 v10 .. v9`
+        tag.sort = "version:refname";
+        # Remember conflict resolutions. If the same conflict appears
+        # again, reuse the previous resolution.
+        rerere.enabled = true;
+      };
     };
   };
 }

@@ -159,3 +159,12 @@ fabric.properties
 .direnv
 
 .helix
+
+# GHC profiling outputs (`+RTS -p -h` etc.)
+*.hp
+*.prof
+
+# Local Claude Code config, usually a symlink to private files
+.claude
+!.claude/
+**/.claude/*

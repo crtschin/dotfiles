@@ -41,7 +41,6 @@
       fd
       jq
       fx
-      jc
       ripgrep
       xclip
       direnv
@@ -52,6 +51,7 @@
       bluetui
       jujutsu
       glow
+      mdfried
 
       # Git
       git-absorb
@@ -166,6 +166,13 @@
           default = [ "gtk" ];
           "org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
           "org.freedesktop.impl.portal.ScreenCast" = [ "wlr" ];
+          # No Secret entry. Nothing installed here provides that interface, and
+          # naming a missing backend makes the portal fail the request instead of
+          # reporting the interface as absent, which clients handle by falling back.
+          # kwallet is the only local implementation and it needs kwalletd running.
+          # gtk's Inhibit only handles idle. Anything else errors out.
+          # https://github.com/flatpak/xdg-desktop-portal-gtk/issues/465
+          "org.freedesktop.impl.portal.Inhibit" = [ "none" ];
         };
       };
       extraPortals = with pkgs; [
@@ -174,9 +181,6 @@
         xdg-desktop-portal-wlr
       ];
     };
-    configFile."direnv/direnvrc".text = ''
-      source ${pkgs.nix-direnv}/share/nix-direnv/direnvrc
-    '';
   };
 
   programs = {
@@ -202,16 +206,6 @@
         theme_background = true;
         truecolor = true;
         vim_keys = true;
-      };
-    };
-
-    direnv = {
-      enable = true;
-      nix-direnv = {
-        enable = true;
-      };
-      config = {
-        hide_env_diff = true;
       };
     };
 
@@ -331,7 +325,6 @@
     MANPAGER = "${pkgs.bat}/bin/bat -S -l man";
     TERMINAL = pkgs.configuration.variables.terminal;
     RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
-    GIT_EDITOR = "${pkgs.helix}/bin/hx";
     NIXPKGS_ALLOW_INSECURE = 1;
     GTK_USE_PORTAL = 1;
   };

@@ -13,7 +13,18 @@ let
     ":redraw"
     ":reload-all"
   ];
-
+  # Like makeBufferWith but stays on the current buffer so `%{buffer_name}`
+  # expansions resolve to the open file. Skipping `:new` is safe because the
+  # command's stdout is redirected to /dev/tty, so `:insert-output` inserts
+  # nothing into the buffer.
+  makeBufferAtBuffer = cmd: [
+    ":write-all"
+    ":insert-output ${cmd} >/dev/tty"
+    ":set mouse false"
+    ":set mouse true"
+    ":redraw"
+    ":reload-all"
+  ];
   noArrowKeys = {
     "up" = "no_op";
     "down" = "no_op";
@@ -139,7 +150,31 @@ let
         "g" = makeBufferWith "lazygit";
         "d" = makeBufferWith "lazydocker";
         "s" = makeBufferWith "lazysql";
-        "y" = makeBufferWith "yazi";
+        "y" = makeBufferAtBuffer ''yazi "%{buffer_name}"'';
+        "m" = makeBufferAtBuffer ''mdfried "%{buffer_name}"'';
+      };
+      "s" = {
+        # This submap shadows helix's `space s`, and KeyTrie::merge flat-inserts a
+        # node over a command rather than merging, so the document symbol picker
+        # has no fallback. Keep it reachable one key deeper.
+        "s" = "lsp_or_syntax_symbol_picker";
+        # pipe-to feeds the selection in on stdin. Interpolating %{selection} into
+        # the command instead would break on any selection holding a quote, such as
+        # a primed Haskell name. Helix reads a single `%` as an expansion sigil, so
+        # the literal one in the URL escape has to be doubled.
+        "h" =
+          '':pipe-to xdg-open "https://hoogle.haskell.org/?hoogle=$(jq -sRr @uri)&scope=set%%3Astackage"'';
+        "r" = [
+          ":reload-all"
+          ":lsp-restart"
+        ];
+        # Output streams live into a passive floating overlay, so editing stays
+        # responsive. The test filter comes from the current selection and goes
+        # through tasty's `-p`. Swap that for `--match` to filter hspec.
+        "b" = ":stream-cabal-build";
+        "t" = ":stream-cabal-test";
+        # Once focused, j/k/f/g/G/d/h/q act directly on the overlay.
+        "o" = ":stream-focus";
       };
       "g" = {
         "g" = "changed_file_picker";
@@ -192,5 +227,5 @@ in
     // movementMacros
     // selectionMacros
     // normalModeMacros;
-  select = noArrowKeys // movementMacros // selectionMacros // selectModeMacros;
+  select = noArrowKeys // windowMacros // movementMacros // selectionMacros // selectModeMacros;
 }
