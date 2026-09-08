@@ -98,7 +98,12 @@ let
   swayConfig = generic "${super.wofi}/bin/wofi --show run,drun" swaylockCommand;
   swaylockCommand = (
     super.lib.concatStrings [
-      "exec ${super.swaylock}/bin/swaylock"
+      # Resolve swaylock off PATH rather than pinning the nixpkgs store path.
+      # nixpkgs' swaylock links nixpkgs' libpam, which loads pam_unix.so from
+      # its own store lib/security and shells out to a non-setuid unix_chkpwd,
+      # so it can never read /etc/shadow on a non-NixOS host and rejects every
+      # password. The distro swaylock uses the distro's setuid helper.
+      "exec swaylock"
       " -n"
       " -c ${toLockColor rgbTheme.background}"
       " --font ${super.rice.font.monospace.name}"
@@ -152,7 +157,8 @@ let
       "${hyprModifier} SHIFT, Return, exec, PATH=~/.nix-profile/bin:$PATH ${configuration.variables.terminal} quick-access-terminal"
       "${hyprModifier}, Tab, workspace, previous"
       "${hyprModifier} SHIFT, r, exec, hyprctl reload"
-      "${hyprModifier} SHIFT, l, exec, ${super.swaylock}/bin/swaylock -n -c ${toLockColor rgbTheme.background} --font ${super.rice.font.monospace.name}"
+      # Off PATH, not the store path; see swaylockCommand for why.
+      "${hyprModifier} SHIFT, l, exec, swaylock -n -c ${toLockColor rgbTheme.background} --font ${super.rice.font.monospace.name}"
       "${hyprModifier}, m, movecurrentworkspacetomonitor, l"
       "${hyprModifier} SHIFT, p, exec, flameshot gui"
       "${hyprModifier}, h, movefocus, l"

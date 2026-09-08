@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  system,
   ...
 }:
 let
@@ -29,7 +30,7 @@ in
     # `--config <store file>`, which it loads instead of gitconfig. The [delta]
     # section below and per-repo overrides such as diffsbs would go silent.
     pkgs.delta
-    inputs.tuicr.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.tuicr.packages.${system}.default
   ];
 
   # tuicr: https://github.com/agavra/tuicr/blob/main/docs/CONFIG.md

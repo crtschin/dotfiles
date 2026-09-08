@@ -4,11 +4,12 @@
   pkgs,
   inputs,
   std,
+  system,
   ...
 }:
 let
   keymap = import ./helix/keymap.nix { inherit pkgs; };
-  langs = import ./helix/languages.nix { inherit pkgs inputs; };
+  langs = import ./helix/languages.nix { inherit pkgs inputs system; };
 in
 {
   xdg.configFile = {

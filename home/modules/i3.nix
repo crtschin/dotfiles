@@ -109,7 +109,6 @@ in
         ${configuration.i3.colorTheme}
 
         exec_always --no-startup-id polybar-msg cmd restart
-        exec --no-startup-id ${pkgs.nitrogen}/bin/nitrogen --restore
         exec --no-startup-id systemctl --user start playerctld polybar picom
 
         ${configuration.i3.workspaces}

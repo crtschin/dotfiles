@@ -1,17 +1,12 @@
-# Haskell/GHC Helix configuration: tree-sitter grammars for Cabal and GHC
-# intermediate-language dumps, haskell-language-server, and the language
-# definitions. Returns fragments that helix.nix splices into its own config so
-# there is a single definition site per Helix option.
-#
-# `mkLspUsage` is passed in from helix.nix so the base language-server list
-# (completion + spellcheck) stays defined once.
+# Haskell configuration.
 {
   pkgs,
   inputs,
   mkLspUsage,
+  system,
 }:
 let
-  haskellContrib = inputs.tree-sitter-haskell-contrib.packages.${pkgs.stdenv.hostPlatform.system};
+  haskellContrib = inputs.tree-sitter-haskell-contrib.packages.${system};
   # Link a grammar package's parser and its Helix queries into Helix's runtime.
   # `lang` names the Helix language, giving both the runtime dir and <lang>.so.
   # The grammars ship their query files under queries/helix/.
@@ -26,15 +21,10 @@ let
         value.source = "${pkg}/queries/helix/${q}.scm";
       }) queries
     );
-  # Grammar source entries all live in the same tree-sitter-haskell-contrib flake input.
-  mkGrammarSource = name: subdir: {
-    inherit name;
-    "source" = {
-      git = "https://github.com/crtschin/tree-sitter-haskell-contrib";
-      rev = inputs.tree-sitter-haskell-contrib.rev;
-      inherit subdir;
-    };
-  };
+  haskellHighlights = pkgs.runCommand "haskell-highlights.scm" { } ''
+    cat ${pkgs.helix.HELIX_DEFAULT_RUNTIME}/queries/haskell/highlights.scm > $out
+    printf '\n[\n  "signature"\n] @keyword.import\n' >> $out
+  '';
 
   # GHC Core dump extensions, shared by the ghc_core language and treehouse's
   # extension to language map below.
@@ -63,7 +53,7 @@ let
   # arguments, it reads this XDG config to map the Core dump extensions to the
   # grammar's parser and to the Helix query directory holding tags.scm.
   ghcCoreGrammar = haskellContrib.tree-sitter-ghc-core;
-  treehousePkg = inputs.treehouse.packages.${pkgs.stdenv.hostPlatform.system}.default;
+  treehousePkg = inputs.treehouse.packages.${system}.default;
   treehouseConfig = pkgs.writeText "treehouse-config.json" (
     builtins.toJSON {
       languages.ghc_core = {
@@ -138,16 +128,28 @@ in
       "injections"
     ]
     // {
+      "helix/runtime/queries/haskell/highlights.scm".source = haskellHighlights;
       "treehouse/config.json".source = treehouseConfig;
     };
 
   languageServers = {
     haskell-language-server = {
-      command = "haskell-language-server-wrapper";
+      # Not the wrapper: it resolves `haskell-language-server-<ghc-version>` off
+      # PATH before the plain binary next to it, so a stale nixpkgs HLS anywhere
+      # later in PATH hijacks the project's own build.
+      command = "haskell-language-server";
+      args = [ "--lsp" ];
       config = {
         sessionLoading = "multipleComponents";
-        rename = {
-          config = "crossModule";
+        plugin = {
+          export = {
+            globalOn = true;
+          };
+          rename = {
+            config = {
+              crossModule = true;
+            };
+          };
         };
       };
     };
@@ -156,13 +158,18 @@ in
     };
   };
 
+  # Only haskell is listed here. The contrib grammars above come prebuilt from
+  # the flake, and their .so lands in the runtime as a read-only store symlink,
+  # so `hx --grammar build` cannot write it. Listing them would make every
+  # `hx --grammar build` fail.
   grammars = [
-    (mkGrammarSource "cabal" "tree-sitter-cabal")
-    (mkGrammarSource "cabal_project" "tree-sitter-cabal-project")
-    (mkGrammarSource "ghc_core" "tree-sitter-ghc-core")
-    (mkGrammarSource "ghc_stg" "tree-sitter-ghc-stg")
-    (mkGrammarSource "ghc_cmm" "tree-sitter-ghc-cmm")
-    (mkGrammarSource "ghc_dump" "tree-sitter-ghc-dump")
+    {
+      name = "haskell";
+      "source" = {
+        git = "https://github.com/crtschin/tree-sitter-haskell";
+        rev = inputs.tree-sitter-haskell.rev;
+      };
+    }
   ];
 
   languages = [
@@ -260,6 +267,9 @@ in
         "hs"
         "hs-boot"
         "hsc"
+        # Backpack module signatures. Cabal treats these as ordinary Haskell
+        # source (builtinHaskellSuffixes), and the forked grammar parses them.
+        "hsig"
       ];
       roots = [
         "Setup.hs"

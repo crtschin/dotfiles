@@ -14,6 +14,7 @@
     ./home/modules/scripts.nix
     ./home/modules/ghostty.nix
     ./home/modules/git.nix
+    ./home/modules/haskell.nix
     ./home/modules/helix.nix
     ./home/modules/kanshi.nix
     ./home/modules/chat.nix
@@ -30,9 +31,6 @@
   nixpkgs.config.allowUnfree = true;
   home = {
     packages = with pkgs; [
-      # Desktop
-      nitrogen
-
       # Sound
       pavucontrol
       playerctl
@@ -93,13 +91,11 @@
       ffmpeg
       gimp
       imagemagick
-      obs-studio
       mupdf
       qrencode
 
       # Programs
       vscode
-      zoom-us
       spotify
       scli
       signal-cli
@@ -176,7 +172,6 @@
         };
       };
       extraPortals = with pkgs; [
-        kdePackages.xdg-desktop-portal-kde
         xdg-desktop-portal-gtk
         xdg-desktop-portal-wlr
       ];

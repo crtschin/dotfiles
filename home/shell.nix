@@ -126,6 +126,7 @@
       extensions = [
         pkgs.gh-dash
         pkgs.gh-eco
+        pkgs.gh-stack
       ];
     };
 

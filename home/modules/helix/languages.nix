@@ -2,7 +2,11 @@
 # Owns `mkLspUsage` and imports the Haskell-specific module, returning:
 #   - configFile: grammar parser/query runtime links for xdg.configFile
 #   - languages:  the programs.helix.languages value
-{ pkgs, inputs }:
+{
+  pkgs,
+  inputs,
+  system,
+}:
 let
   # Every language gets completion + spellcheck on top of its own servers.
   mkLspUsage =
@@ -12,7 +16,14 @@ let
       "codebook-lsp"
     ]
     ++ lsps;
-  haskell = import ./haskell.nix { inherit pkgs inputs mkLspUsage; };
+  haskell = import ./haskell.nix {
+    inherit
+      pkgs
+      inputs
+      mkLspUsage
+      system
+      ;
+  };
 in
 {
   configFile = haskell.configFile;

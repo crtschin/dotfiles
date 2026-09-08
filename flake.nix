@@ -68,6 +68,11 @@
       inputs.utils.follows = "flake-utils";
     };
 
+    tree-sitter-haskell = {
+      url = "github:crtschin/tree-sitter-haskell/crtschin/scratch";
+      flake = false;
+    };
+
     tree-sitter-nix = {
       url = "github:nix-community/tree-sitter-nix";
       flake = false;
@@ -79,10 +84,17 @@
     };
 
     treehouse = {
-      url = "path:/home/crtschin/personal/treehouse";
+      url = "git+file:///home/crtschin/personal/treehouse";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
-      # Transitive, and the last input pinning its own nixpkgs tree.
+      inputs.coreviewer.follows = "coreviewer";
+    };
+
+    coreviewer = {
+      url = "git+file:///home/crtschin/personal/coreviewer";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.git-hooks.follows = "git-hooks";
       inputs.hs-bindgen.inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -220,6 +232,9 @@
             inherit inputs;
             inherit email;
             inherit std;
+            # The one build system, resolved here so modules index
+            # inputs.<x>.packages.${system} without re-deriving it from pkgs.
+            inherit system;
             # The dotfiles argument always points to the flake root.
             dotfiles = self;
           };

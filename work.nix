@@ -52,7 +52,6 @@ in
       # pgadmin4
       # solaar
       ltunify
-      jmeter
       # netbird
       # netbird-ui
 
@@ -75,7 +74,6 @@ in
       mesa
       intel-media-driver
 
-      gemini-cli
       # pkgs.haskellPackages.ghcprofview
       # pkgs.haskellPackages.hpview
     ];

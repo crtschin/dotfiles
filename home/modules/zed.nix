@@ -143,8 +143,15 @@
           settings = {
             haskell = {
               sessionLoading = "multipleComponents";
-              rename = {
-                config = "crossModule";
+              plugin = {
+                export = {
+                  globalOn = true;
+                };
+                rename = {
+                  config = {
+                    crossModule = true;
+                  };
+                };
               };
             };
           };
