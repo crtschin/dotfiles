@@ -94,14 +94,14 @@
     };
 
     treehouse = {
-      url = "git+file:///home/crtschin/personal/treehouse";
+      url = "git+ssh://git@github.com/crtschin/treehouse";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
       inputs.coreviewer.follows = "coreviewer";
     };
 
     coreviewer = {
-      url = "git+file:///home/crtschin/personal/coreviewer";
+      url = "git+ssh://git@github.com/crtschin/coreviewer";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
       inputs.git-hooks.follows = "git-hooks";

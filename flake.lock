@@ -96,24 +96,26 @@
           "git-hooks"
         ],
         "grammars": "grammars",
+        "hls": "hls",
         "hs-bindgen": "hs-bindgen",
         "nixpkgs": [
           "nixpkgs"
         ],
-        "tree-sitter-haskell": "tree-sitter-haskell"
+        "tree-sitter-haskell": "tree-sitter-haskell",
+        "xdiff": "xdiff"
       },
       "locked": {
-        "lastModified": 1786382446,
-        "narHash": "sha256-flrgB3hcVZ39nnoUedLnkAEvgwMYQa23U+p1wsxjTn8=",
+        "lastModified": 1790617613,
+        "narHash": "sha256-sjwCM3geKGxqbSngND/1JG8xyfG4UmlullRAiwaqdfM=",
         "ref": "refs/heads/master",
-        "rev": "74665d7cb6844347245ee244dfed98dbd89dd832",
-        "revCount": 110,
+        "rev": "4e7aac61132f3534490e4ea5e4ac474823f1d867",
+        "revCount": 74,
         "type": "git",
-        "url": "file:///home/crtschin/personal/coreviewer"
+        "url": "ssh://git@github.com/crtschin/coreviewer"
       },
       "original": {
         "type": "git",
-        "url": "file:///home/crtschin/personal/coreviewer"
+        "url": "ssh://git@github.com/crtschin/coreviewer"
       }
     },
     "doomdir": {
@@ -465,6 +467,24 @@
         "type": "github"
       }
     },
+    "flake-utils_2": {
+      "inputs": {
+        "systems": "systems_4"
+      },
+      "locked": {
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "ghc-src": {
       "flake": false,
       "locked": {
@@ -721,6 +741,81 @@
         "type": "github"
       }
     },
+    "hie-bios": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1785419785,
+        "narHash": "sha256-cM9kJMCeXW71gd9qAfrbdc4IAqqm1Pgd1KkN+3EIOJk=",
+        "owner": "haskell",
+        "repo": "hie-bios",
+        "rev": "79b71a85bf9f29d3e95f9abb43de65aba545e553",
+        "type": "github"
+      },
+      "original": {
+        "owner": "haskell",
+        "ref": "release-0.21.0",
+        "repo": "hie-bios",
+        "type": "github"
+      }
+    },
+    "hls": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "hie-bios": "hie-bios",
+        "hls-master": "hls-master",
+        "hls-release": "hls-release",
+        "nixpkgs": [
+          "coreviewer",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1786653849,
+        "narHash": "sha256-o2m3KqIbpugo7UIWQEwuxMjxEX48lpH/Ftrsg+tc6Qk=",
+        "ref": "refs/heads/master",
+        "rev": "d7211fb8f3a887a5861fbb822b8ddbd68b021aa2",
+        "revCount": 1,
+        "type": "git",
+        "url": "ssh://git@github.com/crtschin/hls.nix"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/crtschin/hls.nix"
+      }
+    },
+    "hls-master": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1786380030,
+        "narHash": "sha256-wlP6xAtOHczpIVsP4bJu2GLFgmOEOqyFSq88Nx0hNQM=",
+        "owner": "haskell",
+        "repo": "haskell-language-server",
+        "rev": "16bf0466293daabac6f216d2af7e5bccbb91fcc1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "haskell",
+        "repo": "haskell-language-server",
+        "type": "github"
+      }
+    },
+    "hls-release": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1776586220,
+        "narHash": "sha256-xTveBr5UUfEetT2THbiKLEYhUdjTP5uHbOkkVFRSg5c=",
+        "owner": "haskell",
+        "repo": "haskell-language-server",
+        "rev": "096d797bddaca372156ce85d6b3f6926d6da0c88",
+        "type": "github"
+      },
+      "original": {
+        "owner": "haskell",
+        "ref": "2.14.0.0",
+        "repo": "haskell-language-server",
+        "type": "github"
+      }
+    },
     "hls-src": {
       "flake": false,
       "locked": {
@@ -861,7 +956,7 @@
         "doomemacs-modules": "doomemacs-modules",
         "emacs-overlay": "emacs-overlay",
         "nixpkgs": [],
-        "systems": "systems_4"
+        "systems": "systems_5"
       },
       "locked": {
         "lastModified": 1784897132,
@@ -1020,7 +1115,7 @@
         "fish-abbreviation-tips": "fish-abbreviation-tips",
         "fish-async-prompt": "fish-async-prompt",
         "fish-puffer": "fish-puffer",
-        "flake-utils": "flake-utils",
+        "flake-utils": "flake-utils_2",
         "git-hooks": "git-hooks_2",
         "gruvbox-tmTheme": "gruvbox-tmTheme",
         "helix": "helix",
@@ -1089,7 +1184,7 @@
           "private",
           "nixpkgs"
         ],
-        "systems": "systems_5",
+        "systems": "systems_6",
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
@@ -1113,7 +1208,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "systems": "systems_6",
+        "systems": "systems_7",
         "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
@@ -1206,6 +1301,21 @@
       }
     },
     "systems_6": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_7": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
@@ -1369,17 +1479,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1786302535,
-        "narHash": "sha256-LiEdsxH0Ncp77xLAMI0Yy+LMPBhU4pODbrxT70ZfuHo=",
+        "lastModified": 1790617506,
+        "narHash": "sha256-+VFkzOFQG5lqbEWJw18nEw3ZMX8z3eng+eW5OcUk6SU=",
         "ref": "refs/heads/master",
-        "rev": "53e35966af6bb92497c2e88f42f0c904155d3540",
-        "revCount": 166,
+        "rev": "da5a15c1ea03ea6e0567dc7375d3f09dc1247871",
+        "revCount": 171,
         "type": "git",
-        "url": "file:///home/crtschin/personal/treehouse"
+        "url": "ssh://git@github.com/crtschin/treehouse"
       },
       "original": {
         "type": "git",
-        "url": "file:///home/crtschin/personal/treehouse"
+        "url": "ssh://git@github.com/crtschin/treehouse"
       }
     },
     "tuicr": {
@@ -1438,6 +1548,23 @@
         "owner": "joao-vitor-sr",
         "repo": "wofi-themes-collection",
         "rev": "540e247819fbf8116d73e4fd2e4b481a25d81353",
+        "type": "github"
+      }
+    },
+    "xdiff": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1777708042,
+        "narHash": "sha256-S2IASZHYRfG6AqmvbM7QZv3sdTRchiSTZ81H1JY24Bo=",
+        "owner": "libgit2",
+        "repo": "xdiff",
+        "rev": "c46ae8dd20ed6f4fae8fb9a30cad6932c85269fc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "libgit2",
+        "repo": "xdiff",
+        "rev": "c46ae8dd20ed6f4fae8fb9a30cad6932c85269fc",
         "type": "github"
       }
     }
