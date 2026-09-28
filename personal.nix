@@ -15,6 +15,7 @@ let
         signingKey = "/home/crtschin/.ssh/id_rsa.pub";
       };
       wm = "sway";
+      ghcCoreTools = false;
     };
   };
 

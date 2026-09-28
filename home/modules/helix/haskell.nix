@@ -6,6 +6,8 @@
   system,
 }:
 let
+  inherit (pkgs) lib;
+  enableTreehouse = pkgs.configuration.ghcCoreTools;
   haskellContrib = inputs.tree-sitter-haskell-contrib.packages.${system};
   # Link a grammar package's parser and its Helix queries into Helix's runtime.
   # `lang` names the Helix language, giving both the runtime dir and <lang>.so.
@@ -129,6 +131,8 @@ in
     ]
     // {
       "helix/runtime/queries/haskell/highlights.scm".source = haskellHighlights;
+    }
+    // lib.optionalAttrs enableTreehouse {
       "treehouse/config.json".source = treehouseConfig;
     };
 
@@ -153,6 +157,8 @@ in
         };
       };
     };
+  }
+  // lib.optionalAttrs enableTreehouse {
     treehouse = {
       command = "${treehousePkg}/bin/treehouse";
     };
@@ -196,20 +202,24 @@ in
       rulers = [ 80 ];
       language-servers = mkLspUsage [ "haskell-language-server" ];
     }
-    {
-      name = "ghc_core";
-      scope = "source.ghc_core";
-      file-types = ghcCoreFileTypes;
-      # treehouse provides symbols and go-to-definition for Core bindings. This
-      # skips mkLspUsage because spellcheck and completion on generated Core is
-      # noise.
-      language-servers = [ "treehouse" ];
-      comment-tokens = "--";
-      indent = {
-        tab-width = 2;
-        unit = "  ";
-      };
-    }
+    (
+      {
+        name = "ghc_core";
+        scope = "source.ghc_core";
+        file-types = ghcCoreFileTypes;
+        comment-tokens = "--";
+        indent = {
+          tab-width = 2;
+          unit = "  ";
+        };
+      }
+      // lib.optionalAttrs enableTreehouse {
+        # treehouse provides symbols and go-to-definition for Core bindings. This
+        # skips mkLspUsage because spellcheck and completion on generated Core is
+        # noise.
+        language-servers = [ "treehouse" ];
+      }
+    )
     {
       name = "ghc_stg";
       scope = "source.ghc_stg";

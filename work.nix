@@ -15,6 +15,7 @@ let
         signingKey = "/home/crtschin/.ssh/id_ed25519.pub";
       };
       wm = "sway";
+      ghcCoreTools = true;
     };
   };
 
