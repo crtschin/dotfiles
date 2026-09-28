@@ -7,7 +7,8 @@
          open-init-scm
          load-buffer
          expanded-shell
-         current-path)
+         current-path
+         csv-table)
 
 ;;@doc
 ;; Open the helix.scm file
@@ -37,3 +38,10 @@
   (let* ([focus (editor-focus)]
          [focus-doc-id (editor->doc-id focus)])
     (editor-document->path focus-doc-id)))
+
+;;@doc
+;; Align the whole buffer's CSV into a padded table
+(define (csv-table)
+  (helix.static.select_all)
+  ;; --ofs keeps the commas; plain --opprint would drop them for spaces
+  (helix.pipe "mlr --icsv --opprint --ofs , cat"))

@@ -12,6 +12,9 @@ let
   langs = import ./helix/languages.nix { inherit pkgs inputs system; };
 in
 {
+  # `:csv-table` in helix.scm pipes the selection through mlr.
+  home.packages = [ pkgs.miller ];
+
   xdg.configFile = {
     "helix/init.scm".source = ./helix/init.scm;
     "helix/helix.scm".source = ./helix/helix.scm;

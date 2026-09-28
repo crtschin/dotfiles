@@ -6,6 +6,16 @@
       # url = "flake:nixpkgs/nixos-26.11";
     };
 
+    # Unmerged nixpkgs pull requests, pinned to the pull request head commit so
+    # a force push cannot change what builds. packagesFromNixpkgs below lifts
+    # single packages out of them. Drop the input once the change reaches
+    # nixpkgs-unstable.
+    #
+    # NixOS/nixpkgs#565929: claude-code 2.1.280
+    nixpkgs-pr-565929 = {
+      url = "github:NixOS/nixpkgs/6af5cd1a6acc0416bd2c85197480dafe374eeb53";
+    };
+
     flake-utils = {
       url = "github:numtide/flake-utils";
     };
@@ -163,11 +173,26 @@
     let
       system = "x86_64-linux";
       std = nix-std;
+      # Take the named packages from another nixpkgs checkout. The config has to
+      # match the one below, or an unfree package throws on evaluation.
+      packagesFromNixpkgs =
+        input: names:
+        let
+          other = import input {
+            inherit system;
+            config = {
+              allowUnfree = true;
+            };
+          };
+        in
+        _: _: nixpkgs.lib.getAttrs names other;
+
       overlays = [
         nix-rice.overlays.default
         nixgl.overlay
         helix-crtschin.overlays.default
         awesome-neovim-plugins.overlays.default
+        (packagesFromNixpkgs inputs.nixpkgs-pr-565929 [ "claude-code" ])
       ];
       pkgs = import nixpkgs {
         inherit system overlays;
@@ -254,8 +279,14 @@
           extraModules = [ ./work.nix ];
           email = "curtis.chinjensem@scrive.com";
         };
-        impromptu = makeHomeConfiguration { extraModules = [ ./work.nix ]; };
-        personal = makeHomeConfiguration { extraModules = [ ./personal.nix ]; };
+        impromptu = makeHomeConfiguration {
+          extraModules = [ ./work.nix ];
+          email = "github@crtschin.nl";
+        };
+        personal = makeHomeConfiguration {
+          extraModules = [ ./personal.nix ];
+          email = "github@crtschin.nl";
+        };
       };
 
       nixosConfigurations = {
