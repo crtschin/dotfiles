@@ -24,10 +24,10 @@
     "blog": {
       "flake": false,
       "locked": {
-        "lastModified": 1788364675,
-        "narHash": "sha256-qR4+Y93zf9E7uZNsqNGrs/RjFMzTlSt5eI989bXE2+A=",
+        "lastModified": 1789574311,
+        "narHash": "sha256-Gok/21ODsTEAR9xFxX3M2g5nVwsEx7xTmI6PjXmyE1A=",
         "ref": "refs/heads/master",
-        "rev": "40a50b897a531caae6c4b196280c7b21c291ab03",
+        "rev": "67e7c62f87bbcddd919aeea9bc68fadfe6639223",
         "shallow": true,
         "type": "git",
         "url": "ssh://git@github.com/crtschin/blog"
@@ -1098,14 +1098,17 @@
         "steel": "steel"
       },
       "locked": {
-        "lastModified": 1790099593,
-        "narHash": "sha256-zMKJWaDkhCjgaGKJim1HeU++7uruVy1u9S0CmkMDIFU=",
-        "path": "/home/crtschin/personal/privatefiles",
-        "type": "path"
+        "lastModified": 1790619330,
+        "narHash": "sha256-+gmuqBQqSiY83f1kuzcvr/ngJy2iDVF3VyUsiOXkQnY=",
+        "ref": "refs/heads/master",
+        "rev": "14fae98b64db6b05ee7dca7931610e0a56823683",
+        "revCount": 57,
+        "type": "git",
+        "url": "ssh://git@github.com/crtschin/privatefiles"
       },
       "original": {
-        "path": "/home/crtschin/personal/privatefiles",
-        "type": "path"
+        "type": "git",
+        "url": "ssh://git@github.com/crtschin/privatefiles"
       }
     },
     "root": {
@@ -1188,11 +1191,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1788027589,
-        "narHash": "sha256-6m22JrhPWG+pBypHhuCKR9cwruwMKWdFAiMllv0hiQo=",
+        "lastModified": 1790616828,
+        "narHash": "sha256-b5gowP82TAf0JVoJM+zC7vgasVWlcX0YkYVoWqIo3aw=",
         "owner": "mattwparas",
         "repo": "steel",
-        "rev": "118fb9f9257dd518db92c093e230c3392b8fd520",
+        "rev": "b52801a999868502277e8897e34d537115898fd4",
         "type": "github"
       },
       "original": {

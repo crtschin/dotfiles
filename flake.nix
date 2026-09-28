@@ -105,7 +105,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
       inputs.git-hooks.follows = "git-hooks";
-      inputs.hs-bindgen.inputs.nixpkgs.follows = "nixpkgs";
     };
 
     helix = {
@@ -150,7 +149,7 @@
 
     # PRIVATE
     private = {
-      url = "path:/home/crtschin/personal/privatefiles";
+      url = "git+ssh://git@github.com/crtschin/privatefiles";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.git-hooks.follows = "git-hooks";
     };
