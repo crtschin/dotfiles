@@ -40,16 +40,9 @@ in
       pciutils
       iotop
       pv
-      valgrind
-      discord
-      mesa-demos
       unzip
       time
-      mold
-      mediawriter
 
-      docker
-      docker-compose
       devenv
       git
       htop
@@ -59,12 +52,6 @@ in
       wget
       gcc
       python3
-      rustc
-      rustfmt
-      cargo
-
-      vlc
-      filezilla
     ];
   };
 
