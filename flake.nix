@@ -94,7 +94,7 @@
     };
 
     treehouse = {
-      url = "git+ssh://git@github.com/crtschin/treehouse";
+      url = "git+file:///home/crtschin/personal/treehouse";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
       inputs.coreviewer.follows = "coreviewer";

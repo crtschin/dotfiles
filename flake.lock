@@ -105,11 +105,11 @@
         "xdiff": "xdiff"
       },
       "locked": {
-        "lastModified": 1790617613,
-        "narHash": "sha256-sjwCM3geKGxqbSngND/1JG8xyfG4UmlullRAiwaqdfM=",
+        "lastModified": 1790631862,
+        "narHash": "sha256-SJ43E/0gUkLsWskh4MnRFcQRoKCalbaRQqyro/ZFQWw=",
         "ref": "refs/heads/master",
-        "rev": "4e7aac61132f3534490e4ea5e4ac474823f1d867",
-        "revCount": 74,
+        "rev": "b1345bb28874a0cc36131258a2d2beeed82ba3ca",
+        "revCount": 75,
         "type": "git",
         "url": "ssh://git@github.com/crtschin/coreviewer"
       },
@@ -874,9 +874,7 @@
         "doxygen-parser-src": "doxygen-parser-src",
         "flake-parts": "flake-parts",
         "libclang-bindings-src": "libclang-bindings-src",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "nixpkgs": "nixpkgs"
       },
       "locked": {
         "lastModified": 1781906799,
@@ -1041,11 +1039,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1790055231,
-        "narHash": "sha256-QpXotokGh5eeMG1Njiuh27oP0rK6t5+cMp7ymXSs7mc=",
+        "lastModified": 1778580735,
+        "narHash": "sha256-t+8AVV8ExvOmslz2sLIgw/hJBKlyl65rJvxjvvjHgpE=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "b6c98e9e6633ee64753b594ff4a5febf0367fc00",
+        "rev": "48d91f2c0ce7b9e589f967d4f685153dd765dcdd",
         "type": "github"
       },
       "original": {
@@ -1083,6 +1081,22 @@
         "owner": "NixOS",
         "repo": "nixpkgs",
         "rev": "6af5cd1a6acc0416bd2c85197480dafe374eeb53",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1790055231,
+        "narHash": "sha256-QpXotokGh5eeMG1Njiuh27oP0rK6t5+cMp7ymXSs7mc=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "b6c98e9e6633ee64753b594ff4a5febf0367fc00",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
         "type": "github"
       }
     },
@@ -1128,7 +1142,7 @@
         "nix-rice": "nix-rice",
         "nix-std": "nix-std",
         "nixgl": "nixgl",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "nixpkgs-pr-565929": "nixpkgs-pr-565929",
         "private": "private",
         "steel": "steel_2",
@@ -1482,17 +1496,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1790617506,
-        "narHash": "sha256-+VFkzOFQG5lqbEWJw18nEw3ZMX8z3eng+eW5OcUk6SU=",
+        "lastModified": 1790672643,
+        "narHash": "sha256-NhFTAZjYpSSW30pL5RnwZB+lk37qY5Kn8r0VBSJUkSw=",
         "ref": "refs/heads/master",
-        "rev": "da5a15c1ea03ea6e0567dc7375d3f09dc1247871",
-        "revCount": 171,
+        "rev": "75fe1d3cc0dbe72a737b696fe587dd06f0223901",
+        "revCount": 175,
         "type": "git",
-        "url": "ssh://git@github.com/crtschin/treehouse"
+        "url": "file:///home/crtschin/personal/treehouse"
       },
       "original": {
         "type": "git",
-        "url": "ssh://git@github.com/crtschin/treehouse"
+        "url": "file:///home/crtschin/personal/treehouse"
       }
     },
     "tuicr": {
